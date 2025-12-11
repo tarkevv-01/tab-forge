@@ -567,7 +567,7 @@ class GANMFSSynthesizer:
             X = df.drop(columns=[target_column]).values
             y = df[target_column].values
             
-            # Разделение на train/test
+            # Тут раньше было азделение на train/test
             X_train, y_train = X, y
             
             # Объединяем X и y для обучения GAN

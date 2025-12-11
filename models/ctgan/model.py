@@ -1,7 +1,7 @@
 from typing import Dict, Any, List, Optional
 import pandas as pd
 import numpy as np
-from .base_model import BaseGenerativeModel
+from ..base_model import BaseGenerativeModel
 from sdv.single_table import CTGANSynthesizer as CTGAN
 from sdv.metadata import SingleTableMetadata
 
@@ -34,8 +34,6 @@ class CTGANModel(BaseGenerativeModel):
             'discriminator_decay': 1e-6,
             'discriminator_steps': 1,
             'log_frequency': True,
-            'transformation_num_type': 'CDF',
-            'transformation_cat_type': 'OHE',
             'pac': 10,
             'epochs': 300,
             'verbose': False
@@ -162,6 +160,9 @@ class CTGANModel(BaseGenerativeModel):
                 ctgan_params[sdv_param] = self.hyperparameters[our_param]
         
         return ctgan_params
+    
+    def get_losses(self):
+        return self._synthesizer._model.loss_values
     
     
 
