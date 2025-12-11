@@ -45,7 +45,7 @@ class CTABGANPlusModel(BaseGenerativeModel):
             cat_columns: Optional[List[str]] = None,
             **kwargs) -> None:
        
-        
+        self.feature_names = data.columns.tolist()
         try:
             # Подготовка параметров для CTABGANSynthesize
             ctab_gan_params = self.hyperparameters
@@ -89,15 +89,21 @@ class CTABGANPlusModel(BaseGenerativeModel):
         
         try:
             synthetic_data = self._synthesizer.sample(n_samples)
-            return synthetic_data
+            return pd.DataFrame(synthetic_data, columns=self.feature_names)
+            
             
         except Exception as e:
             raise RuntimeError(f"Ошибка при генерации данных CTAB-GAN-PLUS: {str(e)}")
     
     
     def get_losses(self):
-        df_loss_values = self._synthesizer.loss_df
-        return df_loss_values.to_dict(orient='list')
+        df = self._synthesizer.loss_df.rename(columns={
+            'epoch': 'Epoch',
+            'generator_loss': 'Generator Loss',
+            'discriminator_loss': 'Discriminator Loss'
+        })
+        return df.to_dict(orient='list')
+
     
 
 
