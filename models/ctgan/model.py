@@ -4,6 +4,7 @@ import numpy as np
 from ..base_model import BaseGenerativeModel
 from sdv.single_table import CTGANSynthesizer as CTGAN
 from sdv.metadata import SingleTableMetadata
+from ...dataset import Dataset
 
 class CTGANModel(BaseGenerativeModel):
     """
@@ -48,11 +49,7 @@ class CTGANModel(BaseGenerativeModel):
         self._metadata = None
 
 
-    def fit(self, data: pd.DataFrame, 
-            target_column: Optional[str] = None,
-            num_columns: Optional[List[str]] = None,
-            cat_columns: Optional[List[str]] = None,
-            **kwargs) -> None:
+    def fit(self, dataset: Dataset, **kwargs) -> None:
         """
         Обучение CTGAN модели на предоставленных данных.
         
@@ -64,21 +61,32 @@ class CTGANModel(BaseGenerativeModel):
             **kwargs: Дополнительные параметры обучения
         """
         
+        #Извлекаем стрктуру данных
+        self._num_columns = dataset.get_numerical_features()
+        self._cat_columns = dataset.get_categorical_features()
+        self._target_column = dataset.summary()['target']
+        self._order_features = dataset.get_registered_data().columns.tolist()
+        self._task_type = dataset.summary()['task_type']
+            
         # Создаем метаданные для SDV
         self._metadata = SingleTableMetadata()
-        self._metadata.detect_from_dataframe(data)
+        self._metadata.detect_from_dataframe(dataset.get_registered_data())
         
         # Обновляем метаданные с информацией о типах колонок
-        if num_columns:
-            for col in num_columns:
-                if col in data.columns:
+        if self._num_columns:
+            for col in self._num_columns:
+                if col in self._order_features:
                     self._metadata.update_column(col, sdtype='numerical')
         
-        if cat_columns:
-            for col in cat_columns:
-                if col in data.columns:
+        if self._cat_columns:
+            for col in self._cat_columns:
+                if col in self._order_features:
                     self._metadata.update_column(col, sdtype='categorical')
         
+        if self._task_type == 'classification' and self._target_column:
+            self._metadata.update_column(self._target_column, sdtype='categorical')
+        else:
+            self._metadata.update_column(self._target_column, sdtype='numerical')
         # Создаем и настраиваем синтезатор
         ctgan_params = self._prepare_ctgan_params()
         
@@ -100,7 +108,7 @@ class CTGANModel(BaseGenerativeModel):
             )
             
             # Обучаем модель
-            self._synthesizer.fit(data)
+            self._synthesizer.fit(dataset.get_registered_data())
             
             self.is_fitted = True
 
@@ -127,6 +135,30 @@ class CTGANModel(BaseGenerativeModel):
         except Exception as e:
             raise RuntimeError(f"Ошибка при генерации данных CTGAN: {str(e)}")
     
+    def structed_generate(self, n_samples: int) -> Dataset:
+        """
+        Генерация синтетических данных, но с сохранением информации с помощью класса Dataset.
+        
+        Args:
+            n_samples: Количество генерируемых образцов
+            
+        Returns:
+            Dataset с синтетическими данными
+        """
+        
+        try:
+            synthetic_data = self._synthesizer.sample(num_rows=n_samples)
+            
+            dataset = Dataset(data=synthetic_data,
+                              target=self._target_column,
+                              task_type=self._task_type,
+                              numerical_features=self._num_columns,
+                              categorical_features=self._cat_columns)
+            
+            return dataset
+        
+        except Exception as e:
+            raise RuntimeError(f"Ошибка при генерации данных CTGAN: {str(e)}")
     
     def _prepare_ctgan_params(self) -> Dict[str, Any]:
         """

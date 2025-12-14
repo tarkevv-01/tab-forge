@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from ..base_model import BaseGenerativeModel
 from .ctab_gan_plus import CTABGANSynthesizer
+from ...dataset import Dataset
 
 
 
@@ -39,14 +40,19 @@ class CTABGANPlusModel(BaseGenerativeModel):
         self._synthesizer = None
         self._metadata = None
 
-    def fit(self, data: pd.DataFrame, 
-            target_column: Optional[str] = None,
-            num_columns: Optional[List[str]] = None,
-            cat_columns: Optional[List[str]] = None,
-            **kwargs) -> None:
-       
-        self.feature_names = data.columns.tolist()
+    def fit(self, dataset: Dataset, **kwargs) -> None:
+
+        if self.is_fitted:
+            return
+        
         try:
+            #Извлекаем стрктуру данных
+            self._num_columns = dataset.get_numerical_features()
+            self._cat_columns = dataset.get_categorical_features()
+            self._target_column = dataset.summary()['target']
+            self._order_features = dataset.get_registered_data().columns.tolist()
+            self._task_type = dataset.summary()['task_type']
+            
             # Подготовка параметров для CTABGANSynthesize
             ctab_gan_params = self.hyperparameters
             
@@ -63,10 +69,11 @@ class CTABGANPlusModel(BaseGenerativeModel):
             
             # Обучаем модель
             self._synthesizer.fit(
-                train_data=data,
-                categorical=cat_columns,
-                general=num_columns,
-                type=kwargs['type_task']
+                train_data=dataset.get_registered_data(),
+                categorical=self._cat_columns,
+                general=self._num_columns,
+                #из-за специфики, нужно увеличить первый симов
+                type={self._task_type.capitalize(): self._target_column} 
             )
             
             self.is_fitted = True
@@ -89,12 +96,36 @@ class CTABGANPlusModel(BaseGenerativeModel):
         
         try:
             synthetic_data = self._synthesizer.sample(n_samples)
-            return pd.DataFrame(synthetic_data, columns=self.feature_names)
-            
+            return pd.DataFrame(synthetic_data, columns=self._order_features)
             
         except Exception as e:
             raise RuntimeError(f"Ошибка при генерации данных CTAB-GAN-PLUS: {str(e)}")
     
+    def structed_generate(self, n_samples: int) -> Dataset:
+        """
+        Генерация синтетических данных, но с сохранением информации с помощью класса Dataset.
+        
+        Args:
+            n_samples: Количество генерируемых образцов
+            
+        Returns:
+            Dataset с синтетическими данными
+        """
+        
+        try:
+            synthetic_data = self._synthesizer.sample(n_samples)
+            gan_df = pd.DataFrame(synthetic_data, columns=self._order_features)
+            
+            dataset = Dataset(data=gan_df,
+                              target=self._target_column,
+                              task_type=self._task_type,
+                              numerical_features=self._num_columns,
+                              categorical_features=self._cat_columns)
+            
+            return dataset
+        
+        except Exception as e:
+            raise RuntimeError(f"Ошибка при генерации данных CTAB-GAN-PLUS: {str(e)}")
     
     def get_losses(self):
         df = self._synthesizer.loss_df.rename(columns={

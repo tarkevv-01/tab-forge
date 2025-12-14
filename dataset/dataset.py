@@ -74,6 +74,7 @@ class Dataset:
         self._task_type = task_type
         self._numerical_features = numerical_features or []
         self._categorical_features = categorical_features or []
+        self._input_order_features = [col for col in data.columns if col != target]
         
         # Валидация
         self._validate()
@@ -120,12 +121,12 @@ class Dataset:
         
         # Если есть ошибки, выбросить исключение
         if errors:
-            print("Ошибки валидации:\n- " + "\n- ".join(errors))
+            raise ValueError("Ошибки валидации:\n- " + "\n- ".join(errors))
     
     def _create_info(self):
         """Создание объекта info с информацией о датасете"""
         all_features = [col for col in self._data.columns if col != self._target]
-        registered = set(self._numerical_features) | set(self._categorical_features)
+        registered = [f for f in self._input_order_features if (f in self._numerical_features) or (f in self._categorical_features)] 
         unregistered = [f for f in all_features if f not in registered]
         
         self.info = DatasetInfo(
@@ -173,7 +174,7 @@ class Dataset:
             return self._data[self.info.registered_features].copy()
         return self._data.drop(columns=[self._target]).copy()
     
-    def get_taret(self) -> pd.Series:
+    def get_target(self) -> pd.Series:
         """Получить целевую переменную"""
         return self._data[self._target].copy()
     

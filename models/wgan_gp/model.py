@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from ..base_model import BaseGenerativeModel
 from .wgan_gp import WGANSynthesizer
-
+from ...dataset import Dataset
 
 
 class WGANGPModel(BaseGenerativeModel):
@@ -41,14 +41,13 @@ class WGANGPModel(BaseGenerativeModel):
         self._synthesizer = None
         self._metadata = None
 
-    def fit(self, data: pd.DataFrame, 
-            target_column: Optional[str] = None,
-            num_columns: Optional[List[str]] = None,
-            cat_columns: Optional[List[str]] = None,
-            **kwargs) -> None:
-       
-        
+    def fit(self, dataset: Dataset, **kwargs) -> None:
         try:
+            self._num_columns = dataset.get_numerical_features()
+            self._cat_columns = dataset.get_categorical_features()
+            self._target_column = dataset.summary()['target']
+            self._order_features = dataset.get_registered_data().columns.tolist()
+            self._task_type = dataset.summary()['task_type']
             # Подготовка параметров для WGANSynthesizer
             wgan_gp_params = self.hyperparameters
             
@@ -65,7 +64,7 @@ class WGANGPModel(BaseGenerativeModel):
             )
             
             # Обучаем модель
-            self._synthesizer.fit(data, target_column=target_column)
+            self._synthesizer.fit(dataset.get_registered_data(), target_column=self._target_column)
             
             self.is_fitted = True
 
@@ -93,6 +92,30 @@ class WGANGPModel(BaseGenerativeModel):
             raise RuntimeError(f"Ошибка при генерации данных WGAN-GP: {str(e)}")
     
     
+    def structed_generate(self, n_samples: int) -> Dataset:
+        """
+        Генерация синтетических данных, но с сохранением информации с помощью класса Dataset.
+        
+        Args:
+            n_samples: Количество генерируемых образцов
+            
+        Returns:
+            Dataset с синтетическими данными
+        """
+        try:
+            synthetic_data = self._synthesizer.generate(n_samples)
+            dataset = Dataset(data=synthetic_data,
+                              target=self._target_column,
+                              task_type=self._task_type,
+                              numerical_features=self._num_columns,
+                              categorical_features=self._cat_columns)
+            
+            return dataset
+            
+        except Exception as e:
+            raise RuntimeError(f"Ошибка при генерации данных WGAN-GP: {str(e)}")
+        
+        
     def get_losses(self):
         return self._synthesizer._loss_values
     
