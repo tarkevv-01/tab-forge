@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import List, Optional, Literal, Dict, Set
+from sklearn.model_selection import train_test_split as sk_train_test_split
 import pandas as pd
 import numpy as np
 
@@ -229,6 +230,50 @@ class Dataset:
             'n_unregistered': self.info.n_unregistered,
             'missing_values': self._data.isnull().sum().to_dict()
         }
+        
+    def train_test_split(
+        self,
+        test_size: float = 0.2,
+        random_state: Optional[int] = None,
+        shuffle: bool = True,
+        stratify: bool = False
+    ):
+        """
+        Обёртка над sklearn.model_selection.train_test_split
+        """
+
+        stratify_values = None
+        if stratify:
+            if self._task_type != "classification":
+                raise ValueError("stratify=True поддерживается только для classification")
+            stratify_values = self._data[self._target]
+
+        train_df, test_df = sk_train_test_split(
+            self._data,
+            test_size=test_size,
+            random_state=random_state,
+            shuffle=shuffle,
+            stratify=stratify_values
+        )
+
+        train_dataset = Dataset(
+            data=train_df.reset_index(drop=True),
+            target=self._target,
+            task_type=self._task_type,
+            numerical_features=self._numerical_features.copy(),
+            categorical_features=self._categorical_features.copy()
+        )
+
+        test_dataset = Dataset(
+            data=test_df.reset_index(drop=True),
+            target=self._target,
+            task_type=self._task_type,
+            numerical_features=self._numerical_features.copy(),
+            categorical_features=self._categorical_features.copy()
+        )
+
+        return train_dataset, test_dataset
+
     
     def __repr__(self):
         return f"Dataset(samples={self.info.n_samples}, features={self.info.n_features}, task='{self._task_type}')"
