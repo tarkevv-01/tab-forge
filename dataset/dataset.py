@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional, Literal, Dict, Set
+from typing import List, Optional, Literal, Dict, Set, Union
 from sklearn.model_selection import train_test_split as sk_train_test_split
 import pandas as pd
 import numpy as np
@@ -64,18 +64,31 @@ class Dataset:
     
     def __init__(
         self,
-        data: pd.DataFrame,
+        data: Union[pd.DataFrame, str],
         target: str,
         task_type: Literal['regression', 'classification'],
         numerical_features: Optional[List[str]] = None,
         categorical_features: Optional[List[str]] = None
     ):
-        self._data = data.copy()
+    # Обработка входных данных
+        if isinstance(data, str):
+            # Если передан путь к файлу
+            try:
+                self._data = pd.read_csv(data)
+            except FileNotFoundError:
+                raise FileNotFoundError(f"Файл не найден: {data}")
+            except Exception as e:
+                raise ValueError(f"Ошибка при чтении CSV файла: {e}")
+        elif isinstance(data, pd.DataFrame):
+            self._data = data.copy()
+        else:
+            raise TypeError(f"data должен быть pd.DataFrame или str (путь к CSV), получено: {type(data)}")
+        
         self._target = target
         self._task_type = task_type
         self._numerical_features = numerical_features or []
         self._categorical_features = categorical_features or []
-        self._input_order_features = [col for col in data.columns if col != target]
+        self._input_order_features = [col for col in self._data.columns if col != target]
         
         # Валидация
         self._validate()
