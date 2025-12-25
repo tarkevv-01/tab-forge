@@ -6,7 +6,7 @@ from sdv.single_table import CTGANSynthesizer as CTGAN
 from sdv.metadata import SingleTableMetadata
 from ...dataset import Dataset
 
-class CTGANModel(BaseGenerativeModel):
+class CTGANSynthesizer(BaseGenerativeModel):
     """
     Обертка для модели CTGAN из библиотеки SDV.
     
@@ -199,7 +199,7 @@ class CTGANModel(BaseGenerativeModel):
     
 
 if __name__ == '__main__':
-    ctgan = CTGANModel()
+    ctgan = CTGANSynthesizer()
 
     print(ctgan.is_model_fitted())
     print(ctgan.get_hyperparameters())

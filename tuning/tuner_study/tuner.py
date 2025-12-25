@@ -1,4 +1,4 @@
-# FOUNDED BY OPTUNA DEVELOPMENT TEAM
+# FOUNDED BY OPTUNA DEVELOPMENT TEAM & ITMO
 
 import optuna
 
@@ -19,3 +19,7 @@ class TuningStudy:
     @property
     def best_value(self):
         return self.study.best_value
+    
+    @property
+    def best_trial(self):
+        return self.study.best_trial

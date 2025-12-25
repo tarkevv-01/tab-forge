@@ -1,3 +1,3 @@
-from .model import CTGANModel
+from .model import CTGANSynthesizer
 
-__all__ = ['CTGANModel']
+__all__ = ['CTGANSynthesizer']

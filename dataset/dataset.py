@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from sklearn.model_selection import KFold, StratifiedKFold
 from typing import List, Optional, Literal, Dict, Set, Union
 from sklearn.model_selection import train_test_split as sk_train_test_split
 import pandas as pd
@@ -287,7 +288,6 @@ class Dataset:
 
         return train_dataset, test_dataset
 
-    
     def __repr__(self):
         return f"Dataset(samples={self.info.n_samples}, features={self.info.n_features}, task='{self._task_type}')"
     
