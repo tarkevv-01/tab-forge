@@ -57,9 +57,9 @@ class AutoTuningStudy:
     def __init__(
         self,
         model_class,
-        get_params: Callable,
-        cv: int,
-        sampler,
+        get_params: Callable = lambda trial: {},
+        cv: int = 5,
+        sampler = optuna.samplers.RandomSampler(),
         search_space_mode: Literal['manual', 'extended'] = 'manual',
         benchmark: Optional[Benchmark] = None,
         direction: str = 'minimize',
