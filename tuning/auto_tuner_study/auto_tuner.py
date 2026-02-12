@@ -71,6 +71,7 @@ class AutoTuningStudy:
         self.cv = cv
         self.search_space_mode = search_space_mode
         self.benchmark = benchmark
+        self.direction = direction
         
         # Получаем конфиг модели
         if self.model_name not in MODEL_CONFIGS:
@@ -84,10 +85,13 @@ class AutoTuningStudy:
         # Если бенчмарк не передан, используем default
         if self.benchmark is None:
             self.benchmark = Benchmark(self.model_config['default_benchmark'])
+            self.direction = self.model_config['direction']
+        
+            
         
         # Создаем study
         self.study = optuna.create_study(
-            direction=direction,
+            direction=self.direction,
             sampler=sampler,
             **study_kwargs
         )

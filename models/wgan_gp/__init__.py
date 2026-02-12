@@ -1,3 +1,3 @@
-from .model import WGANGPModel
+from .model import WGANGPSynthesizer
 
-__all__ = ['WGANGPModel']
+__all__ = ['WGANGPSynthesizer']

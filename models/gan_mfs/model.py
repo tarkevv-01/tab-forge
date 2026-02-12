@@ -2,11 +2,11 @@ from typing import Dict, Any, List, Optional
 import pandas as pd
 import numpy as np
 from ..base_model import BaseGenerativeModel
-from .gan_mfs import GANMFSSynthesizer
+from .gan_mfs import GANMFSSynthesizer as GANMFSMODEL
 from ...dataset import Dataset
 
 
-class GANMFSModel(BaseGenerativeModel):
+class GANMFSSynthesizer(BaseGenerativeModel):
     """
     Обертка для модели GAN-MFS.
     """
@@ -56,7 +56,7 @@ class GANMFSModel(BaseGenerativeModel):
             gan_mfs_params = self.hyperparameters
             
             
-            self._synthesizer = GANMFSSynthesizer(
+            self._synthesizer = GANMFSMODEL(
                 learning_rate_D=gan_mfs_params['discriminator_lr'],
                 learning_rate_G=gan_mfs_params['generator_lr'],
                 batch_size=gan_mfs_params['batch_size'],
@@ -132,7 +132,7 @@ class GANMFSModel(BaseGenerativeModel):
 
 
 if __name__ == '__main__':
-    wgan_gp = GANMFSModel()
+    wgan_gp = GANMFSSynthesizer()
 
     print(wgan_gp.is_model_fitted())
     print(wgan_gp.get_hyperparameters())

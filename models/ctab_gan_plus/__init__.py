@@ -1,3 +1,3 @@
-from .model import CTABGANPlusModel
+from .model import CTABGANPlusSynthesizer
 
-__all__ = ['CTABGANPlusModel']
+__all__ = ['CTABGANPlusSynthesizer']

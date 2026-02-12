@@ -1,12 +1,12 @@
-from .gan_mfs import GANMFSModel as GANMFSSynthesizer
-from .wgan_gp import WGANGPModel as WGANSynthesizer
-from .ctab_gan_plus import CTABGANPlusModel as CTABGANPlusSynthesizer
+from .gan_mfs import GANMFSSynthesizer
+from .wgan_gp import WGANGPSynthesizer
+from .ctab_gan_plus import CTABGANPlusSynthesizer
 from .ctgan import CTGANSynthesizer
 
 
 __all__ = [
     "GANMFSSynthesizer",
-    "WGANSynthesizer",
+    "WGANGPSynthesizer",
     "CTABGANPlusSynthesizer",
     "CTGANSynthesizer"
 ]

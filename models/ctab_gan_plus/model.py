@@ -7,7 +7,7 @@ from ...dataset import Dataset
 
 
 
-class CTABGANPlusModel(BaseGenerativeModel):
+class CTABGANPlusSynthesizer(BaseGenerativeModel):
     """
     Обертка для модели CTAB-GAN-PLUS.
     """
@@ -139,7 +139,7 @@ class CTABGANPlusModel(BaseGenerativeModel):
 
 
 if __name__ == '__main__':
-    ctab_gan_plus = CTABGANPlusModel()
+    ctab_gan_plus = CTABGANPlusSynthesizer()
 
     print(ctab_gan_plus.is_model_fitted())
     print(ctab_gan_plus.get_hyperparameters())

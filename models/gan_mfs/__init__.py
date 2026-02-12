@@ -1,3 +1,3 @@
-from .model import GANMFSModel
+from .model import GANMFSSynthesizer
 
-__all__ = ['GANMFSModel']
+__all__ = ['GANMFSSynthesizer']

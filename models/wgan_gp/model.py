@@ -6,7 +6,7 @@ from .wgan_gp import WGANSynthesizer
 from ...dataset import Dataset
 
 
-class WGANGPModel(BaseGenerativeModel):
+class WGANGPSynthesizer(BaseGenerativeModel):
     """
     Обертка для модели WGAN-GP.
     """
@@ -122,7 +122,7 @@ class WGANGPModel(BaseGenerativeModel):
 
 
 if __name__ == '__main__':
-    wgan_gp = WGANGPModel()
+    wgan_gp = WGANGPSynthesizer()
 
     print(wgan_gp.is_model_fitted())
     print(wgan_gp.get_hyperparameters())
