@@ -91,7 +91,7 @@ dataset = Dataset(
 study_extended = AutoTuningStudy(
     model_class=CTGANSynthesizer,
     get_params=None,  # настраиваемые рамки параметров
-    benchmark=None,   # наследуемый параметр оценки
+    benchmark=None,   # настраиваемый параметр оценки
     search_space_mode='extended'
 )
 ```
@@ -99,7 +99,7 @@ study_extended = AutoTuningStudy(
 ### Финальный результат
 
 ```python
-study_extended.optimize(train, n_trials=25)
+study_extended.optimize(dataset, n_trials=25)
 
 model = study_extended.best_model
 synth_data = model.generate(100)
