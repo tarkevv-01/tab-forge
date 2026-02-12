@@ -59,7 +59,7 @@ Tab-Forge — это комплексное решение для работы �
 ### Установка
 
 ```bash
-git clone https://github.com/<username>/tab-forge.git
+git clone https://github.com/tarkevv-01/tab-forge.git
 cd tab-forge
 pip install -r requirements.txt
 ```
@@ -92,8 +92,7 @@ study_extended = AutoTuningStudy(
     model_class=CTGANSynthesizer,
     get_params=None,  # настраиваемые рамки параметров
     benchmark=None,   # наследуемый параметр оценки
-    search_space_mode='extended',
-    directions='maximize'
+    search_space_mode='extended'
 )
 ```
 
