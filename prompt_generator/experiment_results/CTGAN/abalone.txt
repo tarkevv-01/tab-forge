@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: abalone, Metric: r2_metric
+Iteration 1: Best value: 0.8051096922095861, Best params: {'generator_layers': 1, 'discriminator_layers': 1, 'gen_first_layer_size': 134, 'dis_first_layer_size': 82, 'batch_size': 925, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.0001, 'discriminator_decay': 0.001, 'epochs': 900}
+Iteration 2: Best value: 0.8185623403766235, Best params: {'generator_layers': 1, 'discriminator_layers': 1, 'gen_first_layer_size': 84, 'dis_first_layer_size': 96, 'batch_size': 527, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 1000}
+Iteration 3: Best value: 0.8257807010572303, Best params: {'generator_layers': 4, 'discriminator_layers': 2, 'gen_first_layer_size': 62, 'dis_first_layer_size': 135, 'batch_size': 482, 'discriminator_lr': 0.0002, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 700}
+Iteration 4: Best value: 0.825574346487851, Best params: {'generator_layers': 3, 'discriminator_layers': 3, 'gen_first_layer_size': 81, 'dis_first_layer_size': 125, 'batch_size': 450, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 1000}
+Iteration 5: Best value: 0.8039025856577261, Best params: {'generator_layers': 1, 'discriminator_layers': 3, 'gen_first_layer_size': 56, 'dis_first_layer_size': 133, 'batch_size': 801, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.0001, 'discriminator_decay': 0.001, 'epochs': 700}
+==================================================
+Dataset: abalone, Metric: lf_metric
+Iteration 1: Best value: 1.0540913574139104, Best params: {'generator_layers': 3, 'discriminator_layers': 4, 'gen_first_layer_size': 136, 'dis_first_layer_size': 103, 'batch_size': 657, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 900}
+Iteration 2: Best value: 0.9017904507127518, Best params: {'generator_layers': 2, 'discriminator_layers': 1, 'gen_first_layer_size': 138, 'dis_first_layer_size': 98, 'batch_size': 847, 'discriminator_lr': 0.0002, 'discriminator_steps': 3, 'generator_lr': 0.0002, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 1000}
+Iteration 3: Best value: 1.1206299594852573, Best params: {'generator_layers': 3, 'discriminator_layers': 4, 'gen_first_layer_size': 67, 'dis_first_layer_size': 142, 'batch_size': 561, 'discriminator_lr': 0.001, 'discriminator_steps': 1, 'generator_lr': 0.001, 'generator_decay': 0.0001, 'discriminator_decay': 0.0001, 'epochs': 500}
+Iteration 4: Best value: 0.976053393796836, Best params: {'generator_layers': 2, 'discriminator_layers': 2, 'gen_first_layer_size': 97, 'dis_first_layer_size': 150, 'batch_size': 708, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 900}
+Iteration 5: Best value: 1.0428127527911493, Best params: {'generator_layers': 3, 'discriminator_layers': 4, 'gen_first_layer_size': 118, 'dis_first_layer_size': 143, 'batch_size': 779, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 1000}
+==================================================
+Dataset: abalone, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.14545947991486066, Best params: {'generator_layers': 1, 'discriminator_layers': 3, 'gen_first_layer_size': 147, 'dis_first_layer_size': 80, 'batch_size': 770, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 900}
+Iteration 2: Best value: 0.14007214415455457, Best params: {'generator_layers': 2, 'discriminator_layers': 1, 'gen_first_layer_size': 69, 'dis_first_layer_size': 57, 'batch_size': 461, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.0001, 'generator_decay': 0.0001, 'discriminator_decay': 0.001, 'epochs': 900}
+Iteration 3: Best value: 0.13381967871146738, Best params: {'generator_layers': 1, 'discriminator_layers': 2, 'gen_first_layer_size': 83, 'dis_first_layer_size': 65, 'batch_size': 619, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 1000}
+Iteration 4: Best value: 0.14041448852877395, Best params: {'generator_layers': 1, 'discriminator_layers': 3, 'gen_first_layer_size': 138, 'dis_first_layer_size': 118, 'batch_size': 628, 'discriminator_lr': 0.0002, 'discriminator_steps': 2, 'generator_lr': 0.0001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 600}
+Iteration 5: Best value: 0.14247298546909806, Best params: {'generator_layers': 1, 'discriminator_layers': 1, 'gen_first_layer_size': 50, 'dis_first_layer_size': 80, 'batch_size': 936, 'discriminator_lr': 0.0002, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.0001, 'discriminator_decay': 0.0001, 'epochs': 900}
+==================================================
+Dataset: abalone, Metric: mi_matrix_metric
+Iteration 1: Best value: 4.07257442184736, Best params: {'generator_layers': 4, 'discriminator_layers': 1, 'gen_first_layer_size': 105, 'dis_first_layer_size': 101, 'batch_size': 952, 'discriminator_lr': 0.0002, 'discriminator_steps': 3, 'generator_lr': 0.0001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 1000}
+Iteration 2: Best value: 4.517719311380708, Best params: {'generator_layers': 2, 'discriminator_layers': 3, 'gen_first_layer_size': 57, 'dis_first_layer_size': 140, 'batch_size': 803, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.0001, 'discriminator_decay': 0.0001, 'epochs': 800}
+Iteration 3: Best value: 4.497092180969667, Best params: {'generator_layers': 4, 'discriminator_layers': 4, 'gen_first_layer_size': 98, 'dis_first_layer_size': 70, 'batch_size': 958, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.001, 'epochs': 900}
+Iteration 4: Best value: 3.8332376486106408, Best params: {'generator_layers': 3, 'discriminator_layers': 1, 'gen_first_layer_size': 76, 'dis_first_layer_size': 110, 'batch_size': 553, 'discriminator_lr': 0.0002, 'discriminator_steps': 3, 'generator_lr': 0.0002, 'generator_decay': 0.0001, 'discriminator_decay': 0.001, 'epochs': 900}
+Iteration 5: Best value: 4.166308938826865, Best params: {'generator_layers': 4, 'discriminator_layers': 1, 'gen_first_layer_size': 90, 'dis_first_layer_size': 79, 'batch_size': 458, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.001, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 900}
+==================================================
+Dataset: abalone, Metric: rmse_metric
+Iteration 1: Best value: 0.09917314552037955, Best params: {'generator_layers': 2, 'discriminator_layers': 2, 'gen_first_layer_size': 126, 'dis_first_layer_size': 91, 'batch_size': 526, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.0001, 'generator_decay': 0.0001, 'discriminator_decay': 0.0001, 'epochs': 900}
+Iteration 2: Best value: 0.09814900907037434, Best params: {'generator_layers': 1, 'discriminator_layers': 4, 'gen_first_layer_size': 122, 'dis_first_layer_size': 72, 'batch_size': 568, 'discriminator_lr': 0.001, 'discriminator_steps': 2, 'generator_lr': 0.0002, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 1000}
+Iteration 3: Best value: 0.09703107467419281, Best params: {'generator_layers': 2, 'discriminator_layers': 3, 'gen_first_layer_size': 124, 'dis_first_layer_size': 90, 'batch_size': 433, 'discriminator_lr': 0.0002, 'discriminator_steps': 3, 'generator_lr': 0.0002, 'generator_decay': 0.0001, 'discriminator_decay': 0.001, 'epochs': 900}
+Iteration 4: Best value: 0.10108180430960877, Best params: {'generator_layers': 1, 'discriminator_layers': 3, 'gen_first_layer_size': 82, 'dis_first_layer_size': 136, 'batch_size': 619, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.0001, 'generator_decay': 0.001, 'discriminator_decay': 0.0001, 'epochs': 900}
+Iteration 5: Best value: 0.08645526034113211, Best params: {'generator_layers': 3, 'discriminator_layers': 3, 'gen_first_layer_size': 89, 'dis_first_layer_size': 90, 'batch_size': 475, 'discriminator_lr': 0.001, 'discriminator_steps': 3, 'generator_lr': 0.001, 'generator_decay': 0.0001, 'discriminator_decay': 0.0001, 'epochs': 500}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: abalone
+Metric: r2_metric
+1 {'r2_metric': 0.79057552361741, 'lf_metric': 1.1632280903327221, 'jensen_shannon_metric': 0.12873968063131838, 'mi_matrix_metric': 4.672808882320376, 'rmse_metric': 0.09977925787731222}
+2 {'r2_metric': 0.7694405261920638, 'lf_metric': 1.6413072926190833, 'jensen_shannon_metric': 0.12658034969840018, 'mi_matrix_metric': 5.2512733119728034, 'rmse_metric': 0.1046930944312948}
+3 {'r2_metric': 0.821664373618733, 'lf_metric': 1.1394749248734124, 'jensen_shannon_metric': 0.14270798386180927, 'mi_matrix_metric': 4.483095926419178, 'rmse_metric': 0.09207582230489264}
+4 {'r2_metric': 0.7708549010427291, 'lf_metric': 1.3786694574460094, 'jensen_shannon_metric': 0.12674590286524293, 'mi_matrix_metric': 5.013740841065686, 'rmse_metric': 0.10437147877658569}
+5 {'r2_metric': 0.8074670514139173, 'lf_metric': 1.5720175054593108, 'jensen_shannon_metric': 0.11258934821663152, 'mi_matrix_metric': 5.322317774007472, 'rmse_metric': 0.0956707285797705}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.7900710412957649, 'lf_metric': 1.4417711676045162, 'jensen_shannon_metric': 0.12876823894926093, 'mi_matrix_metric': 5.0793078886662935, 'rmse_metric': 0.09989936464536364}
+2 {'r2_metric': 0.7551696147313797, 'lf_metric': 0.7951346291639848, 'jensen_shannon_metric': 0.1744575191653147, 'mi_matrix_metric': 4.1816058775178435, 'rmse_metric': 0.10788453855736677}
+3 {'r2_metric': 0.7734149402359223, 'lf_metric': 1.556344907277183, 'jensen_shannon_metric': 0.15096781287284233, 'mi_matrix_metric': 5.156612649843828, 'rmse_metric': 0.1037868152592138}
+4 {'r2_metric': 0.813268991525503, 'lf_metric': 1.232740006151815, 'jensen_shannon_metric': 0.14421228991543283, 'mi_matrix_metric': 4.778959493380201, 'rmse_metric': 0.0942181932187503}
+5 {'r2_metric': 0.7330175506258081, 'lf_metric': 1.4651367187628166, 'jensen_shannon_metric': 0.13818939198327837, 'mi_matrix_metric': 4.955815853090321, 'rmse_metric': 0.11265952268776802}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.7784962675763571, 'lf_metric': 1.2745479909217932, 'jensen_shannon_metric': 0.1363306383751856, 'mi_matrix_metric': 4.944322673851316, 'rmse_metric': 0.10261647089953997}
+2 {'r2_metric': 0.751134192990287, 'lf_metric': 1.8773078997659713, 'jensen_shannon_metric': 0.12970985184571898, 'mi_matrix_metric': 5.529880358527913, 'rmse_metric': 0.10877000930877634}
+3 {'r2_metric': 0.7776481959404234, 'lf_metric': 1.763574447852123, 'jensen_shannon_metric': 0.12181503393164611, 'mi_matrix_metric': 5.447351084081939, 'rmse_metric': 0.10281272713691295}
+4 {'r2_metric': 0.7166513473048264, 'lf_metric': 1.9209372088950256, 'jensen_shannon_metric': 0.15989384942331258, 'mi_matrix_metric': 5.683119927746811, 'rmse_metric': 0.11606121863769518}
+5 {'r2_metric': 0.7440774585735006, 'lf_metric': 1.26196186723282, 'jensen_shannon_metric': 0.155222683223978, 'mi_matrix_metric': 4.907475282574692, 'rmse_metric': 0.11030134806617985}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.8192943401990919, 'lf_metric': 0.9363723490913148, 'jensen_shannon_metric': 0.13865967372513127, 'mi_matrix_metric': 4.327737439970785, 'rmse_metric': 0.09268563462261226}
+2 {'r2_metric': 0.8230605296525493, 'lf_metric': 1.3214664156512725, 'jensen_shannon_metric': 0.1349861791537874, 'mi_matrix_metric': 4.85757735935265, 'rmse_metric': 0.09171469197444683}
+3 {'r2_metric': 0.7956265343388884, 'lf_metric': 1.4076391427838808, 'jensen_shannon_metric': 0.13432992145289552, 'mi_matrix_metric': 4.880693673105348, 'rmse_metric': 0.09856864923834735}
+4 {'r2_metric': 0.8287189928920478, 'lf_metric': 1.0777458338701829, 'jensen_shannon_metric': 0.1264324126583245, 'mi_matrix_metric': 4.58488795752835, 'rmse_metric': 0.0902362740002633}
+5 {'r2_metric': 0.8240599657985419, 'lf_metric': 1.0826863626693926, 'jensen_shannon_metric': 0.16109046372760225, 'mi_matrix_metric': 4.430018829918843, 'rmse_metric': 0.09145530161992096}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.7440531585138563, 'lf_metric': 1.5876756137640362, 'jensen_shannon_metric': 0.1351952206533451, 'mi_matrix_metric': 5.324861305365337, 'rmse_metric': 0.11030658454456907}
+2 {'r2_metric': 0.765416113747065, 'lf_metric': 2.0016381035900257, 'jensen_shannon_metric': 0.13459350656669267, 'mi_matrix_metric': 5.527059305692552, 'rmse_metric': 0.10560284992500062}
+3 {'r2_metric': 0.7767515416703651, 'lf_metric': 1.2187874616994605, 'jensen_shannon_metric': 0.12869604731395867, 'mi_matrix_metric': 4.894113702080323, 'rmse_metric': 0.1030198194955352}
+4 {'r2_metric': 0.804525447980923, 'lf_metric': 1.2644072393038144, 'jensen_shannon_metric': 0.12717196281281445, 'mi_matrix_metric': 4.802292691256018, 'rmse_metric': 0.09639880796719945}
+5 {'r2_metric': 0.8077754913536983, 'lf_metric': 1.3489702867552484, 'jensen_shannon_metric': 0.13856997945853897, 'mi_matrix_metric': 4.995056483074944, 'rmse_metric': 0.09559406507422193}
+==================================================
+
+=== Summary (best + mean) for dataset: abalone ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.8217 (0.7920 ± 0.0204)
+  lf_metric: 1.1395 (1.3789 ± 0.2049)
+  jensen_shannon_metric: 0.1126 (0.1275 ± 0.0096)
+  mi_matrix_metric: 4.4831 (4.9486 ± 0.3250)
+  rmse_metric: 0.0921 (0.0993 ± 0.0049)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.8133 (0.7730 ± 0.0277)
+  lf_metric: 0.7951 (1.2982 ± 0.2729)
+  jensen_shannon_metric: 0.1288 (0.1473 ± 0.0154)
+  mi_matrix_metric: 4.1816 (4.8305 ± 0.3486)
+  rmse_metric: 0.0942 (0.1037 ± 0.0064)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.7785 (0.7536 ± 0.0231)
+  lf_metric: 1.2620 (1.6197 ± 0.2915)
+  jensen_shannon_metric: 0.1218 (0.1406 ± 0.0147)
+  mi_matrix_metric: 4.9075 (5.3024 ± 0.3168)
+  rmse_metric: 0.1026 (0.1081 ± 0.0050)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.8287 (0.8182 ± 0.0117)
+  lf_metric: 0.9364 (1.1652 ± 0.1732)
+  jensen_shannon_metric: 0.1264 (0.1391 ± 0.0117)
+  mi_matrix_metric: 4.3277 (4.6162 ± 0.2223)
+  rmse_metric: 0.0902 (0.0929 ± 0.0029)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.8078 (0.7797 ± 0.0240)
+  lf_metric: 1.2188 (1.4843 ± 0.2883)
+  jensen_shannon_metric: 0.1272 (0.1328 ± 0.0043)
+  mi_matrix_metric: 4.8023 (5.1087 ± 0.2737)
+  rmse_metric: 0.0956 (0.1022 ± 0.0056)
+==================================================

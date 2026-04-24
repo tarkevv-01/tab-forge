@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: abalone, Metric: r2_metric
+Iteration 1: Best value: 0.697635848400194, Best params: {'cls_n_layers': 2, 'cls_size_layer': 64, 'batch_size': 692, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 4, 'l2scale': 0.0001, 'epochs': 800}
+Iteration 2: Best value: 0.6969938252783895, Best params: {'cls_n_layers': 1, 'cls_size_layer': 256, 'batch_size': 384, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 4, 'l2scale': 0.001, 'epochs': 500}
+Iteration 3: Best value: 0.7072553608786144, Best params: {'cls_n_layers': 3, 'cls_size_layer': 128, 'batch_size': 837, 'lr': 0.001, 'random_dim': 256, 'critic_steps': 1, 'l2scale': 0.001, 'epochs': 900}
+Iteration 4: Best value: 0.6870611207424915, Best params: {'cls_n_layers': 3, 'cls_size_layer': 128, 'batch_size': 685, 'lr': 0.001, 'random_dim': 512, 'critic_steps': 5, 'l2scale': 0.001, 'epochs': 800}
+Iteration 5: Best value: 0.6963561865000715, Best params: {'cls_n_layers': 1, 'cls_size_layer': 256, 'batch_size': 506, 'lr': 0.0002, 'random_dim': 128, 'critic_steps': 1, 'l2scale': 0.0001, 'epochs': 1000}
+==================================================
+Dataset: abalone, Metric: lf_metric
+Iteration 1: Best value: 0.5146784761264241, Best params: {'cls_n_layers': 4, 'cls_size_layer': 128, 'batch_size': 413, 'lr': 0.001, 'random_dim': 128, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 1000}
+Iteration 2: Best value: 0.5639287830090147, Best params: {'cls_n_layers': 3, 'cls_size_layer': 64, 'batch_size': 428, 'lr': 0.001, 'random_dim': 128, 'critic_steps': 5, 'l2scale': 0.0001, 'epochs': 700}
+Iteration 3: Best value: 0.4862059622665323, Best params: {'cls_n_layers': 4, 'cls_size_layer': 128, 'batch_size': 818, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 800}
+Iteration 4: Best value: 0.5133106019709076, Best params: {'cls_n_layers': 4, 'cls_size_layer': 64, 'batch_size': 913, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 5, 'l2scale': 0.001, 'epochs': 1000}
+Iteration 5: Best value: 0.5026320264376068, Best params: {'cls_n_layers': 4, 'cls_size_layer': 256, 'batch_size': 777, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 5, 'l2scale': 0.0001, 'epochs': 800}
+==================================================
+Dataset: abalone, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.1592907427011668, Best params: {'cls_n_layers': 1, 'cls_size_layer': 256, 'batch_size': 583, 'lr': 0.0002, 'random_dim': 128, 'critic_steps': 3, 'l2scale': 0.001, 'epochs': 1000}
+Iteration 2: Best value: 0.1612368781050983, Best params: {'cls_n_layers': 4, 'cls_size_layer': 128, 'batch_size': 451, 'lr': 0.0002, 'random_dim': 512, 'critic_steps': 5, 'l2scale': 0.001, 'epochs': 800}
+Iteration 3: Best value: 0.15891341178452215, Best params: {'cls_n_layers': 1, 'cls_size_layer': 128, 'batch_size': 480, 'lr': 0.0002, 'random_dim': 128, 'critic_steps': 2, 'l2scale': 0.0001, 'epochs': 900}
+Iteration 4: Best value: 0.16306730769483282, Best params: {'cls_n_layers': 2, 'cls_size_layer': 256, 'batch_size': 452, 'lr': 0.001, 'random_dim': 512, 'critic_steps': 1, 'l2scale': 0.0001, 'epochs': 1000}
+Iteration 5: Best value: 0.15772132907401054, Best params: {'cls_n_layers': 2, 'cls_size_layer': 256, 'batch_size': 948, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 900}
+==================================================
+Dataset: abalone, Metric: mi_matrix_metric
+Iteration 1: Best value: 3.022020408233484, Best params: {'cls_n_layers': 3, 'cls_size_layer': 256, 'batch_size': 913, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 900}
+Iteration 2: Best value: 3.3178675490157414, Best params: {'cls_n_layers': 1, 'cls_size_layer': 64, 'batch_size': 545, 'lr': 0.0002, 'random_dim': 64, 'critic_steps': 1, 'l2scale': 0.0001, 'epochs': 700}
+Iteration 3: Best value: 2.861215354788051, Best params: {'cls_n_layers': 1, 'cls_size_layer': 256, 'batch_size': 401, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 5, 'l2scale': 0.0001, 'epochs': 700}
+Iteration 4: Best value: 2.951428359261864, Best params: {'cls_n_layers': 1, 'cls_size_layer': 128, 'batch_size': 903, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 700}
+Iteration 5: Best value: 2.8053460567843005, Best params: {'cls_n_layers': 3, 'cls_size_layer': 64, 'batch_size': 430, 'lr': 0.001, 'random_dim': 64, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 900}
+==================================================
+Dataset: abalone, Metric: rmse_metric
+Iteration 1: Best value: 0.022924154779430713, Best params: {'cls_n_layers': 4, 'cls_size_layer': 128, 'batch_size': 500, 'lr': 0.001, 'random_dim': 256, 'critic_steps': 2, 'l2scale': 0.0001, 'epochs': 800}
+Iteration 2: Best value: 0.02329466037125931, Best params: {'cls_n_layers': 2, 'cls_size_layer': 128, 'batch_size': 834, 'lr': 0.001, 'random_dim': 128, 'critic_steps': 1, 'l2scale': 0.001, 'epochs': 900}
+Iteration 3: Best value: 0.023323949489650667, Best params: {'cls_n_layers': 2, 'cls_size_layer': 128, 'batch_size': 497, 'lr': 0.001, 'random_dim': 512, 'critic_steps': 4, 'l2scale': 0.0001, 'epochs': 800}
+Iteration 4: Best value: 0.023219158067735047, Best params: {'cls_n_layers': 4, 'cls_size_layer': 256, 'batch_size': 644, 'lr': 0.001, 'random_dim': 512, 'critic_steps': 3, 'l2scale': 0.0001, 'epochs': 700}
+Iteration 5: Best value: 0.023313745105244848, Best params: {'cls_n_layers': 3, 'cls_size_layer': 256, 'batch_size': 827, 'lr': 0.001, 'random_dim': 256, 'critic_steps': 1, 'l2scale': 0.001, 'epochs': 1000}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: abalone
+Metric: r2_metric
+1 {'r2_metric': 0.7490098028856669, 'lf_metric': 0.3546363909684655, 'jensen_shannon_metric': 0.14295637739980083, 'mi_matrix_metric': 2.796321667134656, 'rmse_metric': 0.020145662302456655}
+2 {'r2_metric': -0.6614773834319165, 'lf_metric': 6.28035892499926, 'jensen_shannon_metric': 0.31050573655013947, 'mi_matrix_metric': 6.006773883649424, 'rmse_metric': 0.05161190777350851}
+3 {'r2_metric': 0.7540762781210075, 'lf_metric': 0.37346820519264184, 'jensen_shannon_metric': 0.1500114411843755, 'mi_matrix_metric': 3.029017778518815, 'rmse_metric': 0.019941296060466174}
+4 {'r2_metric': 0.7729746083267486, 'lf_metric': 0.45274836602076346, 'jensen_shannon_metric': 0.1489557132724902, 'mi_matrix_metric': 3.363822889122502, 'rmse_metric': 0.019159774204776978}
+5 {'r2_metric': 0.7846256348413175, 'lf_metric': 0.42241757739421226, 'jensen_shannon_metric': 0.143743599428116, 'mi_matrix_metric': 2.779988215610017, 'rmse_metric': 0.018661655804059905}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.7663168685912084, 'lf_metric': 0.24718797569822212, 'jensen_shannon_metric': 0.14220426731254762, 'mi_matrix_metric': 2.6522734003267456, 'rmse_metric': 0.019438683636101045}
+2 {'r2_metric': 0.7231562937981038, 'lf_metric': 0.3429350644010697, 'jensen_shannon_metric': 0.15301315822427058, 'mi_matrix_metric': 2.7987662394728128, 'rmse_metric': 0.02115779949683069}
+3 {'r2_metric': 0.746010506507544, 'lf_metric': 0.26743419739625585, 'jensen_shannon_metric': 0.14724301612448976, 'mi_matrix_metric': 2.7345166024488847, 'rmse_metric': 0.020265673705824664}
+4 {'r2_metric': 0.7109305616926862, 'lf_metric': 0.3577318344079676, 'jensen_shannon_metric': 0.1491482064962021, 'mi_matrix_metric': 2.797248931469018, 'rmse_metric': 0.021619928789026306}
+5 {'r2_metric': 0.44701967670229725, 'lf_metric': 3.225408664841423, 'jensen_shannon_metric': 0.19457750803002266, 'mi_matrix_metric': 6.092322870078672, 'rmse_metric': 0.029949502729117856}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.7517145204765256, 'lf_metric': 0.44571478113361596, 'jensen_shannon_metric': 0.1490743861194337, 'mi_matrix_metric': 2.7960184662960224, 'rmse_metric': 0.02003682156233639}
+2 {'r2_metric': 0.7330335417694784, 'lf_metric': 0.6592003818335475, 'jensen_shannon_metric': 0.1488063582321389, 'mi_matrix_metric': 3.5175624880487057, 'rmse_metric': 0.02077693685120237}
+3 {'r2_metric': 0.7327203355580127, 'lf_metric': 0.3725258010162423, 'jensen_shannon_metric': 0.15089632881996667, 'mi_matrix_metric': 2.7538101780001405, 'rmse_metric': 0.020789121075003688}
+4 {'r2_metric': 0.6803576175641439, 'lf_metric': 0.2701761698546181, 'jensen_shannon_metric': 0.14399879570387333, 'mi_matrix_metric': 2.6295432413155497, 'rmse_metric': 0.02273449697223233}
+5 {'r2_metric': 0.7444908089685165, 'lf_metric': 0.3877697636058289, 'jensen_shannon_metric': 0.15358479200375208, 'mi_matrix_metric': 2.611098934926756, 'rmse_metric': 0.02032621117789275}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.7667538646450281, 'lf_metric': 0.3590229393679882, 'jensen_shannon_metric': 0.15176385051214403, 'mi_matrix_metric': 2.5980140292941014, 'rmse_metric': 0.019420499604109652}
+2 {'r2_metric': 0.7628588828186867, 'lf_metric': 0.4422664906152108, 'jensen_shannon_metric': 0.1507465656218721, 'mi_matrix_metric': 2.839300092022116, 'rmse_metric': 0.01958197990797715}
+3 {'r2_metric': 0.6889309369020058, 'lf_metric': 0.3840965888816654, 'jensen_shannon_metric': 0.1418359168216215, 'mi_matrix_metric': 2.6807166050127393, 'rmse_metric': 0.02242753692862511}
+4 {'r2_metric': 0.7547735007273471, 'lf_metric': 0.26981681622286136, 'jensen_shannon_metric': 0.15210544157230688, 'mi_matrix_metric': 2.645428541451932, 'rmse_metric': 0.019913008039224713}
+5 {'r2_metric': 0.7654000000545147, 'lf_metric': 0.27832786263700865, 'jensen_shannon_metric': 0.1439538479733119, 'mi_matrix_metric': 2.6093555235911667, 'rmse_metric': 0.019476780672511018}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.7374457823273558, 'lf_metric': 0.34512827252292744, 'jensen_shannon_metric': 0.14687669446040452, 'mi_matrix_metric': 2.837969129901309, 'rmse_metric': 0.020608209679360057}
+2 {'r2_metric': 0.7565471115064177, 'lf_metric': 0.34197265414087835, 'jensen_shannon_metric': 0.15923301875223106, 'mi_matrix_metric': 2.7617170844039154, 'rmse_metric': 0.01984086653457759}
+3 {'r2_metric': 0.7622634405574313, 'lf_metric': 0.43662616443910285, 'jensen_shannon_metric': 0.1488005835900186, 'mi_matrix_metric': 3.225372334381343, 'rmse_metric': 0.019606548882808897}
+4 {'r2_metric': 0.7075835165216215, 'lf_metric': 0.4134974663377055, 'jensen_shannon_metric': 0.15065282217072543, 'mi_matrix_metric': 3.2246530317576836, 'rmse_metric': 0.021744733776759513}
+5 {'r2_metric': 0.7496329019357288, 'lf_metric': 0.3576369746258351, 'jensen_shannon_metric': 0.1532204505342019, 'mi_matrix_metric': 2.902173659131059, 'rmse_metric': 0.020120640322279233}
+==================================================
+
+=== Summary (best + mean) for dataset: abalone ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.7846 (0.4798 ± 0.5708)
+  lf_metric: 0.3546 (1.5767 ± 2.3521)
+  jensen_shannon_metric: 0.1430 (0.1792 ± 0.0657)
+  mi_matrix_metric: 2.7800 (3.5952 ± 1.2241)
+  rmse_metric: 0.0187 (0.0259 ± 0.0129)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.7663 (0.6787 ± 0.1174)
+  lf_metric: 0.2472 (0.8881 ± 1.1694)
+  jensen_shannon_metric: 0.1422 (0.1572 ± 0.0190)
+  mi_matrix_metric: 2.6523 (3.4150 ± 1.3397)
+  rmse_metric: 0.0194 (0.0225 ± 0.0038)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.7517 (0.7285 ± 0.0251)
+  lf_metric: 0.2702 (0.4271 ± 0.1291)
+  jensen_shannon_metric: 0.1440 (0.1493 ± 0.0031)
+  mi_matrix_metric: 2.6111 (2.8616 ± 0.3355)
+  rmse_metric: 0.0200 (0.0209 ± 0.0009)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.7668 (0.7477 ± 0.0297)
+  lf_metric: 0.2698 (0.3467 ± 0.0652)
+  jensen_shannon_metric: 0.1418 (0.1481 ± 0.0043)
+  mi_matrix_metric: 2.5980 (2.6746 ± 0.0873)
+  rmse_metric: 0.0194 (0.0202 ± 0.0011)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.7623 (0.7427 ± 0.0194)
+  lf_metric: 0.3420 (0.3790 ± 0.0387)
+  jensen_shannon_metric: 0.1469 (0.1518 ± 0.0043)
+  mi_matrix_metric: 2.7617 (2.9904 ± 0.1967)
+  rmse_metric: 0.0196 (0.0204 ± 0.0008)
+==================================================

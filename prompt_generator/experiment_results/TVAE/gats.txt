@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: GATS, Metric: r2_metric
+Iteration 1: Best value: 0.7955254977605657, Best params: {'batch_size': 172, 'embedding_dim': 16, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.460424493871413e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.7963844160752943, Best params: {'batch_size': 242, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 5.762665000818099e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.7876964916031438, Best params: {'batch_size': 242, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 3.8366977541358487e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.7981734777723849, Best params: {'batch_size': 196, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 2.133318703919173e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.8063907297176258, Best params: {'batch_size': 127, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.761742896060885e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: GATS, Metric: lf_metric
+Iteration 1: Best value: 2.304824329529927, Best params: {'batch_size': 170, 'embedding_dim': 64, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 3.0508999687456303e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 2.2594755433189615, Best params: {'batch_size': 210, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.0197649531834726e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 3: Best value: 2.3346208025381294, Best params: {'batch_size': 236, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 1.2169651801592607e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 2.401492602386098, Best params: {'batch_size': 207, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 1.9472004148437503e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 2.3911867499352133, Best params: {'batch_size': 190, 'embedding_dim': 32, 'encoder_depth': 3, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 3.939486122662936e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+Dataset: GATS, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.25985089318498356, Best params: {'batch_size': 125, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.0209228484706472e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.2645625220866215, Best params: {'batch_size': 153, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 5.422611182041493e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.2641854639290941, Best params: {'batch_size': 147, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 2.4921645932154414e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.25957467388373817, Best params: {'batch_size': 188, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.0219374829774236e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.2638043851495048, Best params: {'batch_size': 205, 'embedding_dim': 16, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.895743456870459e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: GATS, Metric: mi_matrix_metric
+Iteration 1: Best value: 12.559260132110296, Best params: {'batch_size': 148, 'embedding_dim': 16, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 2.3082165936558182e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 12.37415106765006, Best params: {'batch_size': 206, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 5.25407066551444e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 3: Best value: 12.250170670036567, Best params: {'batch_size': 207, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.3671532256253947e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 12.641220914728647, Best params: {'batch_size': 168, 'embedding_dim': 16, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 5.146455282398969e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 12.209422615773015, Best params: {'batch_size': 195, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 2.8770310441245295e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+Dataset: GATS, Metric: rmse_metric
+Iteration 1: Best value: 0.439499573942354, Best params: {'batch_size': 226, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.982830566064944e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.44876202060697484, Best params: {'batch_size': 194, 'embedding_dim': 32, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 1.8772577396947734e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.46711153999889304, Best params: {'batch_size': 238, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 1.7825950030982197e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.42662302067163377, Best params: {'batch_size': 230, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.0755375320470008e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.4397279163776468, Best params: {'batch_size': 152, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.838264790119459e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: GATS
+Metric: r2_metric
+1 {'r2_metric': 0.7747719106384012, 'lf_metric': 2.2604221782594403, 'jensen_shannon_metric': 0.25761396351834137, 'mi_matrix_metric': 12.380330951689224, 'rmse_metric': 0.4892323389379216}
+2 {'r2_metric': 0.8204089013098643, 'lf_metric': 2.071068562910221, 'jensen_shannon_metric': 0.2458045977149466, 'mi_matrix_metric': 12.334567228436814, 'rmse_metric': 0.43686402635310145}
+3 {'r2_metric': 0.8167359921329744, 'lf_metric': 2.5787746562076874, 'jensen_shannon_metric': 0.2495299584114585, 'mi_matrix_metric': 12.794082203101963, 'rmse_metric': 0.4413086809289842}
+4 {'r2_metric': 0.8183246305607095, 'lf_metric': 2.2960801019587453, 'jensen_shannon_metric': 0.2453729512441092, 'mi_matrix_metric': 12.51707584910387, 'rmse_metric': 0.4393917581792695}
+5 {'r2_metric': 0.8127227786782681, 'lf_metric': 2.5791721556837484, 'jensen_shannon_metric': 0.24566135627256983, 'mi_matrix_metric': 12.827703092116801, 'rmse_metric': 0.4461145201962257}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.7061331204511738, 'lf_metric': 2.908248491325851, 'jensen_shannon_metric': 0.28837944366547436, 'mi_matrix_metric': 13.107669764466186, 'rmse_metric': 0.5588293419435357}
+2 {'r2_metric': 0.808389679676541, 'lf_metric': 2.7201637628023745, 'jensen_shannon_metric': 0.24761143922764806, 'mi_matrix_metric': 12.62839447776841, 'rmse_metric': 0.45124596228885133}
+3 {'r2_metric': 0.7834644856273703, 'lf_metric': 2.350333690786917, 'jensen_shannon_metric': 0.2510389391916842, 'mi_matrix_metric': 12.864792407832065, 'rmse_metric': 0.47969859716747476}
+4 {'r2_metric': 0.8201139711595149, 'lf_metric': 2.232933740648076, 'jensen_shannon_metric': 0.2479810351684746, 'mi_matrix_metric': 12.452367915364603, 'rmse_metric': 0.437222595121917}
+5 {'r2_metric': 0.802498365795323, 'lf_metric': 2.047987105349931, 'jensen_shannon_metric': 0.25026737651884323, 'mi_matrix_metric': 12.321543725756873, 'rmse_metric': 0.4573969868993689}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.8162927468940606, 'lf_metric': 2.5463585122910715, 'jensen_shannon_metric': 0.2472350429667381, 'mi_matrix_metric': 12.763839901265593, 'rmse_metric': 0.441842036718992}
+2 {'r2_metric': 0.823484810578841, 'lf_metric': 2.4424993666559724, 'jensen_shannon_metric': 0.24337828392102462, 'mi_matrix_metric': 12.521860467487192, 'rmse_metric': 0.4331067197776857}
+3 {'r2_metric': 0.8245969160008151, 'lf_metric': 2.4258073095024058, 'jensen_shannon_metric': 0.24407674446731917, 'mi_matrix_metric': 12.230998624953576, 'rmse_metric': 0.4317402045558113}
+4 {'r2_metric': 0.8389979940629422, 'lf_metric': 2.2715154146473884, 'jensen_shannon_metric': 0.24397479062198665, 'mi_matrix_metric': 11.869259779441165, 'rmse_metric': 0.41363713742748504}
+5 {'r2_metric': 0.7685569292400439, 'lf_metric': 2.377677723238064, 'jensen_shannon_metric': 0.2648539904001115, 'mi_matrix_metric': 12.44958706631966, 'rmse_metric': 0.49593638482458396}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.7782726150569976, 'lf_metric': 2.0444395739662853, 'jensen_shannon_metric': 0.27024723036527315, 'mi_matrix_metric': 12.305757527938091, 'rmse_metric': 0.4854153972498041}
+2 {'r2_metric': 0.8387651320951475, 'lf_metric': 2.339653822885658, 'jensen_shannon_metric': 0.2539974753793046, 'mi_matrix_metric': 12.237871259504656, 'rmse_metric': 0.41393615716525517}
+3 {'r2_metric': 0.7993684956885858, 'lf_metric': 2.5931142749947957, 'jensen_shannon_metric': 0.24628074129611502, 'mi_matrix_metric': 12.662764434707947, 'rmse_metric': 0.4616150394319961}
+4 {'r2_metric': 0.7401920305972842, 'lf_metric': 2.0543907191512583, 'jensen_shannon_metric': 0.2696860619405166, 'mi_matrix_metric': 12.403212170747011, 'rmse_metric': 0.5254484493578613}
+5 {'r2_metric': 0.8396933063194864, 'lf_metric': 2.003778483833644, 'jensen_shannon_metric': 0.2452946727341718, 'mi_matrix_metric': 12.26339044747015, 'rmse_metric': 0.4127429927832925}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.840478505115035, 'lf_metric': 2.3763928239745895, 'jensen_shannon_metric': 0.24555696589737694, 'mi_matrix_metric': 12.337709729793797, 'rmse_metric': 0.41173092298416486}
+2 {'r2_metric': 0.8015145593724408, 'lf_metric': 2.0533512758047547, 'jensen_shannon_metric': 0.2545597697158965, 'mi_matrix_metric': 12.362690170062464, 'rmse_metric': 0.45942595545828085}
+3 {'r2_metric': 0.7680527766258154, 'lf_metric': 2.2344202570033085, 'jensen_shannon_metric': 0.2609234930219824, 'mi_matrix_metric': 12.79944353262195, 'rmse_metric': 0.4943180140360108}
+4 {'r2_metric': 0.828532277035471, 'lf_metric': 1.8461676937881561, 'jensen_shannon_metric': 0.24786538343136272, 'mi_matrix_metric': 12.386921567436291, 'rmse_metric': 0.4268694462875618}
+5 {'r2_metric': 0.8311984022597019, 'lf_metric': 2.5370795504170753, 'jensen_shannon_metric': 0.24357391879271145, 'mi_matrix_metric': 12.337751629154791, 'rmse_metric': 0.4235377810133537}
+==================================================
+
+=== Summary (best + mean) for dataset: GATS ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.8204 (0.8086 ± 0.0171)
+  lf_metric: 2.0711 (2.3571 ± 0.1966)
+  jensen_shannon_metric: 0.2454 (0.2488 ± 0.0047)
+  mi_matrix_metric: 12.3346 (12.5708 ± 0.2053)
+  rmse_metric: 0.4369 (0.4506 ± 0.0196)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.8201 (0.7841 ± 0.0408)
+  lf_metric: 2.0480 (2.4519 ± 0.3167)
+  jensen_shannon_metric: 0.2476 (0.2571 ± 0.0157)
+  mi_matrix_metric: 12.3215 (12.6750 ± 0.2828)
+  rmse_metric: 0.4372 (0.4769 ± 0.0432)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.8390 (0.8144 ± 0.0241)
+  lf_metric: 2.2715 (2.4128 ± 0.0895)
+  jensen_shannon_metric: 0.2434 (0.2487 ± 0.0082)
+  mi_matrix_metric: 11.8693 (12.3671 ± 0.3015)
+  rmse_metric: 0.4136 (0.4433 ± 0.0279)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.8397 (0.7993 ± 0.0377)
+  lf_metric: 2.0038 (2.2071 ± 0.2270)
+  jensen_shannon_metric: 0.2453 (0.2571 ± 0.0109)
+  mi_matrix_metric: 12.2379 (12.3746 ± 0.1547)
+  rmse_metric: 0.4127 (0.4598 ± 0.0431)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.8405 (0.8140 ± 0.0264)
+  lf_metric: 1.8462 (2.2095 ± 0.2417)
+  jensen_shannon_metric: 0.2436 (0.2505 ± 0.0064)
+  mi_matrix_metric: 12.3377 (12.4449 ± 0.1782)
+  rmse_metric: 0.4117 (0.4432 ± 0.0301)
+==================================================

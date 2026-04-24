@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: abalone, Metric: r2_metric
+Iteration 1: Best value: 0.720505094195759, Best params: {'batch_size': 375, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 5.3076482627843694e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.7165250541096168, Best params: {'batch_size': 313, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.655538107979752e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 3: Best value: 0.7217025309020091, Best params: {'batch_size': 344, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 6.1072548169192e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.7254408346175465, Best params: {'batch_size': 361, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 2.194365542603075e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 0.7222858881711195, Best params: {'batch_size': 292, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.1237403953842138e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+Dataset: abalone, Metric: lf_metric
+Iteration 1: Best value: 0.4632704888966846, Best params: {'batch_size': 227, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.6435390314342286e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.4810376588759111, Best params: {'batch_size': 363, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.506756864785703e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 3: Best value: 0.5130332426963853, Best params: {'batch_size': 386, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.335581775630015e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.49467346711103904, Best params: {'batch_size': 272, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.7434665615806737e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 0.4889931515307171, Best params: {'batch_size': 282, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.1221046362012853e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: abalone, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.13589271007324097, Best params: {'batch_size': 373, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 1.134893665205631e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.13203249032822426, Best params: {'batch_size': 281, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.107611818102459e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.13625437845200356, Best params: {'batch_size': 211, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 6.002083466265236e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.12918173940260155, Best params: {'batch_size': 221, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.3054174831759882e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.13086628819132964, Best params: {'batch_size': 249, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.2761445666313158e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+Dataset: abalone, Metric: mi_matrix_metric
+Iteration 1: Best value: 2.1482523166368703, Best params: {'batch_size': 311, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.620028439953751e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 2.687672290822686, Best params: {'batch_size': 210, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 3.766389290968935e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 2.48274958499544, Best params: {'batch_size': 331, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.092748146662887e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 2.254751059602947, Best params: {'batch_size': 306, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.0456019996504548e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 2.3550489181232224, Best params: {'batch_size': 415, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.0628335285963585e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: abalone, Metric: rmse_metric
+Iteration 1: Best value: 0.02234295848191122, Best params: {'batch_size': 335, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 5.6426722030249044e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.022403211987570847, Best params: {'batch_size': 296, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 256, 'l2scale': 6.104072727505118e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.022028513520575832, Best params: {'batch_size': 283, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.8711879559773292e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.0221094679782749, Best params: {'batch_size': 226, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.3927933647553994e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 0.022138862210730043, Best params: {'batch_size': 331, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 3.6302437844008655e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: abalone
+Metric: r2_metric
+1 {'r2_metric': 0.7870867396414115, 'lf_metric': 0.3518066120517758, 'jensen_shannon_metric': 0.13383610297213908, 'mi_matrix_metric': 2.5922219683251666, 'rmse_metric': 0.018554725128929087}
+2 {'r2_metric': 0.7497695544714831, 'lf_metric': 0.3449979864620837, 'jensen_shannon_metric': 0.147031928351226, 'mi_matrix_metric': 2.7778552980805444, 'rmse_metric': 0.020115148562729057}
+3 {'r2_metric': 0.7648138639631887, 'lf_metric': 0.3149252268100297, 'jensen_shannon_metric': 0.15441176243393742, 'mi_matrix_metric': 2.905636797162753, 'rmse_metric': 0.019501096363881504}
+4 {'r2_metric': 0.7820108520797973, 'lf_metric': 0.3244516736158183, 'jensen_shannon_metric': 0.15164273651167476, 'mi_matrix_metric': 2.6166089247746105, 'rmse_metric': 0.0187745962738533}
+5 {'r2_metric': 0.7728995042026569, 'lf_metric': 0.24162392282948297, 'jensen_shannon_metric': 0.1289482528707247, 'mi_matrix_metric': 2.0324367244671406, 'rmse_metric': 0.019162943143410893}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.7169249677995091, 'lf_metric': 0.3003164670724662, 'jensen_shannon_metric': 0.11902716371766016, 'mi_matrix_metric': 2.465981445738434, 'rmse_metric': 0.02139458922963138}
+2 {'r2_metric': 0.769347715651707, 'lf_metric': 0.3101369223316976, 'jensen_shannon_metric': 0.1455371754066649, 'mi_matrix_metric': 2.6126562883831963, 'rmse_metric': 0.019312213320513166}
+3 {'r2_metric': 0.7711539821686888, 'lf_metric': 0.37307751055323546, 'jensen_shannon_metric': 0.13812325317604907, 'mi_matrix_metric': 2.741429669082097, 'rmse_metric': 0.019236446530712308}
+4 {'r2_metric': 0.7764333431576103, 'lf_metric': 0.3457600550125468, 'jensen_shannon_metric': 0.14521524407335884, 'mi_matrix_metric': 2.7064357416828204, 'rmse_metric': 0.019013264337008704}
+5 {'r2_metric': 0.734438579735555, 'lf_metric': 0.20792511423452573, 'jensen_shannon_metric': 0.1396451663811876, 'mi_matrix_metric': 2.3057177618772986, 'rmse_metric': 0.020722190467705865}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.6960639754597719, 'lf_metric': 0.5397799101419508, 'jensen_shannon_metric': 0.14159610971066808, 'mi_matrix_metric': 2.466569543234569, 'rmse_metric': 0.022168905861038323}
+2 {'r2_metric': 0.7815033202042532, 'lf_metric': 0.305621628717369, 'jensen_shannon_metric': 0.11243357804125145, 'mi_matrix_metric': 2.2912016747695745, 'rmse_metric': 0.018796439485567865}
+3 {'r2_metric': 0.7781720561185861, 'lf_metric': 0.3173250596706115, 'jensen_shannon_metric': 0.13819195331714584, 'mi_matrix_metric': 2.3621378567745572, 'rmse_metric': 0.018939185455434472}
+4 {'r2_metric': 0.7882853813332862, 'lf_metric': 0.37207987550497, 'jensen_shannon_metric': 0.11690282958139275, 'mi_matrix_metric': 2.7297063497693532, 'rmse_metric': 0.018502422474325726}
+5 {'r2_metric': 0.7821959710570283, 'lf_metric': 0.28268120976594463, 'jensen_shannon_metric': 0.12225735441795857, 'mi_matrix_metric': 2.4944801890152304, 'rmse_metric': 0.018766622775463603}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.7798166117603217, 'lf_metric': 0.3269090480548307, 'jensen_shannon_metric': 0.12207767611413246, 'mi_matrix_metric': 2.131289983723299, 'rmse_metric': 0.01886885056850997}
+2 {'r2_metric': 0.7756848575290279, 'lf_metric': 0.33793375505788864, 'jensen_shannon_metric': 0.14194732367193608, 'mi_matrix_metric': 2.266576789762037, 'rmse_metric': 0.0190450652861693}
+3 {'r2_metric': 0.7368794138478585, 'lf_metric': 0.2360400657729601, 'jensen_shannon_metric': 0.1380133711276131, 'mi_matrix_metric': 2.1836993814826813, 'rmse_metric': 0.02062673950155945}
+4 {'r2_metric': 0.7829306152539197, 'lf_metric': 0.2524462911960898, 'jensen_shannon_metric': 0.14805642654120038, 'mi_matrix_metric': 2.4896772941458427, 'rmse_metric': 0.01873494651170509}
+5 {'r2_metric': 0.7669958155349167, 'lf_metric': 0.37116911347762005, 'jensen_shannon_metric': 0.1348398777025017, 'mi_matrix_metric': 2.3677782478863243, 'rmse_metric': 0.019410424353927553}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.7687893102184438, 'lf_metric': 0.29921927609002574, 'jensen_shannon_metric': 0.14866784278607453, 'mi_matrix_metric': 2.602549861416357, 'rmse_metric': 0.019335576465965135}
+2 {'r2_metric': 0.7684547425730153, 'lf_metric': 0.35859186236122503, 'jensen_shannon_metric': 0.14517036384667953, 'mi_matrix_metric': 2.655111542502099, 'rmse_metric': 0.019349560939967467}
+3 {'r2_metric': 0.7785978833852008, 'lf_metric': 0.288044299334508, 'jensen_shannon_metric': 0.13762642981346085, 'mi_matrix_metric': 2.4504758326179585, 'rmse_metric': 0.018920998622166178}
+4 {'r2_metric': 0.78650754331933, 'lf_metric': 0.3038189886042852, 'jensen_shannon_metric': 0.1266511319721542, 'mi_matrix_metric': 2.404574032441551, 'rmse_metric': 0.018579945563069557}
+5 {'r2_metric': 0.7632486986443031, 'lf_metric': 0.3056759735268567, 'jensen_shannon_metric': 0.14527239266238828, 'mi_matrix_metric': 2.464777156358129, 'rmse_metric': 0.019565878724651015}
+==================================================
+
+=== Summary (best + mean) for dataset: abalone ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.7871 (0.7713 ± 0.0132)
+  lf_metric: 0.2416 (0.3156 ± 0.0393)
+  jensen_shannon_metric: 0.1289 (0.1432 ± 0.0100)
+  mi_matrix_metric: 2.0324 (2.5850 ± 0.2988)
+  rmse_metric: 0.0186 (0.0192 ± 0.0006)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.7764 (0.7537 ± 0.0236)
+  lf_metric: 0.2079 (0.3074 ± 0.0561)
+  jensen_shannon_metric: 0.1190 (0.1375 ± 0.0097)
+  mi_matrix_metric: 2.3057 (2.5664 ± 0.1615)
+  rmse_metric: 0.0190 (0.0199 ± 0.0009)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.7883 (0.7652 ± 0.0347)
+  lf_metric: 0.2827 (0.3635 ± 0.0929)
+  jensen_shannon_metric: 0.1124 (0.1263 ± 0.0116)
+  mi_matrix_metric: 2.2912 (2.4688 ± 0.1494)
+  rmse_metric: 0.0185 (0.0194 ± 0.0014)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.7829 (0.7685 ± 0.0167)
+  lf_metric: 0.2360 (0.3049 ± 0.0519)
+  jensen_shannon_metric: 0.1221 (0.1370 ± 0.0087)
+  mi_matrix_metric: 2.1313 (2.2878 ± 0.1288)
+  rmse_metric: 0.0187 (0.0193 ± 0.0007)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.7865 (0.7731 ± 0.0083)
+  lf_metric: 0.2880 (0.3111 ± 0.0245)
+  jensen_shannon_metric: 0.1267 (0.1407 ± 0.0079)
+  mi_matrix_metric: 2.4046 (2.5155 ± 0.0961)
+  rmse_metric: 0.0186 (0.0192 ± 0.0004)
+==================================================

@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: cl-housing_processed, Metric: r2_metric
+Iteration 1: Best value: 0.9375693535809204, Best params: {'batch_size': 363, 'embedding_dim': 64, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 4.0703915158519413e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.9366844548947014, Best params: {'batch_size': 290, 'embedding_dim': 32, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.6048822280220627e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.9228827885586948, Best params: {'batch_size': 542, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 3.358349766398051e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.9348881068767573, Best params: {'batch_size': 458, 'embedding_dim': 64, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.8303710691186288e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.9316829054589612, Best params: {'batch_size': 308, 'embedding_dim': 64, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.9833520791728574e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: cl-housing_processed, Metric: lf_metric
+Iteration 1: Best value: 0.41051721247613643, Best params: {'batch_size': 342, 'embedding_dim': 16, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.943516780922814e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 2: Best value: 0.43712183505069935, Best params: {'batch_size': 340, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 2.4102177967700395e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.3841915917732077, Best params: {'batch_size': 366, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.1325466047393424e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.42739980991503507, Best params: {'batch_size': 479, 'embedding_dim': 16, 'encoder_depth': 2, 'decoder_depth': 2, 'encoder_decoder_dim': 512, 'l2scale': 1.5747558029995473e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 0.4882975692636416, Best params: {'batch_size': 482, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.6790116454015725e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: cl-housing_processed, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.08708012374619874, Best params: {'batch_size': 289, 'embedding_dim': 64, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.595872700116017e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.09291375552966778, Best params: {'batch_size': 399, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.4461908032698836e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.08679169430036733, Best params: {'batch_size': 282, 'embedding_dim': 32, 'encoder_depth': 2, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.0688943652434537e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 4: Best value: 0.08846268018205122, Best params: {'batch_size': 276, 'embedding_dim': 16, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 4.64869427151636e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 5: Best value: 0.0908305496013202, Best params: {'batch_size': 284, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.5607992583374557e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: cl-housing_processed, Metric: mi_matrix_metric
+Iteration 1: Best value: 0.5233516597778902, Best params: {'batch_size': 331, 'embedding_dim': 64, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.2016439105760241e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.5600441671091986, Best params: {'batch_size': 598, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.3300943639987284e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.5489955384534712, Best params: {'batch_size': 358, 'embedding_dim': 16, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 5.736869692630836e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.5125531189263106, Best params: {'batch_size': 293, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.0907613615398257e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.506808443076893, Best params: {'batch_size': 454, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 4.945619688552813e-05, 'loss_factor': 3, 'epochs': 400}
+==================================================
+Dataset: cl-housing_processed, Metric: rmse_metric
+Iteration 1: Best value: 0.25013613327114, Best params: {'batch_size': 336, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.4445480755150848e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 2: Best value: 0.2572330538481686, Best params: {'batch_size': 340, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.2268882207127155e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 3: Best value: 0.2592545645161582, Best params: {'batch_size': 270, 'embedding_dim': 64, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.8049901965094626e-05, 'loss_factor': 3, 'epochs': 400}
+Iteration 4: Best value: 0.26137512491688963, Best params: {'batch_size': 294, 'embedding_dim': 32, 'encoder_depth': 4, 'decoder_depth': 4, 'encoder_decoder_dim': 256, 'l2scale': 1.764349173003317e-05, 'loss_factor': 2, 'epochs': 400}
+Iteration 5: Best value: 0.2558027279184509, Best params: {'batch_size': 271, 'embedding_dim': 32, 'encoder_depth': 3, 'decoder_depth': 4, 'encoder_decoder_dim': 512, 'l2scale': 1.8915308244516105e-05, 'loss_factor': 2, 'epochs': 400}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: cl-housing_processed
+Metric: r2_metric
+1 {'r2_metric': 0.9377689638485763, 'lf_metric': 0.4642939989202949, 'jensen_shannon_metric': 0.09712214113686393, 'mi_matrix_metric': 0.4948097059403829, 'rmse_metric': 0.24936581003714825}
+2 {'r2_metric': 0.9310910653582843, 'lf_metric': 0.308455444636707, 'jensen_shannon_metric': 0.08610742172248206, 'mi_matrix_metric': 0.6033686832914071, 'rmse_metric': 0.2624044283183735}
+3 {'r2_metric': 0.925698627873204, 'lf_metric': 0.5042643147731773, 'jensen_shannon_metric': 0.10040089356718913, 'mi_matrix_metric': 0.6875339545960092, 'rmse_metric': 0.2724782297417841}
+4 {'r2_metric': 0.9265425054715469, 'lf_metric': 0.4037988309624599, 'jensen_shannon_metric': 0.09891409464954783, 'mi_matrix_metric': 0.592591442466137, 'rmse_metric': 0.27092647583472873}
+5 {'r2_metric': 0.9375252636170679, 'lf_metric': 0.41955340374440664, 'jensen_shannon_metric': 0.09406325315727555, 'mi_matrix_metric': 0.5576865579338287, 'rmse_metric': 0.24985359820862818}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.9268502485136861, 'lf_metric': 0.448405056563347, 'jensen_shannon_metric': 0.08822340429214118, 'mi_matrix_metric': 0.5836056462806717, 'rmse_metric': 0.2703583701196995}
+2 {'r2_metric': 0.9258491354648913, 'lf_metric': 0.38711833347830915, 'jensen_shannon_metric': 0.09003981770860367, 'mi_matrix_metric': 0.6716873123369014, 'rmse_metric': 0.2722021188847817}
+3 {'r2_metric': 0.9284920386178384, 'lf_metric': 0.3996291004010113, 'jensen_shannon_metric': 0.09032568372725414, 'mi_matrix_metric': 0.5432169988093466, 'rmse_metric': 0.2673071592434115}
+4 {'r2_metric': 0.8757000423870572, 'lf_metric': 0.8324315689760466, 'jensen_shannon_metric': 0.13276100241285596, 'mi_matrix_metric': 0.9177049602073918, 'rmse_metric': 0.35242676413280316}
+5 {'r2_metric': 0.9285368668553269, 'lf_metric': 0.3516422473754098, 'jensen_shannon_metric': 0.10016770455510152, 'mi_matrix_metric': 0.6677509944425021, 'rmse_metric': 0.2672233588721574}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.9242156855929312, 'lf_metric': 0.3076593950095966, 'jensen_shannon_metric': 0.08494576081691174, 'mi_matrix_metric': 0.7364864598169265, 'rmse_metric': 0.27518392140680137}
+2 {'r2_metric': 0.9390979889653347, 'lf_metric': 0.3833633074479757, 'jensen_shannon_metric': 0.09391397908103014, 'mi_matrix_metric': 0.487154249479837, 'rmse_metric': 0.2466886730527698}
+3 {'r2_metric': 0.9211620324970796, 'lf_metric': 0.36724494379447686, 'jensen_shannon_metric': 0.08802901572103099, 'mi_matrix_metric': 0.6386421028405138, 'rmse_metric': 0.2806733005757411}
+4 {'r2_metric': 0.9444602156753691, 'lf_metric': 0.46455603089910175, 'jensen_shannon_metric': 0.09901322427673484, 'mi_matrix_metric': 0.45815845465061505, 'rmse_metric': 0.23557841016293335}
+5 {'r2_metric': 0.9374555846753512, 'lf_metric': 0.49521164075291807, 'jensen_shannon_metric': 0.0934544325535267, 'mi_matrix_metric': 0.6124233395587149, 'rmse_metric': 0.2499928919755667}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.9270878649184084, 'lf_metric': 0.5271853661053957, 'jensen_shannon_metric': 0.10358641464378798, 'mi_matrix_metric': 0.6245348729142719, 'rmse_metric': 0.26991890288043474}
+2 {'r2_metric': 0.9331828902309985, 'lf_metric': 0.3744270865585644, 'jensen_shannon_metric': 0.10295500696888601, 'mi_matrix_metric': 0.5737369872165944, 'rmse_metric': 0.2583909121501623}
+3 {'r2_metric': 0.9161114248156004, 'lf_metric': 0.47542547022600606, 'jensen_shannon_metric': 0.10799657404990795, 'mi_matrix_metric': 0.6735681386562173, 'rmse_metric': 0.28952415392433206}
+4 {'r2_metric': 0.938065784100357, 'lf_metric': 0.3818728421585515, 'jensen_shannon_metric': 0.08656866962089285, 'mi_matrix_metric': 0.5682049945219991, 'rmse_metric': 0.24877040542237774}
+5 {'r2_metric': 0.938518089627622, 'lf_metric': 0.4500536781877244, 'jensen_shannon_metric': 0.1057967101186002, 'mi_matrix_metric': 0.5688596837690909, 'rmse_metric': 0.24786035582278731}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.943772805416195, 'lf_metric': 0.3573138678221463, 'jensen_shannon_metric': 0.08871853096204896, 'mi_matrix_metric': 0.5374684033625134, 'rmse_metric': 0.2370317919087263}
+2 {'r2_metric': 0.9457981351786925, 'lf_metric': 0.3825124717849533, 'jensen_shannon_metric': 0.09362391818032512, 'mi_matrix_metric': 0.534424150358727, 'rmse_metric': 0.23272364290517122}
+3 {'r2_metric': 0.9308863890076594, 'lf_metric': 0.5822201493869152, 'jensen_shannon_metric': 0.08930579976343794, 'mi_matrix_metric': 0.662090260006771, 'rmse_metric': 0.2627938419606108}
+4 {'r2_metric': 0.9316616468935123, 'lf_metric': 0.6137108789712387, 'jensen_shannon_metric': 0.11915289103673679, 'mi_matrix_metric': 0.5901842723321983, 'rmse_metric': 0.26131578613068907}
+5 {'r2_metric': 0.940089625277593, 'lf_metric': 0.34500364825419144, 'jensen_shannon_metric': 0.08239126138401937, 'mi_matrix_metric': 0.5633597190890839, 'rmse_metric': 0.24467207778816316}
+==================================================
+
+=== Summary (best + mean) for dataset: cl-housing_processed ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.9378 (0.9317 ± 0.0052)
+  lf_metric: 0.3085 (0.4201 ± 0.0660)
+  jensen_shannon_metric: 0.0861 (0.0953 ± 0.0051)
+  mi_matrix_metric: 0.4948 (0.5872 ± 0.0629)
+  rmse_metric: 0.2494 (0.2610 ± 0.0099)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.9285 (0.9171 ± 0.0207)
+  lf_metric: 0.3516 (0.4838 ± 0.1770)
+  jensen_shannon_metric: 0.0882 (0.1003 ± 0.0168)
+  mi_matrix_metric: 0.5432 (0.6768 ± 0.1301)
+  rmse_metric: 0.2672 (0.2859 ± 0.0333)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.9445 (0.9333 ± 0.0090)
+  lf_metric: 0.3077 (0.4036 ± 0.0679)
+  jensen_shannon_metric: 0.0849 (0.0919 ± 0.0049)
+  mi_matrix_metric: 0.4582 (0.5866 ± 0.1022)
+  rmse_metric: 0.2356 (0.2576 ± 0.0173)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.9385 (0.9306 ± 0.0083)
+  lf_metric: 0.3744 (0.4418 ± 0.0577)
+  jensen_shannon_metric: 0.0866 (0.1014 ± 0.0076)
+  mi_matrix_metric: 0.5682 (0.6018 ± 0.0416)
+  rmse_metric: 0.2479 (0.2629 ± 0.0155)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.9458 (0.9384 ± 0.0061)
+  lf_metric: 0.3450 (0.4562 ± 0.1168)
+  jensen_shannon_metric: 0.0824 (0.0946 ± 0.0128)
+  mi_matrix_metric: 0.5344 (0.5775 ± 0.0468)
+  rmse_metric: 0.2327 (0.2477 ± 0.0123)
+==================================================

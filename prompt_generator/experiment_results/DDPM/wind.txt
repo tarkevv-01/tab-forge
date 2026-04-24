@@ -1,0 +1,117 @@
+
+=== Summary of tuning ===
+Dataset: wind, Metric: r2_metric
+Iteration 1: Best value: 0.7845088447584909, Best params: {'batch_size': 829, 'lr': 0.00102845036998163, 'n_layers_hidden': 6, 'n_units_hidden': 512, 'dropout': 0.0, 'num_timesteps': 250, 'beta_schedule': 'cosine'}
+Iteration 2: Best value: 0.7948307471023838, Best params: {'batch_size': 509, 'lr': 0.0004585763610480897, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 500, 'beta_schedule': 'cosine'}
+Iteration 3: Best value: 0.7880239158629139, Best params: {'batch_size': 509, 'lr': 0.00041171818772696065, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 500, 'beta_schedule': 'cosine'}
+Iteration 4: Best value: 0.7868855715229905, Best params: {'batch_size': 573, 'lr': 0.001225215420908606, 'n_layers_hidden': 3, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 250, 'beta_schedule': 'linear'}
+Iteration 5: Best value: 0.7899965836423735, Best params: {'batch_size': 1277, 'lr': 0.0008821873799944023, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.05, 'num_timesteps': 1000, 'beta_schedule': 'cosine'}
+==================================================
+Dataset: wind, Metric: lf_metric
+Iteration 1: Best value: 0.22125630914830408, Best params: {'batch_size': 1277, 'lr': 0.00011306289565842176, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 2: Best value: 0.2239411780316275, Best params: {'batch_size': 765, 'lr': 0.0017825583932667907, 'n_layers_hidden': 6, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 100, 'beta_schedule': 'linear'}
+Iteration 3: Best value: 0.2146813638820941, Best params: {'batch_size': 1341, 'lr': 8.898749495895199e-05, 'n_layers_hidden': 2, 'n_units_hidden': 1024, 'dropout': 0.15000000000000002, 'num_timesteps': 500, 'beta_schedule': 'linear'}
+Iteration 4: Best value: 0.218054215030826, Best params: {'batch_size': 765, 'lr': 0.0003186012950581239, 'n_layers_hidden': 4, 'n_units_hidden': 1024, 'dropout': 0.15000000000000002, 'num_timesteps': 100, 'beta_schedule': 'linear'}
+Iteration 5: Best value: 0.22230898305547017, Best params: {'batch_size': 189, 'lr': 0.00015995827141672604, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 500, 'beta_schedule': 'linear'}
+==================================================
+Dataset: wind, Metric: jensen_shannon_metric
+Iteration 1: Best value: 0.10167845909932298, Best params: {'batch_size': 381, 'lr': 0.00027309199793854136, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 250, 'beta_schedule': 'linear'}
+Iteration 2: Best value: 0.10017361051684885, Best params: {'batch_size': 509, 'lr': 0.0014848438821417737, 'n_layers_hidden': 2, 'n_units_hidden': 512, 'dropout': 0.2, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 3: Best value: 0.10182138168515457, Best params: {'batch_size': 1085, 'lr': 9.420865095035229e-05, 'n_layers_hidden': 2, 'n_units_hidden': 256, 'dropout': 0.05, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 4: Best value: 0.100052284448005, Best params: {'batch_size': 317, 'lr': 1.5558532021067408e-05, 'n_layers_hidden': 6, 'n_units_hidden': 1024, 'dropout': 0.2, 'num_timesteps': 250, 'beta_schedule': 'linear'}
+Iteration 5: Best value: 0.10100490364359366, Best params: {'batch_size': 701, 'lr': 5.9820550341935225e-05, 'n_layers_hidden': 4, 'n_units_hidden': 512, 'dropout': 0.0, 'num_timesteps': 500, 'beta_schedule': 'linear'}
+==================================================
+Dataset: wind, Metric: mi_matrix_metric
+Iteration 1: Best value: 0.310230460224349, Best params: {'batch_size': 1149, 'lr': 3.50349491340743e-05, 'n_layers_hidden': 6, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 2: Best value: 0.31743880504227745, Best params: {'batch_size': 381, 'lr': 2.0091280717508522e-05, 'n_layers_hidden': 4, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 3: Best value: 0.3075348673946843, Best params: {'batch_size': 1085, 'lr': 0.00045687425856040883, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 250, 'beta_schedule': 'linear'}
+Iteration 4: Best value: 0.314861763954193, Best params: {'batch_size': 1213, 'lr': 0.00015211146567989443, 'n_layers_hidden': 4, 'n_units_hidden': 512, 'dropout': 0.15000000000000002, 'num_timesteps': 1000, 'beta_schedule': 'linear'}
+Iteration 5: Best value: 0.2830292220014252, Best params: {'batch_size': 1469, 'lr': 7.899155061980683e-05, 'n_layers_hidden': 3, 'n_units_hidden': 1024, 'dropout': 0.15000000000000002, 'num_timesteps': 500, 'beta_schedule': 'linear'}
+==================================================
+Dataset: wind, Metric: rmse_metric
+Iteration 1: Best value: 0.4555720995141878, Best params: {'batch_size': 189, 'lr': 0.0015978411495937584, 'n_layers_hidden': 2, 'n_units_hidden': 512, 'dropout': 0.0, 'num_timesteps': 100, 'beta_schedule': 'cosine'}
+Iteration 2: Best value: 0.45482316661596794, Best params: {'batch_size': 1021, 'lr': 0.0013974807913581314, 'n_layers_hidden': 2, 'n_units_hidden': 1024, 'dropout': 0.15000000000000002, 'num_timesteps': 500, 'beta_schedule': 'cosine'}
+Iteration 3: Best value: 0.45636916902262475, Best params: {'batch_size': 317, 'lr': 0.0015518748286112386, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 1000, 'beta_schedule': 'cosine'}
+Iteration 4: Best value: 0.45098723588648726, Best params: {'batch_size': 125, 'lr': 0.0007786151859270489, 'n_layers_hidden': 4, 'n_units_hidden': 1024, 'dropout': 0.0, 'num_timesteps': 100, 'beta_schedule': 'linear'}
+Iteration 5: Best value: 0.4620080477731623, Best params: {'batch_size': 189, 'lr': 0.001078691444198746, 'n_layers_hidden': 5, 'n_units_hidden': 1024, 'dropout': 0.1, 'num_timesteps': 500, 'beta_schedule': 'linear'}
+==================================================
+
+=== Summary of test metrics ===
+Dataset: wind
+Metric: r2_metric
+1 {'r2_metric': 0.8119033634358259, 'lf_metric': 0.1928780715094624, 'jensen_shannon_metric': 0.09852584649235419, 'mi_matrix_metric': 0.24649687373157878, 'rmse_metric': 0.44028336317945926}
+2 {'r2_metric': 0.8081191992607735, 'lf_metric': 0.14985009260230536, 'jensen_shannon_metric': 0.09143533993719605, 'mi_matrix_metric': 0.2706621509817351, 'rmse_metric': 0.4446901618737565}
+3 {'r2_metric': 0.8130137740155039, 'lf_metric': 0.18757813076307497, 'jensen_shannon_metric': 0.09202380291008122, 'mi_matrix_metric': 0.3109583177285467, 'rmse_metric': 0.43898185405137624}
+4 {'r2_metric': 0.8123459851783138, 'lf_metric': 0.1414361545494024, 'jensen_shannon_metric': 0.09139180878061455, 'mi_matrix_metric': 0.22203233379768517, 'rmse_metric': 0.43976502916382404}
+5 {'r2_metric': 0.8146814533960922, 'lf_metric': 0.3015366684670302, 'jensen_shannon_metric': 0.09397425852162024, 'mi_matrix_metric': 0.2390469960752742, 'rmse_metric': 0.4370198897131914}
+==================================================
+Metric: lf_metric
+1 {'r2_metric': 0.7979690492698768, 'lf_metric': 0.3108598937219693, 'jensen_shannon_metric': 0.09307980904801637, 'mi_matrix_metric': 0.4756602541085762, 'rmse_metric': 0.45630025778691}
+2 {'r2_metric': 0.7989992815754994, 'lf_metric': 0.3351003466411421, 'jensen_shannon_metric': 0.09267339570145444, 'mi_matrix_metric': 0.48794949639282265, 'rmse_metric': 0.4551353469247816}
+3 {'r2_metric': 0.7886671614035597, 'lf_metric': 0.31657794435443837, 'jensen_shannon_metric': 0.091943510123378, 'mi_matrix_metric': 0.5190392228083455, 'rmse_metric': 0.4666865166473877}
+4 {'r2_metric': 0.8014392153139447, 'lf_metric': 0.3737246715154743, 'jensen_shannon_metric': 0.08618642218696905, 'mi_matrix_metric': 0.6370581465067267, 'rmse_metric': 0.45236448426536896}
+5 {'r2_metric': 0.8043929844414197, 'lf_metric': 0.11863802936090777, 'jensen_shannon_metric': 0.08515329027733087, 'mi_matrix_metric': 0.23671868314844008, 'rmse_metric': 0.44898721423445526}
+==================================================
+Metric: jensen_shannon_metric
+1 {'r2_metric': 0.7940282521026515, 'lf_metric': 0.277499171844495, 'jensen_shannon_metric': 0.09502734108554045, 'mi_matrix_metric': 0.36070939490087517, 'rmse_metric': 0.46072904068786524}
+2 {'r2_metric': 0.799586107958374, 'lf_metric': 0.19215754360261383, 'jensen_shannon_metric': 0.08843957558353277, 'mi_matrix_metric': 0.30188153065513, 'rmse_metric': 0.4544704720499457}
+3 {'r2_metric': 0.7867780333833367, 'lf_metric': 0.43559821528329146, 'jensen_shannon_metric': 0.09552414710109906, 'mi_matrix_metric': 0.7978519021384132, 'rmse_metric': 0.468767757522256}
+4 {'r2_metric': 0.7927572060819806, 'lf_metric': 0.23223139823961045, 'jensen_shannon_metric': 0.09104164322890075, 'mi_matrix_metric': 0.47552393086799455, 'rmse_metric': 0.4621484274584979}
+5 {'r2_metric': 0.7907513439901356, 'lf_metric': 0.2827689466666377, 'jensen_shannon_metric': 0.09337262612173357, 'mi_matrix_metric': 0.48430183729269644, 'rmse_metric': 0.4643795634773675}
+==================================================
+Metric: mi_matrix_metric
+1 {'r2_metric': 0.7957731189091273, 'lf_metric': 0.30498483899748513, 'jensen_shannon_metric': 0.09225380142038897, 'mi_matrix_metric': 0.5087324930262515, 'rmse_metric': 0.4587733826222808}
+2 {'r2_metric': 0.7853769940583871, 'lf_metric': 0.16593974779433227, 'jensen_shannon_metric': 0.08957741231108118, 'mi_matrix_metric': 0.3691242518780217, 'rmse_metric': 0.47030532595294267}
+3 {'r2_metric': 0.8084299143772607, 'lf_metric': 0.3773450985318659, 'jensen_shannon_metric': 0.09764114169387433, 'mi_matrix_metric': 0.48362843051481735, 'rmse_metric': 0.44432996967065963}
+4 {'r2_metric': 0.7976530793178316, 'lf_metric': 0.1767363111196328, 'jensen_shannon_metric': 0.08930759842862283, 'mi_matrix_metric': 0.4150056542658699, 'rmse_metric': 0.45665693789450557}
+5 {'r2_metric': 0.7967396744906363, 'lf_metric': 0.18342788423314355, 'jensen_shannon_metric': 0.09022949229336023, 'mi_matrix_metric': 0.41216908262698837, 'rmse_metric': 0.45768646429467735}
+==================================================
+Metric: rmse_metric
+1 {'r2_metric': 0.80397091833006, 'lf_metric': 0.1949696382052645, 'jensen_shannon_metric': 0.09180829799870815, 'mi_matrix_metric': 0.2804391583052227, 'rmse_metric': 0.44947134864474425}
+2 {'r2_metric': 0.8035575473073435, 'lf_metric': 0.2285243964857293, 'jensen_shannon_metric': 0.0956285510417988, 'mi_matrix_metric': 0.29040612638182295, 'rmse_metric': 0.4499450043474426}
+3 {'r2_metric': 0.8179289226929807, 'lf_metric': 0.1914333095659134, 'jensen_shannon_metric': 0.09287147354748339, 'mi_matrix_metric': 0.4662725520502624, 'rmse_metric': 0.43317386018059467}
+4 {'r2_metric': 0.7940595981302966, 'lf_metric': 0.3123053337890644, 'jensen_shannon_metric': 0.0937386044049473, 'mi_matrix_metric': 0.4450061340278815, 'rmse_metric': 0.4606939810864775}
+5 {'r2_metric': 0.8066903021942686, 'lf_metric': 0.16550098275761654, 'jensen_shannon_metric': 0.08800477446729281, 'mi_matrix_metric': 0.26108701326308825, 'rmse_metric': 0.44634284910319016}
+==================================================
+
+=== Summary (best + mean) for dataset: wind ===
+
+Tuning metric: r2_metric
+  r2_metric: 0.8147 (0.8120 ± 0.0022)
+  lf_metric: 0.1414 (0.1947 ± 0.0571)
+  jensen_shannon_metric: 0.0914 (0.0935 ± 0.0027)
+  mi_matrix_metric: 0.2220 (0.2578 ± 0.0308)
+  rmse_metric: 0.4370 (0.4401 ± 0.0025)
+==================================================
+
+Tuning metric: lf_metric
+  r2_metric: 0.8044 (0.7983 ± 0.0053)
+  lf_metric: 0.1186 (0.2910 ± 0.0889)
+  jensen_shannon_metric: 0.0852 (0.0898 ± 0.0034)
+  mi_matrix_metric: 0.2367 (0.4713 ± 0.1304)
+  rmse_metric: 0.4490 (0.4559 ± 0.0060)
+==================================================
+
+Tuning metric: jensen_shannon_metric
+  r2_metric: 0.7996 (0.7928 ± 0.0042)
+  lf_metric: 0.1922 (0.2841 ± 0.0826)
+  jensen_shannon_metric: 0.0884 (0.0927 ± 0.0026)
+  mi_matrix_metric: 0.3019 (0.4841 ± 0.1714)
+  rmse_metric: 0.4545 (0.4621 ± 0.0047)
+==================================================
+
+Tuning metric: mi_matrix_metric
+  r2_metric: 0.8084 (0.7968 ± 0.0073)
+  lf_metric: 0.1659 (0.2417 ± 0.0846)
+  jensen_shannon_metric: 0.0893 (0.0918 ± 0.0031)
+  mi_matrix_metric: 0.3691 (0.4377 ± 0.0510)
+  rmse_metric: 0.4443 (0.4576 ± 0.0082)
+==================================================
+
+Tuning metric: rmse_metric
+  r2_metric: 0.8179 (0.8052 ± 0.0076)
+  lf_metric: 0.1655 (0.2185 ± 0.0510)
+  jensen_shannon_metric: 0.0880 (0.0924 ± 0.0025)
+  mi_matrix_metric: 0.2611 (0.3486 ± 0.0881)
+  rmse_metric: 0.4332 (0.4479 ± 0.0088)
+==================================================
