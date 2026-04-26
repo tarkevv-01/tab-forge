@@ -7,9 +7,19 @@ from tab_forge.benchmark import Benchmark
 from ...dataset.functions import merge_datasets, split_folds
 from .config import MODEL_CONFIGS
 import optuna.logging
+from ...models import CTGANSynthesizer, WGANGPSynthesizer, GANMFSSynthesizer, CTABGANPlusSynthesizer, TVAESynthesizer, DDPMSynthesizer
 
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 
+
+CONNECT_RESPONSE_TO_MODELS = {
+    'DDPM': DDPMSynthesizer,
+    'GAN-MFS': GANMFSSynthesizer,
+    'WGAN-GP': WGANGPSynthesizer,
+    'CTABGAN+': CTABGANPlusSynthesizer,
+    'CTGAN': CTGANSynthesizer,
+    'TVAE': TVAESynthesizer
+}
 
 class AutoTuningStudy:
     """
@@ -65,6 +75,13 @@ class AutoTuningStudy:
         direction: str = 'minimize',
         **study_kwargs
     ):
+        if model_class is str:
+            if model_class not in CONNECT_RESPONSE_TO_MODELS:
+                raise ValueError(
+                    f"Модель {model_class} не поддерживается. "
+                    f"Доступные: {list(CONNECT_RESPONSE_TO_MODELS.keys())}"
+                )
+            model_class = CONNECT_RESPONSE_TO_MODELS[model_class]
         self.model_class = model_class
         self.model_name = model_class.__name__
         self.get_params = get_params
