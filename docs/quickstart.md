@@ -42,7 +42,7 @@ train, test = train_test_split(dataset, test_size=0.2, random_state=42)
 `PromptGenerator` вычисляет мета-характеристики датасета и собирает из них структурированный промт для LLM.
 
 ```python
-from prompt_generator import PromptGenerator
+from tab_forge.prompt_generator import PromptGenerator
 
 gen = PromptGenerator()
 
@@ -75,7 +75,7 @@ print(prompt)
 ## Шаг 3. LLM-ранжирование моделей (LLMRunner)
 
 ```python
-from llm_runner import LLMRunner
+from tab_forge.llm_runner import LLMRunner
 
 runner = LLMRunner(
     base_url = "https://api.openai.com/v1",   # или URL локального сервера

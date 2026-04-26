@@ -89,8 +89,8 @@ pip install -r requirements.txt
 ```python
 from tab_forge.dataset import Dataset
 from tab_forge.tuning import AutoTuningStudy
-from prompt_generator import PromptGenerator
-from llm_runner import LLMRunner
+from tab_forge.prompt_generator import PromptGenerator
+from tab_forge.llm_runner import LLMRunner
 
 # 1. Загрузка данных
 dataset = Dataset(
