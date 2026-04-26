@@ -84,48 +84,46 @@ cd tab-forge
 pip install -r requirements.txt
 ```
 
-### Импорт модулей
+### Полный пайплайн
 
 ```python
 from tab_forge.dataset import Dataset
-from tab_forge.models import CTGANSynthesizer
 from tab_forge.tuning import AutoTuningStudy
 from prompt_generator import PromptGenerator
 from llm_runner import LLMRunner
-```
 
-### Инициализация данных
-
-```python
+# 1. Загрузка данных
 dataset = Dataset(
-    data="abalone.csv",
-    target="Rings",
-    task_type="regression",
-    categorical_features=["Sex"],
-    numerical_features=["Length", "Diameter", "Height",
-                        "Whole weight", "Shucked weight"]
+    data="your_data.csv",           # путь к CSV или pd.DataFrame
+    target="target_column",         # целевая переменная
+    task_type="regression",         # "regression" или "classification"
+    numerical_features=["feat1", "feat2", "feat3"],
+    categorical_features=["cat_feat"],
 )
-```
 
-### LLM-ассистированный выбор модели
-
-```python
-study_extended = AutoTuningStudy(
-    model_class=CTGANSynthesizer,
-    get_params=None,  # настраиваемые рамки параметров
-    benchmark=None,   # наследуемый параметр оценки
-    search_space_mode='extended'
+# 2. LLM ранжирует модели по мета-характеристикам датасета
+prompt = PromptGenerator().build_prompt(
+    dataset=dataset,
+    target_metric="r2_metric",  # задача
+    shot_mode="few",            # "zero" или "few"
 )
+
+runner = LLMRunner(base_url="https://api.openai.com/v1", api_key="sk-...", model="gpt-4o")
+result = runner.run(prompt, n_runs=5, temperature=0.7)
+print("Рейтинг моделей:", result.final_ranking)
+# ['GAN-MFS', 'CTGAN', 'WGAN-GP', ...]
+
+# 3. Тюнинг модели с наивысшим приоритетом
+# AutoTuningStudy принимает строку — название модели из рейтинга LLM
+study = AutoTuningStudy(model_class=result.final_ranking[0], search_space_mode="extended", cv=3)
+study.optimize(dataset, n_trials=25)
+print("Лучшие параметры:", study.best_params)
+
+# 4. Генерация синтетических данных
+synth_df = study.best_model.generate(n_samples=1000)
 ```
 
-### Тюнинг в порядке, предложенном LLM
-
-```python
-study_extended.optimize(train, n_trials=25)
-
-model = study_extended.best_model
-synth_data = model.generate(100)
-```
+> Подробнее: [docs/quickstart.md](docs/quickstart.md) и примеры в папке `examples/`.
 
 ## 📊 Применение
 

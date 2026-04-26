@@ -75,7 +75,7 @@ class AutoTuningStudy:
         direction: str = 'minimize',
         **study_kwargs
     ):
-        if model_class is str:
+        if isinstance(model_class, str):
             if model_class not in CONNECT_RESPONSE_TO_MODELS:
                 raise ValueError(
                     f"Модель {model_class} не поддерживается. "
