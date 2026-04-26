@@ -192,3 +192,74 @@ def _suggest_ctab_gan_plus_extended(trial, dataset, user_params):
         params['epochs'] = trial.suggest_int('epochs', 100, 1000, step=100)
     
     return params
+
+#TVAE
+def _suggest_tvae_extended(trial, dataset, user_params):
+    """Расширенное пространство для TVAE (параметры, которые пользователь не задал)"""
+    params = {}
+
+    if 'compress_dims' not in user_params:
+        encoder_depth = trial.suggest_categorical('encoder_depth', [2, 3, 4])
+        encoder_dim = trial.suggest_categorical('encoder_dim', [256, 512])
+        params['compress_dims'] = tuple([encoder_dim] * encoder_depth)
+
+    if 'decompress_dims' not in user_params:
+        decoder_depth = trial.suggest_categorical('decoder_depth', [2, 4])
+        decoder_dim = trial.suggest_categorical('decoder_dim', [256, 512])
+        params['decompress_dims'] = tuple([decoder_dim] * decoder_depth)
+
+    if 'batch_size' not in user_params:
+        num_samples = len(dataset)
+        min_batch = max(10, min(256, num_samples // 20))
+        max_batch = max(min_batch, min(1024, num_samples // 10))
+        batch_size = trial.suggest_int('batch_size', min_batch, max_batch)
+        params['batch_size'] = max(10, int(round(batch_size / 10) * 10))
+
+    if 'embedding_dim' not in user_params:
+        params['embedding_dim'] = trial.suggest_categorical('embedding_dim', [16, 32, 64])
+
+    if 'l2scale' not in user_params:
+        params['l2scale'] = trial.suggest_float('l2scale', 1e-5, 6.3e-5, log=True)
+
+    if 'loss_factor' not in user_params:
+        params['loss_factor'] = trial.suggest_categorical('loss_factor', [2, 3])
+
+    if 'epochs' not in user_params:
+        params['epochs'] = trial.suggest_int('epochs', 100, 1000, step=100)
+
+    return params
+
+
+#DDPM
+def _suggest_ddpm_extended(trial, dataset, user_params):
+    """Расширенное пространство для DDPM (параметры, которые пользователь не задал)"""
+    params = {}
+
+    if 'batch_size' not in user_params:
+        num_samples = len(dataset)
+        bs_min = max(64, num_samples // 50)
+        bs_max = min(4096, num_samples // 4)
+        # Защита: bs_max должен быть >= bs_min
+        bs_max = max(bs_min, bs_max)
+        batch_size = trial.suggest_int('batch_size', bs_min, bs_max, step=64)
+        params['batch_size'] = batch_size
+
+    if 'lr' not in user_params:
+        params['lr'] = trial.suggest_float('lr', 1e-5, 2e-3, log=True)
+
+    if 'num_timesteps' not in user_params:
+        params['num_timesteps'] = trial.suggest_categorical('num_timesteps', [100, 250, 500, 1000])
+
+    if 'scheduler' not in user_params:
+        params['scheduler'] = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
+
+    if 'n_layers_hidden' not in user_params:
+        params['n_layers_hidden'] = trial.suggest_int('n_layers_hidden', 2, 6)
+
+    if 'n_units_hidden' not in user_params:
+        params['n_units_hidden'] = trial.suggest_categorical('n_units_hidden', [256, 512, 1024])
+
+    if 'dropout' not in user_params:
+        params['dropout'] = trial.suggest_float('dropout', 0.0, 0.2, step=0.05)
+
+    return params

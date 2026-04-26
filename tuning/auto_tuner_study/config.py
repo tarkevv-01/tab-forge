@@ -1,4 +1,4 @@
-from .extended_fun import _suggest_ctgan_extended, _suggest_wgan_gp_extended, _suggest_gan_mfs_extended, _suggest_ctab_gan_plus_extended
+from .extended_fun import _suggest_ctgan_extended, _suggest_wgan_gp_extended, _suggest_gan_mfs_extended, _suggest_ctab_gan_plus_extended, _suggest_tvae_extended, _suggest_ddpm_extended
 
 MODEL_CONFIGS = {
     'CTGANSynthesizer': {
@@ -29,4 +29,18 @@ MODEL_CONFIGS = {
         'direction': 'minimize',
         'extended_space_fn': lambda trial, dataset, user_params: _suggest_ctab_gan_plus_extended(trial, dataset, user_params)
     },
+    'TVAESynthesizer': {
+        'default_benchmark': {
+            'rmse_xgboost': ('rmse', {'model': 'xgboost'})
+        },
+        'direction': 'minimize',
+        'extended_space_fn': lambda trial, dataset, user_params: _suggest_tvae_extended(trial, dataset, user_params)
+    },
+    'DDPMSynthesizer': {
+        'default_benchmark': {
+            'r2_xgboost': ('r2', {'model': 'xgboost'})
+        },
+        'direction': 'minimize',
+        'extended_space_fn': lambda trial, dataset, user_params: _suggest_ddpm_extended(trial, dataset, user_params)
+    }
 }
