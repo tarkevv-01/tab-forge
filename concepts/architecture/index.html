@@ -1349,54 +1349,6 @@
 <h1 id="tab-forge">Архитектура Tab-Forge<a class="headerlink" href="#tab-forge" title="Permanent link">&para;</a></h1>
 <h2 id="_1">Схема модулей<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><img alt="Схема архитектуры Tab-Forge" src="../../img/arch.png" /></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌──────────────────────────────────────────────────────────────┐
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                      Ваш датасет (CSV / DataFrame)           │
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>└───────────────────────────┬──────────────────────────────────┘
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                            │
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                            ▼
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>┌──────────────────────────────────────────────────────────────┐
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│                         Dataset                              │
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│  • Унифицированная обёртка над DataFrame                     │
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│  • DatasetInfo: размер, типы признаков, задача               │
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  • train_test_split / split_folds / merge_datasets           │
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>└───────────────┬──────────────────────┬───────────────────────┘
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                │                      │
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                ▼                      ▼
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>┌──────────────────────┐   ┌───────────────────────────────────┐
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   PromptGenerator    │   │           Models                  │
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│                      │   │  BaseGenerativeModel (ABC)        │
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│  • extract_meta_     │   │  ┌─────────────────────────────┐  │
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│    features()        │   │  │ CTGANSynthesizer            │  │
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│  • build_prompt()    │   │  │ WGANGPSynthesizer           │  │
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│    - zero-shot       │   │  │ GANMFSSynthesizer           │  │
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│    - few-shot        │   │  │ CTABGANPlusSynthesizer      │  │
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│                      │   │  │ TVAESynthesizer             │  │
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>└────────┬─────────────┘   │  │ DDPMSynthesizer             │  │
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>         │                 │  └─────────────────────────────┘  │
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>         ▼                 │  fit() / generate() /             │
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>┌────────────────────┐     │  structed_generate()              │
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│     LLMRunner      │     └───────────────┬───────────────────┘
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│                    │                     │
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│  • OpenAI-compat.  │                     ▼
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>│  • n_runs запросов │     ┌───────────────────────────────────┐
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>│  • self-consistency│     │         AutoTuningStudy           │
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>│  • RunnerResult    │     │  • Optuna (TPE / Random sampler)  │
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>└────────┬───────────┘     │  • k-fold CV через split_folds    │
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>         │                 │  • extended / manual режимы       │
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>         │ final_ranking   │  • optimize(dataset, n_trials)    │
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>         └────────────────►└───────────────┬───────────────────┘
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>                                           │ best_params
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>                                           ▼
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>                           ┌───────────────────────────────────┐
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>                           │           Benchmark               │
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>                           │  • r2_metric                      │
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>                           │  • rmse_metric                    │
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>                           │  • js_mean_metric                 │
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>                           │  • frob_corr_metric               │
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>                           │  • frob_mi_metric                 │
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>                           │  evaluate(synth, real)            │
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>                           └───────────────────────────────────┘
-</code></pre></div>
 <hr />
 <h2 id="_2">Принцип модульности<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>Каждый модуль Tab-Forge — самостоятельный и не требует остальных. Вы можете:</p>
@@ -1408,31 +1360,12 @@
 </ul>
 <hr />
 <h2 id="_3">Поток данных в полном пайплайне<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. Dataset(csv/df) ──── DatasetInfo ──────────────────────────────────────┐
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                                                           │
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>2.       PromptGenerator.build_prompt(dataset, target_metric, shot_mode)  │
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>         ↑ использует Dataset.info + мета-фичи                            │
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>         ↓ строка-промпт                                                  │
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>3.       LLMRunner.run(prompt, n_runs)                                    │
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>         ↓ RunnerResult.final_ranking                                     │
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>4.       AutoTuningStudy(model_class=ranking[0], cv=3, ...)               │
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>         ↓ objective per trial:                                            │
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>             split_folds(dataset, cv) ─────────────────────────────── ◄──┘
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>             for fold in folds:
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                 model.fit(merge(train_folds))
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                 synth = model.structed_generate(len(val_fold))
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>                 score = benchmark.evaluate(synth, val_fold)
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>             return mean(score)
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>         ↓ best_params
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>5.       model.fit(train_dataset)
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>         synth_dataset = model.structed_generate(N)
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>6.       Benchmark.evaluate(synth_dataset, test_dataset) → BenchmarkResult
-</code></pre></div>
+<p><img alt="Схема универсального pipeline Tab-forge" src="../../img/pipeline.png" /></p>
 <hr />
 <h2 id="dataset">Модуль <code>dataset</code><a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h2>
 <p><strong>Ключевые экспорты:</strong> <code>Dataset</code>, <code>merge_datasets</code>, <code>split_folds</code></p>
 <p><code>Dataset</code> — центральный объект библиотеки. Все модели принимают его на вход и возвращают его из <code>structed_generate</code>. Это позволяет беспрепятственно передавать данные между модулями.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">merge_datasets</span><span class="p">,</span> <span class="n">split_folds</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">merge_datasets</span><span class="p">,</span> <span class="n">split_folds</span>
 </code></pre></div>
 <hr />
 <h2 id="models">Модуль <code>models</code><a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
