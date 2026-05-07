@@ -1,0 +1,1732 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Автоматизированная настройка генеративных моделей для табличных данных">
+      
+      
+      
+      
+        <link rel="prev" href="../tuning-results/">
+      
+      
+        <link rel="next" href="../../api/dataset/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Мета-классификатор - Tab-Forge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-llm-selection" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="../.." title="Tab-Forge" class="md-header__button md-logo" aria-label="Tab-Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tab-Forge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Мета-классификатор
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tarkevv-01/tab-forge" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tarkevv-01/tab-forge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Начало работы
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/overview/" class="md-tabs__link">
+          
+  
+  
+  Концепции
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/dataset/" class="md-tabs__link">
+          
+  
+  
+  Руководство пользователя
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tuning-results/" class="md-tabs__link">
+          
+  
+  
+  Эксперименты
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/dataset/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tab-Forge" class="md-nav__button md-logo" aria-label="Tab-Forge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tab-Forge
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tarkevv-01/tab-forge" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tarkevv-01/tab-forge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Начало работы
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Начало работы
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Установка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Быстрый старт
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Концепции
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Концепции
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Обзор и мотивация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Метрики качества
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Руководство пользователя
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Руководство пользователя
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/llm-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Selection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Эксперименты
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Эксперименты
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tuning-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Результаты тюнинга
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Мета-классификатор
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Мета-классификатор
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Что мы измеряли
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zero-shot-few-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Что такое zero-shot и few-shot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Что такое zero-shot и few-shot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zero-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero-shot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#few-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-shot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-vs-short-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full vs Short prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Таблица результатов
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Таблица результатов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spearman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ρ Spearman (средний по датасетам)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top1-acc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        top1-acc (средний по датасетам)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Интерпретация результатов
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Интерпретация результатов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#few-shot-zero-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-shot значительно лучше zero-shot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#js-mi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Лучшие результаты — для JS и MI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r2-lf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R² и LF — уверенное ранжирование
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rmse-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RMSE — сложная метрика для LLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spearman_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Что такое ρ Spearman в данном контексте
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Практические выводы
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Практические выводы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-few-shot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Используйте few-shot режим
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-full-prompt-vs-short-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Full prompt vs Short prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rmse-llm-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Если оптимизируете по RMSE — перепроверяйте LLM-рейтинг
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Рекомендуемая конфигурация
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/dataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/llm-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Selection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="-llm-selection">Результаты мета-классификатора (LLM Selection)<a class="headerlink" href="#-llm-selection" title="Permanent link">&para;</a></h1>
+<h2 id="_1">Что мы измеряли<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Ключевой вопрос: <strong>насколько хорошо LLM предсказывает лучшую модель для датасета?</strong></p>
+<p>Мы тестировали 4 стратегии формирования промпта:</p>
+<ul>
+<li><strong>Zero-shot + full prompt</strong> — мета-фичи + полные описания моделей, без примеров</li>
+<li><strong>Zero-shot + short prompt</strong> — мета-фичи + краткие описания, без примеров</li>
+<li><strong>Few-shot + full prompt</strong> — мета-фичи + полные описания + результаты на референсных датасетах</li>
+<li><strong>Few-shot + short prompt</strong> — мета-фичи + краткие описания + результаты на референсных датасетах</li>
+</ul>
+<p>И два типа метрик качества предсказания:</p>
+<ul>
+<li><strong>ρ Spearman</strong> — насколько хорошо LLM упорядочивает модели (корреляция рангов с реальным рейтингом)</li>
+<li><strong>top1-acc</strong> — как часто LLM правильно называет <strong>лучшую</strong> модель с первой попытки</li>
+</ul>
+<hr />
+<h2 id="zero-shot-few-shot">Что такое zero-shot и few-shot<a class="headerlink" href="#zero-shot-few-shot" title="Permanent link">&para;</a></h2>
+<h3 id="zero-shot">Zero-shot<a class="headerlink" href="#zero-shot" title="Permanent link">&para;</a></h3>
+<p>LLM видит только:
+- Мета-характеристики датасета (размер, признаки, статистики)
+- Описания моделей
+- Целевую метрику</p>
+<p>Модель отвечает на основе общих знаний — <strong>без примеров</strong> того, как модели вели себя на реальных данных.</p>
+<h3 id="few-shot">Few-shot<a class="headerlink" href="#few-shot" title="Permanent link">&para;</a></h3>
+<p>В дополнение к zero-shot добавляются <strong>результаты предварительных экспериментов</strong> на 5 референсных датасетах. LLM видит конкретные числа: например, «на датасете abalone при оптимизации по R² модель GAN-MFS показала лучший результат». Это контекстуальный опыт, который помогает LLM лучше рассуждать.</p>
+<h3 id="full-vs-short-prompt">Full vs Short prompt<a class="headerlink" href="#full-vs-short-prompt" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Full</strong> — развёрнутые описания каждой архитектуры: как она работает, её сильные стороны, типы данных где она показывает себя лучше</li>
+<li><strong>Short</strong> — лаконичные названия и краткие характеристики</li>
+</ul>
+<hr />
+<h2 id="_2">Таблица результатов<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="spearman">ρ Spearman (средний по датасетам)<a class="headerlink" href="#spearman" title="Permanent link">&para;</a></h3>
+<p><em>Насколько хорошо LLM упорядочивает модели — от 0 (случайно) до 1 (идеально). Значение 0.5+ считается хорошим.</em></p>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>zero-shot full</th>
+<th>zero-shot short</th>
+<th>few-shot full</th>
+<th>few-shot short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R²</strong></td>
+<td>0.5815</td>
+<td>0.5040</td>
+<td><strong>0.7234</strong></td>
+<td>0.6937</td>
+</tr>
+<tr>
+<td><strong>LF</strong></td>
+<td><strong>0.5794</strong></td>
+<td>0.5406</td>
+<td>0.4080</td>
+<td>0.4171</td>
+</tr>
+<tr>
+<td><strong>JS</strong></td>
+<td>0.1611</td>
+<td>0.2846</td>
+<td>0.3029</td>
+<td>0.2891</td>
+</tr>
+<tr>
+<td><strong>MI</strong></td>
+<td>0.4948</td>
+<td>0.5085</td>
+<td><strong>0.7463</strong></td>
+<td>0.6251</td>
+</tr>
+<tr>
+<td><strong>RMSE</strong></td>
+<td>0.2891</td>
+<td>0.3143</td>
+<td>0.3280</td>
+<td>0.2800</td>
+</tr>
+</tbody>
+</table>
+<h3 id="top1-acc">top1-acc (средний по датасетам)<a class="headerlink" href="#top1-acc" title="Permanent link">&para;</a></h3>
+<p><em>Доля случаев, в которых LLM правильно назвала лучшую модель с первого места. 0.84 = в 84% случаев LLM права.</em></p>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>zero-shot full</th>
+<th>zero-shot short</th>
+<th>few-shot full</th>
+<th>few-shot short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R²</strong></td>
+<td>0.48</td>
+<td>0.36</td>
+<td>0.60</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td><strong>LF</strong></td>
+<td>0.28</td>
+<td>0.36</td>
+<td>0.60</td>
+<td>0.64</td>
+</tr>
+<tr>
+<td><strong>JS</strong></td>
+<td>0.16</td>
+<td>0.40</td>
+<td><strong>0.84</strong></td>
+<td>0.76</td>
+</tr>
+<tr>
+<td><strong>MI</strong></td>
+<td>0.44</td>
+<td>0.44</td>
+<td><strong>0.84</strong></td>
+<td>0.76</td>
+</tr>
+<tr>
+<td><strong>RMSE</strong></td>
+<td>0.32</td>
+<td>0.32</td>
+<td>0.44</td>
+<td>0.52</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Выделение результатов</p>
+<p>В оригинальной презентации зелёные ячейки — высокие значения (хорошо), красные — низкие. В обеих таблицах <strong>few-shot + full prompt</strong> доминирует для большинства метрик.</p>
+</div>
+<hr />
+<h2 id="_3">Интерпретация результатов<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="few-shot-zero-shot">Few-shot значительно лучше zero-shot<a class="headerlink" href="#few-shot-zero-shot" title="Permanent link">&para;</a></h3>
+<p>Для большинства метрик переход к few-shot повышает качество предсказания. Самый наглядный пример:</p>
+<ul>
+<li><strong>JS zero-shot full</strong>: top1-acc = <strong>0.16</strong> (LLM практически случайно выбирает)</li>
+<li><strong>JS few-shot full</strong>: top1-acc = <strong>0.84</strong> (в 84% случаев LLM правильно называет лучшую модель!)</li>
+</ul>
+<p>Разрыв в 5 раз! Это объяснимо: из общих знаний сложно понять какая GAN-архитектура лучше воспроизведёт JS-дивергенцию — но конкретные экспериментальные данные дают LLM нужный контекст.</p>
+<h3 id="js-mi">Лучшие результаты — для JS и MI<a class="headerlink" href="#js-mi" title="Permanent link">&para;</a></h3>
+<p>Few-shot + full prompt для <strong>JS</strong> и <strong>MI</strong> даёт top1-acc = <strong>0.84</strong>. Это значит, что в 84% случаев LLM правильно называет лучшую модель с первой попытки — без единого запуска тюнинга.</p>
+<h3 id="r2-lf">R² и LF — уверенное ранжирование<a class="headerlink" href="#r2-lf" title="Permanent link">&para;</a></h3>
+<p>Для <strong>R²</strong> ρ Spearman = <strong>0.72</strong> (few-shot full) — LLM не просто угадывает лучшую модель, но и достаточно точно упорядочивает остальные. Это означает: порядок, в котором вы тюните модели по рейтингу LLM, соответствует реальному порядку их качества.</p>
+<h3 id="rmse-llm">RMSE — сложная метрика для LLM<a class="headerlink" href="#rmse-llm" title="Permanent link">&para;</a></h3>
+<p>Для <strong>RMSE</strong> все стратегии показывают relative скромные результаты (top1-acc 0.32–0.52, ρ 0.28–0.33). Это может объяснятся тем, что RMSE сильно зависит от масштаба данных и специфики целевой переменной — информации, которую сложно выразить через стандартные мета-фичи.</p>
+<hr />
+<h2 id="spearman_1">Что такое ρ Spearman в данном контексте<a class="headerlink" href="#spearman_1" title="Permanent link">&para;</a></h2>
+<p><strong>ρ Spearman</strong> — это коэффициент корреляции рангов. В нашем контексте:</p>
+<ol>
+<li>У нас есть <strong>реальный рейтинг</strong> 6 моделей по метрике X на датасете Y (получен после тюнинга всех моделей)</li>
+<li>LLM выдаёт <strong>предсказанный рейтинг</strong></li>
+<li>ρ Spearman измеряет, насколько эти два рейтинга совпадают</li>
+</ol>
+<div class="arithmatex">\[
+\rho = 1 - \frac{6 \sum_i d_i^2}{n(n^2 - 1)}
+\]</div>
+<p>где <span class="arithmatex">\(d_i\)</span> — разность рангов для i-й модели.</p>
+<ul>
+<li><strong>ρ = 1.0</strong> — LLM предсказала порядок идеально</li>
+<li><strong>ρ = 0.0</strong> — рейтинг случайный</li>
+<li><strong>ρ = -1.0</strong> — LLM поставила всё с ног на голову</li>
+</ul>
+<p>Значения 0.7+ (достигнутые для R² и MI в few-shot режиме) — это очень хорошие результаты для задачи мета-обучения.</p>
+<hr />
+<h2 id="_4">Практические выводы<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1-few-shot">1. Используйте few-shot режим<a class="headerlink" href="#1-few-shot" title="Permanent link">&para;</a></h3>
+<p>Всегда используйте <code>shot_mode="few"</code> — разница с zero-shot существенная для большинства метрик.</p>
+<h3 id="2-full-prompt-vs-short-prompt">2. Full prompt vs Short prompt<a class="headerlink" href="#2-full-prompt-vs-short-prompt" title="Permanent link">&para;</a></h3>
+<p>Для большинства метрик <strong>full prompt</strong> лучше или равен short. Используйте <code>mfe_features="short"</code> (12 ключевых мета-фич) — это даёт хороший баланс между информативностью и компактностью промпта.</p>
+<h3 id="3-rmse-llm-">3. Если оптимизируете по RMSE — перепроверяйте LLM-рейтинг<a class="headerlink" href="#3-rmse-llm-" title="Permanent link">&para;</a></h3>
+<p>LLM менее надёжна при предсказании лучшей модели для RMSE. Рассмотрите тюнинг двух-трёх первых моделей из рейтинга, а не только первой.</p>
+<h3 id="4">4. Рекомендуемая конфигурация<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">prompt</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">build_prompt</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">dataset</span>       <span class="o">=</span> <span class="n">dataset</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">target_metric</span> <span class="o">=</span> <span class="s2">&quot;r2_metric&quot;</span><span class="p">,</span>  <span class="c1"># или &quot;mi_matrix_metric&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">shot_mode</span>     <span class="o">=</span> <span class="s2">&quot;few&quot;</span><span class="p">,</span>        <span class="c1"># ✓ few-shot</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">mfe_features</span>  <span class="o">=</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>      <span class="c1"># ✓ 12 ключевых фич</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">n_runs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># top1-acc ~0.60–0.84 в зависимости от метрики</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
