@@ -5,3 +5,4 @@ __pycache__/
 .ipynb_checkpoints/
 site/
 mkdocs.yml
+docs/img/

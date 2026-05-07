@@ -135,3 +135,95 @@ evaluate(
 
 Норма Фробениуса разности матриц взаимной информации:
 \(\| \text{MI}(X_\text{real}) - \text{MI}(X_\text{synth}) \|_F\)
+
+---
+
+## Кастомные метрики
+
+`Benchmark` принимает произвольную callable вместо строки метрики. Сигнатура функции:
+
+```python
+def my_metric(synthetic: Dataset, real: Dataset, **kwargs) -> float:
+    ...
+```
+
+Функция получает два объекта `Dataset` и должна вернуть одно число. Параметры из словаря `kwargs` можно передавать через спецификацию метрик.
+
+### Пример: Wasserstein-дистанция и анонимность
+
+Допустим, вас интересуют две дополнительные характеристики синтетических данных, которых нет во встроенных метриках:
+
+1. **Wasserstein-дистанция** — чувствительнее к форме распределений, чем JS-дивергенция
+2. **Мера анонимности** — средняя дистанция до ближайшего соседа в реальных данных (чем больше — тем «безопаснее» синтетика с точки зрения приватности)
+
+```python
+import numpy as np
+from scipy.stats import wasserstein_distance
+from scipy.spatial import cKDTree
+
+def wasserstein_mean(synthetic, real):
+    """Средняя Wasserstein-дистанция по всем числовым признакам."""
+    num_cols = real.numerical_features
+    distances = [
+        wasserstein_distance(
+            real.data[col].dropna(),
+            synthetic.data[col].dropna(),
+        )
+        for col in num_cols
+    ]
+    return float(np.mean(distances))
+
+
+def nearest_neighbour_distance(synthetic, real, quantile=0.05):
+    """
+    Оценка приватности: 5-й перцентиль расстояния от каждой синтетической
+    точки до ближайшей реальной (нормировано на стандартное отклонение).
+    Чем больше значение — тем дальше синтетика от реальных записей.
+    """
+    num_cols = real.numerical_features
+    real_arr  = real.data[num_cols].dropna().values
+    synth_arr = synthetic.data[num_cols].dropna().values
+
+    std = real_arr.std(axis=0)
+    std[std == 0] = 1.0
+    real_norm  = real_arr  / std
+    synth_norm = synth_arr / std
+
+    tree = cKDTree(real_norm)
+    dists, _ = tree.query(synth_norm, k=1)
+    return float(np.quantile(dists, quantile))
+
+
+benchmark = Benchmark({
+    # Стандартные метрики качества предсказания
+    "r2_xgb":        ("r2",        {"model": "xgboost"}),
+    "r2_linear":     ("r2",        {"model": "linear"}),
+    "rmse_xgb":      ("rmse",      {"model": "xgboost"}),
+    # Статистическое сходство распределений
+    "js_mean":       ("js_mean",   {}),
+    "frob_corr":     ("frob_corr", {}),
+    "frob_mi":       ("frob_mi",   {}),
+    # Кастомные метрики
+    "wasserstein":   (wasserstein_mean,          {}),
+    "privacy_p05":   (nearest_neighbour_distance, {"quantile": 0.05}),
+})
+
+result = benchmark.evaluate(synth_dataset, test_dataset)
+print(result.metrics)
+# {
+#   'r2_xgb': 0.821,  'r2_linear': 0.764,
+#   'rmse_xgb': 1.14, 'js_mean': 0.031,
+#   'frob_corr': 0.18, 'frob_mi': 0.22,
+#   'wasserstein': 0.043, 'privacy_p05': 1.87
+# }
+```
+
+!!! tip "Kwargs в кастомных метриках"
+    Параметры, заданные в спецификации (`{"quantile": 0.05}`), передаются в функцию как keyword-аргументы. Это позволяет переиспользовать одну функцию с разными настройками:
+
+    ```python
+    benchmark = Benchmark({
+        "privacy_p05": (nearest_neighbour_distance, {"quantile": 0.05}),
+        "privacy_p25": (nearest_neighbour_distance, {"quantile": 0.25}),
+    })
+    ```

@@ -93,7 +93,7 @@ study = AutoTuningStudy(
 study.optimize(dataset, n_trials=25)
 
 print("Лучшие параметры:", study.best_params)
-print("Лучшее значение R²:", study.best_value)
+print("Лучшее значение:", study.best_value)
 ```
 
 !!! tip "Тюнинг по рейтингу"

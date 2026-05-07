@@ -169,10 +169,10 @@ model.fit(dataset)
 
 | Модель | Архитектура | Лучшая метрика | Скорость | Стабильность |
 |--------|------------|----------------|----------|--------------|
-| CTGAN | Conditional GAN (SDV) | R², RMSE | Средняя | Высокая |
+| CTGAN | Conditional GAN (SDV) | R², RMSE | Быстрая | Средняя |
 | WGAN-GP | Wasserstein GAN | JS divergence | Средняя | Высокая |
-| GAN-MFS | WGAN-GP + MFS loss | **R²** ⭐ | Средняя | Средняя |
-| CTABGAN+ | CTGAN + aux heads | **RMSE** ⭐ | Средняя | Средняя |
+| GAN-MFS | WGAN-GP + MFS loss | **R²** ⭐ | Средняя | Высокая |
+| CTABGAN+ | CTGAN + aux heads | **RMSE** ⭐ | Низкая | Низкая |
 | TVAE | Variational AE (SDV) | RMSE | Быстрая | Очень высокая |
 | TabDDPM | Diffusion (Synthcity) | R², MI | Медленная | Высокая |
 

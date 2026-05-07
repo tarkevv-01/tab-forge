@@ -2,55 +2,7 @@
 
 ## Схема модулей
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                      Ваш датасет (CSV / DataFrame)           │
-└───────────────────────────┬──────────────────────────────────┘
-                            │
-                            ▼
-┌──────────────────────────────────────────────────────────────┐
-│                         Dataset                              │
-│  • Унифицированная обёртка над DataFrame                     │
-│  • DatasetInfo: размер, типы признаков, задача               │
-│  • train_test_split / split_folds / merge_datasets           │
-└───────────────┬──────────────────────┬───────────────────────┘
-                │                      │
-                ▼                      ▼
-┌──────────────────────┐   ┌───────────────────────────────────┐
-│   PromptGenerator    │   │           Models                  │
-│                      │   │  BaseGenerativeModel (ABC)        │
-│  • extract_meta_     │   │  ┌─────────────────────────────┐  │
-│    features()        │   │  │ CTGANSynthesizer            │  │
-│  • build_prompt()    │   │  │ WGANGPSynthesizer           │  │
-│    - zero-shot       │   │  │ GANMFSSynthesizer           │  │
-│    - few-shot        │   │  │ CTABGANPlusSynthesizer      │  │
-│                      │   │  │ TVAESynthesizer             │  │
-└────────┬─────────────┘   │  │ DDPMSynthesizer             │  │
-         │                 │  └─────────────────────────────┘  │
-         ▼                 │  fit() / generate() /             │
-┌────────────────────┐     │  structed_generate()              │
-│     LLMRunner      │     └───────────────┬───────────────────┘
-│                    │                     │
-│  • OpenAI-compat.  │                     ▼
-│  • n_runs запросов │     ┌───────────────────────────────────┐
-│  • self-consistency│     │         AutoTuningStudy           │
-│  • RunnerResult    │     │  • Optuna (TPE / Random sampler)  │
-└────────┬───────────┘     │  • k-fold CV через split_folds    │
-         │                 │  • extended / manual режимы       │
-         │ final_ranking   │  • optimize(dataset, n_trials)    │
-         └────────────────►└───────────────┬───────────────────┘
-                                           │ best_params
-                                           ▼
-                           ┌───────────────────────────────────┐
-                           │           Benchmark               │
-                           │  • r2_metric                      │
-                           │  • rmse_metric                    │
-                           │  • js_mean_metric                 │
-                           │  • frob_corr_metric               │
-                           │  • frob_mi_metric                 │
-                           │  evaluate(synth, real)            │
-                           └───────────────────────────────────┘
-```
+![Схема архитектуры Tab-Forge](../img/arch.png)
 
 ---
 
@@ -66,28 +18,7 @@
 ---
 
 ## Поток данных в полном пайплайне
-
-```
-1. Dataset(csv/df) ──── DatasetInfo ──────────────────────────────────────┐
-                                                                           │
-2.       PromptGenerator.build_prompt(dataset, target_metric, shot_mode)  │
-         ↑ использует Dataset.info + мета-фичи                            │
-         ↓ строка-промпт                                                  │
-3.       LLMRunner.run(prompt, n_runs)                                    │
-         ↓ RunnerResult.final_ranking                                     │
-4.       AutoTuningStudy(model_class=ranking[0], cv=3, ...)               │
-         ↓ objective per trial:                                            │
-             split_folds(dataset, cv) ─────────────────────────────── ◄──┘
-             for fold in folds:
-                 model.fit(merge(train_folds))
-                 synth = model.structed_generate(len(val_fold))
-                 score = benchmark.evaluate(synth, val_fold)
-             return mean(score)
-         ↓ best_params
-5.       model.fit(train_dataset)
-         synth_dataset = model.structed_generate(N)
-6.       Benchmark.evaluate(synth_dataset, test_dataset) → BenchmarkResult
-```
+![Схема универсального pipeline Tab-forge](../img/pipeline.png)
 
 ---
 
