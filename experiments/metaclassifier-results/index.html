@@ -1056,10 +1056,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#full-vs-short-prompt" class="md-nav__link">
+  <a href="#full-vs-short-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Full vs Short prompt
+        Full vs Short — набор мета-фич датасета
       
     </span>
   </a>
@@ -1206,10 +1206,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-full-prompt-vs-short-prompt" class="md-nav__link">
+  <a href="#2-full-vs-short-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Full prompt vs Short prompt
+        2. Full vs Short набор мета-фич
       
     </span>
   </a>
@@ -1505,10 +1505,11 @@
 <p>Модель отвечает на основе общих знаний — <strong>без примеров</strong> того, как модели вели себя на реальных данных.</p>
 <h3 id="few-shot">Few-shot<a class="headerlink" href="#few-shot" title="Permanent link">&para;</a></h3>
 <p>В дополнение к zero-shot добавляются <strong>результаты предварительных экспериментов</strong> на 5 референсных датасетах. LLM видит конкретные числа: например, «на датасете abalone при оптимизации по R² модель GAN-MFS показала лучший результат». Это контекстуальный опыт, который помогает LLM лучше рассуждать.</p>
-<h3 id="full-vs-short-prompt">Full vs Short prompt<a class="headerlink" href="#full-vs-short-prompt" title="Permanent link">&para;</a></h3>
+<h3 id="full-vs-short-">Full vs Short — набор мета-фич датасета<a class="headerlink" href="#full-vs-short-" title="Permanent link">&para;</a></h3>
+<p>Речь идёт о количестве мета-характеристик пользовательского датасета, которые передаются в промпте.</p>
 <ul>
-<li><strong>Full</strong> — развёрнутые описания каждой архитектуры: как она работает, её сильные стороны, типы данных где она показывает себя лучше</li>
-<li><strong>Short</strong> — лаконичные названия и краткие характеристики</li>
+<li><strong>Full</strong> — полный набор из <strong>43 мета-фич</strong> (все доступные признаки pymfe): статистики распределений, характеристики информационного содержания, размерность и т.д.</li>
+<li><strong>Short</strong> — сокращённый набор мета-фич, сформированный по результатам исследования важности признаков (порог &gt; 0.05). Включает ключевые фичи, на которые LLM реально обращает внимание при ранжировании — полный набор при этом не даёт существенного прироста качества.</li>
 </ul>
 <hr />
 <h2 id="_2">Таблица результатов<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1653,8 +1654,8 @@
 <h2 id="_4">Практические выводы<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1-few-shot">1. Используйте few-shot режим<a class="headerlink" href="#1-few-shot" title="Permanent link">&para;</a></h3>
 <p>Всегда используйте <code>shot_mode="few"</code> — разница с zero-shot существенная для большинства метрик.</p>
-<h3 id="2-full-prompt-vs-short-prompt">2. Full prompt vs Short prompt<a class="headerlink" href="#2-full-prompt-vs-short-prompt" title="Permanent link">&para;</a></h3>
-<p>Для большинства метрик <strong>full prompt</strong> лучше или равен short. Используйте <code>mfe_features="short"</code> (12 ключевых мета-фич) — это даёт хороший баланс между информативностью и компактностью промпта.</p>
+<h3 id="2-full-vs-short-">2. Full vs Short набор мета-фич<a class="headerlink" href="#2-full-vs-short-" title="Permanent link">&para;</a></h3>
+<p>Несмотря на то что <strong>full</strong> (43 мета-фичи) в среднем немного лучше или равен short, разница несущественна. Используйте <code>mfe_features="short"</code> — сокращённый набор покрывает те признаки, на которые LLM реально опирается, и даёт сопоставимое качество при более компактном промпте.</p>
 <h3 id="3-rmse-llm-">3. Если оптимизируете по RMSE — перепроверяйте LLM-рейтинг<a class="headerlink" href="#3-rmse-llm-" title="Permanent link">&para;</a></h3>
 <p>LLM менее надёжна при предсказании лучшей модели для RMSE. Рассмотрите тюнинг двух-трёх первых моделей из рейтинга, а не только первой.</p>
 <h3 id="4">4. Рекомендуемая конфигурация<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
