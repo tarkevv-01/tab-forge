@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tab-forge" class="md-skip">
+        <a href="#tab-forge-architecture" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -693,10 +693,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#module-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Схема модулей
+        Module Diagram
       
     </span>
   </a>
@@ -704,10 +704,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#modularity-principle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Принцип модульности
+        Modularity Principle
       
     </span>
   </a>
@@ -715,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#data-flow-in-the-full-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Поток данных в полном пайплайне
+        Data Flow in the Full Pipeline
       
     </span>
   </a>
@@ -726,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dataset" class="md-nav__link">
+  <a href="#dataset-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль dataset
+        dataset Module
       
     </span>
   </a>
@@ -737,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#models" class="md-nav__link">
+  <a href="#models-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль models
+        models Module
       
     </span>
   </a>
@@ -748,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tuning" class="md-nav__link">
+  <a href="#tuning-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль tuning
+        tuning Module
       
     </span>
   </a>
@@ -759,10 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#benchmark" class="md-nav__link">
+  <a href="#benchmark-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль benchmark
+        benchmark Module
       
     </span>
   </a>
@@ -770,10 +770,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prompt_generator" class="md-nav__link">
+  <a href="#prompt_generator-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль prompt_generator
+        prompt_generator Module
       
     </span>
   </a>
@@ -781,10 +781,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#llm_runner" class="md-nav__link">
+  <a href="#llm_runner-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Модуль llm_runner
+        llm_runner Module
       
     </span>
   </a>
@@ -1346,73 +1346,73 @@
   
 
 
-<h1 id="tab-forge">Архитектура Tab-Forge<a class="headerlink" href="#tab-forge" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Схема модулей<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><img alt="Схема архитектуры Tab-Forge" src="../../img/arch.png" /></p>
+<h1 id="tab-forge-architecture">Tab-Forge Architecture<a class="headerlink" href="#tab-forge-architecture" title="Permanent link">&para;</a></h1>
+<h2 id="module-diagram">Module Diagram<a class="headerlink" href="#module-diagram" title="Permanent link">&para;</a></h2>
+<p><img alt="Tab-Forge Architecture Diagram" src="../../img/arch.png" /></p>
 <hr />
-<h2 id="_2">Принцип модульности<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>Каждый модуль Tab-Forge — самостоятельный и не требует остальных. Вы можете:</p>
+<h2 id="modularity-principle">Modularity Principle<a class="headerlink" href="#modularity-principle" title="Permanent link">&para;</a></h2>
+<p>Each Tab-Forge module is self-contained and does not require the others. You can:</p>
 <ul>
-<li>Использовать только <strong>Dataset + Models + Benchmark</strong> без LLM</li>
-<li>Запустить <strong>AutoTuningStudy</strong> вручную без LLM-рейтинга</li>
-<li>Использовать <strong>PromptGenerator</strong> отдельно для изучения мета-фич датасета</li>
-<li>Подключить свою модель к <strong>Benchmark</strong> вне Tab-Forge</li>
+<li>Use only <strong>Dataset + Models + Benchmark</strong> without LLM</li>
+<li>Run <strong>AutoTuningStudy</strong> manually without an LLM ranking</li>
+<li>Use <strong>PromptGenerator</strong> separately to explore dataset meta-features</li>
+<li>Connect your own model to <strong>Benchmark</strong> outside of Tab-Forge</li>
 </ul>
 <hr />
-<h2 id="_3">Поток данных в полном пайплайне<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="Схема универсального pipeline Tab-forge" src="../../img/pipeline.png" /></p>
+<h2 id="data-flow-in-the-full-pipeline">Data Flow in the Full Pipeline<a class="headerlink" href="#data-flow-in-the-full-pipeline" title="Permanent link">&para;</a></h2>
+<p><img alt="Universal Tab-forge pipeline diagram" src="../../img/pipeline.png" /></p>
 <hr />
-<h2 id="dataset">Модуль <code>dataset</code><a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> <code>Dataset</code>, <code>merge_datasets</code>, <code>split_folds</code></p>
-<p><code>Dataset</code> — центральный объект библиотеки. Все модели принимают его на вход и возвращают его из <code>structed_generate</code>. Это позволяет беспрепятственно передавать данные между модулями.</p>
+<h2 id="dataset-module"><code>dataset</code> Module<a class="headerlink" href="#dataset-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> <code>Dataset</code>, <code>merge_datasets</code>, <code>split_folds</code></p>
+<p><code>Dataset</code> is the central object of the library. All models accept it as input and return it from <code>structed_generate</code>. This allows seamless data transfer between modules.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">merge_datasets</span><span class="p">,</span> <span class="n">split_folds</span>
 </code></pre></div>
 <hr />
-<h2 id="models">Модуль <code>models</code><a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> 6 классов-синтезаторов</p>
-<p>Все модели наследуют <code>BaseGenerativeModel</code> и реализуют единый интерфейс:</p>
+<h2 id="models-module"><code>models</code> Module<a class="headerlink" href="#models-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> 6 synthesizer classes</p>
+<p>All models inherit <code>BaseGenerativeModel</code> and implement a unified interface:</p>
 <table>
 <thead>
 <tr>
-<th>Метод</th>
-<th>Описание</th>
+<th>Method</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>fit(dataset)</code></td>
-<td>Обучение на <code>Dataset</code></td>
+<td>Train on <code>Dataset</code></td>
 </tr>
 <tr>
 <td><code>generate(n_samples)</code></td>
-<td>Генерация как <code>pd.DataFrame</code></td>
+<td>Generate as <code>pd.DataFrame</code></td>
 </tr>
 <tr>
 <td><code>structed_generate(n_samples)</code></td>
-<td>Генерация как <code>Dataset</code> (для Benchmark/AutoTuning)</td>
+<td>Generate as <code>Dataset</code> (for Benchmark/AutoTuning)</td>
 </tr>
 <tr>
 <td><code>get_losses()</code></td>
-<td>История потерь в процессе обучения</td>
+<td>Training loss history</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="tuning">Модуль <code>tuning</code><a class="headerlink" href="#tuning" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> <code>AutoTuningStudy</code>, <code>TuningStudy</code></p>
-<p><code>TuningStudy</code> — тонкая обёртка над <code>optuna.Study</code>. <code>AutoTuningStudy</code> — полноценный пайплайн CV-тюнинга с предустановленными пространствами поиска для каждой архитектуры.</p>
+<h2 id="tuning-module"><code>tuning</code> Module<a class="headerlink" href="#tuning-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> <code>AutoTuningStudy</code>, <code>TuningStudy</code></p>
+<p><code>TuningStudy</code> is a thin wrapper around <code>optuna.Study</code>. <code>AutoTuningStudy</code> is a full CV-tuning pipeline with preset search spaces for each architecture.</p>
 <hr />
-<h2 id="benchmark">Модуль <code>benchmark</code><a class="headerlink" href="#benchmark" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> <code>Benchmark</code>, <code>BenchmarkResult</code></p>
-<p>Все метрики реализованы по схеме train-on-synthetic / test-on-real или через сравнение статистик. Принимает <code>Dataset</code> объекты.</p>
+<h2 id="benchmark-module"><code>benchmark</code> Module<a class="headerlink" href="#benchmark-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> <code>Benchmark</code>, <code>BenchmarkResult</code></p>
+<p>All metrics are implemented using the train-on-synthetic / test-on-real scheme or by comparing statistics. Accepts <code>Dataset</code> objects.</p>
 <hr />
-<h2 id="prompt_generator">Модуль <code>prompt_generator</code><a class="headerlink" href="#prompt_generator" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> <code>PromptGenerator</code></p>
-<p>Использует <code>pymfe</code> для вычисления мета-фич и загружает предрасчитанные результаты экспериментов из <code>experiment_results/</code> для few-shot режима.</p>
+<h2 id="prompt_generator-module"><code>prompt_generator</code> Module<a class="headerlink" href="#prompt_generator-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> <code>PromptGenerator</code></p>
+<p>Uses <code>pymfe</code> to compute meta-features and loads pre-computed experiment results from <code>experiment_results/</code> for few-shot mode.</p>
 <hr />
-<h2 id="llm_runner">Модуль <code>llm_runner</code><a class="headerlink" href="#llm_runner" title="Permanent link">&para;</a></h2>
-<p><strong>Ключевые экспорты:</strong> <code>LLMRunner</code>, <code>RunnerResult</code></p>
-<p>Работает с любым OpenAI-совместимым API. Реализует self-consistency: N независимых вызовов → усреднение рангов через <code>_aggregate</code>.</p>
+<h2 id="llm_runner-module"><code>llm_runner</code> Module<a class="headerlink" href="#llm_runner-module" title="Permanent link">&para;</a></h2>
+<p><strong>Key exports:</strong> <code>LLMRunner</code>, <code>RunnerResult</code></p>
+<p>Works with any OpenAI-compatible API. Implements self-consistency: N independent calls → rank averaging via <code>_aggregate</code>.</p>
 
 
 

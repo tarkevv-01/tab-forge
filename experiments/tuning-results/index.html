@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#tuning-experiment-results" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -983,10 +983,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#experiment-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Цель экспериментов
+        Experiment Objective
       
     </span>
   </a>
@@ -994,10 +994,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#experimental-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Экспериментальная установка
+        Experimental Setup
       
     </span>
   </a>
@@ -1005,10 +1005,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#results-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Таблица результатов
+        Results Table
       
     </span>
   </a>
@@ -1016,15 +1016,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#interpretation-by-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Интерпретация по моделям
+        Interpretation by Model
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Интерпретация по моделям">
+    <nav class="md-nav" aria-label="Interpretation by Model">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1099,22 +1099,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#general-conclusions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Общие выводы
+        General Conclusions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Общие выводы">
+    <nav class="md-nav" aria-label="General Conclusions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-there-is-no-universal-best-metric-for-all-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Нет универсальной «лучшей метрики» для всех моделей
+        1. There is no universal "best metric" for all models
       
     </span>
   </a>
@@ -1122,10 +1122,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-each-model-has-its-native-metric" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. У каждой модели есть «родная» метрика
+        2. Each model has its "native" metric
       
     </span>
   </a>
@@ -1133,10 +1133,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-lf-frobenius-correlation" class="md-nav__link">
+  <a href="#3-lf-frobenius-correlation-weak-signal-for-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. LF (Frobenius Correlation) — слабый сигнал для тюнинга
+        3. LF (Frobenius Correlation) — weak signal for tuning
       
     </span>
   </a>
@@ -1144,10 +1144,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-llm-" class="md-nav__link">
+  <a href="#4-use-the-llm-ranking-to-select-the-model-then-tune-by-the-right-metric" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Используйте LLM-рейтинг чтобы выбрать модель, а затем тюньте по правильной метрике
+        4. Use the LLM ranking to select the model, then tune by the right metric
       
     </span>
   </a>
@@ -1424,31 +1424,31 @@
   
 
 
-<h1 id="_1">Результаты экспериментов по тюнингу<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">Цель экспериментов<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>Мы хотели ответить на два вопроса:</p>
+<h1 id="tuning-experiment-results">Tuning Experiment Results<a class="headerlink" href="#tuning-experiment-results" title="Permanent link">&para;</a></h1>
+<h2 id="experiment-objective">Experiment Objective<a class="headerlink" href="#experiment-objective" title="Permanent link">&para;</a></h2>
+<p>We wanted to answer two questions:</p>
 <ol>
-<li>Если оптимизировать модель по одной метрике — улучшаются ли при этом остальные?</li>
-<li>Какая метрика тюнинга даёт наибольший «обобщающий» эффект для каждой модели?</li>
+<li>If you optimize a model by one metric — do the others improve as well?</li>
+<li>Which tuning metric provides the greatest "generalizing" effect for each model?</li>
 </ol>
-<p>Это важно: запускать тюнинг по 5 метрикам одновременно дорого. Если одна метрика «тянет» остальные за собой — достаточно оптимизировать по ней одной.</p>
+<p>This matters: running tuning across 5 metrics simultaneously is expensive. If one metric "pulls" the others along — it is sufficient to optimize by that one alone.</p>
 <hr />
-<h2 id="_3">Экспериментальная установка<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="experimental-setup">Experimental Setup<a class="headerlink" href="#experimental-setup" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>5 датасетов:</strong> abalone, cl-housing, air-quality, wind, gats</li>
-<li><strong>6 моделей:</strong> CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM</li>
-<li><strong>25 триалов</strong> тюнинга для каждой метрики и каждой модели</li>
-<li><strong>k-fold кросс-валидация</strong> в каждом триале</li>
-<li>После тюнинга — оценка <strong>всех 5 метрик</strong> на отложенной выборке</li>
+<li><strong>5 datasets:</strong> abalone, cl-housing, air-quality, wind, gats</li>
+<li><strong>6 models:</strong> CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM</li>
+<li><strong>25 trials</strong> of tuning for each metric and each model</li>
+<li><strong>k-fold cross-validation</strong> in each trial</li>
+<li>After tuning — evaluation of <strong>all 5 metrics</strong> on the holdout set</li>
 </ul>
-<p>Число в ячейке таблицы: <strong>сколько раз из 25 триалов</strong> оптимизация по данной метрике улучшала все <em>остальные</em> метрики (не ту, по которой оптимизировали).</p>
+<p>The number in each table cell: <strong>how many times out of 25 trials</strong> did optimizing by the given metric improve all <em>other</em> metrics (not the one being optimized).</p>
 <hr />
-<h2 id="_4">Таблица результатов<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><em>Числа — количество триалов (из 25), в которых оптимизация по данной метрике улучшила остальные метрики качества синтетики.</em></p>
+<h2 id="results-table">Results Table<a class="headerlink" href="#results-table" title="Permanent link">&para;</a></h2>
+<p><em>Numbers represent how many trials (out of 25) in which optimization by the given metric improved the other synthetic data quality metrics.</em></p>
 <table>
 <thead>
 <tr>
-<th>Модель</th>
+<th>Model</th>
 <th>R²</th>
 <th>LF (FrobCorr)</th>
 <th>JS</th>
@@ -1508,59 +1508,59 @@
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Как читать таблицу</p>
-<p>Строка GAN-MFS, столбец R²: значение <strong>8</strong> означает, что в 8 из 25 триалов, когда тюнинг оптимизировал GAN-MFS по метрике R², улучшались и остальные 4 метрики (LF, JS, MI, RMSE). Зелёный цвет в оригинальной презентации обозначал высокие значения (хорошо), красный — низкие.</p>
+<p class="admonition-title">How to read the table</p>
+<p>Row GAN-MFS, column R²: value <strong>8</strong> means that in 8 out of 25 trials, when tuning optimized GAN-MFS by R², all 4 other metrics also improved (LF, JS, MI, RMSE). Green color in the original presentation indicated high values (good), red indicated low.</p>
 </div>
 <hr />
-<h2 id="_5">Интерпретация по моделям<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="interpretation-by-model">Interpretation by Model<a class="headerlink" href="#interpretation-by-model" title="Permanent link">&para;</a></h2>
 <h3 id="ctgan">CTGAN<a class="headerlink" href="#ctgan" title="Permanent link">&para;</a></h3>
-<p>Результаты равномерные по всем метрикам (4–6). Нет явного лидера. Если вы используете CTGAN и не знаете, по какой метрике тюнить — выбирайте <strong>LF (FrobCorr)</strong> или <strong>RMSE</strong> — оба дают 6 обобщающих улучшений.</p>
+<p>Results are uniform across all metrics (4–6). No clear leader. If you use CTGAN and do not know which metric to tune by — choose <strong>LF (FrobCorr)</strong> or <strong>RMSE</strong> — both give 6 generalizing improvements.</p>
 <h3 id="wgan-gp">WGAN-GP<a class="headerlink" href="#wgan-gp" title="Permanent link">&para;</a></h3>
-<p>Выраженный лидер — <strong>JS-дивергенция</strong> (12 улучшений — максимальный результат во всей таблице!). Это теоретически обоснованно: WGAN-GP минимизирует Wasserstein-расстояние между распределениями, что напрямую связано с JS. Оптимизируя WGAN-GP по JS — вы «играете на сильной стороне» архитектуры.</p>
+<p>Clear leader — <strong>JS divergence</strong> (12 improvements — the maximum result in the entire table!). This is theoretically justified: WGAN-GP minimizes Wasserstein distance between distributions, which is directly related to JS. Optimizing WGAN-GP by JS — you are "playing to the architecture's strength".</p>
 <div class="admonition tip">
-<p class="admonition-title">Рекомендация для WGAN-GP</p>
-<p>Тюньте WGAN-GP по метрике <code>js_mean</code>. При этом с высокой вероятностью улучшатся и остальные метрики.</p>
+<p class="admonition-title">Recommendation for WGAN-GP</p>
+<p>Tune WGAN-GP by the <code>js_mean</code> metric. This will very likely also improve the other metrics.</p>
 </div>
 <h3 id="gan-mfs">GAN-MFS<a class="headerlink" href="#gan-mfs" title="Permanent link">&para;</a></h3>
-<p>Явный лидер — <strong>R²</strong> (8 улучшений). GAN-MFS с его мета-фич регуляризатором особенно хорошо сохраняет статистическую структуру данных, что напрямую влияет на ML-полезность синтетики.</p>
+<p>Clear leader — <strong>R²</strong> (8 improvements). GAN-MFS with its meta-feature regularizer particularly well preserves the statistical structure of data, which directly affects the ML utility of synthetic data.</p>
 <div class="admonition tip">
-<p class="admonition-title">Рекомендация для GAN-MFS</p>
-<p>Тюньте GAN-MFS по метрике <code>r2</code>. GAN-MFS показал <strong>наилучший общий результат среди всех моделей по R²</strong> — это ваш лучший выбор когда важна ML-полезность синтетики.</p>
+<p class="admonition-title">Recommendation for GAN-MFS</p>
+<p>Tune GAN-MFS by the <code>r2</code> metric. GAN-MFS showed <strong>the best overall R² result among all models</strong> — this is your best choice when ML utility of synthetic data is important.</p>
 </div>
 <h3 id="ctabgan">CTABGAN+<a class="headerlink" href="#ctabgan" title="Permanent link">&para;</a></h3>
-<p>Рекордный показатель — <strong>RMSE</strong> (11 улучшений — второй результат после WGAN-GP/JS). CTABGAN+ с вспомогательными регрессионными головами нацелен именно на точность предсказания целевой переменной. Тюнинг по RMSE «попадает в цель».</p>
+<p>Record result — <strong>RMSE</strong> (11 improvements — second result after WGAN-GP/JS). CTABGAN+ with auxiliary regression heads is specifically aimed at target variable prediction accuracy. Tuning by RMSE "hits the target".</p>
 <div class="admonition tip">
-<p class="admonition-title">Рекомендация для CTABGAN+</p>
-<p>Тюньте CTABGAN+ по метрике <code>rmse</code>. Вспомогательные регрессионные головы дискриминатора делают эту модель прирождённым оптимизатором RMSE.</p>
+<p class="admonition-title">Recommendation for CTABGAN+</p>
+<p>Tune CTABGAN+ by the <code>rmse</code> metric. The auxiliary regression heads in the discriminator make this model a natural RMSE optimizer.</p>
 </div>
 <h3 id="tvae">TVAE<a class="headerlink" href="#tvae" title="Permanent link">&para;</a></h3>
-<p>Хорошие результаты по <strong>JS</strong> (7) и <strong>RMSE</strong> (8). TVAE — VAE-архитектура, и ELBO-функция потерь неявно минимизирует расхождение распределений.</p>
+<p>Good results for <strong>JS</strong> (7) and <strong>RMSE</strong> (8). TVAE is a VAE architecture, and the ELBO loss function implicitly minimizes distribution divergence.</p>
 <div class="admonition tip">
-<p class="admonition-title">Рекомендация для TVAE</p>
-<p>Тюньте по <code>rmse</code> или <code>js_mean</code>. Оба дают стабильное обобщающее улучшение.</p>
+<p class="admonition-title">Recommendation for TVAE</p>
+<p>Tune by <code>rmse</code> or <code>js_mean</code>. Both provide stable generalizing improvement.</p>
 </div>
 <h3 id="tabddpm">TabDDPM<a class="headerlink" href="#tabddpm" title="Permanent link">&para;</a></h3>
-<p>Неплохие результаты по <strong>R²</strong> (7) и <strong>MI</strong> (6), но <strong>JS</strong> — всего 3 (один из худших). Диффузионные модели хорошо моделируют сложные нелинейные зависимости, но маргинальные распределения — не их конёк.</p>
+<p>Good results for <strong>R²</strong> (7) and <strong>MI</strong> (6), but <strong>JS</strong> — only 3 (one of the worst). Diffusion models model complex nonlinear dependencies well, but marginal distributions are not their strong suit.</p>
 <div class="admonition tip">
-<p class="admonition-title">Рекомендация для TabDDPM</p>
-<p>Тюньте по <code>r2</code> или <code>frob_mi</code> (MI). Не ждите от TabDDPM отличных результатов по JS.</p>
+<p class="admonition-title">Recommendation for TabDDPM</p>
+<p>Tune by <code>r2</code> or <code>frob_mi</code> (MI). Do not expect excellent JS results from TabDDPM.</p>
 </div>
 <hr />
-<h2 id="_6">Общие выводы<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="1">1. Нет универсальной «лучшей метрики» для всех моделей<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p>Архитектура определяет, какая метрика оптимально её «раскрывает». Тюнинг по неправильной метрике — неэффективный расход ресурсов.</p>
-<h3 id="2">2. У каждой модели есть «родная» метрика<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h2 id="general-conclusions">General Conclusions<a class="headerlink" href="#general-conclusions" title="Permanent link">&para;</a></h2>
+<h3 id="1-there-is-no-universal-best-metric-for-all-models">1. There is no universal "best metric" for all models<a class="headerlink" href="#1-there-is-no-universal-best-metric-for-all-models" title="Permanent link">&para;</a></h3>
+<p>The architecture determines which metric optimally "unlocks" it. Tuning by the wrong metric is an inefficient use of resources.</p>
+<h3 id="2-each-model-has-its-native-metric">2. Each model has its "native" metric<a class="headerlink" href="#2-each-model-has-its-native-metric" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Модель</th>
-<th>Рекомендуемая метрика тюнинга</th>
+<th>Model</th>
+<th>Recommended tuning metric</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>CTGAN</td>
-<td>LF или RMSE</td>
+<td>LF or RMSE</td>
 </tr>
 <tr>
 <td>WGAN-GP</td>
@@ -1576,19 +1576,19 @@
 </tr>
 <tr>
 <td>TVAE</td>
-<td>RMSE или JS</td>
+<td>RMSE or JS</td>
 </tr>
 <tr>
 <td>TabDDPM</td>
-<td>R² или MI</td>
+<td>R² or MI</td>
 </tr>
 </tbody>
 </table>
-<h3 id="3-lf-frobenius-correlation">3. LF (Frobenius Correlation) — слабый сигнал для тюнинга<a class="headerlink" href="#3-lf-frobenius-correlation" title="Permanent link">&para;</a></h3>
-<p>Для большинства моделей оптимизация по LF даёт мало обобщающих улучшений (1–6). Это не значит, что LF не важна — просто она хуже подходит как <strong>цель</strong> оптимизации.</p>
-<h3 id="4-llm-">4. Используйте LLM-рейтинг чтобы выбрать модель, а затем тюньте по правильной метрике<a class="headerlink" href="#4-llm-" title="Permanent link">&para;</a></h3>
-<p>Пример оптимального пайплайна:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LLM рекомендует GAN-MFS → тюним GAN-MFS по r2 → получаем максимальную ML-полезность
+<h3 id="3-lf-frobenius-correlation-weak-signal-for-tuning">3. LF (Frobenius Correlation) — weak signal for tuning<a class="headerlink" href="#3-lf-frobenius-correlation-weak-signal-for-tuning" title="Permanent link">&para;</a></h3>
+<p>For most models, optimization by LF provides few generalizing improvements (1–6). This does not mean LF is not important — it just performs poorly as an <strong>optimization objective</strong>.</p>
+<h3 id="4-use-the-llm-ranking-to-select-the-model-then-tune-by-the-right-metric">4. Use the LLM ranking to select the model, then tune by the right metric<a class="headerlink" href="#4-use-the-llm-ranking-to-select-the-model-then-tune-by-the-right-metric" title="Permanent link">&para;</a></h3>
+<p>Example of an optimal pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LLM recommends GAN-MFS → tune GAN-MFS by r2 → achieve maximum ML utility
 </code></pre></div>
 
 

@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#overview-and-motivation" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -637,10 +637,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#the-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Проблема
+        The Problem
       
     </span>
   </a>
@@ -648,22 +648,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tab-forge" class="md-nav__link">
+  <a href="#tab-forges-solution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Решение Tab-Forge
+        Tab-Forge's Solution
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Решение Tab-Forge">
+    <nav class="md-nav" aria-label="Tab-Forge&#39;s Solution">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-llm-" class="md-nav__link">
+  <a href="#level-1-llm-as-meta-classifier" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Уровень 1: LLM как мета-классификатор
+        Level 1: LLM as Meta-Classifier
       
     </span>
   </a>
@@ -671,10 +671,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-k-fold-cv" class="md-nav__link">
+  <a href="#level-2-bayesian-tuning-with-k-fold-cv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Уровень 2: Байесовский тюнинг с k-fold CV
+        Level 2: Bayesian Tuning with k-fold CV
       
     </span>
   </a>
@@ -682,10 +682,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#level-3-standardized-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Уровень 3: Стандартизированная оценка
+        Level 3: Standardized Evaluation
       
     </span>
   </a>
@@ -698,10 +698,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tab-forge_1" class="md-nav__link">
+  <a href="#where-to-apply-tab-forge" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Где применять Tab-Forge
+        Where to Apply Tab-Forge
       
     </span>
   </a>
@@ -709,10 +709,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tab-forge_2" class="md-nav__link">
+  <a href="#what-tab-forge-does-not-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Что Tab-Forge не делает
+        What Tab-Forge Does Not Do
       
     </span>
   </a>
@@ -1330,43 +1330,43 @@
   
 
 
-<h1 id="_1">Обзор и мотивация<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">Проблема<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>Синтетические табличные данные нужны повсюду — для аугментации обучающих выборок, защиты приватности, балансировки классов, тестирования ML-пайплайнов. Но выбор подходящей генеративной модели — нетривиальная задача.</p>
-<p>Сегодня существуют десятки архитектур: CTGAN, WGAN, VAE, Diffusion-модели. Каждая работает по-своему хорошо на разных типах данных. Классический подход — перебор всех вариантов — занимает дни вычислений и требует глубокого понимания каждой архитектуры.</p>
-<p><strong>Ключевые вопросы, с которыми сталкивается любой практик:</strong></p>
+<h1 id="overview-and-motivation">Overview and Motivation<a class="headerlink" href="#overview-and-motivation" title="Permanent link">&para;</a></h1>
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h2>
+<p>Synthetic tabular data is needed everywhere — for training set augmentation, privacy protection, class balancing, and ML pipeline testing. But selecting the right generative model is a non-trivial task.</p>
+<p>Today there are dozens of architectures: CTGAN, WGAN, VAE, Diffusion models. Each works differently well on different types of data. The classic approach — trying all options — takes days of computation and requires deep understanding of each architecture.</p>
+<p><strong>Key questions every practitioner faces:</strong></p>
 <ol>
-<li>Какую модель попробовать первой для моего датасета?</li>
-<li>Какую метрику качества использовать как цель оптимизации?</li>
-<li>Как долго тюнить и в каком диапазоне гиперпараметров?</li>
+<li>Which model should I try first for my dataset?</li>
+<li>Which quality metric should I use as the optimization objective?</li>
+<li>How long should I tune and in what hyperparameter range?</li>
 </ol>
 <hr />
-<h2 id="tab-forge">Решение Tab-Forge<a class="headerlink" href="#tab-forge" title="Permanent link">&para;</a></h2>
-<p>Tab-Forge предлагает трёхуровневый ответ на эти вопросы:</p>
-<h3 id="1-llm-">Уровень 1: LLM как мета-классификатор<a class="headerlink" href="#1-llm-" title="Permanent link">&para;</a></h3>
-<p>Прежде чем запускать дорогостоящий тюнинг, библиотека извлекает <strong>мета-характеристики</strong> вашего датасета (размер, типы признаков, пропуски, корреляции, асимметрия и пр.) и отправляет их в LLM вместе с описаниями всех поддерживаемых моделей.</p>
-<p>LLM анализирует контекст — в few-shot режиме видит ещё и результаты предварительных экспериментов на схожих датасетах — и выдаёт <strong>приоритетный рейтинг моделей</strong>. Это не случайный выбор: эксперименты показывают точность top1-acc до <strong>0.84</strong> для некоторых метрик.</p>
-<h3 id="2-k-fold-cv">Уровень 2: Байесовский тюнинг с k-fold CV<a class="headerlink" href="#2-k-fold-cv" title="Permanent link">&para;</a></h3>
-<p><code>AutoTuningStudy</code> запускает Optuna-оптимизацию с кросс-валидацией: на каждом trial модель обучается на train-фолдах, генерирует синтетику размером с val-фолд, и <code>Benchmark</code> оценивает качество. Это даёт надёжную оценку обобщающей способности гиперпараметров.</p>
-<h3 id="3">Уровень 3: Стандартизированная оценка<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>Пять метрик качества (<code>r2</code>, <code>rmse</code>, <code>js_mean</code>, <code>frob_corr</code>, <code>frob_mi</code>) охватывают разные аспекты: от распределений отдельных признаков до структуры зависимостей между ними. Вы можете оптимизировать по одной метрике и наблюдать, как меняются остальные.</p>
+<h2 id="tab-forges-solution">Tab-Forge's Solution<a class="headerlink" href="#tab-forges-solution" title="Permanent link">&para;</a></h2>
+<p>Tab-Forge offers a three-level answer to these questions:</p>
+<h3 id="level-1-llm-as-meta-classifier">Level 1: LLM as Meta-Classifier<a class="headerlink" href="#level-1-llm-as-meta-classifier" title="Permanent link">&para;</a></h3>
+<p>Before launching expensive tuning, the library extracts <strong>meta-characteristics</strong> of your dataset (size, feature types, missing values, correlations, skewness, etc.) and sends them to an LLM along with descriptions of all supported models.</p>
+<p>The LLM analyzes the context — in few-shot mode it also sees results of preliminary experiments on similar datasets — and outputs a <strong>prioritized model ranking</strong>. This is not a random choice: experiments show top1-acc up to <strong>0.84</strong> for some metrics.</p>
+<h3 id="level-2-bayesian-tuning-with-k-fold-cv">Level 2: Bayesian Tuning with k-fold CV<a class="headerlink" href="#level-2-bayesian-tuning-with-k-fold-cv" title="Permanent link">&para;</a></h3>
+<p><code>AutoTuningStudy</code> runs Optuna optimization with cross-validation: at each trial the model is trained on train folds, generates synthetic data the size of the val fold, and <code>Benchmark</code> evaluates quality. This provides a reliable estimate of the hyperparameter generalization ability.</p>
+<h3 id="level-3-standardized-evaluation">Level 3: Standardized Evaluation<a class="headerlink" href="#level-3-standardized-evaluation" title="Permanent link">&para;</a></h3>
+<p>Five quality metrics (<code>r2</code>, <code>rmse</code>, <code>js_mean</code>, <code>frob_corr</code>, <code>frob_mi</code>) cover different aspects: from distributions of individual features to the structure of dependencies between them. You can optimize by one metric and observe how the others change.</p>
 <hr />
-<h2 id="tab-forge_1">Где применять Tab-Forge<a class="headerlink" href="#tab-forge_1" title="Permanent link">&para;</a></h2>
+<h2 id="where-to-apply-tab-forge">Where to Apply Tab-Forge<a class="headerlink" href="#where-to-apply-tab-forge" title="Permanent link">&para;</a></h2>
 <div class="admonition tip">
-<p class="admonition-title">Типичные сценарии использования</p>
+<p class="admonition-title">Typical use cases</p>
 <ul>
-<li><strong>Аугментация данных</strong>: мало обучающих примеров — синтетика помогает ML-модели обобщаться</li>
-<li><strong>Балансировка классов</strong>: генерация синтетических примеров для недостаточно представленных классов</li>
-<li><strong>Приватность</strong>: синтетические данные как замена реальным в разработке и тестировании</li>
-<li><strong>Исследования</strong>: сравнение архитектур на одном датасете с одинаковым пайплайном</li>
+<li><strong>Data augmentation</strong>: few training examples — synthetic data helps ML models generalize</li>
+<li><strong>Class balancing</strong>: generate synthetic examples for underrepresented classes</li>
+<li><strong>Privacy</strong>: synthetic data as a replacement for real data in development and testing</li>
+<li><strong>Research</strong>: comparing architectures on the same dataset with the same pipeline</li>
 </ul>
 </div>
 <hr />
-<h2 id="tab-forge_2">Что Tab-Forge не делает<a class="headerlink" href="#tab-forge_2" title="Permanent link">&para;</a></h2>
+<h2 id="what-tab-forge-does-not-do">What Tab-Forge Does Not Do<a class="headerlink" href="#what-tab-forge-does-not-do" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Не работает с текстом, изображениями или временными рядами — только <strong>табличные данные</strong></li>
-<li>Не гарантирует дифференциальную приватность (но CTABGAN+ имеет соответствующий механизм)</li>
-<li>Не заменяет глубокое понимание данных — LLM-рейтинг это стартовая точка, а не финальный ответ</li>
+<li>Does not work with text, images, or time series — only <strong>tabular data</strong></li>
+<li>Does not guarantee differential privacy (but CTABGAN+ has a corresponding mechanism)</li>
+<li>Does not replace deep understanding of data — the LLM ranking is a starting point, not a final answer</li>
 </ul>
 
 

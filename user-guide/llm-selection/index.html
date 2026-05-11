@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#llm-selection" class="md-skip">
+        <a href="#llm-selection-module" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -894,10 +894,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#why-you-need-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Зачем это нужно
+        Why You Need This
       
     </span>
   </a>
@@ -917,10 +917,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#build_prompt" class="md-nav__link">
+  <a href="#build_prompt-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Параметры build_prompt
+        build_prompt Parameters
       
     </span>
   </a>
@@ -928,10 +928,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#target_metric" class="md-nav__link">
+  <a href="#target_metric-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Значения target_metric
+        target_metric Values
       
     </span>
   </a>
@@ -944,22 +944,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-" class="md-nav__link">
+  <a href="#dataset-meta-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Мета-фичи датасета
+        Dataset Meta-Features
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Мета-фичи датасета">
+    <nav class="md-nav" aria-label="Dataset Meta-Features">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#what-is-computed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Что вычисляется
+        What is Computed
       
     </span>
   </a>
@@ -967,10 +967,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-_1" class="md-nav__link">
+  <a href="#meta-feature-importance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Важность мета-фич
+        Meta-Feature Importance
       
     </span>
   </a>
@@ -1034,10 +1034,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#creating-and-running" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Создание и запуск
+        Creating and Running
       
     </span>
   </a>
@@ -1045,10 +1045,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run" class="md-nav__link">
+  <a href="#run-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Параметры run
+        run Parameters
       
     </span>
   </a>
@@ -1061,10 +1061,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#self-consistency" class="md-nav__link">
+  <a href="#self-consistency-how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Self-consistency: как это работает
+        Self-Consistency: How It Works
       
     </span>
   </a>
@@ -1083,10 +1083,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#llm" class="md-nav__link">
+  <a href="#connecting-a-local-llm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Подключение локальной LLM
+        Connecting a Local LLM
       
     </span>
   </a>
@@ -1447,15 +1447,15 @@
   
 
 
-<h1 id="llm-selection">Модуль LLM Selection<a class="headerlink" href="#llm-selection" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Зачем это нужно<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Выбор модели для конкретного датасета — это по сути задача мета-обучения: «какая архитектура исторически работала лучше всего на похожих данных?». Вместо того чтобы запускать все 6 моделей и смотреть, Tab-Forge формулирует этот вопрос как промпт для LLM.</p>
-<p>Ключевое открытие: LLM, снабжённый мета-характеристиками датасета и результатами экспериментов на референсных наборах данных, способен предсказывать лучшую модель с точностью <strong>top1-acc до 0.84</strong> (few-shot режим).</p>
+<h1 id="llm-selection-module">LLM Selection Module<a class="headerlink" href="#llm-selection-module" title="Permanent link">&para;</a></h1>
+<h2 id="why-you-need-this">Why You Need This<a class="headerlink" href="#why-you-need-this" title="Permanent link">&para;</a></h2>
+<p>Choosing a model for a specific dataset is essentially a meta-learning task: "which architecture has historically worked best on similar data?". Instead of running all 6 models and comparing results, Tab-Forge formulates this question as a prompt for an LLM.</p>
+<p>Key finding: an LLM equipped with dataset meta-characteristics and experiment results on reference datasets is able to predict the best model with accuracy <strong>top1-acc up to 0.84</strong> (few-shot mode).</p>
 <hr />
 <h2 id="promptgenerator">PromptGenerator<a class="headerlink" href="#promptgenerator" title="Permanent link">&para;</a></h2>
-<p><code>PromptGenerator</code> делает две вещи:
-1. Извлекает мета-характеристики вашего датасета
-2. Собирает из них структурированный промпт</p>
+<p><code>PromptGenerator</code> does two things:
+1. Extracts meta-characteristics of your dataset
+2. Assembles them into a structured prompt</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.prompt_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptGenerator</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">gen</span> <span class="o">=</span> <span class="n">PromptGenerator</span><span class="p">()</span>
@@ -1465,16 +1465,16 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">shot_mode</span>     <span class="o">=</span> <span class="s2">&quot;few&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">mfe_features</span>  <span class="o">=</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>  <span class="c1"># посмотреть начало промпта</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>  <span class="c1"># view the beginning of the prompt</span>
 </code></pre></div>
-<h3 id="build_prompt">Параметры <code>build_prompt</code><a class="headerlink" href="#build_prompt" title="Permanent link">&para;</a></h3>
+<h3 id="build_prompt-parameters"><code>build_prompt</code> Parameters<a class="headerlink" href="#build_prompt-parameters" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Значения</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -1482,46 +1482,46 @@
 <td><code>dataset</code></td>
 <td><code>Dataset</code></td>
 <td>—</td>
-<td>Ваш датасет</td>
+<td>Your dataset</td>
 </tr>
 <tr>
 <td><code>target_metric</code></td>
-<td>см. ниже</td>
+<td>see below</td>
 <td><code>"r2_metric"</code></td>
-<td>Целевая метрика для ранжирования</td>
+<td>Target metric for ranking</td>
 </tr>
 <tr>
 <td><code>shot_mode</code></td>
 <td><code>"zero"</code>, <code>"few"</code></td>
 <td><code>"zero"</code></td>
-<td>Zero-shot или few-shot</td>
+<td>Zero-shot or few-shot</td>
 </tr>
 <tr>
 <td><code>mfe_features</code></td>
-<td><code>"short"</code>, <code>"full"</code>, список</td>
+<td><code>"short"</code>, <code>"full"</code>, list</td>
 <td><code>"short"</code></td>
-<td>Набор мета-фич</td>
+<td>Meta-feature set</td>
 </tr>
 <tr>
 <td><code>mfe_groups</code></td>
-<td>список групп pymfe</td>
+<td>list of pymfe groups</td>
 <td><code>None</code></td>
-<td>Группы для pymfe</td>
+<td>Groups for pymfe</td>
 </tr>
 <tr>
 <td><code>models_to_include</code></td>
-<td>список моделей</td>
-<td>все 6</td>
-<td>Ограничить набор моделей</td>
+<td>list of models</td>
+<td>all 6</td>
+<td>Limit the model set</td>
 </tr>
 </tbody>
 </table>
-<h3 id="target_metric">Значения target_metric<a class="headerlink" href="#target_metric" title="Permanent link">&para;</a></h3>
+<h3 id="target_metric-values">target_metric Values<a class="headerlink" href="#target_metric-values" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Строка</th>
-<th>Метрика</th>
+<th>String</th>
+<th>Metric</th>
 </tr>
 </thead>
 <tbody>
@@ -1548,146 +1548,146 @@
 </tbody>
 </table>
 <hr />
-<h2 id="-">Мета-фичи датасета<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
-<h3 id="_2">Что вычисляется<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p><code>PromptGenerator</code> автоматически вычисляет следующие мета-характеристики:</p>
+<h2 id="dataset-meta-features">Dataset Meta-Features<a class="headerlink" href="#dataset-meta-features" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-computed">What is Computed<a class="headerlink" href="#what-is-computed" title="Permanent link">&para;</a></h3>
+<p><code>PromptGenerator</code> automatically computes the following meta-characteristics:</p>
 <table>
 <thead>
 <tr>
-<th>Мета-фича</th>
-<th>Смысл</th>
+<th>Meta-feature</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>nr_inst</code></td>
-<td>Количество строк</td>
+<td>Number of rows</td>
 </tr>
 <tr>
 <td><code>nr_attr</code></td>
-<td>Количество признаков</td>
+<td>Number of features</td>
 </tr>
 <tr>
 <td><code>nr_num</code></td>
-<td>Числовые признаки</td>
+<td>Numerical features</td>
 </tr>
 <tr>
 <td><code>nr_cat</code></td>
-<td>Категориальные признаки</td>
+<td>Categorical features</td>
 </tr>
 <tr>
 <td><code>missing_pct</code></td>
-<td>Доля пропущенных значений, %</td>
+<td>Fraction of missing values, %</td>
 </tr>
 <tr>
 <td><code>task_type</code></td>
-<td>Тип задачи (regression/classification)</td>
+<td>Task type (regression/classification)</td>
 </tr>
 <tr>
 <td><code>abs_corr_mean</code></td>
-<td>Средняя абсолютная корреляция</td>
+<td>Mean absolute correlation</td>
 </tr>
 <tr>
 <td><code>abs_corr_max</code></td>
-<td>Максимальная абсолютная корреляция</td>
+<td>Maximum absolute correlation</td>
 </tr>
 <tr>
 <td><code>skewness_mean</code></td>
-<td>Средняя асимметрия признаков</td>
+<td>Mean feature skewness</td>
 </tr>
 <tr>
 <td><code>kurtosis_mean</code></td>
-<td>Среднее значение эксцесса</td>
+<td>Mean kurtosis value</td>
 </tr>
 <tr>
 <td><code>kurtosis_std</code></td>
-<td>СКО эксцесса</td>
+<td>Kurtosis standard deviation</td>
 </tr>
 <tr>
 <td><code>std_mean</code></td>
-<td>Среднее стандартное отклонение</td>
+<td>Mean standard deviation</td>
 </tr>
 </tbody>
 </table>
-<p>В режиме <code>mfe_features="full"</code> дополнительно вычисляются все доступные мета-фичи из выбранных групп <code>pymfe</code>.</p>
-<h3 id="-_1">Важность мета-фич<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h3>
-<p>По результатам экспериментов на мета-классификаторе, наибольшее влияние на предсказание лучшей модели оказывают:</p>
+<p>In <code>mfe_features="full"</code> mode, all available meta-features from the selected <code>pymfe</code> groups are additionally computed.</p>
+<h3 id="meta-feature-importance">Meta-Feature Importance<a class="headerlink" href="#meta-feature-importance" title="Permanent link">&para;</a></h3>
+<p>Based on meta-classifier experiments, the greatest influence on predicting the best model comes from:</p>
 <ol>
-<li><strong><code>nr_num</code></strong> — количество числовых признаков</li>
-<li><strong><code>missing_pct</code></strong> — доля пропущенных значений</li>
-<li><strong><code>task_type</code></strong> — тип задачи</li>
+<li><strong><code>nr_num</code></strong> — number of numerical features</li>
+<li><strong><code>missing_pct</code></strong> — fraction of missing values</li>
+<li><strong><code>task_type</code></strong> — task type</li>
 </ol>
-<p>Это означает: числовые датасеты без пропусков и датасеты с большой долей пропусков ведут себя по-разному, и LLM это учитывает.</p>
+<p>This means: numerical datasets without missing values and datasets with a large fraction of missing values behave differently, and the LLM accounts for this.</p>
 <hr />
 <h2 id="zero-shot-vs-few-shot">Zero-shot vs Few-shot<a class="headerlink" href="#zero-shot-vs-few-shot" title="Permanent link">&para;</a></h2>
 <h3 id="zero-shot">Zero-shot<a class="headerlink" href="#zero-shot" title="Permanent link">&para;</a></h3>
-<p>Промпт содержит только:
-- Мета-характеристики вашего датасета
-- Описания 6 поддерживаемых моделей
-- Целевую метрику</p>
-<p>LLM отвечает на основе общих знаний об архитектурах и их свойствах.</p>
+<p>The prompt contains only:
+- Meta-characteristics of your dataset
+- Descriptions of 6 supported models
+- Target metric</p>
+<p>The LLM responds based on general knowledge about architectures and their properties.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">prompt</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">build_prompt</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">target_metric</span><span class="o">=</span><span class="s2">&quot;r2_metric&quot;</span><span class="p">,</span> <span class="n">shot_mode</span><span class="o">=</span><span class="s2">&quot;zero&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="few-shot">Few-shot<a class="headerlink" href="#few-shot" title="Permanent link">&para;</a></h3>
-<p>Дополнительно к zero-shot промпту добавляются результаты предварительных экспериментов на 5 референсных датасетах:</p>
+<p>In addition to the zero-shot prompt, results of preliminary experiments on 5 reference datasets are added:</p>
 <ul>
-<li><strong>abalone</strong> (регрессия, ~4177 строк)</li>
-<li><strong>cl-housing</strong> (регрессия, недвижимость)</li>
-<li><strong>air-quality</strong> (регрессия, качество воздуха)</li>
-<li><strong>wind</strong> (регрессия, скорость ветра)</li>
-<li><strong>gats</strong> (регрессия)</li>
+<li><strong>abalone</strong> (regression, ~4177 rows)</li>
+<li><strong>cl-housing</strong> (regression, real estate)</li>
+<li><strong>air-quality</strong> (regression, air quality)</li>
+<li><strong>wind</strong> (regression, wind speed)</li>
+<li><strong>gats</strong> (regression)</li>
 </ul>
-<p>LLM видит: на похожем датасете модель X показала такие-то результаты по такой-то метрике — это конкретный опыт, на который можно опираться.</p>
+<p>The LLM sees: on a similar dataset, model X showed such-and-such results for such-and-such metric — this is concrete experience to rely on.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">prompt</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">build_prompt</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">target_metric</span><span class="o">=</span><span class="s2">&quot;r2_metric&quot;</span><span class="p">,</span> <span class="n">shot_mode</span><span class="o">=</span><span class="s2">&quot;few&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Когда что использовать</p>
+<p class="admonition-title">When to use which</p>
 <ul>
-<li><strong>Few-shot</strong> — всегда предпочтительнее: даёт top1-acc до 0.84 vs 0.6 для zero-shot (по экспериментам)</li>
-<li><strong>Zero-shot</strong> — если хотите получить быстрый ответ без overhead'а чтения экспериментальных данных</li>
+<li><strong>Few-shot</strong> — always preferred: gives top1-acc up to 0.84 vs 0.6 for zero-shot (according to experiments)</li>
+<li><strong>Zero-shot</strong> — if you want a quick answer without the overhead of reading experimental data</li>
 </ul>
 </div>
 <hr />
 <h2 id="llmrunner">LLMRunner<a class="headerlink" href="#llmrunner" title="Permanent link">&para;</a></h2>
-<p><code>LLMRunner</code> отправляет промпт в LLM и агрегирует результаты нескольких запусков.</p>
-<h3 id="_3">Создание и запуск<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>LLMRunner</code> sends the prompt to the LLM and aggregates results from multiple runs.</p>
+<h3 id="creating-and-running">Creating and Running<a class="headerlink" href="#creating-and-running" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.llm_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMRunner</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">runner</span> <span class="o">=</span> <span class="n">LLMRunner</span><span class="p">(</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">base_url</span>        <span class="o">=</span> <span class="s2">&quot;https://api.openai.com/v1&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">api_key</span>         <span class="o">=</span> <span class="s2">&quot;sk-...&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">model</span>           <span class="o">=</span> <span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">retry_on_parse_error</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>   <span class="c1"># повторить если LLM не дал корректный ответ</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">request_delay</span>   <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>         <span class="c1"># пауза между запросами в секундах</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">retry_on_parse_error</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>   <span class="c1"># retry if LLM gave an invalid response</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">request_delay</span>   <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>         <span class="c1"># pause between requests in seconds</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">)</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">prompt</span>      <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">n_runs</span>      <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>        <span class="c1"># количество независимых запросов</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">n_runs</span>      <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>        <span class="c1"># number of independent requests</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">top_p</span>       <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="n">max_tokens</span>  <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">)</span>
 </code></pre></div>
-<h3 id="run">Параметры <code>run</code><a class="headerlink" href="#run" title="Permanent link">&para;</a></h3>
+<h3 id="run-parameters"><code>run</code> Parameters<a class="headerlink" href="#run-parameters" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>n_runs</code></td>
 <td><code>1</code></td>
-<td>Количество независимых запросов (self-consistency)</td>
+<td>Number of independent requests (self-consistency)</td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
 <td><code>0.7</code></td>
-<td>Температура генерации</td>
+<td>Generation temperature</td>
 </tr>
 <tr>
 <td><code>top_p</code></td>
@@ -1697,33 +1697,33 @@
 <tr>
 <td><code>max_tokens</code></td>
 <td><code>2048</code></td>
-<td>Максимальная длина ответа</td>
+<td>Maximum response length</td>
 </tr>
 <tr>
 <td><code>seed</code></td>
 <td><code>None</code></td>
-<td>Фиксация seed (если поддерживается моделью)</td>
+<td>Seed (if supported by the model)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="self-consistency">Self-consistency: как это работает<a class="headerlink" href="#self-consistency" title="Permanent link">&para;</a></h2>
-<p>Self-consistency — ключевая техника, делающая LLM-выбор надёжным.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Запрос 1 → [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;WGAN-GP&#39;, &#39;CTABGAN+&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Запрос 2 → [&#39;CTGAN&#39;, &#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;TVAE&#39;, &#39;CTABGAN+&#39;, &#39;DDPM&#39;]
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Запрос 3 → [&#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;CTGAN&#39;, &#39;CTABGAN+&#39;, &#39;DDPM&#39;, &#39;TVAE&#39;]
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Запрос 4 → [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;CTABGAN+&#39;, &#39;WGAN-GP&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Запрос 5 → [&#39;CTGAN&#39;, &#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;CTABGAN+&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
+<h2 id="self-consistency-how-it-works">Self-Consistency: How It Works<a class="headerlink" href="#self-consistency-how-it-works" title="Permanent link">&para;</a></h2>
+<p>Self-consistency is the key technique that makes LLM-based selection reliable.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Request 1 → [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;WGAN-GP&#39;, &#39;CTABGAN+&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Request 2 → [&#39;CTGAN&#39;, &#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;TVAE&#39;, &#39;CTABGAN+&#39;, &#39;DDPM&#39;]
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Request 3 → [&#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;CTGAN&#39;, &#39;CTABGAN+&#39;, &#39;DDPM&#39;, &#39;TVAE&#39;]
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Request 4 → [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;CTABGAN+&#39;, &#39;WGAN-GP&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Request 5 → [&#39;CTGAN&#39;, &#39;GAN-MFS&#39;, &#39;WGAN-GP&#39;, &#39;CTABGAN+&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Средние ранги:
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Average ranks:
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  GAN-MFS:  (1+2+1+1+2)/5 = 1.4
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  CTGAN:    (2+1+3+2+1)/5 = 1.8
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  WGAN-GP:  (3+3+2+4+3)/5 = 3.0
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  ...
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>Итоговый рейтинг: [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;WGAN-GP&#39;, ...]
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>Final ranking: [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;WGAN-GP&#39;, ...]
 </code></pre></div>
-<p>LLM ведёт себя стохастически при <code>temperature &gt; 0</code>. 5 независимых запросов с усреднением рангов дают статистически устойчивый результат.</p>
+<p>The LLM behaves stochastically when <code>temperature &gt; 0</code>. 5 independent requests with rank averaging give a statistically robust result.</p>
 <hr />
 <h2 id="runnerresult">RunnerResult<a class="headerlink" href="#runnerresult" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">n_runs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -1735,21 +1735,21 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># {&#39;GAN-MFS&#39;: 1.4, &#39;CTGAN&#39;: 1.8, ...}</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">n_runs</span><span class="p">)</span>    <span class="c1"># 5</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">n_parsed</span><span class="p">)</span>  <span class="c1"># сколько из 5 ответов LLM успешно распарсилось</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">n_parsed</span><span class="p">)</span>  <span class="c1"># how many of the 5 LLM responses were successfully parsed</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Ошибки парсинга</p>
-<p>Если <code>n_parsed &lt; n_runs</code>, значит LLM не дала валидный ответ в нужном формате для части запросов. Включите <code>retry_on_parse_error=True</code> чтобы повторять запросы при ошибке парсинга.</p>
+<p class="admonition-title">Parse errors</p>
+<p>If <code>n_parsed &lt; n_runs</code>, the LLM did not give a valid response in the required format for some requests. Enable <code>retry_on_parse_error=True</code> to retry requests on parse errors.</p>
 </div>
 <hr />
-<h2 id="llm">Подключение локальной LLM<a class="headerlink" href="#llm" title="Permanent link">&para;</a></h2>
-<p>Tab-Forge совместим с любым OpenAI-совместимым API:</p>
+<h2 id="connecting-a-local-llm">Connecting a Local LLM<a class="headerlink" href="#connecting-a-local-llm" title="Permanent link">&para;</a></h2>
+<p>Tab-Forge is compatible with any OpenAI-compatible API:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Ollama</label><label for="__tabbed_1_2">LM Studio</label><label for="__tabbed_1_3">OpenAI</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">runner</span> <span class="o">=</span> <span class="n">LLMRunner</span><span class="p">(</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:11434/v1&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">api_key</span>  <span class="o">=</span> <span class="s2">&quot;ollama&quot;</span><span class="p">,</span>          <span class="c1"># любая строка</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">api_key</span>  <span class="o">=</span> <span class="s2">&quot;ollama&quot;</span><span class="p">,</span>          <span class="c1"># any string</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">model</span>    <span class="o">=</span> <span class="s2">&quot;llama3.1:8b&quot;</span><span class="p">,</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">)</span>
 </code></pre></div>
@@ -1773,8 +1773,8 @@
 </div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Качество моделей</p>
-<p>Качество рейтинга зависит от способности LLM следовать инструкциям и рассуждать о табличных данных. GPT-4o и аналогичные модели показывают лучшие результаты. Небольшие локальные модели могут давать менее стабильные рейтинги — увеличьте <code>n_runs</code> для компенсации.</p>
+<p class="admonition-title">Model quality</p>
+<p>Ranking quality depends on the LLM's ability to follow instructions and reason about tabular data. GPT-4o and similar models produce the best results. Small local models may give less stable rankings — increase <code>n_runs</code> to compensate.</p>
 </div>
 
 

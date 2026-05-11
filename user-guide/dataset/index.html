@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dataset" class="md-skip">
+        <a href="#dataset-module" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -782,10 +782,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#why-you-need-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Зачем это нужно
+        Why You Need This
       
     </span>
   </a>
@@ -793,22 +793,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dataset_1" class="md-nav__link">
+  <a href="#the-main-class-dataset" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Основной класс — Dataset
+        The Main Class — Dataset
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Основной класс — Dataset">
+    <nav class="md-nav" aria-label="The Main Class — Dataset">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#csv" class="md-nav__link">
+  <a href="#create-from-csv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Создание из CSV
+        Create from CSV
       
     </span>
   </a>
@@ -816,10 +816,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dataframe" class="md-nav__link">
+  <a href="#create-from-dataframe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Создание из DataFrame
+        Create from DataFrame
       
     </span>
   </a>
@@ -832,10 +832,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datasetinfo-" class="md-nav__link">
+  <a href="#datasetinfo-meta-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DatasetInfo — мета-информация
+        DatasetInfo — Meta-Information
       
     </span>
   </a>
@@ -843,15 +843,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#splitting-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Разбиение данных
+        Splitting Data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Разбиение данных">
+    <nav class="md-nav" aria-label="Splitting Data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -866,10 +866,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#split_folds-" class="md-nav__link">
+  <a href="#split_folds-for-cross-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        split_folds — для кросс-валидации
+        split_folds — for cross-validation
       
     </span>
   </a>
@@ -882,10 +882,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#merging-datasets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Объединение датасетов
+        Merging Datasets
       
     </span>
   </a>
@@ -893,10 +893,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#accessing-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Получение данных
+        Accessing Data
       
     </span>
   </a>
@@ -904,10 +904,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#registering-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Регистрация признаков
+        Registering Features
       
     </span>
   </a>
@@ -915,10 +915,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#common-usage-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Типичные паттерны использования
+        Common Usage Patterns
       
     </span>
   </a>
@@ -1391,19 +1391,19 @@
   
 
 
-<h1 id="dataset">Модуль Dataset<a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Зачем это нужно<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Разные генеративные модели ожидают данные в разных форматах: одни хотят чистый <code>pd.DataFrame</code>, другим нужна информация о типах признаков, третьим — отдельно числовые и категориальные колонки. Каждый раз вручную пробрасывать эту информацию утомительно и чревато ошибками.</p>
-<p><code>Dataset</code> — это единый контейнер, который хранит данные вместе с метаинформацией: целевую переменную, тип задачи, списки числовых и категориальных признаков. Все модули Tab-Forge работают именно с <code>Dataset</code> — это делает пайплайн типобезопасным и предсказуемым.</p>
+<h1 id="dataset-module">Dataset Module<a class="headerlink" href="#dataset-module" title="Permanent link">&para;</a></h1>
+<h2 id="why-you-need-this">Why You Need This<a class="headerlink" href="#why-you-need-this" title="Permanent link">&para;</a></h2>
+<p>Different generative models expect data in different formats: some want a plain <code>pd.DataFrame</code>, others need information about feature types, and others need numerical and categorical columns separately. Manually propagating this information each time is tedious and error-prone.</p>
+<p><code>Dataset</code> is a unified container that stores data together with meta-information: the target variable, task type, and lists of numerical and categorical features. All Tab-Forge modules work with <code>Dataset</code> — this makes the pipeline type-safe and predictable.</p>
 <hr />
-<h2 id="dataset_1">Основной класс — <code>Dataset</code><a class="headerlink" href="#dataset_1" title="Permanent link">&para;</a></h2>
-<h3 id="csv">Создание из CSV<a class="headerlink" href="#csv" title="Permanent link">&para;</a></h3>
+<h2 id="the-main-class-dataset">The Main Class — <code>Dataset</code><a class="headerlink" href="#the-main-class-dataset" title="Permanent link">&para;</a></h2>
+<h3 id="create-from-csv">Create from CSV<a class="headerlink" href="#create-from-csv" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;abalone.csv&quot;</span><span class="p">,</span>           <span class="c1"># путь к CSV или pd.DataFrame</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;Rings&quot;</span><span class="p">,</span>               <span class="c1"># целевая переменная</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">task_type</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">,</span>       <span class="c1"># &quot;regression&quot; или &quot;classification&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;abalone.csv&quot;</span><span class="p">,</span>           <span class="c1"># path to CSV or pd.DataFrame</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;Rings&quot;</span><span class="p">,</span>               <span class="c1"># target variable</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">task_type</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">,</span>       <span class="c1"># &quot;regression&quot; or &quot;classification&quot;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">numerical_features</span><span class="o">=</span><span class="p">[</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;Length&quot;</span><span class="p">,</span> <span class="s2">&quot;Diameter&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="s2">&quot;Whole weight&quot;</span><span class="p">,</span> <span class="s2">&quot;Shucked weight&quot;</span><span class="p">,</span>
@@ -1412,7 +1412,7 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">],</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">)</span>
 </code></pre></div>
-<h3 id="dataframe">Создание из DataFrame<a class="headerlink" href="#dataframe" title="Permanent link">&para;</a></h3>
+<h3 id="create-from-dataframe">Create from DataFrame<a class="headerlink" href="#create-from-dataframe" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;my_data.csv&quot;</span><span class="p">)</span>
@@ -1421,12 +1421,12 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;target_col&quot;</span><span class="p">,</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">task_type</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;category_a&quot;</span><span class="p">,</span> <span class="s2">&quot;category_b&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="c1"># numerical_features можно опустить — остальное будет определено автоматически</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="c1"># numerical_features can be omitted — the rest will be determined automatically</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="datasetinfo-">DatasetInfo — мета-информация<a class="headerlink" href="#datasetinfo-" title="Permanent link">&para;</a></h2>
-<p>После создания объекта <code>Dataset</code> доступен атрибут <code>info</code>:</p>
+<h2 id="datasetinfo-meta-information">DatasetInfo — Meta-Information<a class="headerlink" href="#datasetinfo-meta-information" title="Permanent link">&para;</a></h2>
+<p>After creating a <code>Dataset</code> object, the <code>info</code> attribute is available:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>DatasetInfo(
@@ -1440,128 +1440,128 @@
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  ...
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>)
 </code></pre></div>
-<p><code>DatasetInfo</code> хранит:</p>
+<p><code>DatasetInfo</code> stores:</p>
 <table>
 <thead>
 <tr>
-<th>Поле</th>
-<th>Смысл</th>
+<th>Field</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>n_samples</code></td>
-<td>Количество строк</td>
+<td>Number of rows</td>
 </tr>
 <tr>
 <td><code>n_features</code></td>
-<td>Количество признаков (без целевой)</td>
+<td>Number of features (excluding target)</td>
 </tr>
 <tr>
 <td><code>n_numerical</code></td>
-<td>Число числовых признаков</td>
+<td>Number of numerical features</td>
 </tr>
 <tr>
 <td><code>n_categorical</code></td>
-<td>Число категориальных признаков</td>
+<td>Number of categorical features</td>
 </tr>
 <tr>
 <td><code>n_registered</code></td>
-<td>Признаки, готовые к обработке моделями</td>
+<td>Features ready for model processing</td>
 </tr>
 <tr>
 <td><code>task_type</code></td>
-<td><code>"regression"</code> или <code>"classification"</code></td>
+<td><code>"regression"</code> or <code>"classification"</code></td>
 </tr>
 <tr>
 <td><code>target_name</code></td>
-<td>Имя целевой переменной</td>
+<td>Name of the target variable</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_2">Разбиение данных<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="splitting-data">Splitting Data<a class="headerlink" href="#splitting-data" title="Permanent link">&para;</a></h2>
 <h3 id="train_test_split">train_test_split<a class="headerlink" href="#train_test_split" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">test_size</span>    <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">shuffle</span>      <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">stratify</span>     <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># True только для classification</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">stratify</span>     <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># True only for classification</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="si">}</span><span class="s2">, Test: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Стратификация</p>
-<p>Параметр <code>stratify=True</code> доступен только для <code>task_type="classification"</code> и использует <code>StratifiedKFold</code> под капотом.</p>
+<p class="admonition-title">Stratification</p>
+<p>The <code>stratify=True</code> parameter is available only for <code>task_type="classification"</code> and uses <code>StratifiedKFold</code> under the hood.</p>
 </div>
-<h3 id="split_folds-">split_folds — для кросс-валидации<a class="headerlink" href="#split_folds-" title="Permanent link">&para;</a></h3>
+<h3 id="split_folds-for-cross-validation">split_folds — for cross-validation<a class="headerlink" href="#split_folds-for-cross-validation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_folds</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">folds</span> <span class="o">=</span> <span class="n">split_folds</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># folds — список из 5 Dataset-объектов</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># folds — list of 5 Dataset objects</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fold</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">folds</span><span class="p">):</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fold </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span><span class="si">}</span><span class="s2"> строк&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fold </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
-<p><code>split_folds</code> используется внутри <code>AutoTuningStudy</code> автоматически — вам не нужно вызывать его вручную при тюнинге.</p>
+<p><code>split_folds</code> is used internally by <code>AutoTuningStudy</code> automatically — you do not need to call it manually during tuning.</p>
 </div>
 <hr />
-<h2 id="_3">Объединение датасетов<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="merging-datasets">Merging Datasets<a class="headerlink" href="#merging-datasets" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge_datasets</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Объединение нескольких совместимых датасетов</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Merge several compatible datasets</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">combined</span> <span class="o">=</span> <span class="n">merge_datasets</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">])</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Совместимость датасетов</p>
-<p><code>merge_datasets</code> проверяет, что у всех объектов одинаковые: целевая переменная, тип задачи, набор признаков. При несовпадении выбрасывается исключение.</p>
+<p class="admonition-title">Dataset compatibility</p>
+<p><code>merge_datasets</code> checks that all objects have the same: target variable, task type, and feature set. An exception is raised on mismatch.</p>
 </div>
 <hr />
-<h2 id="_4">Получение данных<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Получить все данные включая целевую переменную</span>
+<h2 id="accessing-data">Accessing Data<a class="headerlink" href="#accessing-data" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Get all data including the target variable</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Получить только признаки (без target)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Get only features (without target)</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_X</span><span class="p">()</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Получить только целевую переменную</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Get only the target variable</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_target</span><span class="p">()</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Краткая сводка</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Brief summary</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># {&quot;shape&quot;: (4177, 9), &quot;task_type&quot;: &quot;regression&quot;, &quot;missing&quot;: {...}}</span>
 </code></pre></div>
 <hr />
-<h2 id="_5">Регистрация признаков<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>Иногда датасет содержит дополнительные признаки, которые нужно добавить к уже созданному объекту:</p>
+<h2 id="registering-features">Registering Features<a class="headerlink" href="#registering-features" title="Permanent link">&para;</a></h2>
+<p>Sometimes a dataset contains additional features that need to be added to an already created object:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">dataset</span><span class="o">.</span><span class="n">register_features</span><span class="p">(</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">numerical</span>   <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;new_num_feature&quot;</span><span class="p">],</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">categorical</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;new_cat_feature&quot;</span><span class="p">],</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="_6">Типичные паттерны использования<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="common-usage-patterns">Common Usage Patterns<a class="headerlink" href="#common-usage-patterns" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
-<p class="admonition-title">Паттерн 1: загрузка + сплит</p>
+<p class="admonition-title">Pattern 1: load + split</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">task_type</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">)</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Паттерн 2: k-fold для тюнинга</p>
+<p class="admonition-title">Pattern 2: k-fold for tuning</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_folds</span><span class="p">,</span> <span class="n">merge_datasets</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">folds</span> <span class="o">=</span> <span class="n">split_folds</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Для fold 0: валидация на folds[0], обучение на merge(folds[1:])</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># For fold 0: validate on folds[0], train on merge(folds[1:])</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">val_fold</span> <span class="o">=</span> <span class="n">folds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">train_folds</span> <span class="o">=</span> <span class="n">merge_datasets</span><span class="p">(</span><span class="n">folds</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 </code></pre></div>
 </div>
 <div class="admonition example">
-<p class="admonition-title">Паттерн 3: из синтетики обратно в Dataset</p>
-<p>Когда модель возвращает <code>Dataset</code> через <code>structed_generate</code>, его можно сразу передать в <code>Benchmark</code>:</p>
+<p class="admonition-title">Pattern 3: from synthetic data back to Dataset</p>
+<p>When a model returns a <code>Dataset</code> via <code>structed_generate</code>, it can be directly passed to <code>Benchmark</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">synth</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">structed_generate</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">bench</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">synth</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
 </code></pre></div>

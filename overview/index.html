@@ -21,7 +21,7 @@
     
     
       
-        <title>Tab-Forge — Обзор - Tab-Forge</title>
+        <title>Tab-Forge — Overview - Tab-Forge</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tab-forge" class="md-skip">
+        <a href="#tab-forge-overview" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tab-Forge — Обзор
+              Tab-Forge — Overview
             
           </span>
         </div>
@@ -1191,35 +1191,35 @@
   
 
 
-<h1 id="tab-forge">Tab-Forge — Обзор<a class="headerlink" href="#tab-forge" title="Permanent link">&para;</a></h1>
-<p>Tab-Forge — модульная библиотека для автоматизированного создания синтетических табличных данных. Её ключевая идея: <strong>перед дорогостоящим перебором</strong> гиперпараметров LLM анализирует мета-характеристики вашего датасета и задачи, предсказывает, какие генеративные модели покажут себя лучше всего, и предлагает приоритетный порядок их тюнинга.</p>
+<h1 id="tab-forge-overview">Tab-Forge — Overview<a class="headerlink" href="#tab-forge-overview" title="Permanent link">&para;</a></h1>
+<p>Tab-Forge is a modular library for automated generation of synthetic tabular data. Its core idea: <strong>before expensive hyperparameter search</strong>, an LLM analyzes the meta-characteristics of your dataset and task, predicts which generative models will perform best, and proposes a prioritized tuning order.</p>
 <hr />
-<h2 id="_1">Структура библиотеки<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="library-structure">Library Structure<a class="headerlink" href="#library-structure" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>tab_forge/
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── dataset/           # Загрузка и управление данными
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── models/            # Генеративные архитектуры (CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, DDPM)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── benchmark/         # Метрики качества синтетических данных
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── prompt_generator/  # Сборка промта для LLM + мета-фичи датасета
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── llm_runner/        # Взаимодействие с LLM, self-consistency агрегация
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>└── tuning/            # Тюнинг гиперпараметров (Optuna)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── dataset/           # Data loading and management
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── models/            # Generative architectures (CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, DDPM)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── benchmark/         # Synthetic data quality metrics
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── prompt_generator/  # LLM prompt assembly + dataset meta-features
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── llm_runner/        # LLM interaction, self-consistency aggregation
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>└── tuning/            # Hyperparameter tuning (Optuna)
 </code></pre></div>
 <hr />
-<h2 id="_2">Пайплайн<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────────────────────────────────┐
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│            PromptGenerator               │  ← мета-фичи датасета +
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│                                          │    опыт на референсных датасетах
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│            PromptGenerator               │  ← dataset meta-features +
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│                                          │    experience on reference datasets
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└───────────────────┬──────────────────────┘
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                    │ готовый промт
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                    │ assembled prompt
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                    ↓
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>┌──────────────────────────────────────────┐
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│               LLMRunner                  │  ← ранжирование моделей
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│       (self-consistency, N runs)         │    через self-consistency
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│               LLMRunner                  │  ← model ranking
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│       (self-consistency, N runs)         │    via self-consistency
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└───────────────────┬──────────────────────┘
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                    │ приоритетный список моделей
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                    │ prioritized model list
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                    ↓
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>┌──────────────────────────────────────────┐
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│           AutoTuningStudy                │  ← k-fold CV + Optuna
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│                                          │    по каждой модели из рейтинга
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│                                          │    for each model in the ranking
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>└──────┬───────────────────────┬───────────┘
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>       │                       │
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>       ↓                       ↓
@@ -1228,93 +1228,93 @@
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>└──────────────┘   └──────────┬────────────┘
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                               ↓
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                  ┌────────────────────────┐
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>                  │        Benchmark       │  ← оценка качества синтетики
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>                  │        Benchmark       │  ← synthetic data quality evaluation
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                  └────────────────────────┘
 </code></pre></div>
-<p>Каждый из шагов можно использовать независимо.</p>
+<p>Each step can be used independently.</p>
 <hr />
-<h2 id="_3">Компоненты<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
 <h3 id="dataset">Dataset<a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h3>
-<p>Обёртка над <code>pd.DataFrame</code> (или путём к CSV). Хранит метаинформацию: целевую переменную, тип задачи (<code>regression</code> / <code>classification</code>), списки числовых и категориальных признаков.</p>
-<p>Предоставляет утилиты:
-- <code>train_test_split()</code> — разбиение на обучающую/тестовую выборки
-- <code>split_folds()</code> — k-fold разбиение (для кросс-валидации в тюнинге)
-- <code>merge_datasets()</code> — объединение нескольких <code>Dataset</code>-объектов</p>
+<p>A wrapper around <code>pd.DataFrame</code> (or a path to a CSV file). Stores meta-information: the target variable, task type (<code>regression</code> / <code>classification</code>), and lists of numerical and categorical features.</p>
+<p>Provides utilities:
+- <code>train_test_split()</code> — split into train/test sets
+- <code>split_folds()</code> — k-fold split (for cross-validation in tuning)
+- <code>merge_datasets()</code> — merge multiple <code>Dataset</code> objects</p>
 <hr />
 <h3 id="promptgenerator">PromptGenerator<a class="headerlink" href="#promptgenerator" title="Permanent link">&para;</a></h3>
-<p>Строит текстовый промт для LLM, включающий:</p>
+<p>Builds a text prompt for the LLM, including:</p>
 <ul>
-<li><strong>Мета-характеристики датасета</strong> — статистики, вычисляемые автоматически (часть из них — через библиотеку <code>pymfe</code>):</li>
+<li><strong>Dataset meta-characteristics</strong> — statistics computed automatically (some via the <code>pymfe</code> library):</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>Мета-фича</th>
-<th>Смысл</th>
+<th>Meta-feature</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>nr_inst</code></td>
-<td>Количество строк</td>
+<td>Number of rows</td>
 </tr>
 <tr>
 <td><code>nr_attr</code></td>
-<td>Количество признаков</td>
+<td>Number of features</td>
 </tr>
 <tr>
 <td><code>nr_num</code> / <code>nr_cat</code></td>
-<td>Числовые / категориальные признаки</td>
+<td>Numerical / categorical features</td>
 </tr>
 <tr>
 <td><code>missing_pct</code></td>
-<td>Доля пропущенных значений, %</td>
+<td>Fraction of missing values, %</td>
 </tr>
 <tr>
 <td><code>task_type</code></td>
-<td>Тип задачи</td>
+<td>Task type</td>
 </tr>
 <tr>
 <td><code>abs_corr_mean</code> / <code>abs_corr_max</code></td>
-<td>Средняя / максимальная абсолютная корреляция</td>
+<td>Mean / maximum absolute correlation</td>
 </tr>
 <tr>
 <td><code>skewness_mean</code></td>
-<td>Средняя асимметрия</td>
+<td>Mean skewness</td>
 </tr>
 <tr>
 <td><code>kurtosis_mean</code> / <code>kurtosis_std</code></td>
-<td>Среднее / СКО эксцесса</td>
+<td>Mean / std of kurtosis</td>
 </tr>
 <tr>
 <td><code>std_mean</code></td>
-<td>Среднее стандартное отклонение</td>
+<td>Mean standard deviation</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li><strong>Описания поддерживаемых моделей</strong> и целевой метрики.</li>
-<li><strong>(few-shot)</strong> Результаты предварительных экспериментов на 5 референсных датасетах (<code>abalone</code>, <code>cl-housing</code>, <code>air</code>, <code>wind</code>, <code>gats</code>) — LLM видит, как каждая модель проявила себя на похожих задачах.</li>
+<li><strong>Descriptions of supported models</strong> and the target metric.</li>
+<li><strong>(few-shot)</strong> Results of preliminary experiments on 5 reference datasets (<code>abalone</code>, <code>cl-housing</code>, <code>air</code>, <code>wind</code>, <code>gats</code>) — the LLM sees how each model performed on similar tasks.</li>
 </ul>
-<p>Параметр <code>mfe_features</code>:
-- <code>"short"</code> (по умолчанию) — кураторский набор из 12 ключевых мета-фич
-- <code>"full"</code> — все признаки из выбранных <code>mfe_groups</code>
-- <code>list[str]</code> — произвольный пользовательский набор</p>
+<p><code>mfe_features</code> parameter:
+- <code>"short"</code> (default) — a curated set of 12 key meta-features
+- <code>"full"</code> — all features from the selected <code>mfe_groups</code>
+- <code>list[str]</code> — an arbitrary user-defined set</p>
 <hr />
 <h3 id="llmrunner">LLMRunner<a class="headerlink" href="#llmrunner" title="Permanent link">&para;</a></h3>
-<p>Отправляет промт в любой OpenAI-совместимый API (OpenAI, локальный сервер, etc.).</p>
-<p><strong>Self-consistency:</strong> запрос повторяется <code>n_runs</code> раз независимо; ранги моделей из каждого ответа усредняются. Это снижает влияние случайного выбора LLM и делает итоговый рейтинг устойчивее.</p>
-<p>Возвращает объект <code>RunnerResult</code> с:
-- <code>average_ranks</code> — средний ранг каждой модели (чем меньше, тем лучше)
-- <code>final_ranking</code> — список моделей, упорядоченных по среднему рангу</p>
+<p>Sends the prompt to any OpenAI-compatible API (OpenAI, local server, etc.).</p>
+<p><strong>Self-consistency:</strong> the request is repeated <code>n_runs</code> times independently; model ranks from each response are averaged. This reduces the influence of random LLM behavior and makes the final ranking more stable.</p>
+<p>Returns a <code>RunnerResult</code> object with:
+- <code>average_ranks</code> — average rank of each model (lower is better)
+- <code>final_ranking</code> — list of models ordered by average rank</p>
 <hr />
 <h3 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h3>
-<p>Единый базовый интерфейс <code>BaseGenerativeModel</code> с методами <code>fit</code> / <code>generate</code> / <code>structed_generate</code>. Четыре реализации доступны «из коробки»:</p>
+<p>A unified base interface <code>BaseGenerativeModel</code> with <code>fit</code> / <code>generate</code> / <code>structed_generate</code> methods. Six implementations are available out of the box:</p>
 <table>
 <thead>
 <tr>
-<th>Класс</th>
-<th>Архитектура</th>
+<th>Class</th>
+<th>Architecture</th>
 </tr>
 </thead>
 <tbody>
@@ -1328,73 +1328,73 @@
 </tr>
 <tr>
 <td><code>GANMFSSynthesizer</code></td>
-<td>WGAN-GP с MFS-регуляризатором в функции потерь</td>
+<td>WGAN-GP with MFS regularizer in the loss function</td>
 </tr>
 <tr>
 <td><code>CTABGANPlusSynthesizer</code></td>
-<td>CTAB-GAN+ с вспомогательными регрессионными/классификационными головами</td>
+<td>CTAB-GAN+ with auxiliary regression/classification heads</td>
 </tr>
 <tr>
 <td><code>TVAESynthesizer</code></td>
-<td>Variational Autoencoder с табличной адаптацией ELBO</td>
+<td>Variational Autoencoder with tabular ELBO adaptation</td>
 </tr>
 <tr>
 <td><code>DDPMSynthesizer</code></td>
-<td>Диффузионная модель (Tab-DDPM)</td>
+<td>Diffusion model (Tab-DDPM)</td>
 </tr>
 </tbody>
 </table>
-<p>Все шесть моделей участвуют в LLM-ранжировании; тюнинг запускается для моделей в порядке, предложенном LLM.</p>
+<p>All six models participate in LLM ranking; tuning is launched for models in the order proposed by the LLM.</p>
 <hr />
 <h3 id="benchmark">Benchmark<a class="headerlink" href="#benchmark" title="Permanent link">&para;</a></h3>
-<p>Оценивает качество синтетических данных относительно реальных. Принимает спецификацию метрик в виде списка или словаря кортежей.</p>
-<h4 id="_4">Метрики качества<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>Evaluates the quality of synthetic data relative to real data. Accepts a metric specification as a list or dictionary of tuples.</p>
+<h4 id="quality-metrics">Quality Metrics<a class="headerlink" href="#quality-metrics" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
-<th>Метрика</th>
-<th>Смысл</th>
-<th>Направление</th>
+<th>Metric</th>
+<th>Meaning</th>
+<th>Direction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>R²</strong></td>
-<td>Доля дисперсии реальных данных, объяснённая синтетическими (через ML-модель)</td>
-<td>выше → лучше</td>
+<td>Fraction of real data variance explained by synthetic data (via ML model)</td>
+<td>higher → better</td>
 </tr>
 <tr>
 <td><strong>RMSE</strong></td>
-<td>Среднеквадратичная ошибка предсказания</td>
-<td>ниже → лучше</td>
+<td>Root mean square prediction error</td>
+<td>lower → better</td>
 </tr>
 <tr>
 <td><strong>Jensen–Shannon</strong></td>
-<td>Расхождение маргинальных распределений признаков</td>
-<td>ниже → лучше</td>
+<td>Divergence of marginal feature distributions</td>
+<td>lower → better</td>
 </tr>
 <tr>
 <td><strong>Frobenius Correlation</strong></td>
-<td>Норма разности корреляционных матриц</td>
-<td>ниже → лучше</td>
+<td>Norm of the difference between correlation matrices</td>
+<td>lower → better</td>
 </tr>
 <tr>
 <td><strong>Frobenius MI</strong></td>
-<td>Сохранность нелинейных зависимостей (матрица взаимной информации)</td>
-<td>ниже → лучше</td>
+<td>Preservation of nonlinear dependencies (mutual information matrix)</td>
+<td>lower → better</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h3 id="autotuningstudy">AutoTuningStudy<a class="headerlink" href="#autotuningstudy" title="Permanent link">&para;</a></h3>
-<p>Выполняет автоматический поиск гиперпараметров через Optuna.</p>
-<p><strong>Схема работы:</strong>
-1. Данные делятся на <code>cv</code> фолдов.
-2. Для каждого набора гиперпараметров (<code>trial</code>): модель обучается на объединении train-фолдов, генерирует синтетику в размере val-фолда, <code>Benchmark</code> считает метрику.
-3. Средняя метрика по фолдам — цель оптимизации.</p>
-<p><strong>Режимы пространства поиска:</strong>
-- <code>"manual"</code> — только гиперпараметры, заданные пользователем через <code>get_params(trial)</code>
-- <code>"extended"</code> — пространство поиска расширяется предустановленными для данной архитектуры диапазонами (размеры слоёв, learning rate, epochs, batch size и т.д.)</p>
+<p>Performs automated hyperparameter search via Optuna.</p>
+<p><strong>Workflow:</strong>
+1. Data is split into <code>cv</code> folds.
+2. For each hyperparameter set (<code>trial</code>): the model is trained on combined train folds, generates synthetic data the size of the val fold, <code>Benchmark</code> computes the metric.
+3. Average metric across folds — optimization objective.</p>
+<p><strong>Search space modes:</strong>
+- <code>"manual"</code> — only hyperparameters defined by the user via <code>get_params(trial)</code>
+- <code>"extended"</code> — search space is extended with preset ranges for the given architecture (layer sizes, learning rate, epochs, batch size, etc.)</p>
 
 
 

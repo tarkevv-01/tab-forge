@@ -1128,10 +1128,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Импорт
+        Import
       
     </span>
   </a>
@@ -1151,15 +1151,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#common-methods-for-all-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Общие методы всех моделей
+        Common Methods for All Models
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Общие методы всех моделей">
+    <nav class="md-nav" aria-label="Common Methods for All Models">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1414,7 +1414,7 @@
 
 
 <h1 id="api-reference-models">API Reference — Models<a class="headerlink" href="#api-reference-models" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Импорт<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="import">Import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">CTGANSynthesizer</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">WGANGPSynthesizer</span><span class="p">,</span>
@@ -1426,32 +1426,32 @@
 </code></pre></div>
 <hr />
 <h2 id="basegenerativemodel-abc"><code>BaseGenerativeModel</code> (ABC)<a class="headerlink" href="#basegenerativemodel-abc" title="Permanent link">&para;</a></h2>
-<p>Абстрактный базовый класс для всех синтезаторов. Определяет единый интерфейс.</p>
-<h3 id="_2">Общие методы всех моделей<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Abstract base class for all synthesizers. Defines a unified interface.</p>
+<h3 id="common-methods-for-all-models">Common Methods for All Models<a class="headerlink" href="#common-methods-for-all-models" title="Permanent link">&para;</a></h3>
 <h4 id="fit"><code>fit</code><a class="headerlink" href="#fit" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fit(dataset: Dataset, **kwargs) -&gt; None
 </code></pre></div>
-<p>Обучает модель на переданном датасете.</p>
+<p>Trains the model on the provided dataset.</p>
 <h4 id="generate"><code>generate</code><a class="headerlink" href="#generate" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>generate(n_samples: int) -&gt; pd.DataFrame
 </code></pre></div>
-<p>Генерирует <code>n_samples</code> строк синтетических данных. Возвращает <code>pd.DataFrame</code>.</p>
+<p>Generates <code>n_samples</code> rows of synthetic data. Returns <code>pd.DataFrame</code>.</p>
 <div class="admonition warning">
-<p>Модель должна быть обучена (<code>fit</code>) перед вызовом <code>generate</code>. Иначе поднимается исключение.</p>
+<p>The model must be trained (<code>fit</code>) before calling <code>generate</code>. Otherwise an exception is raised.</p>
 </div>
 <h4 id="structed_generate"><code>structed_generate</code><a class="headerlink" href="#structed_generate" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>structed_generate(n_samples: int) -&gt; Dataset
 </code></pre></div>
-<p>Аналог <code>generate</code>, но возвращает объект <code>Dataset</code> с сохранёнными метаданными (типы признаков, целевая переменная). Используйте этот метод когда результат нужно передать в <code>Benchmark</code> или <code>AutoTuningStudy</code>.</p>
+<p>Analogous to <code>generate</code>, but returns a <code>Dataset</code> object with preserved metadata (feature types, target variable). Use this method when the result needs to be passed to <code>Benchmark</code> or <code>AutoTuningStudy</code>.</p>
 <h4 id="get_losses"><code>get_losses</code><a class="headerlink" href="#get_losses" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>get_losses() -&gt; dict
 </code></pre></div>
-<p>Возвращает словарь с историей функции потерь за время обучения.</p>
+<p>Returns a dictionary with the training loss history.</p>
 <h4 id="set_hyperparameters-get_hyperparameters"><code>set_hyperparameters</code> / <code>get_hyperparameters</code><a class="headerlink" href="#set_hyperparameters-get_hyperparameters" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>set_hyperparameters(**kwargs) -&gt; None
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>get_hyperparameters() -&gt; dict
 </code></pre></div>
-<p>Установка и получение текущих гиперпараметров модели.</p>
+<p>Set and retrieve the current model hyperparameters.</p>
 <hr />
 <h2 id="ctgansynthesizer"><code>CTGANSynthesizer</code><a class="headerlink" href="#ctgansynthesizer" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>CTGANSynthesizer(
@@ -1470,56 +1470,56 @@
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    verbose: bool = False,
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>)
 </code></pre></div>
-<p>Условный табличный GAN на основе реализации SDV. Поддерживает смешанные данные с числовыми и категориальными признаками.</p>
-<p><strong>Параметры:</strong></p>
+<p>Conditional tabular GAN based on the SDV implementation. Supports mixed data with numerical and categorical features.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
 <td><code>300</code></td>
-<td>Число эпох обучения</td>
+<td>Number of training epochs</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
 <td><code>500</code></td>
-<td>Размер мини-батча</td>
+<td>Mini-batch size</td>
 </tr>
 <tr>
 <td><code>embedding_dim</code></td>
 <td><code>128</code></td>
-<td>Размерность embedding для категориальных признаков</td>
+<td>Embedding dimensionality for categorical features</td>
 </tr>
 <tr>
 <td><code>generator_dim</code></td>
 <td><code>(256, 256)</code></td>
-<td>Размерности слоёв генератора</td>
+<td>Generator layer sizes</td>
 </tr>
 <tr>
 <td><code>discriminator_dim</code></td>
 <td><code>(256, 256)</code></td>
-<td>Размерности слоёв дискриминатора</td>
+<td>Discriminator layer sizes</td>
 </tr>
 <tr>
 <td><code>generator_lr</code></td>
 <td><code>2e-4</code></td>
-<td>Learning rate генератора</td>
+<td>Generator learning rate</td>
 </tr>
 <tr>
 <td><code>discriminator_lr</code></td>
 <td><code>2e-4</code></td>
-<td>Learning rate дискриминатора</td>
+<td>Discriminator learning rate</td>
 </tr>
 <tr>
 <td><code>pac</code></td>
 <td><code>10</code></td>
-<td>Размер pac для PacGAN (объединение сэмплов в дискриминаторе)</td>
+<td>PacGAN pac size (sample grouping in discriminator)</td>
 </tr>
 </tbody>
 </table>
@@ -1542,26 +1542,26 @@
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    discriminator_dim: tuple = (256, 256),
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>)
 </code></pre></div>
-<p>Wasserstein GAN с Gradient Penalty. Собственная PyTorch-реализация. Теоретически более стабилен чем стандартный GAN.</p>
-<p><strong>Параметры:</strong></p>
+<p>Wasserstein GAN with Gradient Penalty. Custom PyTorch implementation. Theoretically more stable than standard GAN.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>n_critic</code></td>
 <td><code>5</code></td>
-<td>Шагов дискриминатора на один шаг генератора</td>
+<td>Discriminator steps per generator step</td>
 </tr>
 <tr>
 <td><code>lambda_gp</code></td>
 <td><code>10.0</code></td>
-<td>Коэффициент gradient penalty</td>
+<td>Gradient penalty coefficient</td>
 </tr>
 </tbody>
 </table>
@@ -1585,36 +1585,36 @@
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    sample_frac: float = 0.1,
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>)
 </code></pre></div>
-<p>Расширение WGAN-GP с дополнительным регуляризатором Meta-Feature Similarity (MFS). Регуляризатор добавляет слагаемое в функцию потерь: расстояние Wasserstein между распределениями мета-фич реальных и генерируемых данных.</p>
-<p><strong>Дополнительные параметры:</strong></p>
+<p>Extension of WGAN-GP with an additional Meta-Feature Similarity (MFS) regularizer. The regularizer adds a term to the loss function: Wasserstein distance between meta-feature distributions of real and generated data.</p>
+<p><strong>Additional parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>mfs_lambda</code></td>
 <td><code>0.1</code></td>
-<td>Вес MFS-регуляризатора</td>
+<td>MFS regularizer weight</td>
 </tr>
 <tr>
 <td><code>subset_mfs</code></td>
 <td><code>10</code></td>
-<td>Размер подвыборки для вычисления мета-фич</td>
+<td>Subsample size for meta-feature computation</td>
 </tr>
 <tr>
 <td><code>sample_frac</code></td>
 <td><code>0.1</code></td>
-<td>Доля данных для вычисления MFS на каждой итерации</td>
+<td>Fraction of data used for MFS computation each iteration</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition tip">
-<p>Наилучшие результаты по R² среди всех моделей в экспериментах. Рекомендуется как первый выбор для задач аугментации данных.</p>
+<p>Best R² results among all models in experiments. Recommended as the first choice for data augmentation tasks.</p>
 </div>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">model</span> <span class="o">=</span> <span class="n">GANMFSSynthesizer</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">mfs_lambda</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -1633,41 +1633,41 @@
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    l2scale: float = 1e-5,
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>)
 </code></pre></div>
-<p>Обёртка над CTAB-GAN+ — расширением CTABGAN с вспомогательными регрессионными/классификационными головами в дискриминаторе. Тип головы определяется из <code>dataset.info.task_type</code>.</p>
-<p><strong>Параметры:</strong></p>
+<p>Wrapper around CTAB-GAN+ — an extension of CTABGAN with auxiliary regression/classification heads in the discriminator. The head type is determined from <code>dataset.info.task_type</code>.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>random_dim</code></td>
 <td><code>100</code></td>
-<td>Размерность латентного пространства</td>
+<td>Latent space dimensionality</td>
 </tr>
 <tr>
 <td><code>critic_iterations</code></td>
 <td><code>1</code></td>
-<td>Шагов дискриминатора на генераторный шаг</td>
+<td>Discriminator steps per generator step</td>
 </tr>
 <tr>
 <td><code>class_dim</code></td>
 <td><code>(256, 256, 256, 256)</code></td>
-<td>Архитектура вспомогательных голов</td>
+<td>Auxiliary head architecture</td>
 </tr>
 <tr>
 <td><code>l2scale</code></td>
 <td><code>1e-5</code></td>
-<td>L2-регуляризация</td>
+<td>L2 regularization</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition tip">
-<p>Лучшие результаты по RMSE среди всех моделей (11/25). Отличный выбор когда важна точность предсказания.</p>
+<p>Best RMSE results among all models (11/25). Excellent choice when prediction accuracy matters.</p>
 </div>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">model</span> <span class="o">=</span> <span class="n">CTABGANPlusSynthesizer</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
@@ -1685,31 +1685,31 @@
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    l2scale: float = 1e-5,
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>)
 </code></pre></div>
-<p>Табличный Variational Autoencoder от SDV. Использует адаптированный ELBO как функцию потерь. Обучается стабильнее GAN-архитектур.</p>
-<p><strong>Параметры:</strong></p>
+<p>Tabular Variational Autoencoder from SDV. Uses adapted ELBO as the loss function. Trains more stably than GAN architectures.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>compress_dims</code></td>
 <td><code>(128, 128)</code></td>
-<td>Размерности слоёв энкодера</td>
+<td>Encoder layer sizes</td>
 </tr>
 <tr>
 <td><code>decompress_dims</code></td>
 <td><code>(128, 128)</code></td>
-<td>Размерности слоёв декодера</td>
+<td>Decoder layer sizes</td>
 </tr>
 <tr>
 <td><code>l2scale</code></td>
 <td><code>1e-5</code></td>
-<td>L2-регуляризация</td>
+<td>L2 regularization</td>
 </tr>
 </tbody>
 </table>
@@ -1730,42 +1730,42 @@
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    **model_params,
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>)
 </code></pre></div>
-<p>Диффузионная модель Tab-DDPM, реализованная через плагин <code>ddpm</code> библиотеки Synthcity.</p>
-<p><strong>Параметры:</strong></p>
+<p>Tab-DDPM diffusion model, implemented via the <code>ddpm</code> plugin of the Synthcity library.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>num_timesteps</code></td>
 <td><code>1000</code></td>
-<td>Число шагов диффузии</td>
+<td>Number of diffusion steps</td>
 </tr>
 <tr>
 <td><code>model_type</code></td>
 <td><code>"mlp"</code></td>
-<td>Тип нейросети шумоподавителя</td>
+<td>Type of denoiser neural network</td>
 </tr>
 <tr>
 <td><code>scheduler</code></td>
 <td><code>"cosine"</code></td>
-<td>Расписание шумового процесса (<code>"cosine"</code> / <code>"linear"</code>)</td>
+<td>Noise schedule (<code>"cosine"</code> / <code>"linear"</code>)</td>
 </tr>
 <tr>
 <td><code>**model_params</code></td>
 <td>—</td>
-<td>Дополнительные параметры архитектуры для плагина Synthcity</td>
+<td>Additional architecture parameters for the Synthcity plugin</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
-<p class="admonition-title">Время обучения</p>
-<p>TabDDPM обучается значительно медленнее GAN-архитектур. Начните с <code>epochs=50</code> и <code>num_timesteps=500</code> для быстрой проверки.</p>
+<p class="admonition-title">Training time</p>
+<p>TabDDPM trains significantly slower than GAN architectures. Start with <code>epochs=50</code> and <code>num_timesteps=500</code> for a quick check.</p>
 </div>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">model</span> <span class="o">=</span> <span class="n">DDPMSynthesizer</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">num_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>

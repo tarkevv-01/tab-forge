@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#installation" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -520,10 +520,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Требования
+        Requirements
       
     </span>
   </a>
@@ -531,10 +531,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#install-from-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Установка из исходного кода
+        Install from Source
       
     </span>
   </a>
@@ -542,10 +542,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#recommended-virtual-environment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Рекомендуемый способ: виртуальное окружение
+        Recommended: Virtual Environment
       
     </span>
   </a>
@@ -553,10 +553,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#key-dependencies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ключевые зависимости
+        Key Dependencies
       
     </span>
   </a>
@@ -564,10 +564,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#verify-installation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Проверка установки
+        Verify Installation
       
     </span>
   </a>
@@ -1302,25 +1302,25 @@
   
 
 
-<h1 id="_1">Установка<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">Требования<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Python <strong>3.8+</strong></li>
 <li>pip</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Тяжёлые зависимости</p>
-<p>Tab-Forge использует <code>torch</code>, <code>tensorflow</code>, <code>sdv</code> и <code>synthcity</code> — суммарный размер окружения может достигать нескольких гигабайт. Рекомендуем создать отдельное виртуальное окружение.</p>
+<p class="admonition-title">Heavy dependencies</p>
+<p>Tab-Forge uses <code>torch</code>, <code>tensorflow</code>, <code>sdv</code>, and <code>synthcity</code> — the total environment size can reach several gigabytes. We recommend creating a separate virtual environment.</p>
 </div>
 <hr />
-<h2 id="_3">Установка из исходного кода<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>Tab-Forge пока не опубликован на PyPI, поэтому устанавливается клонированием репозитория:</p>
+<h2 id="install-from-source">Install from Source<a class="headerlink" href="#install-from-source" title="Permanent link">&para;</a></h2>
+<p>Tab-Forge is not yet published on PyPI, so it is installed by cloning the repository:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tarkevv-01/tab-forge.git
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>tab-forge
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div>
 <hr />
-<h2 id="_4">Рекомендуемый способ: виртуальное окружение<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="recommended-virtual-environment">Recommended: Virtual Environment<a class="headerlink" href="#recommended-virtual-environment" title="Permanent link">&para;</a></h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">venv</label><label for="__tabbed_1_2">conda</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1347,12 +1347,12 @@
 </div>
 </div>
 <hr />
-<h2 id="_5">Ключевые зависимости<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="key-dependencies">Key Dependencies<a class="headerlink" href="#key-dependencies" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Пакет</th>
-<th>Зачем</th>
+<th>Package</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
@@ -1362,11 +1362,11 @@
 </tr>
 <tr>
 <td><code>tensorflow</code></td>
-<td>CTABGAN+ (некоторые части)</td>
+<td>CTABGAN+ (some parts)</td>
 </tr>
 <tr>
 <td><code>sdv</code>, <code>ctgan</code></td>
-<td>CTGAN и TVAE</td>
+<td>CTGAN and TVAE</td>
 </tr>
 <tr>
 <td><code>synthcity</code></td>
@@ -1374,24 +1374,24 @@
 </tr>
 <tr>
 <td><code>optuna</code></td>
-<td>Байесовская оптимизация</td>
+<td>Bayesian optimization</td>
 </tr>
 <tr>
 <td><code>pymfe</code></td>
-<td>Извлечение мета-фич датасета</td>
+<td>Dataset meta-feature extraction</td>
 </tr>
 <tr>
 <td><code>openai</code></td>
-<td>Запросы к LLM API</td>
+<td>LLM API requests</td>
 </tr>
 <tr>
 <td><code>xgboost</code>, <code>scikit-learn</code></td>
-<td>Оценка качества синтетики</td>
+<td>Synthetic data quality evaluation</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_6">Проверка установки<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="verify-installation">Verify Installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTGANSynthesizer</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
@@ -1399,11 +1399,11 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.prompt_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptGenerator</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.llm_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMRunner</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tab-Forge успешно установлен!&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tab-Forge installed successfully!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Работа с GPU</p>
-<p>Для ускорения обучения PyTorch-моделей (WGAN-GP, GAN-MFS, CTABGAN+) убедитесь, что установлена версия <code>torch</code> с поддержкой CUDA:</p>
+<p class="admonition-title">GPU Support</p>
+<p>To accelerate training of PyTorch models (WGAN-GP, GAN-MFS, CTABGAN+), make sure the CUDA-enabled version of <code>torch</code> is installed:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
 </code></pre></div>
 </div>

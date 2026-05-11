@@ -434,10 +434,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#who-this-library-is-for" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Для кого эта библиотека
+        Who This Library Is For
       
     </span>
   </a>
@@ -445,10 +445,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#key-advantages" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ключевые преимущества
+        Key Advantages
       
     </span>
   </a>
@@ -456,10 +456,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#quick-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Быстрый пример
+        Quick Example
       
     </span>
   </a>
@@ -467,10 +467,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#pipeline-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Архитектура пайплайна
+        Pipeline Architecture
       
     </span>
   </a>
@@ -478,10 +478,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#documentation-sections" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Разделы документации
+        Documentation Sections
       
     </span>
   </a>
@@ -1298,62 +1298,62 @@
 
 
 <h1 id="tab-forge">Tab-Forge<a class="headerlink" href="#tab-forge" title="Permanent link">&para;</a></h1>
-<p><strong>Модульная Python-библиотека для автоматизированной настройки генеративных моделей на табличных данных</strong></p>
+<p><strong>A modular Python library for automated tuning of generative models on tabular data</strong></p>
 <hr />
-<p>Tab-Forge решает реальную задачу: выбор и настройка генеративной модели для синтеза табличных данных — дело трудоёмкое. Нужно понять, какую из шести совершенно разных архитектур (GAN, VAE, Diffusion) попробовать первой, какие метрики качества важны для вашей задачи, и сколько времени тратить на тюнинг.</p>
-<p>Tab-Forge автоматизирует весь этот процесс: LLM анализирует мета-характеристики вашего датасета и предсказывает, какие модели стоит попробовать в первую очередь — а дальше Optuna-тюнинг делает остальное.</p>
+<p>Tab-Forge solves a real problem: selecting and configuring a generative model for tabular data synthesis is a labor-intensive task. You need to figure out which of six completely different architectures (GAN, VAE, Diffusion) to try first, which quality metrics matter for your task, and how much time to spend on tuning.</p>
+<p>Tab-Forge automates this entire process: an LLM analyzes the meta-characteristics of your dataset and predicts which models to try first — then Optuna tuning takes care of the rest.</p>
 <hr />
-<h2 id="_1">Для кого эта библиотека<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="who-this-library-is-for">Who This Library Is For<a class="headerlink" href="#who-this-library-is-for" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Data scientists</strong>, которым нужны синтетические данные для аугментации, балансировки классов или тестирования</li>
-<li><strong>ML-инженеры</strong>, работающие с приватными или ограниченными датасетами</li>
-<li><strong>Исследователи</strong>, изучающие генеративные модели для табличных данных</li>
-<li>Все, кто устал вручную подбирать гиперпараметры GAN</li>
+<li><strong>Data scientists</strong> who need synthetic data for augmentation, class balancing, or testing</li>
+<li><strong>ML engineers</strong> working with private or limited datasets</li>
+<li><strong>Researchers</strong> studying generative models for tabular data</li>
+<li>Anyone tired of manually tuning GAN hyperparameters</li>
 </ul>
 <hr />
-<h2 id="_2">Ключевые преимущества<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="key-advantages">Key Advantages<a class="headerlink" href="#key-advantages" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Возможность</th>
-<th>Детали</th>
+<th>Feature</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>6 архитектур из коробки</strong></td>
-<td>CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM — единый интерфейс</td>
+<td><strong>6 architectures out of the box</strong></td>
+<td>CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM — unified interface</td>
 </tr>
 <tr>
-<td><strong>LLM-ассистированный выбор</strong></td>
-<td>PromptGenerator + LLMRunner ранжируют модели по мета-фичам вашего датасета</td>
+<td><strong>LLM-assisted selection</strong></td>
+<td>PromptGenerator + LLMRunner rank models by meta-features of your dataset</td>
 </tr>
 <tr>
 <td><strong>Self-consistency</strong></td>
-<td>N независимых запросов к LLM, агрегация через голосование — устойчивый результат</td>
+<td>N independent LLM requests, rank aggregation via voting — robust result</td>
 </tr>
 <tr>
-<td><strong>Байесовский тюнинг</strong></td>
-<td>AutoTuningStudy через Optuna с k-fold CV; поддержка extended и manual режимов</td>
+<td><strong>Bayesian tuning</strong></td>
+<td>AutoTuningStudy via Optuna with k-fold CV; supports extended and manual modes</td>
 </tr>
 <tr>
-<td><strong>5 метрик качества</strong></td>
+<td><strong>5 quality metrics</strong></td>
 <td>R², RMSE, Jensen–Shannon, Frobenius Correlation, Frobenius MI</td>
 </tr>
 <tr>
-<td><strong>Модульность</strong></td>
-<td>Каждый компонент можно использовать отдельно</td>
+<td><strong>Modularity</strong></td>
+<td>Each component can be used independently</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_3">Быстрый пример<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.prompt_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptGenerator</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.llm_runner</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMRunner</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTuningStudy</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 1. Загружаем данные</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 1. Load data</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;abalone.csv&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;Rings&quot;</span><span class="p">,</span>
@@ -1363,7 +1363,7 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">categorical_features</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">],</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">)</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># 2. LLM выбирает лучшую модель для этого датасета</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># 2. LLM selects the best model for this dataset</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptGenerator</span><span class="p">()</span><span class="o">.</span><span class="n">build_prompt</span><span class="p">(</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">target_metric</span><span class="o">=</span><span class="s2">&quot;r2_metric&quot;</span><span class="p">,</span>
@@ -1372,27 +1372,27 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">result</span> <span class="o">=</span> <span class="n">LLMRunner</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.openai.com/v1&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                   <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-...&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">n_runs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Рейтинг:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ranking:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">)</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1"># → [&#39;GAN-MFS&#39;, &#39;CTGAN&#39;, &#39;WGAN-GP&#39;, &#39;CTABGAN+&#39;, &#39;TVAE&#39;, &#39;DDPM&#39;]</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="c1"># 3. Тюним лучшую модель</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="c1"># 3. Tune the best model</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="n">study</span> <span class="o">=</span> <span class="n">AutoTuningStudy</span><span class="p">(</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">model_class</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># строка из рейтинга LLM</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">model_class</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># string from LLM ranking</span>
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="n">search_space_mode</span><span class="o">=</span><span class="s2">&quot;extended&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">)</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Лучшие параметры:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="_4">Архитектура пайплайна<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Ваш датасет
+<h2 id="pipeline-architecture">Pipeline Architecture<a class="headerlink" href="#pipeline-architecture" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Your dataset
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>     │
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     ▼
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>PromptGenerator  ──── мета-фичи + опыт референсных датасетов
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>PromptGenerator  ──── meta-features + experience on reference datasets
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>     │
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>     ▼
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>LLMRunner  ──── self-consistency (N запросов → усреднение рангов)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>LLMRunner  ──── self-consistency (N requests → rank averaging)
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>     │
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>     ▼
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>AutoTuningStudy  ──── Optuna + k-fold CV
@@ -1402,32 +1402,32 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>     └──► Benchmark  (R² / RMSE / JS / FrobCorr / FrobMI)
 </code></pre></div>
 <hr />
-<h2 id="_5">Разделы документации<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="documentation-sections">Documentation Sections<a class="headerlink" href="#documentation-sections" title="Permanent link">&para;</a></h2>
 <div class="grid cards">
 <ul>
 <li>
-<p><strong><a href="getting-started/installation/">Установка</a></strong>
-  Как поставить библиотеку и зависимости</p>
+<p><strong><a href="getting-started/installation/">Installation</a></strong>
+  How to install the library and its dependencies</p>
 </li>
 <li>
-<p><strong><a href="getting-started/quickstart/">Быстрый старт</a></strong>
-  Полный пайплайн за 5 минут</p>
+<p><strong><a href="getting-started/quickstart/">Quick Start</a></strong>
+  Full pipeline in 5 minutes</p>
 </li>
 <li>
-<p><strong><a href="concepts/metrics/">Метрики качества</a></strong>
-  Что измеряет каждая метрика и когда её использовать</p>
+<p><strong><a href="concepts/metrics/">Quality Metrics</a></strong>
+  What each metric measures and when to use it</p>
 </li>
 <li>
-<p><strong><a href="concepts/architecture/">Архитектура</a></strong>
-  Как устроены модули и как они взаимодействуют</p>
+<p><strong><a href="concepts/architecture/">Architecture</a></strong>
+  How modules are organized and how they interact</p>
 </li>
 <li>
-<p><strong><a href="user-guide/dataset/">Руководство пользователя</a></strong>
-  Подробное описание каждого модуля</p>
+<p><strong><a href="user-guide/dataset/">User Guide</a></strong>
+  Detailed description of each module</p>
 </li>
 <li>
-<p><strong><a href="experiments/tuning-results/">Эксперименты</a></strong>
-  Результаты исследований и выводы</p>
+<p><strong><a href="experiments/tuning-results/">Experiments</a></strong>
+  Research results and conclusions</p>
 </li>
 </ul>
 </div>

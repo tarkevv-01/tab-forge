@@ -1100,10 +1100,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Импорт
+        Import
       
     </span>
   </a>
@@ -1375,7 +1375,7 @@
 
 
 <h1 id="api-reference-dataset">API Reference — Dataset<a class="headerlink" href="#api-reference-dataset" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Импорт<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="import">Import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">merge_datasets</span><span class="p">,</span> <span class="n">split_folds</span>
 </code></pre></div>
 <hr />
@@ -1388,63 +1388,63 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    categorical_features: Optional[List[str]] = None,
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>)
 </code></pre></div>
-<p>Унифицированный контейнер для табличных данных. Хранит DataFrame вместе с метаинформацией о признаках, целевой переменной и типе задачи. Является центральным объектом пайплайна — все модели принимают <code>Dataset</code> на вход и возвращают его из <code>structed_generate</code>.</p>
-<p><strong>Параметры:</strong></p>
+<p>A unified container for tabular data. Stores a DataFrame together with meta-information about features, the target variable, and task type. It is the central object of the pipeline — all models accept <code>Dataset</code> as input and return it from <code>structed_generate</code>.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Тип</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>data</code></td>
-<td><code>str</code> или <code>pd.DataFrame</code></td>
-<td>Путь к CSV-файлу или готовый DataFrame</td>
+<td><code>str</code> or <code>pd.DataFrame</code></td>
+<td>Path to a CSV file or a ready DataFrame</td>
 </tr>
 <tr>
 <td><code>target</code></td>
 <td><code>str</code></td>
-<td>Имя целевой переменной (колонка в данных)</td>
+<td>Name of the target variable (column in the data)</td>
 </tr>
 <tr>
 <td><code>task_type</code></td>
 <td><code>str</code></td>
-<td>Тип задачи: <code>"regression"</code> или <code>"classification"</code></td>
+<td>Task type: <code>"regression"</code> or <code>"classification"</code></td>
 </tr>
 <tr>
 <td><code>numerical_features</code></td>
-<td><code>list[str]</code>, опционально</td>
-<td>Список числовых признаков</td>
+<td><code>list[str]</code>, optional</td>
+<td>List of numerical features</td>
 </tr>
 <tr>
 <td><code>categorical_features</code></td>
-<td><code>list[str]</code>, опционально</td>
-<td>Список категориальных признаков</td>
+<td><code>list[str]</code>, optional</td>
+<td>List of categorical features</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Атрибуты:</strong></p>
+<p><strong>Attributes:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Атрибут</th>
-<th>Тип</th>
-<th>Описание</th>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>info</code></td>
 <td><code>DatasetInfo</code></td>
-<td>Мета-информация о датасете</td>
+<td>Dataset meta-information</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition example">
-<p class="admonition-title">Создание Dataset</p>
+<p class="admonition-title">Creating a Dataset</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">data</span><span class="o">=</span><span class="s2">&quot;abalone.csv&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">&quot;Rings&quot;</span><span class="p">,</span>
@@ -1463,15 +1463,15 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    stratify: bool = False,
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>) -&gt; Tuple[Dataset, Dataset]
 </code></pre></div>
-<p>Разбивает датасет на обучающую и тестовую выборки.</p>
-<p><strong>Параметры:</strong></p>
+<p>Splits the dataset into train and test sets.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Тип</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -1479,29 +1479,29 @@
 <td><code>test_size</code></td>
 <td><code>float</code></td>
 <td><code>0.2</code></td>
-<td>Доля тестовой выборки (0–1)</td>
+<td>Fraction of the test set (0–1)</td>
 </tr>
 <tr>
 <td><code>random_state</code></td>
 <td><code>int</code></td>
 <td><code>None</code></td>
-<td>Seed для воспроизводимости</td>
+<td>Seed for reproducibility</td>
 </tr>
 <tr>
 <td><code>shuffle</code></td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
-<td>Перемешивать ли данные перед разбиением</td>
+<td>Whether to shuffle data before splitting</td>
 </tr>
 <tr>
 <td><code>stratify</code></td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
-<td>Стратифицированное разбиение (только для classification)</td>
+<td>Stratified split (classification only)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Возвращает:</strong> кортеж <code>(train_dataset, test_dataset)</code> — два объекта <code>Dataset</code>.</p>
+<p><strong>Returns:</strong> tuple <code>(train_dataset, test_dataset)</code> — two <code>Dataset</code> objects.</p>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </code></pre></div>
@@ -1510,21 +1510,21 @@
 <h3 id="datasetget_data"><code>Dataset.get_data</code><a class="headerlink" href="#datasetget_data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>get_data() -&gt; pd.DataFrame
 </code></pre></div>
-<p>Возвращает полный DataFrame, включая целевую переменную.</p>
+<p>Returns the full DataFrame, including the target variable.</p>
 <hr />
 <h3 id="datasetget_x"><code>Dataset.get_X</code><a class="headerlink" href="#datasetget_x" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>get_X(registered_only: bool = False) -&gt; pd.DataFrame
 </code></pre></div>
-<p>Возвращает DataFrame только с признаками (без целевой переменной).</p>
-<p><strong>Параметры:</strong></p>
+<p>Returns a DataFrame with features only (without the target variable).</p>
+<p><strong>Parameters:</strong></p>
 <ul>
-<li><code>registered_only</code> — если <code>True</code>, возвращает только «зарегистрированные» признаки (переданные при создании или через <code>register_features</code>)</li>
+<li><code>registered_only</code> — if <code>True</code>, returns only "registered" features (passed at creation or via <code>register_features</code>)</li>
 </ul>
 <hr />
 <h3 id="datasetget_target"><code>Dataset.get_target</code><a class="headerlink" href="#datasetget_target" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>get_target() -&gt; pd.Series
 </code></pre></div>
-<p>Возвращает целевую переменную как <code>pd.Series</code>.</p>
+<p>Returns the target variable as a <code>pd.Series</code>.</p>
 <hr />
 <h3 id="datasetregister_features"><code>Dataset.register_features</code><a class="headerlink" href="#datasetregister_features" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>register_features(
@@ -1532,58 +1532,58 @@
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    categorical: Optional[List[str]] = None,
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>)
 </code></pre></div>
-<p>Добавляет дополнительные признаки к уже созданному датасету.</p>
+<p>Adds additional features to an already created dataset.</p>
 <hr />
 <h3 id="datasetsummary"><code>Dataset.summary</code><a class="headerlink" href="#datasetsummary" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>summary() -&gt; dict
 </code></pre></div>
-<p>Возвращает краткую сводку: форму данных, тип задачи, количество пропусков по колонкам.</p>
+<p>Returns a brief summary: data shape, task type, number of missing values per column.</p>
 <hr />
 <h2 id="datasetinfo"><code>DatasetInfo</code><a class="headerlink" href="#datasetinfo" title="Permanent link">&para;</a></h2>
-<p>Датакласс с мета-информацией о датасете. Доступен через <code>dataset.info</code>.</p>
+<p>Dataclass with dataset meta-information. Accessible via <code>dataset.info</code>.</p>
 <table>
 <thead>
 <tr>
-<th>Поле</th>
-<th>Тип</th>
-<th>Описание</th>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>n_samples</code></td>
 <td><code>int</code></td>
-<td>Количество строк</td>
+<td>Number of rows</td>
 </tr>
 <tr>
 <td><code>n_features</code></td>
 <td><code>int</code></td>
-<td>Количество признаков</td>
+<td>Number of features</td>
 </tr>
 <tr>
 <td><code>n_numerical</code></td>
 <td><code>int</code></td>
-<td>Число числовых признаков</td>
+<td>Number of numerical features</td>
 </tr>
 <tr>
 <td><code>n_categorical</code></td>
 <td><code>int</code></td>
-<td>Число категориальных признаков</td>
+<td>Number of categorical features</td>
 </tr>
 <tr>
 <td><code>n_registered</code></td>
 <td><code>int</code></td>
-<td>Зарегистрированных признаков</td>
+<td>Number of registered features</td>
 </tr>
 <tr>
 <td><code>task_type</code></td>
 <td><code>str</code></td>
-<td>Тип задачи</td>
+<td>Task type</td>
 </tr>
 <tr>
 <td><code>target_name</code></td>
 <td><code>str</code></td>
-<td>Имя целевой переменной</td>
+<td>Name of the target variable</td>
 </tr>
 </tbody>
 </table>
@@ -1594,13 +1594,13 @@
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    reset_index: bool = True,
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>) -&gt; Dataset
 </code></pre></div>
-<p>Объединяет список совместимых <code>Dataset</code>-объектов в один.</p>
-<p><strong>Параметры:</strong></p>
+<p>Merges a list of compatible <code>Dataset</code> objects into one.</p>
+<p><strong>Parameters:</strong></p>
 <ul>
-<li><code>datasets</code> — список объектов <code>Dataset</code></li>
-<li><code>reset_index</code> — сбрасывать ли индекс после объединения</li>
+<li><code>datasets</code> — list of <code>Dataset</code> objects</li>
+<li><code>reset_index</code> — whether to reset the index after merging</li>
 </ul>
-<p><strong>Исключения:</strong> поднимает <code>ValueError</code> если датасеты несовместимы (разные таргеты, типы задач или наборы признаков).</p>
+<p><strong>Exceptions:</strong> raises <code>ValueError</code> if datasets are incompatible (different targets, task types, or feature sets).</p>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">combined</span> <span class="o">=</span> <span class="n">merge_datasets</span><span class="p">([</span><span class="n">fold_1</span><span class="p">,</span> <span class="n">fold_2</span><span class="p">,</span> <span class="n">fold_3</span><span class="p">])</span>
 </code></pre></div>
@@ -1615,26 +1615,26 @@
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    stratified: bool = False,
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>) -&gt; List[Dataset]
 </code></pre></div>
-<p>Разбивает датасет на <code>n_splits</code> фолдов для кросс-валидации.</p>
-<p><strong>Параметры:</strong></p>
+<p>Splits the dataset into <code>n_splits</code> folds for cross-validation.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>n_splits</code></td>
 <td><code>5</code></td>
-<td>Количество фолдов</td>
+<td>Number of folds</td>
 </tr>
 <tr>
 <td><code>shuffle</code></td>
 <td><code>True</code></td>
-<td>Перемешивание перед разбиением</td>
+<td>Shuffle before splitting</td>
 </tr>
 <tr>
 <td><code>random_state</code></td>
@@ -1644,11 +1644,11 @@
 <tr>
 <td><code>stratified</code></td>
 <td><code>False</code></td>
-<td>Стратифицированное разбиение (для classification)</td>
+<td>Stratified split (for classification)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Возвращает:</strong> список из <code>n_splits</code> объектов <code>Dataset</code> примерно равного размера.</p>
+<p><strong>Returns:</strong> list of <code>n_splits</code> <code>Dataset</code> objects of approximately equal size.</p>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">folds</span> <span class="o">=</span> <span class="n">split_folds</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">val</span> <span class="o">=</span> <span class="n">folds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>

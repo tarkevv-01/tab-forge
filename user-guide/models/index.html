@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#models" class="md-skip">
+        <a href="#models-module" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -810,10 +810,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#why-you-need-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Зачем это нужно
+        Why You Need This
       
     </span>
   </a>
@@ -821,10 +821,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#unified-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Единый интерфейс
+        Unified Interface
       
     </span>
   </a>
@@ -832,15 +832,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#all-6-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Все 6 моделей
+        All 6 Models
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Все 6 моделей">
+    <nav class="md-nav" aria-label="All 6 Models">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -866,10 +866,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gan-mfs-gan-meta-feature-similarity" class="md-nav__link">
+  <a href="#gan-mfs-gan-with-meta-feature-similarity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GAN-MFS — GAN с Meta-Feature Similarity
+        GAN-MFS — GAN with Meta-Feature Similarity
       
     </span>
   </a>
@@ -877,10 +877,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ctabgan-ctabgan" class="md-nav__link">
+  <a href="#ctabgan-ctabgan-with-auxiliary-heads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CTABGAN+ — CTABGAN с вспомогательными головами
+        CTABGAN+ — CTABGAN with Auxiliary Heads
       
     </span>
   </a>
@@ -899,10 +899,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tabddpm" class="md-nav__link">
+  <a href="#tabddpm-diffusion-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TabDDPM — Диффузионная модель
+        TabDDPM — Diffusion Model
       
     </span>
   </a>
@@ -915,10 +915,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#model-comparison" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Сравнение моделей
+        Model Comparison
       
     </span>
   </a>
@@ -926,10 +926,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#default-hyperparameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Гиперпараметры по умолчанию
+        Default Hyperparameters
       
     </span>
   </a>
@@ -1374,19 +1374,19 @@
   
 
 
-<h1 id="models">Модуль Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Зачем это нужно<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Шесть поддерживаемых архитектур реализованы в очень разных библиотеках: SDV, Synthcity, PyTorch с кастомными реализациями. Каждая предоставляет свой API. Tab-Forge накрывает всех единым интерфейсом <code>BaseGenerativeModel</code> с тремя ключевыми методами: <code>fit</code>, <code>generate</code>, <code>structed_generate</code>.</p>
+<h1 id="models-module">Models Module<a class="headerlink" href="#models-module" title="Permanent link">&para;</a></h1>
+<h2 id="why-you-need-this">Why You Need This<a class="headerlink" href="#why-you-need-this" title="Permanent link">&para;</a></h2>
+<p>The six supported architectures are implemented in very different libraries: SDV, Synthcity, PyTorch with custom implementations. Each provides its own API. Tab-Forge wraps all of them with a unified <code>BaseGenerativeModel</code> interface with three key methods: <code>fit</code>, <code>generate</code>, <code>structed_generate</code>.</p>
 <hr />
-<h2 id="_2">Единый интерфейс<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Все модели работают одинаково</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>                          <span class="c1"># обучение</span>
+<h2 id="unified-interface">Unified Interface<a class="headerlink" href="#unified-interface" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># All models work the same way</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>                          <span class="c1"># train</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">synth_df</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>  <span class="c1"># → pd.DataFrame</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">synth_ds</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">structed_generate</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>   <span class="c1"># → Dataset (для Benchmark / AutoTuning)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">losses</span>    <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_losses</span><span class="p">()</span>             <span class="c1"># история функции потерь</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">synth_ds</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">structed_generate</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>   <span class="c1"># → Dataset (for Benchmark / AutoTuning)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">losses</span>    <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_losses</span><span class="p">()</span>             <span class="c1"># training loss history</span>
 </code></pre></div>
 <hr />
-<h2 id="6">Все 6 моделей<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h2 id="all-6-models">All 6 Models<a class="headerlink" href="#all-6-models" title="Permanent link">&para;</a></h2>
 <h3 id="ctgan-conditional-tabular-gan">CTGAN — Conditional Tabular GAN<a class="headerlink" href="#ctgan-conditional-tabular-gan" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTGANSynthesizer</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -1400,10 +1400,10 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">synth</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">structed_generate</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> CTGAN — надёжный универсальный выбор. Реализован через SDV и хорошо работает на смешанных данных (числовые + категориальные). Особенно эффективен когда в данных есть сложные условные распределения по категориальным признакам.</p>
+<p><strong>When to use:</strong> CTGAN is a reliable general-purpose choice. Implemented via SDV and works well on mixed data (numerical + categorical). Especially effective when data has complex conditional distributions by categorical features.</p>
 <div class="admonition tip">
-<p class="admonition-title">Оптимальные метрики для CTGAN</p>
-<p>По экспериментам CTGAN показал стабильные результаты по <strong>R²</strong> (5 улучшений) и <strong>RMSE</strong> (6 улучшений). Хороший общий выбор для задач регрессии.</p>
+<p class="admonition-title">Optimal metrics for CTGAN</p>
+<p>Experiments show CTGAN produced stable results for <strong>R²</strong> (5 improvements) and <strong>RMSE</strong> (6 improvements). A good general choice for regression tasks.</p>
 </div>
 <hr />
 <h3 id="wgan-gp-wasserstein-gan-gradient-penalty">WGAN-GP — Wasserstein GAN + Gradient Penalty<a class="headerlink" href="#wgan-gp-wasserstein-gan-gradient-penalty" title="Permanent link">&para;</a></h3>
@@ -1414,37 +1414,37 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">batch_size</span>      <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">generator_lr</span>    <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">discriminator_lr</span><span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">n_critic</span>        <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>       <span class="c1"># шагов дискриминатора на шаг генератора</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">lambda_gp</span>       <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>      <span class="c1"># коэффициент gradient penalty</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">n_critic</span>        <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>       <span class="c1"># discriminator steps per generator step</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">lambda_gp</span>       <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>      <span class="c1"># gradient penalty coefficient</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">)</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> WGAN-GP теоретически более стабилен в обучении, чем обычный GAN — gradient penalty предотвращает mode collapse. Собственная реализация на PyTorch внутри Tab-Forge.</p>
+<p><strong>When to use:</strong> WGAN-GP is theoretically more stable in training than standard GAN — gradient penalty prevents mode collapse. Custom PyTorch implementation inside Tab-Forge.</p>
 <div class="admonition tip">
-<p class="admonition-title">Оптимальные метрики для WGAN-GP</p>
-<p>Рекордные результаты по <strong>JS-дивергенции</strong> (12 улучшений из 25!) — это логично, ведь Wasserstein-расстояние напрямую связано с расхождением распределений. Также хорошие результаты по <strong>RMSE</strong> (6 улучшений).</p>
+<p class="admonition-title">Optimal metrics for WGAN-GP</p>
+<p>Record results for <strong>JS divergence</strong> (12 improvements out of 25!) — this makes sense, as Wasserstein distance is directly related to distribution divergence. Also good results for <strong>RMSE</strong> (6 improvements).</p>
 </div>
 <hr />
-<h3 id="gan-mfs-gan-meta-feature-similarity">GAN-MFS — GAN с Meta-Feature Similarity<a class="headerlink" href="#gan-mfs-gan-meta-feature-similarity" title="Permanent link">&para;</a></h3>
+<h3 id="gan-mfs-gan-with-meta-feature-similarity">GAN-MFS — GAN with Meta-Feature Similarity<a class="headerlink" href="#gan-mfs-gan-with-meta-feature-similarity" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">GANMFSSynthesizer</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">GANMFSSynthesizer</span><span class="p">(</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">epochs</span>       <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">batch_size</span>   <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">generator_lr</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">mfs_lambda</span>   <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>    <span class="c1"># вес MFS-регуляризатора в функции потерь</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">subset_mfs</span>   <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>     <span class="c1"># размер подвыборки для MFS</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">sample_frac</span>  <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>    <span class="c1"># доля данных для вычисления MFS</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">mfs_lambda</span>   <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>    <span class="c1"># MFS regularizer weight in loss function</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">subset_mfs</span>   <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>     <span class="c1"># subsample size for MFS</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">sample_frac</span>  <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>    <span class="c1"># fraction of data for MFS computation</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">)</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> GAN-MFS расширяет WGAN-GP дополнительным слагаемым в функции потерь — расстоянием Wasserstein на распределениях мета-фич (статистик данных). Это делает генерируемые данные статистически похожими на реальные.</p>
+<p><strong>When to use:</strong> GAN-MFS extends WGAN-GP with an additional term in the loss function — Wasserstein distance on meta-feature (data statistics) distributions. This makes generated data statistically similar to real data.</p>
 <div class="admonition tip">
-<p class="admonition-title">GAN-MFS — выбор номер один для R²</p>
-<p>В экспериментах GAN-MFS показал <strong>наилучшие результаты по R²</strong> среди всех моделей (8 улучшений из 25). Если ваша задача — обучить ML-модель на синтетике, начните с GAN-MFS.</p>
+<p class="admonition-title">GAN-MFS — the number one choice for R²</p>
+<p>In experiments, GAN-MFS showed <strong>the best R² results</strong> among all models (8 improvements out of 25). If your goal is to train an ML model on synthetic data, start with GAN-MFS.</p>
 </div>
 <hr />
-<h3 id="ctabgan-ctabgan">CTABGAN+ — CTABGAN с вспомогательными головами<a class="headerlink" href="#ctabgan-ctabgan" title="Permanent link">&para;</a></h3>
+<h3 id="ctabgan-ctabgan-with-auxiliary-heads">CTABGAN+ — CTABGAN with Auxiliary Heads<a class="headerlink" href="#ctabgan-ctabgan-with-auxiliary-heads" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTABGANPlusSynthesizer</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">CTABGANPlusSynthesizer</span><span class="p">(</span>
@@ -1458,14 +1458,14 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">)</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> CTABGAN+ добавляет к обычному CTGAN вспомогательные классификационные/регрессионные головы в дискриминаторе. Это принуждает генератор учитывать целевую переменную и сохранять её распределение.</p>
+<p><strong>When to use:</strong> CTABGAN+ adds auxiliary classification/regression heads in the discriminator to standard CTGAN. This forces the generator to account for the target variable and preserve its distribution.</p>
 <div class="admonition tip">
-<p class="admonition-title">Оптимальные метрики для CTABGAN+</p>
-<p>Показал выдающиеся результаты по <strong>RMSE</strong> (11 улучшений — лучший результат среди всех моделей!). Хороший выбор когда важна точность предсказания.</p>
+<p class="admonition-title">Optimal metrics for CTABGAN+</p>
+<p>Outstanding results for <strong>RMSE</strong> (11 improvements — the best result among all models!). A great choice when prediction accuracy matters.</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Тип задачи</p>
-<p>CTABGAN+ автоматически определяет тип вспомогательной задачи из <code>dataset.info.task_type</code>. Укажите правильный тип задачи при создании <code>Dataset</code>.</p>
+<p class="admonition-title">Task type</p>
+<p>CTABGAN+ automatically determines the auxiliary task type from <code>dataset.info.task_type</code>. Make sure to specify the correct task type when creating the <code>Dataset</code>.</p>
 </div>
 <hr />
 <h3 id="tvae-tabular-variational-autoencoder">TVAE — Tabular Variational Autoencoder<a class="headerlink" href="#tvae-tabular-variational-autoencoder" title="Permanent link">&para;</a></h3>
@@ -1481,13 +1481,13 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">)</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> TVAE — VAE-based архитектура от SDV. В отличие от GAN, VAE обучается стабильнее (нет соревнования генератора и дискриминатора) и хорошо работает на датасетах с пропущенными значениями.</p>
+<p><strong>When to use:</strong> TVAE is a VAE-based architecture from SDV. Unlike GAN, VAE trains more stably (no generator-discriminator competition) and works well on datasets with missing values.</p>
 <div class="admonition tip">
-<p class="admonition-title">Когда выбирать TVAE</p>
-<p>Если GAN-обучение нестабильно или данных мало — попробуйте TVAE. Модель хорошо справляется с задачами где важна <strong>RMSE</strong> (8 улучшений).</p>
+<p class="admonition-title">When to choose TVAE</p>
+<p>If GAN training is unstable or data is limited — try TVAE. The model handles tasks where <strong>RMSE</strong> is important well (8 improvements).</p>
 </div>
 <hr />
-<h3 id="tabddpm">TabDDPM — Диффузионная модель<a class="headerlink" href="#tabddpm" title="Permanent link">&para;</a></h3>
+<h3 id="tabddpm-diffusion-model">TabDDPM — Diffusion Model<a class="headerlink" href="#tabddpm-diffusion-model" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDPMSynthesizer</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">DDPMSynthesizer</span><span class="p">(</span>
@@ -1500,25 +1500,25 @@
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">)</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Когда использовать:</strong> TabDDPM — современная диффузионная архитектура (Synthcity). Хорошо улавливает сложные многомодальные распределения и нелинейные зависимости. Обычно требует больше времени на обучение.</p>
+<p><strong>When to use:</strong> TabDDPM is a modern diffusion architecture (Synthcity). It captures complex multimodal distributions and nonlinear dependencies well. Usually requires more training time.</p>
 <div class="admonition tip">
-<p class="admonition-title">Оптимальные метрики для TabDDPM</p>
-<p>Хорошие результаты по <strong>R²</strong> (7 улучшений) и <strong>MI</strong> (6 улучшений). Рекомендуется для датасетов с нелинейными зависимостями.</p>
+<p class="admonition-title">Optimal metrics for TabDDPM</p>
+<p>Good results for <strong>R²</strong> (7 improvements) and <strong>MI</strong> (6 improvements). Recommended for datasets with nonlinear dependencies.</p>
 </div>
 <div class="admonition warning">
-<p class="admonition-title">Время обучения</p>
-<p>Диффузионные модели обучаются медленнее GAN. При ограниченных ресурсах уменьшите <code>num_timesteps</code> или <code>epochs</code>.</p>
+<p class="admonition-title">Training time</p>
+<p>Diffusion models train slower than GAN. With limited resources, reduce <code>num_timesteps</code> or <code>epochs</code>.</p>
 </div>
 <hr />
-<h2 id="_3">Сравнение моделей<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="model-comparison">Model Comparison<a class="headerlink" href="#model-comparison" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Модель</th>
-<th>Архитектура</th>
-<th>Лучшая метрика</th>
-<th>Скорость</th>
-<th>Стабильность</th>
+<th>Model</th>
+<th>Architecture</th>
+<th>Best metric</th>
+<th>Speed</th>
+<th>Stability</th>
 </tr>
 </thead>
 <tbody>
@@ -1526,53 +1526,53 @@
 <td>CTGAN</td>
 <td>Conditional GAN (SDV)</td>
 <td>R², RMSE</td>
-<td>Быстрая</td>
-<td>Средняя</td>
+<td>Fast</td>
+<td>Medium</td>
 </tr>
 <tr>
 <td>WGAN-GP</td>
 <td>Wasserstein GAN</td>
 <td>JS divergence</td>
-<td>Средняя</td>
-<td>Высокая</td>
+<td>Medium</td>
+<td>High</td>
 </tr>
 <tr>
 <td>GAN-MFS</td>
 <td>WGAN-GP + MFS loss</td>
 <td><strong>R²</strong> ⭐</td>
-<td>Средняя</td>
-<td>Высокая</td>
+<td>Medium</td>
+<td>High</td>
 </tr>
 <tr>
 <td>CTABGAN+</td>
 <td>CTGAN + aux heads</td>
 <td><strong>RMSE</strong> ⭐</td>
-<td>Низкая</td>
-<td>Низкая</td>
+<td>Slow</td>
+<td>Low</td>
 </tr>
 <tr>
 <td>TVAE</td>
 <td>Variational AE (SDV)</td>
 <td>RMSE</td>
-<td>Быстрая</td>
-<td>Очень высокая</td>
+<td>Fast</td>
+<td>Very high</td>
 </tr>
 <tr>
 <td>TabDDPM</td>
 <td>Diffusion (Synthcity)</td>
 <td>R², MI</td>
-<td>Медленная</td>
-<td>Высокая</td>
+<td>Slow</td>
+<td>High</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_4">Гиперпараметры по умолчанию<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="default-hyperparameters">Default Hyperparameters<a class="headerlink" href="#default-hyperparameters" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Откуда берутся дефолты?</p>
-<p>Дефолтные значения гиперпараметров взяты из оригинальных статей и репозиториев каждой архитектуры. При использовании <code>AutoTuningStudy</code> с режимом <code>"extended"</code> они служат отправной точкой для поиска.</p>
+<p class="admonition-title">Where do defaults come from?</p>
+<p>Default hyperparameter values are taken from the original papers and repositories of each architecture. When using <code>AutoTuningStudy</code> with <code>"extended"</code> mode, they serve as the starting point for the search.</p>
 </div>
-<p>Подробные диапазоны всех гиперпараметров для тюнинга описаны в разделе <a href="../tuning/">Tuning</a> и в <a href="../../api/models/">API Reference</a>.</p>
+<p>Detailed hyperparameter ranges for tuning are described in the <a href="../tuning/">Tuning</a> section and in the <a href="../../api/models/">API Reference</a>.</p>
 
 
 

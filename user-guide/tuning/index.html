@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tuning" class="md-skip">
+        <a href="#tuning-module" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -838,10 +838,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#why-you-need-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Зачем это нужно
+        Why You Need This
       
     </span>
   </a>
@@ -849,22 +849,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autotuningstudy" class="md-nav__link">
+  <a href="#autotuningstudy-recommended-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        AutoTuningStudy — рекомендуемый путь
+        AutoTuningStudy — Recommended Path
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="AutoTuningStudy — рекомендуемый путь">
+    <nav class="md-nav" aria-label="AutoTuningStudy — Recommended Path">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#extended" class="md-nav__link">
+  <a href="#mode-extended-automatic-search-space" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Режим "extended" — автоматическое пространство поиска
+        Mode "extended" — automatic search space
       
     </span>
   </a>
@@ -872,10 +872,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#manual" class="md-nav__link">
+  <a href="#mode-manual-custom-search-space" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Режим "manual" — ручное пространство поиска
+        Mode "manual" — custom search space
       
     </span>
   </a>
@@ -888,10 +888,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#how-tuning-works-internally" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Как работает тюнинг внутри
+        How Tuning Works Internally
       
     </span>
   </a>
@@ -899,10 +899,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autotuningstudy_1" class="md-nav__link">
+  <a href="#autotuningstudy-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Параметры AutoTuningStudy
+        AutoTuningStudy Parameters
       
     </span>
   </a>
@@ -910,15 +910,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extended_1" class="md-nav__link">
+  <a href="#search-spaces-in-extended-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Пространства поиска в режиме "extended"
+        Search Spaces in "extended" Mode
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Пространства поиска в режиме &#34;extended&#34;">
+    <nav class="md-nav" aria-label="Search Spaces in &#34;extended&#34; Mode">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -993,10 +993,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tuningstudy" class="md-nav__link">
+  <a href="#tuningstudy-low-level-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TuningStudy — низкоуровневый интерфейс
+        TuningStudy — Low-Level Interface
       
     </span>
   </a>
@@ -1004,10 +1004,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#visualizing-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Визуализация результатов
+        Visualizing Results
       
     </span>
   </a>
@@ -1424,18 +1424,18 @@
   
 
 
-<h1 id="tuning">Модуль Tuning<a class="headerlink" href="#tuning" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Зачем это нужно<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Генеративные модели чувствительны к гиперпараметрам: слишком маленький learning rate — модель не сходится, слишком большой — нестабильное обучение. Перебирать вручную неэффективно. Tab-Forge предоставляет два инструмента:</p>
+<h1 id="tuning-module">Tuning Module<a class="headerlink" href="#tuning-module" title="Permanent link">&para;</a></h1>
+<h2 id="why-you-need-this">Why You Need This<a class="headerlink" href="#why-you-need-this" title="Permanent link">&para;</a></h2>
+<p>Generative models are sensitive to hyperparameters: too small a learning rate — the model does not converge; too large — unstable training. Manual search is inefficient. Tab-Forge provides two tools:</p>
 <ul>
-<li><code>AutoTuningStudy</code> — полноценный пайплайн с k-fold CV и предустановленными пространствами поиска</li>
-<li><code>TuningStudy</code> — тонкая обёртка над Optuna для гибкого ручного тюнинга</li>
+<li><code>AutoTuningStudy</code> — full pipeline with k-fold CV and preset search spaces</li>
+<li><code>TuningStudy</code> — thin wrapper around Optuna for flexible manual tuning</li>
 </ul>
 <hr />
-<h2 id="autotuningstudy">AutoTuningStudy — рекомендуемый путь<a class="headerlink" href="#autotuningstudy" title="Permanent link">&para;</a></h2>
-<p><code>AutoTuningStudy</code> — главный инструмент тюнинга в Tab-Forge. Он берёт на себя всё: разбиение данных на фолды, обучение модели, оценку качества, агрегацию метрик и передачу Optuna.</p>
-<h3 id="extended">Режим "extended" — автоматическое пространство поиска<a class="headerlink" href="#extended" title="Permanent link">&para;</a></h3>
-<p>Самый простой способ: указать класс модели и дать библиотеке самой определить диапазоны гиперпараметров:</p>
+<h2 id="autotuningstudy-recommended-path">AutoTuningStudy — Recommended Path<a class="headerlink" href="#autotuningstudy-recommended-path" title="Permanent link">&para;</a></h2>
+<p><code>AutoTuningStudy</code> is the main tuning tool in Tab-Forge. It handles everything: splitting data into folds, training the model, evaluating quality, aggregating metrics, and passing to Optuna.</p>
+<h3 id="mode-extended-automatic-search-space">Mode "extended" — automatic search space<a class="headerlink" href="#mode-extended-automatic-search-space" title="Permanent link">&para;</a></h3>
+<p>The simplest way: specify the model class and let the library define the hyperparameter ranges automatically:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTGANSynthesizer</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTuningStudy</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -1447,21 +1447,21 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Лучшие параметры:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Лучшее значение:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_value</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best value:&quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_value</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Имя модели из рейтинга LLM</p>
-<p>Если у вас есть рейтинг от LLMRunner, можно передать строку с именем модели напрямую:</p>
+<p class="admonition-title">Model name from LLM ranking</p>
+<p>If you have a ranking from LLMRunner, you can pass the model name string directly:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">study</span> <span class="o">=</span> <span class="n">AutoTuningStudy</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">model_class</span>       <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># &quot;GAN-MFS&quot;, &quot;CTGAN&quot; и т.д.</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">model_class</span>       <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">final_ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># &quot;GAN-MFS&quot;, &quot;CTGAN&quot;, etc.</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">search_space_mode</span> <span class="o">=</span> <span class="s2">&quot;extended&quot;</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">cv</span>                <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
 </code></pre></div>
 </div>
-<h3 id="manual">Режим "manual" — ручное пространство поиска<a class="headerlink" href="#manual" title="Permanent link">&para;</a></h3>
-<p>Если вы хотите контролировать диапазоны сами, определите функцию <code>get_params</code>:</p>
+<h3 id="mode-manual-custom-search-space">Mode "manual" — custom search space<a class="headerlink" href="#mode-manual-custom-search-space" title="Permanent link">&para;</a></h3>
+<p>If you want to control the ranges yourself, define a <code>get_params</code> function:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">GANMFSSynthesizer</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTuningStudy</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -1484,15 +1484,15 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="_2">Как работает тюнинг внутри<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>На каждом <code>trial</code> Optuna предлагает набор гиперпараметров. <code>AutoTuningStudy</code> запускает следующий цикл:</p>
+<h2 id="how-tuning-works-internally">How Tuning Works Internally<a class="headerlink" href="#how-tuning-works-internally" title="Permanent link">&para;</a></h2>
+<p>At each <code>trial</code>, Optuna proposes a set of hyperparameters. <code>AutoTuningStudy</code> runs the following cycle:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>dataset
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  │
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  ├── split_folds(cv=3) → [fold_0, fold_1, fold_2]
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  │
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  └── for каждого fold:
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>       train_folds = merge(остальные фолды)
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>       val_fold    = текущий фолд
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  └── for each fold:
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>       train_folds = merge(remaining folds)
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>       val_fold    = current fold
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>       model = ModelClass(**trial_params)
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>       model.fit(train_folds)
@@ -1500,99 +1500,99 @@
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>       synth = model.structed_generate(len(val_fold))
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>       score = benchmark.evaluate(synth, val_fold)
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  → среднее score по фолдам → цель для Optuna
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  → average score across folds → objective for Optuna
 </code></pre></div>
-<p>Optuna минимизирует или максимизирует эту цель в зависимости от параметра <code>direction</code>.</p>
+<p>Optuna minimizes or maximizes this objective depending on the <code>direction</code> parameter.</p>
 <hr />
-<h2 id="autotuningstudy_1">Параметры AutoTuningStudy<a class="headerlink" href="#autotuningstudy_1" title="Permanent link">&para;</a></h2>
+<h2 id="autotuningstudy-parameters">AutoTuningStudy Parameters<a class="headerlink" href="#autotuningstudy-parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Тип</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>model_class</code></td>
-<td>класс или строка</td>
+<td>class or string</td>
 <td>—</td>
-<td>Класс модели или её имя (из рейтинга LLM)</td>
+<td>Model class or its name (from LLM ranking)</td>
 </tr>
 <tr>
 <td><code>get_params</code></td>
 <td>callable</td>
 <td><code>None</code></td>
-<td>Функция <code>(trial) -&gt; dict</code> для режима <code>"manual"</code></td>
+<td>Function <code>(trial) -&gt; dict</code> for <code>"manual"</code> mode</td>
 </tr>
 <tr>
 <td><code>cv</code></td>
 <td>int</td>
 <td><code>3</code></td>
-<td>Количество fold-ов</td>
+<td>Number of folds</td>
 </tr>
 <tr>
 <td><code>sampler</code></td>
 <td>Optuna sampler</td>
 <td><code>TPESampler</code></td>
-<td>Алгоритм поиска</td>
+<td>Search algorithm</td>
 </tr>
 <tr>
 <td><code>search_space_mode</code></td>
 <td><code>"manual"</code> / <code>"extended"</code></td>
 <td><code>"manual"</code></td>
-<td>Откуда брать пространство поиска</td>
+<td>Source of search space</td>
 </tr>
 <tr>
 <td><code>benchmark</code></td>
 <td><code>Benchmark</code></td>
-<td>автоматически</td>
-<td>Инстанс Benchmark для оценки</td>
+<td>automatic</td>
+<td>Benchmark instance for evaluation</td>
 </tr>
 <tr>
 <td><code>direction</code></td>
 <td><code>"maximize"</code> / <code>"minimize"</code></td>
-<td>зависит от модели</td>
-<td>Направление оптимизации</td>
+<td>depends on model</td>
+<td>Optimization direction</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
-<p class="admonition-title">direction по умолчанию</p>
-<p>В режиме <code>"extended"</code> направление оптимизации задаётся конфигом модели. Для R² это <code>"maximize"</code>, для RMSE — <code>"minimize"</code>. В режиме <code>"manual"</code> убедитесь, что <code>direction</code> соответствует вашей метрике.</p>
+<p class="admonition-title">Default direction</p>
+<p>In <code>"extended"</code> mode, the optimization direction is set by the model config. For R² it is <code>"maximize"</code>, for RMSE — <code>"minimize"</code>. In <code>"manual"</code> mode, make sure <code>direction</code> matches your metric.</p>
 </div>
 <hr />
-<h2 id="extended_1">Пространства поиска в режиме "extended"<a class="headerlink" href="#extended_1" title="Permanent link">&para;</a></h2>
+<h2 id="search-spaces-in-extended-mode">Search Spaces in "extended" Mode<a class="headerlink" href="#search-spaces-in-extended-mode" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">batch_size</p>
-<p>Во всех моделях <code>batch_size</code> подбирается динамически исходя из размера датасета: <code>[max(384, n//20), max(1024, n//10)]</code>, результат округляется до 10.</p>
+<p>In all models, <code>batch_size</code> is chosen dynamically based on dataset size: <code>[max(384, n//20), max(1024, n//10)]</code>, result rounded to 10.</p>
 </div>
 <h3 id="ctgan">CTGAN<a class="headerlink" href="#ctgan" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
-<td>100–1000 (шаг 100)</td>
+<td>100–1000 (step 100)</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически (см. выше)</td>
+<td>dynamic (see above)</td>
 </tr>
 <tr>
 <td><code>generator_dim</code></td>
-<td>1–4 слоя × 50–150 нейронов</td>
+<td>1–4 layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>discriminator_dim</code></td>
-<td>1–4 слоя × 50–150 нейронов</td>
+<td>1–4 layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>generator_lr</code></td>
@@ -1620,26 +1620,26 @@
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
-<td>100–1000 (шаг 100)</td>
+<td>100–1000 (step 100)</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически (см. выше)</td>
+<td>dynamic (see above)</td>
 </tr>
 <tr>
 <td><code>generator_dim</code></td>
-<td>[1,2,3,4] слоя × 50–150 нейронов</td>
+<td>[1,2,3,4] layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>discriminator_dim</code></td>
-<td>[1,2,3,4] слоя × 50–150 нейронов</td>
+<td>[1,2,3,4] layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>generator_lr</code></td>
@@ -1667,26 +1667,26 @@
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
-<td>100–1000 (шаг 100)</td>
+<td>100–1000 (step 100)</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически (см. выше)</td>
+<td>dynamic (see above)</td>
 </tr>
 <tr>
 <td><code>generator_dim</code></td>
-<td>[1,2,3,4] слоя × 50–150 нейронов</td>
+<td>[1,2,3,4] layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>discriminator_dim</code></td>
-<td>[1,2,3,4] слоя × 50–150 нейронов</td>
+<td>[1,2,3,4] layers × 50–150 neurons</td>
 </tr>
 <tr>
 <td><code>generator_lr</code></td>
@@ -1722,22 +1722,22 @@
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
-<td>100–1000 (шаг 100)</td>
+<td>100–1000 (step 100)</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически (см. выше)</td>
+<td>dynamic (see above)</td>
 </tr>
 <tr>
 <td><code>class_dim</code></td>
-<td>1–4 слоя × [64, 128, 256] нейронов</td>
+<td>1–4 layers × [64, 128, 256] neurons</td>
 </tr>
 <tr>
 <td><code>lr</code></td>
@@ -1761,26 +1761,26 @@
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>epochs</code></td>
-<td>100–1000 (шаг 100)</td>
+<td>100–1000 (step 100)</td>
 </tr>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически (см. выше)</td>
+<td>dynamic (see above)</td>
 </tr>
 <tr>
 <td><code>compress_dims</code></td>
-<td>[2,3,4] слоя × [256, 512] нейронов</td>
+<td>[2,3,4] layers × [256, 512] neurons</td>
 </tr>
 <tr>
 <td><code>decompress_dims</code></td>
-<td>[2,4] слоя × [256, 512] нейронов</td>
+<td>[2,4] layers × [256, 512] neurons</td>
 </tr>
 <tr>
 <td><code>embedding_dim</code></td>
@@ -1800,14 +1800,14 @@
 <table>
 <thead>
 <tr>
-<th>Гиперпараметр</th>
-<th>Диапазон</th>
+<th>Hyperparameter</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>batch_size</code></td>
-<td>динамически: 64 – min(4096, n//4) (шаг 64)</td>
+<td>dynamic: 64 – min(4096, n//4) (step 64)</td>
 </tr>
 <tr>
 <td><code>lr</code></td>
@@ -1831,13 +1831,13 @@
 </tr>
 <tr>
 <td><code>dropout</code></td>
-<td>0.0–0.2 (шаг 0.05)</td>
+<td>0.0–0.2 (step 0.05)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="tuningstudy">TuningStudy — низкоуровневый интерфейс<a class="headerlink" href="#tuningstudy" title="Permanent link">&para;</a></h2>
-<p>Если нужен полный контроль над Optuna:</p>
+<h2 id="tuningstudy-low-level-interface">TuningStudy — Low-Level Interface<a class="headerlink" href="#tuningstudy-low-level-interface" title="Permanent link">&para;</a></h2>
+<p>If you need full control over Optuna:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">TuningStudy</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTGANSynthesizer</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
@@ -1867,17 +1867,17 @@
 <a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="_3">Визуализация результатов<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><code>TuningStudy</code> и <code>AutoTuningStudy</code> возвращают <code>study</code> объект Optuna с полными данными трайлов. Можно использовать встроенную визуализацию Optuna:</p>
+<h2 id="visualizing-results">Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permanent link">&para;</a></h2>
+<p><code>TuningStudy</code> and <code>AutoTuningStudy</code> return an Optuna <code>study</code> object with complete trial data. You can use Optuna's built-in visualization:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">optuna.visualization</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">vis</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># История оптимизации</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Optimization history</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">fig</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">plot_optimization_history</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="o">.</span><span class="n">study</span><span class="p">)</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Важность гиперпараметров</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Hyperparameter importance</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">fig2</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">plot_param_importances</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="o">.</span><span class="n">study</span><span class="p">)</span>
 </code></pre></div>
-<p>Подробные примеры — в <code>examples/test_tuning.ipynb</code>.</p>
+<p>Detailed examples are in <code>examples/test_tuning.ipynb</code>.</p>
 
 
 

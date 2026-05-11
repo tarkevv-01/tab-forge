@@ -1156,10 +1156,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Импорт
+        Import
       
     </span>
   </a>
@@ -1190,10 +1190,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#autotuningstudy_1" class="md-nav__link">
+  <a href="#autotuningstudy-properties" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Свойства AutoTuningStudy
+        AutoTuningStudy Properties
       
     </span>
   </a>
@@ -1229,10 +1229,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tuningstudy_1" class="md-nav__link">
+  <a href="#tuningstudy-properties" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Свойства TuningStudy
+        TuningStudy Properties
       
     </span>
   </a>
@@ -1348,7 +1348,7 @@
 
 
 <h1 id="api-reference-tuning">API Reference — Tuning<a class="headerlink" href="#api-reference-tuning" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Импорт<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="import">Import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTuningStudy</span><span class="p">,</span> <span class="n">TuningStudy</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">TPESampler</span><span class="p">,</span> <span class="n">RandomSampler</span>  <span class="c1"># Optuna samplers</span>
 </code></pre></div>
@@ -1365,71 +1365,71 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    **study_kwargs,
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>)
 </code></pre></div>
-<p>Полноценный пайплайн байесовской оптимизации гиперпараметров с k-fold кросс-валидацией. Интегрирует <code>Dataset</code>, модели, <code>Benchmark</code> и Optuna в единый workflow.</p>
-<p><strong>Параметры:</strong></p>
+<p>Full Bayesian hyperparameter optimization pipeline with k-fold cross-validation. Integrates <code>Dataset</code>, models, <code>Benchmark</code>, and Optuna into a unified workflow.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Тип</th>
-<th>По умолчанию</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>model_class</code></td>
-<td>класс или <code>str</code></td>
+<td>class or <code>str</code></td>
 <td>—</td>
-<td>Класс синтезатора или строка-имя (<code>"CTGAN"</code>, <code>"GAN-MFS"</code>, и т.д.)</td>
+<td>Synthesizer class or name string (<code>"CTGAN"</code>, <code>"GAN-MFS"</code>, etc.)</td>
 </tr>
 <tr>
 <td><code>get_params</code></td>
 <td><code>Callable(trial) -&gt; dict</code></td>
 <td><code>None</code></td>
-<td>Функция пространства поиска для режима <code>"manual"</code></td>
+<td>Search space function for <code>"manual"</code> mode</td>
 </tr>
 <tr>
 <td><code>cv</code></td>
 <td><code>int</code></td>
 <td><code>3</code></td>
-<td>Количество фолдов</td>
+<td>Number of folds</td>
 </tr>
 <tr>
 <td><code>sampler</code></td>
 <td>Optuna sampler</td>
 <td><code>TPESampler</code></td>
-<td>Алгоритм поиска гиперпараметров</td>
+<td>Hyperparameter search algorithm</td>
 </tr>
 <tr>
 <td><code>search_space_mode</code></td>
 <td><code>str</code></td>
 <td><code>"manual"</code></td>
-<td><code>"manual"</code> или <code>"extended"</code></td>
+<td><code>"manual"</code> or <code>"extended"</code></td>
 </tr>
 <tr>
 <td><code>benchmark</code></td>
 <td><code>Benchmark</code></td>
-<td>авто</td>
-<td>Объект Benchmark для оценки качества</td>
+<td>auto</td>
+<td>Benchmark object for quality evaluation</td>
 </tr>
 <tr>
 <td><code>direction</code></td>
 <td><code>str</code></td>
-<td>из конфига</td>
-<td><code>"maximize"</code> или <code>"minimize"</code></td>
+<td>from config</td>
+<td><code>"maximize"</code> or <code>"minimize"</code></td>
 </tr>
 <tr>
 <td><code>**study_kwargs</code></td>
 <td>—</td>
 <td>—</td>
-<td>Дополнительные аргументы для <code>optuna.create_study</code></td>
+<td>Additional arguments for <code>optuna.create_study</code></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Строки-имена моделей</p>
-<p>Допустимые строки для <code>model_class</code>:
+<p class="admonition-title">Model name strings</p>
+<p>Valid strings for <code>model_class</code>:
 <code>"CTGAN"</code>, <code>"WGAN-GP"</code>, <code>"GAN-MFS"</code>, <code>"CTABGAN+"</code>, <code>"TVAE"</code>, <code>"DDPM"</code></p>
 </div>
 <hr />
@@ -1441,31 +1441,31 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    **kwargs,
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>) -&gt; optuna.Study
 </code></pre></div>
-<p>Запускает байесовскую оптимизацию.</p>
-<p><strong>Параметры:</strong></p>
+<p>Launches Bayesian optimization.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Параметр</th>
-<th>Описание</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>dataset</code></td>
-<td>Датасет для тюнинга</td>
+<td>Dataset for tuning</td>
 </tr>
 <tr>
 <td><code>n_trials</code></td>
-<td>Количество триалов Optuna</td>
+<td>Number of Optuna trials</td>
 </tr>
 <tr>
 <td><code>verbose</code></td>
-<td>Включить вывод Optuna</td>
+<td>Enable Optuna output</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Возвращает:</strong> объект <code>optuna.Study</code> с полной историей триалов.</p>
+<p><strong>Returns:</strong> <code>optuna.Study</code> object with complete trial history.</p>
 <div class="admonition example">
 <p class="admonition-title">Extended mode</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CTGANSynthesizer</span>
@@ -1503,30 +1503,30 @@
 </code></pre></div>
 </div>
 <hr />
-<h3 id="autotuningstudy_1">Свойства <code>AutoTuningStudy</code><a class="headerlink" href="#autotuningstudy_1" title="Permanent link">&para;</a></h3>
+<h3 id="autotuningstudy-properties"><code>AutoTuningStudy</code> Properties<a class="headerlink" href="#autotuningstudy-properties" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Свойство</th>
-<th>Тип</th>
-<th>Описание</th>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>best_params</code></td>
 <td><code>dict</code></td>
-<td>Лучшие найденные гиперпараметры</td>
+<td>Best found hyperparameters</td>
 </tr>
 <tr>
 <td><code>best_value</code></td>
 <td><code>float</code></td>
-<td>Лучшее значение целевой метрики</td>
+<td>Best value of the target metric</td>
 </tr>
 <tr>
 <td><code>best_trial</code></td>
 <td><code>optuna.Trial</code></td>
-<td>Объект лучшего триала Optuna</td>
+<td>Best Optuna trial object</td>
 </tr>
 </tbody>
 </table>
@@ -1537,11 +1537,11 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    **study_kwargs,
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>)
 </code></pre></div>
-<p>Тонкая обёртка над <code>optuna.Study</code>. Используйте когда нужен полный контроль над objective-функцией.</p>
-<p><strong>Параметры:</strong></p>
+<p>Thin wrapper around <code>optuna.Study</code>. Use when full control over the objective function is needed.</p>
+<p><strong>Parameters:</strong></p>
 <ul>
-<li><code>direction</code> — <code>"maximize"</code> или <code>"minimize"</code></li>
-<li><code>**study_kwargs</code> — аргументы для <code>optuna.create_study</code> (например, <code>sampler=TPESampler(seed=42)</code>)</li>
+<li><code>direction</code> — <code>"maximize"</code> or <code>"minimize"</code></li>
+<li><code>**study_kwargs</code> — arguments for <code>optuna.create_study</code> (e.g., <code>sampler=TPESampler(seed=42)</code>)</li>
 </ul>
 <hr />
 <h3 id="tuningstudyoptimize"><code>TuningStudy.optimize</code><a class="headerlink" href="#tuningstudyoptimize" title="Permanent link">&para;</a></h3>
@@ -1552,7 +1552,7 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    **kwargs,
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>)
 </code></pre></div>
-<p>Запускает оптимизацию с произвольной objective-функцией.</p>
+<p>Runs optimization with an arbitrary objective function.</p>
 <div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">TuningStudy</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
@@ -1560,7 +1560,7 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">)}</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="c1"># ... обучение и оценка ...</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="c1"># ... training and evaluation ...</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">return</span> <span class="n">score</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -1568,53 +1568,53 @@
 </code></pre></div>
 </div>
 <hr />
-<h3 id="tuningstudy_1">Свойства <code>TuningStudy</code><a class="headerlink" href="#tuningstudy_1" title="Permanent link">&para;</a></h3>
+<h3 id="tuningstudy-properties"><code>TuningStudy</code> Properties<a class="headerlink" href="#tuningstudy-properties" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Свойство</th>
-<th>Тип</th>
-<th>Описание</th>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>best_params</code></td>
 <td><code>dict</code></td>
-<td>Лучшие найденные параметры</td>
+<td>Best found parameters</td>
 </tr>
 <tr>
 <td><code>best_value</code></td>
 <td><code>float</code></td>
-<td>Лучшее значение objective</td>
+<td>Best objective value</td>
 </tr>
 <tr>
 <td><code>best_trial</code></td>
 <td><code>optuna.Trial</code></td>
-<td>Объект лучшего триала</td>
+<td>Best trial object</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="samplers">Samplers<a class="headerlink" href="#samplers" title="Permanent link">&para;</a></h2>
-<p>Tab-Forge реэкспортирует оптимальные samplers из Optuna:</p>
+<p>Tab-Forge re-exports optimal samplers from Optuna:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tab_forge.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">TPESampler</span><span class="p">,</span> <span class="n">RandomSampler</span>
 </code></pre></div>
 <table>
 <thead>
 <tr>
 <th>Sampler</th>
-<th>Когда использовать</th>
+<th>When to use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>TPESampler</code></td>
-<td>По умолчанию. Байесовская оптимизация через Tree-structured Parzen Estimator. Эффективен при 20+ триалах.</td>
+<td>Default. Bayesian optimization via Tree-structured Parzen Estimator. Effective with 20+ trials.</td>
 </tr>
 <tr>
 <td><code>RandomSampler</code></td>
-<td>Случайный поиск. Подходит для небольшого числа триалов или как baseline.</td>
+<td>Random search. Suitable for a small number of trials or as a baseline.</td>
 </tr>
 </tbody>
 </table>
@@ -1623,7 +1623,7 @@
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">study</span> <span class="o">=</span> <span class="n">AutoTuningStudy</span><span class="p">(</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">model_class</span> <span class="o">=</span> <span class="s2">&quot;CTGAN&quot;</span><span class="p">,</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">search_space_mode</span> <span class="o">=</span> <span class="s2">&quot;extended&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">sampler</span> <span class="o">=</span> <span class="n">TPESampler</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>  <span class="c1"># фиксируем seed для воспроизводимости</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">sampler</span> <span class="o">=</span> <span class="n">TPESampler</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>  <span class="c1"># fix seed for reproducibility</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">)</span>
 </code></pre></div>
 
