@@ -1,6 +1,6 @@
 # API Reference — Models
 
-## Импорт
+## Import
 
 ```python
 from tab_forge.models import (
@@ -17,9 +17,9 @@ from tab_forge.models import (
 
 ## `BaseGenerativeModel` (ABC)
 
-Абстрактный базовый класс для всех синтезаторов. Определяет единый интерфейс.
+Abstract base class for all synthesizers. Defines a unified interface.
 
-### Общие методы всех моделей
+### Common Methods for All Models
 
 #### `fit`
 
@@ -27,7 +27,7 @@ from tab_forge.models import (
 fit(dataset: Dataset, **kwargs) -> None
 ```
 
-Обучает модель на переданном датасете.
+Trains the model on the provided dataset.
 
 #### `generate`
 
@@ -35,10 +35,10 @@ fit(dataset: Dataset, **kwargs) -> None
 generate(n_samples: int) -> pd.DataFrame
 ```
 
-Генерирует `n_samples` строк синтетических данных. Возвращает `pd.DataFrame`.
+Generates `n_samples` rows of synthetic data. Returns `pd.DataFrame`.
 
 !!! warning ""
-    Модель должна быть обучена (`fit`) перед вызовом `generate`. Иначе поднимается исключение.
+    The model must be trained (`fit`) before calling `generate`. Otherwise an exception is raised.
 
 #### `structed_generate`
 
@@ -46,7 +46,7 @@ generate(n_samples: int) -> pd.DataFrame
 structed_generate(n_samples: int) -> Dataset
 ```
 
-Аналог `generate`, но возвращает объект `Dataset` с сохранёнными метаданными (типы признаков, целевая переменная). Используйте этот метод когда результат нужно передать в `Benchmark` или `AutoTuningStudy`.
+Analogous to `generate`, but returns a `Dataset` object with preserved metadata (feature types, target variable). Use this method when the result needs to be passed to `Benchmark` or `AutoTuningStudy`.
 
 #### `get_losses`
 
@@ -54,7 +54,7 @@ structed_generate(n_samples: int) -> Dataset
 get_losses() -> dict
 ```
 
-Возвращает словарь с историей функции потерь за время обучения.
+Returns a dictionary with the training loss history.
 
 #### `set_hyperparameters` / `get_hyperparameters`
 
@@ -63,7 +63,7 @@ set_hyperparameters(**kwargs) -> None
 get_hyperparameters() -> dict
 ```
 
-Установка и получение текущих гиперпараметров модели.
+Set and retrieve the current model hyperparameters.
 
 ---
 
@@ -87,20 +87,20 @@ CTGANSynthesizer(
 )
 ```
 
-Условный табличный GAN на основе реализации SDV. Поддерживает смешанные данные с числовыми и категориальными признаками.
+Conditional tabular GAN based on the SDV implementation. Supports mixed data with numerical and categorical features.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `epochs` | `300` | Число эпох обучения |
-| `batch_size` | `500` | Размер мини-батча |
-| `embedding_dim` | `128` | Размерность embedding для категориальных признаков |
-| `generator_dim` | `(256, 256)` | Размерности слоёв генератора |
-| `discriminator_dim` | `(256, 256)` | Размерности слоёв дискриминатора |
-| `generator_lr` | `2e-4` | Learning rate генератора |
-| `discriminator_lr` | `2e-4` | Learning rate дискриминатора |
-| `pac` | `10` | Размер pac для PacGAN (объединение сэмплов в дискриминаторе) |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `epochs` | `300` | Number of training epochs |
+| `batch_size` | `500` | Mini-batch size |
+| `embedding_dim` | `128` | Embedding dimensionality for categorical features |
+| `generator_dim` | `(256, 256)` | Generator layer sizes |
+| `discriminator_dim` | `(256, 256)` | Discriminator layer sizes |
+| `generator_lr` | `2e-4` | Generator learning rate |
+| `discriminator_lr` | `2e-4` | Discriminator learning rate |
+| `pac` | `10` | PacGAN pac size (sample grouping in discriminator) |
 
 !!! example ""
 
@@ -127,14 +127,14 @@ WGANGPSynthesizer(
 )
 ```
 
-Wasserstein GAN с Gradient Penalty. Собственная PyTorch-реализация. Теоретически более стабилен чем стандартный GAN.
+Wasserstein GAN with Gradient Penalty. Custom PyTorch implementation. Theoretically more stable than standard GAN.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `n_critic` | `5` | Шагов дискриминатора на один шаг генератора |
-| `lambda_gp` | `10.0` | Коэффициент gradient penalty |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `n_critic` | `5` | Discriminator steps per generator step |
+| `lambda_gp` | `10.0` | Gradient penalty coefficient |
 
 !!! example ""
 
@@ -162,18 +162,18 @@ GANMFSSynthesizer(
 )
 ```
 
-Расширение WGAN-GP с дополнительным регуляризатором Meta-Feature Similarity (MFS). Регуляризатор добавляет слагаемое в функцию потерь: расстояние Wasserstein между распределениями мета-фич реальных и генерируемых данных.
+Extension of WGAN-GP with an additional Meta-Feature Similarity (MFS) regularizer. The regularizer adds a term to the loss function: Wasserstein distance between meta-feature distributions of real and generated data.
 
-**Дополнительные параметры:**
+**Additional parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `mfs_lambda` | `0.1` | Вес MFS-регуляризатора |
-| `subset_mfs` | `10` | Размер подвыборки для вычисления мета-фич |
-| `sample_frac` | `0.1` | Доля данных для вычисления MFS на каждой итерации |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `mfs_lambda` | `0.1` | MFS regularizer weight |
+| `subset_mfs` | `10` | Subsample size for meta-feature computation |
+| `sample_frac` | `0.1` | Fraction of data used for MFS computation each iteration |
 
 !!! tip ""
-    Наилучшие результаты по R² среди всех моделей в экспериментах. Рекомендуется как первый выбор для задач аугментации данных.
+    Best R² results among all models in experiments. Recommended as the first choice for data augmentation tasks.
 
 !!! example ""
 
@@ -198,19 +198,19 @@ CTABGANPlusSynthesizer(
 )
 ```
 
-Обёртка над CTAB-GAN+ — расширением CTABGAN с вспомогательными регрессионными/классификационными головами в дискриминаторе. Тип головы определяется из `dataset.info.task_type`.
+Wrapper around CTAB-GAN+ — an extension of CTABGAN with auxiliary regression/classification heads in the discriminator. The head type is determined from `dataset.info.task_type`.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `random_dim` | `100` | Размерность латентного пространства |
-| `critic_iterations` | `1` | Шагов дискриминатора на генераторный шаг |
-| `class_dim` | `(256, 256, 256, 256)` | Архитектура вспомогательных голов |
-| `l2scale` | `1e-5` | L2-регуляризация |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `random_dim` | `100` | Latent space dimensionality |
+| `critic_iterations` | `1` | Discriminator steps per generator step |
+| `class_dim` | `(256, 256, 256, 256)` | Auxiliary head architecture |
+| `l2scale` | `1e-5` | L2 regularization |
 
 !!! tip ""
-    Лучшие результаты по RMSE среди всех моделей (11/25). Отличный выбор когда важна точность предсказания.
+    Best RMSE results among all models (11/25). Excellent choice when prediction accuracy matters.
 
 !!! example ""
 
@@ -234,15 +234,15 @@ TVAESynthesizer(
 )
 ```
 
-Табличный Variational Autoencoder от SDV. Использует адаптированный ELBO как функцию потерь. Обучается стабильнее GAN-архитектур.
+Tabular Variational Autoencoder from SDV. Uses adapted ELBO as the loss function. Trains more stably than GAN architectures.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `compress_dims` | `(128, 128)` | Размерности слоёв энкодера |
-| `decompress_dims` | `(128, 128)` | Размерности слоёв декодера |
-| `l2scale` | `1e-5` | L2-регуляризация |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `compress_dims` | `(128, 128)` | Encoder layer sizes |
+| `decompress_dims` | `(128, 128)` | Decoder layer sizes |
+| `l2scale` | `1e-5` | L2 regularization |
 
 !!! example ""
 
@@ -267,19 +267,19 @@ DDPMSynthesizer(
 )
 ```
 
-Диффузионная модель Tab-DDPM, реализованная через плагин `ddpm` библиотеки Synthcity.
+Tab-DDPM diffusion model, implemented via the `ddpm` plugin of the Synthcity library.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `num_timesteps` | `1000` | Число шагов диффузии |
-| `model_type` | `"mlp"` | Тип нейросети шумоподавителя |
-| `scheduler` | `"cosine"` | Расписание шумового процесса (`"cosine"` / `"linear"`) |
-| `**model_params` | — | Дополнительные параметры архитектуры для плагина Synthcity |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `num_timesteps` | `1000` | Number of diffusion steps |
+| `model_type` | `"mlp"` | Type of denoiser neural network |
+| `scheduler` | `"cosine"` | Noise schedule (`"cosine"` / `"linear"`) |
+| `**model_params` | — | Additional architecture parameters for the Synthcity plugin |
 
-!!! warning "Время обучения"
-    TabDDPM обучается значительно медленнее GAN-архитектур. Начните с `epochs=50` и `num_timesteps=500` для быстрой проверки.
+!!! warning "Training time"
+    TabDDPM trains significantly slower than GAN architectures. Start with `epochs=50` and `num_timesteps=500` for a quick check.
 
 !!! example ""
 

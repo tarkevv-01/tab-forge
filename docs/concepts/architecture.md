@@ -1,32 +1,32 @@
-# Архитектура Tab-Forge
+# Tab-Forge Architecture
 
-## Схема модулей
+## Module Diagram
 
-![Схема архитектуры Tab-Forge](../img/arch.png)
-
----
-
-## Принцип модульности
-
-Каждый модуль Tab-Forge — самостоятельный и не требует остальных. Вы можете:
-
-- Использовать только **Dataset + Models + Benchmark** без LLM
-- Запустить **AutoTuningStudy** вручную без LLM-рейтинга
-- Использовать **PromptGenerator** отдельно для изучения мета-фич датасета
-- Подключить свою модель к **Benchmark** вне Tab-Forge
+![Tab-Forge Architecture Diagram](../img/arch.png)
 
 ---
 
-## Поток данных в полном пайплайне
-![Схема универсального pipeline Tab-forge](../img/pipeline.png)
+## Modularity Principle
+
+Each Tab-Forge module is self-contained and does not require the others. You can:
+
+- Use only **Dataset + Models + Benchmark** without LLM
+- Run **AutoTuningStudy** manually without an LLM ranking
+- Use **PromptGenerator** separately to explore dataset meta-features
+- Connect your own model to **Benchmark** outside of Tab-Forge
 
 ---
 
-## Модуль `dataset`
+## Data Flow in the Full Pipeline
+![Universal Tab-forge pipeline diagram](../img/pipeline.png)
 
-**Ключевые экспорты:** `Dataset`, `merge_datasets`, `split_folds`
+---
 
-`Dataset` — центральный объект библиотеки. Все модели принимают его на вход и возвращают его из `structed_generate`. Это позволяет беспрепятственно передавать данные между модулями.
+## `dataset` Module
+
+**Key exports:** `Dataset`, `merge_datasets`, `split_folds`
+
+`Dataset` is the central object of the library. All models accept it as input and return it from `structed_generate`. This allows seamless data transfer between modules.
 
 ```python
 from tab_forge.dataset import Dataset, merge_datasets, split_folds
@@ -34,47 +34,47 @@ from tab_forge.dataset import Dataset, merge_datasets, split_folds
 
 ---
 
-## Модуль `models`
+## `models` Module
 
-**Ключевые экспорты:** 6 классов-синтезаторов
+**Key exports:** 6 synthesizer classes
 
-Все модели наследуют `BaseGenerativeModel` и реализуют единый интерфейс:
+All models inherit `BaseGenerativeModel` and implement a unified interface:
 
-| Метод | Описание |
-|-------|----------|
-| `fit(dataset)` | Обучение на `Dataset` |
-| `generate(n_samples)` | Генерация как `pd.DataFrame` |
-| `structed_generate(n_samples)` | Генерация как `Dataset` (для Benchmark/AutoTuning) |
-| `get_losses()` | История потерь в процессе обучения |
-
----
-
-## Модуль `tuning`
-
-**Ключевые экспорты:** `AutoTuningStudy`, `TuningStudy`
-
-`TuningStudy` — тонкая обёртка над `optuna.Study`. `AutoTuningStudy` — полноценный пайплайн CV-тюнинга с предустановленными пространствами поиска для каждой архитектуры.
+| Method | Description |
+|--------|-------------|
+| `fit(dataset)` | Train on `Dataset` |
+| `generate(n_samples)` | Generate as `pd.DataFrame` |
+| `structed_generate(n_samples)` | Generate as `Dataset` (for Benchmark/AutoTuning) |
+| `get_losses()` | Training loss history |
 
 ---
 
-## Модуль `benchmark`
+## `tuning` Module
 
-**Ключевые экспорты:** `Benchmark`, `BenchmarkResult`
+**Key exports:** `AutoTuningStudy`, `TuningStudy`
 
-Все метрики реализованы по схеме train-on-synthetic / test-on-real или через сравнение статистик. Принимает `Dataset` объекты.
-
----
-
-## Модуль `prompt_generator`
-
-**Ключевые экспорты:** `PromptGenerator`
-
-Использует `pymfe` для вычисления мета-фич и загружает предрасчитанные результаты экспериментов из `experiment_results/` для few-shot режима.
+`TuningStudy` is a thin wrapper around `optuna.Study`. `AutoTuningStudy` is a full CV-tuning pipeline with preset search spaces for each architecture.
 
 ---
 
-## Модуль `llm_runner`
+## `benchmark` Module
 
-**Ключевые экспорты:** `LLMRunner`, `RunnerResult`
+**Key exports:** `Benchmark`, `BenchmarkResult`
 
-Работает с любым OpenAI-совместимым API. Реализует self-consistency: N независимых вызовов → усреднение рангов через `_aggregate`.
+All metrics are implemented using the train-on-synthetic / test-on-real scheme or by comparing statistics. Accepts `Dataset` objects.
+
+---
+
+## `prompt_generator` Module
+
+**Key exports:** `PromptGenerator`
+
+Uses `pymfe` to compute meta-features and loads pre-computed experiment results from `experiment_results/` for few-shot mode.
+
+---
+
+## `llm_runner` Module
+
+**Key exports:** `LLMRunner`, `RunnerResult`
+
+Works with any OpenAI-compatible API. Implements self-consistency: N independent calls → rank averaging via `_aggregate`.

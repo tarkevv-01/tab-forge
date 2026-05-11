@@ -1,6 +1,6 @@
 # API Reference — Dataset
 
-## Импорт
+## Import
 
 ```python
 from tab_forge.dataset import Dataset, merge_datasets, split_folds
@@ -20,25 +20,25 @@ Dataset(
 )
 ```
 
-Унифицированный контейнер для табличных данных. Хранит DataFrame вместе с метаинформацией о признаках, целевой переменной и типе задачи. Является центральным объектом пайплайна — все модели принимают `Dataset` на вход и возвращают его из `structed_generate`.
+A unified container for tabular data. Stores a DataFrame together with meta-information about features, the target variable, and task type. It is the central object of the pipeline — all models accept `Dataset` as input and return it from `structed_generate`.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `data` | `str` или `pd.DataFrame` | Путь к CSV-файлу или готовый DataFrame |
-| `target` | `str` | Имя целевой переменной (колонка в данных) |
-| `task_type` | `str` | Тип задачи: `"regression"` или `"classification"` |
-| `numerical_features` | `list[str]`, опционально | Список числовых признаков |
-| `categorical_features` | `list[str]`, опционально | Список категориальных признаков |
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `data` | `str` or `pd.DataFrame` | Path to a CSV file or a ready DataFrame |
+| `target` | `str` | Name of the target variable (column in the data) |
+| `task_type` | `str` | Task type: `"regression"` or `"classification"` |
+| `numerical_features` | `list[str]`, optional | List of numerical features |
+| `categorical_features` | `list[str]`, optional | List of categorical features |
 
-**Атрибуты:**
+**Attributes:**
 
-| Атрибут | Тип | Описание |
-|---------|-----|----------|
-| `info` | `DatasetInfo` | Мета-информация о датасете |
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `info` | `DatasetInfo` | Dataset meta-information |
 
-!!! example "Создание Dataset"
+!!! example "Creating a Dataset"
 
     ```python
     dataset = Dataset(
@@ -63,18 +63,18 @@ train_test_split(
 ) -> Tuple[Dataset, Dataset]
 ```
 
-Разбивает датасет на обучающую и тестовую выборки.
+Splits the dataset into train and test sets.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|-------------|----------|
-| `test_size` | `float` | `0.2` | Доля тестовой выборки (0–1) |
-| `random_state` | `int` | `None` | Seed для воспроизводимости |
-| `shuffle` | `bool` | `True` | Перемешивать ли данные перед разбиением |
-| `stratify` | `bool` | `False` | Стратифицированное разбиение (только для classification) |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `test_size` | `float` | `0.2` | Fraction of the test set (0–1) |
+| `random_state` | `int` | `None` | Seed for reproducibility |
+| `shuffle` | `bool` | `True` | Whether to shuffle data before splitting |
+| `stratify` | `bool` | `False` | Stratified split (classification only) |
 
-**Возвращает:** кортеж `(train_dataset, test_dataset)` — два объекта `Dataset`.
+**Returns:** tuple `(train_dataset, test_dataset)` — two `Dataset` objects.
 
 !!! example ""
 
@@ -90,7 +90,7 @@ train_test_split(
 get_data() -> pd.DataFrame
 ```
 
-Возвращает полный DataFrame, включая целевую переменную.
+Returns the full DataFrame, including the target variable.
 
 ---
 
@@ -100,11 +100,11 @@ get_data() -> pd.DataFrame
 get_X(registered_only: bool = False) -> pd.DataFrame
 ```
 
-Возвращает DataFrame только с признаками (без целевой переменной).
+Returns a DataFrame with features only (without the target variable).
 
-**Параметры:**
+**Parameters:**
 
-- `registered_only` — если `True`, возвращает только «зарегистрированные» признаки (переданные при создании или через `register_features`)
+- `registered_only` — if `True`, returns only "registered" features (passed at creation or via `register_features`)
 
 ---
 
@@ -114,7 +114,7 @@ get_X(registered_only: bool = False) -> pd.DataFrame
 get_target() -> pd.Series
 ```
 
-Возвращает целевую переменную как `pd.Series`.
+Returns the target variable as a `pd.Series`.
 
 ---
 
@@ -127,7 +127,7 @@ register_features(
 )
 ```
 
-Добавляет дополнительные признаки к уже созданному датасету.
+Adds additional features to an already created dataset.
 
 ---
 
@@ -137,23 +137,23 @@ register_features(
 summary() -> dict
 ```
 
-Возвращает краткую сводку: форму данных, тип задачи, количество пропусков по колонкам.
+Returns a brief summary: data shape, task type, number of missing values per column.
 
 ---
 
 ## `DatasetInfo`
 
-Датакласс с мета-информацией о датасете. Доступен через `dataset.info`.
+Dataclass with dataset meta-information. Accessible via `dataset.info`.
 
-| Поле | Тип | Описание |
-|------|-----|----------|
-| `n_samples` | `int` | Количество строк |
-| `n_features` | `int` | Количество признаков |
-| `n_numerical` | `int` | Число числовых признаков |
-| `n_categorical` | `int` | Число категориальных признаков |
-| `n_registered` | `int` | Зарегистрированных признаков |
-| `task_type` | `str` | Тип задачи |
-| `target_name` | `str` | Имя целевой переменной |
+| Field | Type | Description |
+|-------|------|-------------|
+| `n_samples` | `int` | Number of rows |
+| `n_features` | `int` | Number of features |
+| `n_numerical` | `int` | Number of numerical features |
+| `n_categorical` | `int` | Number of categorical features |
+| `n_registered` | `int` | Number of registered features |
+| `task_type` | `str` | Task type |
+| `target_name` | `str` | Name of the target variable |
 
 ---
 
@@ -166,14 +166,14 @@ merge_datasets(
 ) -> Dataset
 ```
 
-Объединяет список совместимых `Dataset`-объектов в один.
+Merges a list of compatible `Dataset` objects into one.
 
-**Параметры:**
+**Parameters:**
 
-- `datasets` — список объектов `Dataset`
-- `reset_index` — сбрасывать ли индекс после объединения
+- `datasets` — list of `Dataset` objects
+- `reset_index` — whether to reset the index after merging
 
-**Исключения:** поднимает `ValueError` если датасеты несовместимы (разные таргеты, типы задач или наборы признаков).
+**Exceptions:** raises `ValueError` if datasets are incompatible (different targets, task types, or feature sets).
 
 !!! example ""
 
@@ -195,18 +195,18 @@ split_folds(
 ) -> List[Dataset]
 ```
 
-Разбивает датасет на `n_splits` фолдов для кросс-валидации.
+Splits the dataset into `n_splits` folds for cross-validation.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `n_splits` | `5` | Количество фолдов |
-| `shuffle` | `True` | Перемешивание перед разбиением |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `n_splits` | `5` | Number of folds |
+| `shuffle` | `True` | Shuffle before splitting |
 | `random_state` | `None` | Seed |
-| `stratified` | `False` | Стратифицированное разбиение (для classification) |
+| `stratified` | `False` | Stratified split (for classification) |
 
-**Возвращает:** список из `n_splits` объектов `Dataset` примерно равного размера.
+**Returns:** list of `n_splits` `Dataset` objects of approximately equal size.
 
 !!! example ""
 

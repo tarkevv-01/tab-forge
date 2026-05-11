@@ -1,18 +1,18 @@
-# Модуль LLM Selection
+# LLM Selection Module
 
-## Зачем это нужно
+## Why You Need This
 
-Выбор модели для конкретного датасета — это по сути задача мета-обучения: «какая архитектура исторически работала лучше всего на похожих данных?». Вместо того чтобы запускать все 6 моделей и смотреть, Tab-Forge формулирует этот вопрос как промпт для LLM.
+Choosing a model for a specific dataset is essentially a meta-learning task: "which architecture has historically worked best on similar data?". Instead of running all 6 models and comparing results, Tab-Forge formulates this question as a prompt for an LLM.
 
-Ключевое открытие: LLM, снабжённый мета-характеристиками датасета и результатами экспериментов на референсных наборах данных, способен предсказывать лучшую модель с точностью **top1-acc до 0.84** (few-shot режим).
+Key finding: an LLM equipped with dataset meta-characteristics and experiment results on reference datasets is able to predict the best model with accuracy **top1-acc up to 0.84** (few-shot mode).
 
 ---
 
 ## PromptGenerator
 
-`PromptGenerator` делает две вещи:
-1. Извлекает мета-характеристики вашего датасета
-2. Собирает из них структурированный промпт
+`PromptGenerator` does two things:
+1. Extracts meta-characteristics of your dataset
+2. Assembles them into a structured prompt
 
 ```python
 from tab_forge.prompt_generator import PromptGenerator
@@ -24,24 +24,24 @@ prompt = gen.build_prompt(
     shot_mode     = "few",
     mfe_features  = "short",
 )
-print(prompt[:500])  # посмотреть начало промпта
+print(prompt[:500])  # view the beginning of the prompt
 ```
 
-### Параметры `build_prompt`
+### `build_prompt` Parameters
 
-| Параметр | Значения | По умолчанию | Описание |
-|----------|---------|-------------|----------|
-| `dataset` | `Dataset` | — | Ваш датасет |
-| `target_metric` | см. ниже | `"r2_metric"` | Целевая метрика для ранжирования |
-| `shot_mode` | `"zero"`, `"few"` | `"zero"` | Zero-shot или few-shot |
-| `mfe_features` | `"short"`, `"full"`, список | `"short"` | Набор мета-фич |
-| `mfe_groups` | список групп pymfe | `None` | Группы для pymfe |
-| `models_to_include` | список моделей | все 6 | Ограничить набор моделей |
+| Parameter | Values | Default | Description |
+|-----------|--------|---------|-------------|
+| `dataset` | `Dataset` | — | Your dataset |
+| `target_metric` | see below | `"r2_metric"` | Target metric for ranking |
+| `shot_mode` | `"zero"`, `"few"` | `"zero"` | Zero-shot or few-shot |
+| `mfe_features` | `"short"`, `"full"`, list | `"short"` | Meta-feature set |
+| `mfe_groups` | list of pymfe groups | `None` | Groups for pymfe |
+| `models_to_include` | list of models | all 6 | Limit the model set |
 
-### Значения target_metric
+### target_metric Values
 
-| Строка | Метрика |
-|--------|---------|
+| String | Metric |
+|--------|--------|
 | `"r2_metric"` | R² |
 | `"rmse_metric"` | RMSE |
 | `"jensen_shannon_metric"` | Jensen–Shannon |
@@ -50,38 +50,38 @@ print(prompt[:500])  # посмотреть начало промпта
 
 ---
 
-## Мета-фичи датасета
+## Dataset Meta-Features
 
-### Что вычисляется
+### What is Computed
 
-`PromptGenerator` автоматически вычисляет следующие мета-характеристики:
+`PromptGenerator` automatically computes the following meta-characteristics:
 
-| Мета-фича | Смысл |
-|-----------|-------|
-| `nr_inst` | Количество строк |
-| `nr_attr` | Количество признаков |
-| `nr_num` | Числовые признаки |
-| `nr_cat` | Категориальные признаки |
-| `missing_pct` | Доля пропущенных значений, % |
-| `task_type` | Тип задачи (regression/classification) |
-| `abs_corr_mean` | Средняя абсолютная корреляция |
-| `abs_corr_max` | Максимальная абсолютная корреляция |
-| `skewness_mean` | Средняя асимметрия признаков |
-| `kurtosis_mean` | Среднее значение эксцесса |
-| `kurtosis_std` | СКО эксцесса |
-| `std_mean` | Среднее стандартное отклонение |
+| Meta-feature | Meaning |
+|-------------|---------|
+| `nr_inst` | Number of rows |
+| `nr_attr` | Number of features |
+| `nr_num` | Numerical features |
+| `nr_cat` | Categorical features |
+| `missing_pct` | Fraction of missing values, % |
+| `task_type` | Task type (regression/classification) |
+| `abs_corr_mean` | Mean absolute correlation |
+| `abs_corr_max` | Maximum absolute correlation |
+| `skewness_mean` | Mean feature skewness |
+| `kurtosis_mean` | Mean kurtosis value |
+| `kurtosis_std` | Kurtosis standard deviation |
+| `std_mean` | Mean standard deviation |
 
-В режиме `mfe_features="full"` дополнительно вычисляются все доступные мета-фичи из выбранных групп `pymfe`.
+In `mfe_features="full"` mode, all available meta-features from the selected `pymfe` groups are additionally computed.
 
-### Важность мета-фич
+### Meta-Feature Importance
 
-По результатам экспериментов на мета-классификаторе, наибольшее влияние на предсказание лучшей модели оказывают:
+Based on meta-classifier experiments, the greatest influence on predicting the best model comes from:
 
-1. **`nr_num`** — количество числовых признаков
-2. **`missing_pct`** — доля пропущенных значений
-3. **`task_type`** — тип задачи
+1. **`nr_num`** — number of numerical features
+2. **`missing_pct`** — fraction of missing values
+3. **`task_type`** — task type
 
-Это означает: числовые датасеты без пропусков и датасеты с большой долей пропусков ведут себя по-разному, и LLM это учитывает.
+This means: numerical datasets without missing values and datasets with a large fraction of missing values behave differently, and the LLM accounts for this.
 
 ---
 
@@ -89,12 +89,12 @@ print(prompt[:500])  # посмотреть начало промпта
 
 ### Zero-shot
 
-Промпт содержит только:
-- Мета-характеристики вашего датасета
-- Описания 6 поддерживаемых моделей
-- Целевую метрику
+The prompt contains only:
+- Meta-characteristics of your dataset
+- Descriptions of 6 supported models
+- Target metric
 
-LLM отвечает на основе общих знаний об архитектурах и их свойствах.
+The LLM responds based on general knowledge about architectures and their properties.
 
 ```python
 prompt = gen.build_prompt(dataset=dataset, target_metric="r2_metric", shot_mode="zero")
@@ -102,31 +102,31 @@ prompt = gen.build_prompt(dataset=dataset, target_metric="r2_metric", shot_mode=
 
 ### Few-shot
 
-Дополнительно к zero-shot промпту добавляются результаты предварительных экспериментов на 5 референсных датасетах:
+In addition to the zero-shot prompt, results of preliminary experiments on 5 reference datasets are added:
 
-- **abalone** (регрессия, ~4177 строк)
-- **cl-housing** (регрессия, недвижимость)
-- **air-quality** (регрессия, качество воздуха)
-- **wind** (регрессия, скорость ветра)
-- **gats** (регрессия)
+- **abalone** (regression, ~4177 rows)
+- **cl-housing** (regression, real estate)
+- **air-quality** (regression, air quality)
+- **wind** (regression, wind speed)
+- **gats** (regression)
 
-LLM видит: на похожем датасете модель X показала такие-то результаты по такой-то метрике — это конкретный опыт, на который можно опираться.
+The LLM sees: on a similar dataset, model X showed such-and-such results for such-and-such metric — this is concrete experience to rely on.
 
 ```python
 prompt = gen.build_prompt(dataset=dataset, target_metric="r2_metric", shot_mode="few")
 ```
 
-!!! tip "Когда что использовать"
-    - **Few-shot** — всегда предпочтительнее: даёт top1-acc до 0.84 vs 0.6 для zero-shot (по экспериментам)
-    - **Zero-shot** — если хотите получить быстрый ответ без overhead'а чтения экспериментальных данных
+!!! tip "When to use which"
+    - **Few-shot** — always preferred: gives top1-acc up to 0.84 vs 0.6 for zero-shot (according to experiments)
+    - **Zero-shot** — if you want a quick answer without the overhead of reading experimental data
 
 ---
 
 ## LLMRunner
 
-`LLMRunner` отправляет промпт в LLM и агрегирует результаты нескольких запусков.
+`LLMRunner` sends the prompt to the LLM and aggregates results from multiple runs.
 
-### Создание и запуск
+### Creating and Running
 
 ```python
 from tab_forge.llm_runner import LLMRunner
@@ -135,52 +135,52 @@ runner = LLMRunner(
     base_url        = "https://api.openai.com/v1",
     api_key         = "sk-...",
     model           = "gpt-4o",
-    retry_on_parse_error = True,   # повторить если LLM не дал корректный ответ
-    request_delay   = 0.5,         # пауза между запросами в секундах
+    retry_on_parse_error = True,   # retry if LLM gave an invalid response
+    request_delay   = 0.5,         # pause between requests in seconds
 )
 
 result = runner.run(
     prompt      = prompt,
-    n_runs      = 5,        # количество независимых запросов
+    n_runs      = 5,        # number of independent requests
     temperature = 0.7,
     top_p       = 1.0,
     max_tokens  = 2048,
 )
 ```
 
-### Параметры `run`
+### `run` Parameters
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `n_runs` | `1` | Количество независимых запросов (self-consistency) |
-| `temperature` | `0.7` | Температура генерации |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `n_runs` | `1` | Number of independent requests (self-consistency) |
+| `temperature` | `0.7` | Generation temperature |
 | `top_p` | `1.0` | Top-p sampling |
-| `max_tokens` | `2048` | Максимальная длина ответа |
-| `seed` | `None` | Фиксация seed (если поддерживается моделью) |
+| `max_tokens` | `2048` | Maximum response length |
+| `seed` | `None` | Seed (if supported by the model) |
 
 ---
 
-## Self-consistency: как это работает
+## Self-Consistency: How It Works
 
-Self-consistency — ключевая техника, делающая LLM-выбор надёжным.
+Self-consistency is the key technique that makes LLM-based selection reliable.
 
 ```
-Запрос 1 → ['GAN-MFS', 'CTGAN', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
-Запрос 2 → ['CTGAN', 'GAN-MFS', 'WGAN-GP', 'TVAE', 'CTABGAN+', 'DDPM']
-Запрос 3 → ['GAN-MFS', 'WGAN-GP', 'CTGAN', 'CTABGAN+', 'DDPM', 'TVAE']
-Запрос 4 → ['GAN-MFS', 'CTGAN', 'CTABGAN+', 'WGAN-GP', 'TVAE', 'DDPM']
-Запрос 5 → ['CTGAN', 'GAN-MFS', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
+Request 1 → ['GAN-MFS', 'CTGAN', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
+Request 2 → ['CTGAN', 'GAN-MFS', 'WGAN-GP', 'TVAE', 'CTABGAN+', 'DDPM']
+Request 3 → ['GAN-MFS', 'WGAN-GP', 'CTGAN', 'CTABGAN+', 'DDPM', 'TVAE']
+Request 4 → ['GAN-MFS', 'CTGAN', 'CTABGAN+', 'WGAN-GP', 'TVAE', 'DDPM']
+Request 5 → ['CTGAN', 'GAN-MFS', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
 
-Средние ранги:
+Average ranks:
   GAN-MFS:  (1+2+1+1+2)/5 = 1.4
   CTGAN:    (2+1+3+2+1)/5 = 1.8
   WGAN-GP:  (3+3+2+4+3)/5 = 3.0
   ...
 
-Итоговый рейтинг: ['GAN-MFS', 'CTGAN', 'WGAN-GP', ...]
+Final ranking: ['GAN-MFS', 'CTGAN', 'WGAN-GP', ...]
 ```
 
-LLM ведёт себя стохастически при `temperature > 0`. 5 независимых запросов с усреднением рангов дают статистически устойчивый результат.
+The LLM behaves stochastically when `temperature > 0`. 5 independent requests with rank averaging give a statistically robust result.
 
 ---
 
@@ -196,24 +196,24 @@ print(result.average_ranks)
 # {'GAN-MFS': 1.4, 'CTGAN': 1.8, ...}
 
 print(result.n_runs)    # 5
-print(result.n_parsed)  # сколько из 5 ответов LLM успешно распарсилось
+print(result.n_parsed)  # how many of the 5 LLM responses were successfully parsed
 ```
 
-!!! warning "Ошибки парсинга"
-    Если `n_parsed < n_runs`, значит LLM не дала валидный ответ в нужном формате для части запросов. Включите `retry_on_parse_error=True` чтобы повторять запросы при ошибке парсинга.
+!!! warning "Parse errors"
+    If `n_parsed < n_runs`, the LLM did not give a valid response in the required format for some requests. Enable `retry_on_parse_error=True` to retry requests on parse errors.
 
 ---
 
-## Подключение локальной LLM
+## Connecting a Local LLM
 
-Tab-Forge совместим с любым OpenAI-совместимым API:
+Tab-Forge is compatible with any OpenAI-compatible API:
 
 === "Ollama"
 
     ```python
     runner = LLMRunner(
         base_url = "http://localhost:11434/v1",
-        api_key  = "ollama",          # любая строка
+        api_key  = "ollama",          # any string
         model    = "llama3.1:8b",
     )
     ```
@@ -238,5 +238,5 @@ Tab-Forge совместим с любым OpenAI-совместимым API:
     )
     ```
 
-!!! note "Качество моделей"
-    Качество рейтинга зависит от способности LLM следовать инструкциям и рассуждать о табличных данных. GPT-4o и аналогичные модели показывают лучшие результаты. Небольшие локальные модели могут давать менее стабильные рейтинги — увеличьте `n_runs` для компенсации.
+!!! note "Model quality"
+    Ranking quality depends on the LLM's ability to follow instructions and reason about tabular data. GPT-4o and similar models produce the best results. Small local models may give less stable rankings — increase `n_runs` to compensate.

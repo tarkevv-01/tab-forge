@@ -1,18 +1,18 @@
-# Установка
+# Installation
 
-## Требования
+## Requirements
 
 - Python **3.8+**
 - pip
 
-!!! warning "Тяжёлые зависимости"
-    Tab-Forge использует `torch`, `tensorflow`, `sdv` и `synthcity` — суммарный размер окружения может достигать нескольких гигабайт. Рекомендуем создать отдельное виртуальное окружение.
+!!! warning "Heavy dependencies"
+    Tab-Forge uses `torch`, `tensorflow`, `sdv`, and `synthcity` — the total environment size can reach several gigabytes. We recommend creating a separate virtual environment.
 
 ---
 
-## Установка из исходного кода
+## Install from Source
 
-Tab-Forge пока не опубликован на PyPI, поэтому устанавливается клонированием репозитория:
+Tab-Forge is not yet published on PyPI, so it is installed by cloning the repository:
 
 ```bash
 git clone https://github.com/tarkevv-01/tab-forge.git
@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 ---
 
-## Рекомендуемый способ: виртуальное окружение
+## Recommended: Virtual Environment
 
 === "venv"
 
@@ -51,22 +51,22 @@ pip install -r requirements.txt
 
 ---
 
-## Ключевые зависимости
+## Key Dependencies
 
-| Пакет | Зачем |
-|-------|-------|
+| Package | Purpose |
+|---------|---------|
 | `torch` | WGAN-GP, GAN-MFS, CTABGAN+ |
-| `tensorflow` | CTABGAN+ (некоторые части) |
-| `sdv`, `ctgan` | CTGAN и TVAE |
+| `tensorflow` | CTABGAN+ (some parts) |
+| `sdv`, `ctgan` | CTGAN and TVAE |
 | `synthcity` | TabDDPM |
-| `optuna` | Байесовская оптимизация |
-| `pymfe` | Извлечение мета-фич датасета |
-| `openai` | Запросы к LLM API |
-| `xgboost`, `scikit-learn` | Оценка качества синтетики |
+| `optuna` | Bayesian optimization |
+| `pymfe` | Dataset meta-feature extraction |
+| `openai` | LLM API requests |
+| `xgboost`, `scikit-learn` | Synthetic data quality evaluation |
 
 ---
 
-## Проверка установки
+## Verify Installation
 
 ```python
 from tab_forge.dataset import Dataset
@@ -76,11 +76,11 @@ from tab_forge.tuning import AutoTuningStudy
 from tab_forge.prompt_generator import PromptGenerator
 from tab_forge.llm_runner import LLMRunner
 
-print("Tab-Forge успешно установлен!")
+print("Tab-Forge installed successfully!")
 ```
 
-!!! tip "Работа с GPU"
-    Для ускорения обучения PyTorch-моделей (WGAN-GP, GAN-MFS, CTABGAN+) убедитесь, что установлена версия `torch` с поддержкой CUDA:
+!!! tip "GPU Support"
+    To accelerate training of PyTorch models (WGAN-GP, GAN-MFS, CTABGAN+), make sure the CUDA-enabled version of `torch` is installed:
 
     ```bash
     pip install torch --index-url https://download.pytorch.org/whl/cu121

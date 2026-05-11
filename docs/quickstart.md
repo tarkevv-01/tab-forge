@@ -1,6 +1,6 @@
-# Tab-Forge — Быстрый старт
+# Tab-Forge — Quick Start
 
-## Установка
+## Installation
 
 ```bash
 git clone https://github.com/tarkevv-01/tab-forge.git
@@ -10,15 +10,15 @@ pip install -r requirements.txt
 
 ---
 
-## Шаг 1. Загрузка данных
+## Step 1. Load Data
 
 ```python
 from tab_forge.dataset import Dataset
 
 dataset = Dataset(
-    data="abalone.csv",           # путь к CSV или pd.DataFrame
-    target="Rings",               # целевая переменная
-    task_type="regression",       # "regression" или "classification"
+    data="abalone.csv",           # path to CSV or pd.DataFrame
+    target="Rings",               # target variable
+    task_type="regression",       # "regression" or "classification"
     numerical_features=["Length", "Diameter", "Height",
                         "Whole weight", "Shucked weight"],
     categorical_features=["Sex"],
@@ -27,7 +27,7 @@ dataset = Dataset(
 print(dataset.info)
 ```
 
-При разбиении на выборки:
+Splitting into sets:
 
 ```python
 from tab_forge.dataset import train_test_split
@@ -37,9 +37,9 @@ train, test = train_test_split(dataset, test_size=0.2, random_state=42)
 
 ---
 
-## Шаг 2. Формирование промта (PromptGenerator)
+## Step 2. Build the Prompt (PromptGenerator)
 
-`PromptGenerator` вычисляет мета-характеристики датасета и собирает из них структурированный промт для LLM.
+`PromptGenerator` computes dataset meta-characteristics and assembles them into a structured prompt for the LLM.
 
 ```python
 from tab_forge.prompt_generator import PromptGenerator
@@ -48,18 +48,18 @@ gen = PromptGenerator()
 
 prompt = gen.build_prompt(
     dataset       = dataset,
-    target_metric = "r2_metric",   # целевая метрика оптимизации
-    shot_mode     = "few",         # "zero" или "few"
-    mfe_features  = "short",       # "short", "full" или список строк
+    target_metric = "r2_metric",   # target optimization metric
+    shot_mode     = "few",         # "zero" or "few"
+    mfe_features  = "short",       # "short", "full", or list of strings
 )
 
 print(prompt)
 ```
 
-**`target_metric`** — по какой метрике LLM ранжирует модели:
+**`target_metric`** — which metric the LLM uses to rank models:
 
-| Значение | Метрика |
-|----------|---------|
+| Value | Metric |
+|-------|--------|
 | `"r2_metric"` | R² |
 | `"rmse_metric"` | RMSE |
 | `"jensen_shannon_metric"` | Jensen–Shannon divergence |
@@ -67,44 +67,44 @@ print(prompt)
 | `"mi_matrix_metric"` | Frobenius MI |
 
 **`shot_mode`:**
-- `"zero"` — промт содержит только мета-фичи вашего датасета и описания моделей
-- `"few"` — дополнительно включаются результаты предварительных экспериментов на 5 референсных датасетах; LLM видит, как каждая модель проявила себя на похожих задачах
+- `"zero"` — prompt contains only meta-features of your dataset and model descriptions
+- `"few"` — additionally includes results of preliminary experiments on 5 reference datasets; the LLM sees how each model performed on similar tasks
 
 ---
 
-## Шаг 3. LLM-ранжирование моделей (LLMRunner)
+## Step 3. LLM Model Ranking (LLMRunner)
 
 ```python
 from tab_forge.llm_runner import LLMRunner
 
 runner = LLMRunner(
-    base_url = "https://api.openai.com/v1",   # или URL локального сервера
+    base_url = "https://api.openai.com/v1",   # or local server URL
     api_key  = "sk-...",
     model    = "gpt-4o",
 )
 
 result = runner.run(
     prompt      = prompt,
-    n_runs      = 5,       # количество независимых запросов (self-consistency)
+    n_runs      = 5,       # number of independent requests (self-consistency)
     temperature = 0.7,
 )
 
 print(result)
-# Выводит итоговый рейтинг и средние ранги каждой модели
+# Prints the final ranking and average ranks for each model
 
 print(result.final_ranking)
 # ['GAN-MFS', 'CTGAN', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
 ```
 
-`n_runs` — число независимых вызовов LLM. Ранги из каждого ответа усредняются, что делает итоговый список устойчивым к случайному поведению модели.
+`n_runs` — number of independent LLM calls. Ranks from each response are averaged, making the final list robust to random model behavior.
 
 ---
 
-## Шаг 4. Тюнинг гиперпараметров (AutoTuningStudy)
+## Step 4. Hyperparameter Tuning (AutoTuningStudy)
 
-### Режим `"extended"` — рекомендуемый
+### Mode `"extended"` — recommended
 
-Пространство поиска для архитектуры задаётся автоматически. Достаточно передать класс модели:
+The search space for the architecture is set automatically. Just pass the model class:
 
 ```python
 from tab_forge.models import CTGANSynthesizer
@@ -112,8 +112,8 @@ from tab_forge.tuning import AutoTuningStudy
 
 study = AutoTuningStudy(
     model_class       = CTGANSynthesizer,
-    search_space_mode = "extended",   # автоматическое пространство поиска
-    cv                = 3,            # количество фолдов
+    search_space_mode = "extended",   # automatic search space
+    cv                = 3,            # number of folds
 )
 
 study.optimize(dataset, n_trials=25)
@@ -122,7 +122,7 @@ print(study.best_params)
 print(study.best_value)
 ```
 
-### Режим `"manual"` — гиперпараметры задаются вручную
+### Mode `"manual"` — manually defined hyperparameters
 
 ```python
 from tab_forge.models import GANMFSSynthesizer
@@ -140,7 +140,7 @@ study = AutoTuningStudy(
     get_params        = my_params,
     search_space_mode = "manual",
     cv                = 3,
-    direction         = "maximize",   # зависит от выбранной метрики
+    direction         = "maximize",   # depends on the chosen metric
 )
 
 study.optimize(dataset, n_trials=30)
@@ -148,7 +148,7 @@ study.optimize(dataset, n_trials=30)
 
 ---
 
-## Полный пайплайн
+## Full Pipeline
 
 ```python
 from tab_forge.dataset import Dataset
@@ -157,7 +157,7 @@ from tab_forge.tuning import AutoTuningStudy
 from prompt_generator import PromptGenerator
 from llm_runner import LLMRunner
 
-# Загрузка данных
+# Load data
 dataset = Dataset(
     data="abalone.csv",
     target="Rings",
@@ -167,20 +167,20 @@ dataset = Dataset(
     categorical_features=["Sex"],
 )
 
-# LLM выбирает приоритет моделей
+# LLM selects model priority
 gen = PromptGenerator()
 prompt = gen.build_prompt(dataset=dataset, target_metric="r2_metric", shot_mode="few")
 
 runner = LLMRunner(base_url="https://api.openai.com/v1", api_key="sk-...", model="gpt-4o")
 result = runner.run(prompt, n_runs=5, temperature=0.7)
 
-print("Рейтинг моделей:", result.final_ranking)
+print("Model ranking:", result.final_ranking)
 
-# Тюнинг модели с наивысшим приоритетом
+# Tune the highest-priority model
 MODEL_REGISTRY = {
     "CTGAN":   CTGANSynthesizer,
     "GAN-MFS": GANMFSSynthesizer,
-    # ... остальные модели
+    # ... other models
 }
 
 top_model_name = result.final_ranking[0]
@@ -193,14 +193,14 @@ if model_class:
         cv                = 3,
     )
     study.optimize(dataset, n_trials=25)
-    print(f"Лучшие параметры для {top_model_name}:", study.best_params)
+    print(f"Best parameters for {top_model_name}:", study.best_params)
 ```
 
 ---
 
-## Оценка качества (Benchmark)
+## Quality Evaluation (Benchmark)
 
-Если нужно просто оценить синтетические данные:
+To simply evaluate synthetic data:
 
 ```python
 from tab_forge.models import CTGANSynthesizer
@@ -209,7 +209,7 @@ from tab_forge.benchmark import Benchmark
 model = CTGANSynthesizer(epochs=300)
 model.fit(train)
 
-synth = model.structed_generate(len(test))   # возвращает Dataset
+synth = model.structed_generate(len(test))   # returns Dataset
 
 bench = Benchmark([
     ("r2",   {"model": "xgboost"}),
@@ -221,7 +221,7 @@ result = bench.evaluate(synth, test)
 print(result)
 ```
 
-Именованный вариант спецификации метрик:
+Named metric specification:
 
 ```python
 bench = Benchmark({
@@ -233,7 +233,7 @@ bench = Benchmark({
 
 ---
 
-## Использование модели без тюнинга
+## Using a Model Without Tuning
 
 ```python
 from tab_forge.models import CTGANSynthesizer
@@ -241,24 +241,24 @@ from tab_forge.models import CTGANSynthesizer
 model = CTGANSynthesizer(epochs=300)
 model.fit(dataset)
 
-# Генерация как pd.DataFrame
+# Generate as pd.DataFrame
 synth_df = model.generate(n_samples=1000)
 
-# Генерация как Dataset (для Benchmark и AutoTuningStudy)
+# Generate as Dataset (for Benchmark and AutoTuningStudy)
 synth_dataset = model.structed_generate(n_samples=1000)
 ```
 
 ---
 
-## Примеры
+## Examples
 
-Подробные Jupyter-ноутбуки находятся в папке `examples/`:
+Detailed Jupyter notebooks are located in the `examples/` folder:
 
-| Ноутбук | Что показывает |
-|---------|----------------|
-| `test_dataset.ipynb` | Загрузка данных, разбиение, утилиты |
-| `test_model.ipynb` | Обучение и генерация для каждой архитектуры |
-| `test_benchmark.ipynb` | Оценка качества синтетических данных |
-| `test_tuning.ipynb` | `TuningStudy` и `AutoTuningStudy`, визуализация Optuna |
-| `test_prompt_generator.ipynb` | Построение промтов, zero/few-shot, разные наборы мета-фич |
-| `test_llm_runner.ipynb` | Полный цикл: промт → LLM → рейтинг |
+| Notebook | What it demonstrates |
+|----------|---------------------|
+| `test_dataset.ipynb` | Data loading, splitting, utilities |
+| `test_model.ipynb` | Training and generation for each architecture |
+| `test_benchmark.ipynb` | Synthetic data quality evaluation |
+| `test_tuning.ipynb` | `TuningStudy` and `AutoTuningStudy`, Optuna visualization |
+| `test_prompt_generator.ipynb` | Prompt construction, zero/few-shot, different meta-feature sets |
+| `test_llm_runner.ipynb` | Full cycle: prompt → LLM → ranking |

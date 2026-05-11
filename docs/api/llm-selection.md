@@ -1,6 +1,6 @@
 # API Reference — LLM Selection
 
-## Импорт
+## Import
 
 ```python
 from tab_forge.prompt_generator import PromptGenerator
@@ -18,17 +18,17 @@ PromptGenerator(
 )
 ```
 
-Строит структурированный промпт для LLM на основе мета-характеристик датасета.
+Builds a structured prompt for the LLM based on dataset meta-characteristics.
 
-При инициализации без аргументов использует встроенные директории с экспериментальными данными (`prompt_generator/experiment_results/`) и референсными датасетами (`prompt_generator/datasets/`).
+When initialized without arguments, uses built-in directories with experimental data (`prompt_generator/experiment_results/`) and reference datasets (`prompt_generator/datasets/`).
 
-**Параметры:**
+**Parameters:**
 
-- `experiment_dir` — путь к директории с результатами экспериментов (необязательно)
-- `datasets_dir` — путь к директории с референсными датасетами (необязательно)
+- `experiment_dir` — path to the directory with experiment results (optional)
+- `datasets_dir` — path to the directory with reference datasets (optional)
 
 !!! warning ""
-    При инициализации проверяется наличие папок `experiment_results/` и `datasets/`. Если они не найдены — поднимается исключение.
+    On initialization, the presence of `experiment_results/` and `datasets/` folders is verified. If they are not found — an exception is raised.
 
 ---
 
@@ -45,25 +45,25 @@ build_prompt(
 ) -> str
 ```
 
-Формирует текстовый промпт для LLM.
+Builds a text prompt for the LLM.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|-------------|----------|
-| `dataset` | `Dataset` | — | Датасет для анализа |
-| `target_metric` | `str` | `"r2_metric"` | Целевая метрика для ранжирования |
-| `shot_mode` | `str` | `"zero"` | `"zero"` или `"few"` |
-| `mfe_features` | `str` или `list` | `"short"` | Набор мета-фич: `"short"`, `"full"` или список строк |
-| `mfe_groups` | `list[str]` | `None` | Группы pymfe (например, `["statistical", "info-theory"]`) |
-| `models_to_include` | `list[str]` | все 6 | Ограничить набор моделей в промпте |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `dataset` | `Dataset` | — | Dataset to analyze |
+| `target_metric` | `str` | `"r2_metric"` | Target metric for ranking |
+| `shot_mode` | `str` | `"zero"` | `"zero"` or `"few"` |
+| `mfe_features` | `str` or `list` | `"short"` | Meta-feature set: `"short"`, `"full"`, or list of strings |
+| `mfe_groups` | `list[str]` | `None` | pymfe groups (e.g., `["statistical", "info-theory"]`) |
+| `models_to_include` | `list[str]` | all 6 | Limit the set of models in the prompt |
 
-**Возвращает:** строку-промпт готовую для отправки в LLM.
+**Returns:** a prompt string ready to send to the LLM.
 
-**Допустимые значения `target_metric`:**
+**Valid `target_metric` values:**
 
-| Значение | Метрика |
-|----------|---------|
+| Value | Metric |
+|-------|--------|
 | `"r2_metric"` | R² |
 | `"rmse_metric"` | RMSE |
 | `"jensen_shannon_metric"` | Jensen–Shannon Divergence |
@@ -80,7 +80,7 @@ build_prompt(
         shot_mode     = "few",
         mfe_features  = "short",
     )
-    print(f"Длина промпта: {len(prompt)} символов")
+    print(f"Prompt length: {len(prompt)} characters")
     ```
 
 ---
@@ -97,17 +97,17 @@ LLMRunner(
 )
 ```
 
-Отправляет промпт в OpenAI-совместимый API и агрегирует результаты нескольких запросов (self-consistency).
+Sends the prompt to an OpenAI-compatible API and aggregates results from multiple requests (self-consistency).
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|-------------|----------|
-| `base_url` | `str` | — | URL API endpoint (`"https://api.openai.com/v1"`) |
-| `api_key` | `str` | — | API ключ |
-| `model` | `str` | — | Имя модели (`"gpt-4o"`, `"llama3.1:8b"`, и т.д.) |
-| `retry_on_parse_error` | `bool` | `False` | Повторять запрос если LLM дал непарсируемый ответ |
-| `request_delay` | `float` | `0.0` | Задержка между запросами (секунды) |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `base_url` | `str` | — | API endpoint URL (`"https://api.openai.com/v1"`) |
+| `api_key` | `str` | — | API key |
+| `model` | `str` | — | Model name (`"gpt-4o"`, `"llama3.1:8b"`, etc.) |
+| `retry_on_parse_error` | `bool` | `False` | Retry the request if the LLM response is unparseable |
+| `request_delay` | `float` | `0.0` | Delay between requests (seconds) |
 
 ---
 
@@ -126,20 +126,20 @@ run(
 ) -> RunnerResult
 ```
 
-Выполняет `n_runs` независимых запросов к LLM и агрегирует рейтинги.
+Performs `n_runs` independent LLM requests and aggregates rankings.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | По умолчанию | Описание |
-|----------|-------------|----------|
-| `prompt` | — | Текст промпта |
-| `n_runs` | `1` | Количество независимых запросов (self-consistency) |
-| `temperature` | `0.7` | Температура генерации (0 = детерминировано) |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `prompt` | — | Prompt text |
+| `n_runs` | `1` | Number of independent requests (self-consistency) |
+| `temperature` | `0.7` | Generation temperature (0 = deterministic) |
 | `top_p` | `1.0` | Top-p (nucleus) sampling |
-| `max_tokens` | `2048` | Максимальное число токенов в ответе |
-| `seed` | `None` | Фиксация seed для воспроизводимости (если LLM поддерживает) |
+| `max_tokens` | `2048` | Maximum number of tokens in the response |
+| `seed` | `None` | Seed for reproducibility (if supported by the LLM) |
 
-**Возвращает:** `RunnerResult`
+**Returns:** `RunnerResult`
 
 !!! example ""
 
@@ -157,17 +157,17 @@ run(
 
 ## `RunnerResult`
 
-Датакласс с результатами всех запусков.
+Dataclass with results of all runs.
 
-| Атрибут | Тип | Описание |
-|---------|-----|----------|
-| `runs` | `List[SingleRun]` | Детали каждого запуска |
-| `average_ranks` | `dict` | Средний ранг каждой модели |
-| `final_ranking` | `List[str]` | Список моделей, упорядоченный по среднему рангу |
-| `n_runs` | `int` | Запрошенное число запусков |
-| `n_parsed` | `int` | Успешно распарсенных ответов |
-| `model` | `str` | Имя использованной LLM |
-| `prompt_chars` | `int` | Длина промпта в символах |
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `runs` | `List[SingleRun]` | Details of each run |
+| `average_ranks` | `dict` | Average rank of each model |
+| `final_ranking` | `List[str]` | List of models ordered by average rank |
+| `n_runs` | `int` | Requested number of runs |
+| `n_parsed` | `int` | Successfully parsed responses |
+| `model` | `str` | Name of the LLM used |
+| `prompt_chars` | `int` | Prompt length in characters |
 
 !!! example ""
 
@@ -178,25 +178,25 @@ run(
     print(result.average_ranks)
     # {'GAN-MFS': 1.4, 'CTGAN': 1.8, 'WGAN-GP': 3.0, ...}
 
-    print(f"Успешно распарсено: {result.n_parsed}/{result.n_runs}")
+    print(f"Successfully parsed: {result.n_parsed}/{result.n_runs}")
     ```
 
 ---
 
 ## `SingleRun`
 
-Датакласс с деталями одного запуска.
+Dataclass with details of a single run.
 
-| Атрибут | Тип | Описание |
-|---------|-----|----------|
-| `run_index` | `int` | Индекс запуска |
-| `raw_response` | `str` | Сырой текст ответа LLM |
-| `ranking` | `List[str]` | Распарсенный рейтинг моделей |
-| `parsed_ok` | `bool` | Успешно ли распарсился ответ |
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `run_index` | `int` | Run index |
+| `raw_response` | `str` | Raw LLM response text |
+| `ranking` | `List[str]` | Parsed model ranking |
+| `parsed_ok` | `bool` | Whether the response was successfully parsed |
 
 ---
 
-## Вспомогательные функции
+## Utility Functions
 
 ### `extract_meta_features`
 
@@ -213,4 +213,4 @@ print(features)
 # {'nr_inst': 4177, 'nr_attr': 8, 'nr_num': 7, 'missing_pct': 0.0, ...}
 ```
 
-Вычисляет мета-характеристики датасета. Использует как ручные вычисления (базовые статистики), так и `pymfe` для расширенных фич.
+Computes dataset meta-characteristics. Uses both manual calculations (basic statistics) and `pymfe` for extended features.

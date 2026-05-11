@@ -1,6 +1,6 @@
 # API Reference — Benchmark
 
-## Импорт
+## Import
 
 ```python
 from tab_forge.benchmark import Benchmark, BenchmarkResult
@@ -16,13 +16,13 @@ Benchmark(
 )
 ```
 
-Оценивает качество синтетических данных относительно реальных по набору метрик.
+Evaluates the quality of synthetic data relative to real data using a set of metrics.
 
-**Параметры:**
+**Parameters:**
 
-- `metrics_spec` — спецификация метрик. Поддерживает два формата:
+- `metrics_spec` — metric specification. Supports two formats:
 
-=== "Список"
+=== "List"
 
     ```python
     bench = Benchmark([
@@ -34,7 +34,7 @@ Benchmark(
     ])
     ```
 
-=== "Словарь (с именами)"
+=== "Dictionary (with names)"
 
     ```python
     bench = Benchmark({
@@ -46,10 +46,10 @@ Benchmark(
 
 ---
 
-### Доступные метрики
+### Available Metrics
 
-| Строка | Класс метрики | Параметры |
-|--------|--------------|-----------|
+| String | Metric class | Parameters |
+|--------|-------------|-----------|
 | `"r2"` | `r2_metric` | `model`: `"xgboost"` / `"linearregression"` |
 | `"rmse"` | `rmse_metric` | `model`: `"xgboost"` / `"linearregression"` |
 | `"js_mean"` | `jensen_shannon_metric` | — |
@@ -67,14 +67,14 @@ evaluate(
 ) -> BenchmarkResult
 ```
 
-Вычисляет все заданные метрики.
+Computes all specified metrics.
 
-**Параметры:**
+**Parameters:**
 
-- `synthetic_data` — синтетические данные в виде `Dataset`
-- `real_data` — реальные данные в виде `Dataset` (тестовая выборка)
+- `synthetic_data` — synthetic data as a `Dataset`
+- `real_data` — real data as a `Dataset` (test set)
 
-**Возвращает:** `BenchmarkResult`
+**Returns:** `BenchmarkResult`
 
 !!! example ""
 
@@ -86,17 +86,17 @@ evaluate(
     ```
 
 !!! note ""
-    Метод `fit` — алиас для `evaluate`. Оба работают одинаково.
+    The `fit` method is an alias for `evaluate`. Both work the same way.
 
 ---
 
 ## `BenchmarkResult`
 
-Датакласс с результатами оценки.
+Dataclass with evaluation results.
 
-| Атрибут | Тип | Описание |
-|---------|-----|----------|
-| `metrics` | `dict` | Словарь `{имя_метрики: значение}` |
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `metrics` | `dict` | Dictionary `{metric_name: value}` |
 
 !!! example ""
 
@@ -104,57 +104,57 @@ evaluate(
     print(result)
     # BenchmarkResult(r2_xgb=0.743, rmse=1.823, js=0.041)
 
-    # Доступ к конкретной метрике
+    # Access a specific metric
     r2_value = result.metrics["r2_xgb"]
     ```
 
 ---
 
-## Метрики подробно
+## Metrics in Detail
 
 ### `r2_metric(synthetic: Dataset, real: Dataset, model="xgboost") -> float`
 
-Обучает ML-модель на синтетических данных, оценивает на реальных. Возвращает R².
+Trains an ML model on synthetic data, evaluates on real data. Returns R².
 
-**Схема:** `fit(synth_X, synth_y)` → `predict(real_X)` → `R²(real_y, predictions)`
+**Scheme:** `fit(synth_X, synth_y)` → `predict(real_X)` → `R²(real_y, predictions)`
 
 ### `rmse_metric(synthetic: Dataset, real: Dataset, model="xgboost") -> float`
 
-Аналогично R², но возвращает RMSE (среднеквадратичная ошибка).
+Same as R², but returns RMSE (root mean square error).
 
 ### `jensen_shannon_metric(synthetic: Dataset, real: Dataset) -> float`
 
-Среднее значение Jensen–Shannon Divergence по всем числовым признакам. JSD вычисляется через гистограммы.
+Mean Jensen–Shannon Divergence across all numerical features. JSD is computed via histograms.
 
 ### `frob_corr_metric(synthetic: Dataset, real: Dataset) -> float`
 
-Норма Фробениуса разности корреляционных матриц:
+Frobenius norm of the difference between correlation matrices:
 \(\| \text{Corr}(X_\text{real}) - \text{Corr}(X_\text{synth}) \|_F\)
 
 ### `frob_mi_metric(synthetic: Dataset, real: Dataset) -> float`
 
-Норма Фробениуса разности матриц взаимной информации:
+Frobenius norm of the difference between mutual information matrices:
 \(\| \text{MI}(X_\text{real}) - \text{MI}(X_\text{synth}) \|_F\)
 
 ---
 
-## Кастомные метрики
+## Custom Metrics
 
-`Benchmark` принимает произвольную callable вместо строки метрики. Сигнатура функции:
+`Benchmark` accepts an arbitrary callable instead of a metric string. Function signature:
 
 ```python
 def my_metric(synthetic: Dataset, real: Dataset, **kwargs) -> float:
     ...
 ```
 
-Функция получает два объекта `Dataset` и должна вернуть одно число. Параметры из словаря `kwargs` можно передавать через спецификацию метрик.
+The function receives two `Dataset` objects and must return a single number. Parameters from the `kwargs` dictionary can be passed via the metric specification.
 
-### Пример: Wasserstein-дистанция и анонимность
+### Example: Wasserstein Distance and Anonymity
 
-Допустим, вас интересуют две дополнительные характеристики синтетических данных, которых нет во встроенных метриках:
+Suppose you are interested in two additional synthetic data characteristics not available in the built-in metrics:
 
-1. **Wasserstein-дистанция** — чувствительнее к форме распределений, чем JS-дивергенция
-2. **Мера анонимности** — средняя дистанция до ближайшего соседа в реальных данных (чем больше — тем «безопаснее» синтетика с точки зрения приватности)
+1. **Wasserstein distance** — more sensitive to distribution shape than JS divergence
+2. **Anonymity measure** — average distance to the nearest neighbor in real data (the larger — the "safer" the synthetic data in terms of privacy)
 
 ```python
 import numpy as np
@@ -162,7 +162,7 @@ from scipy.stats import wasserstein_distance
 from scipy.spatial import cKDTree
 
 def wasserstein_mean(synthetic, real):
-    """Средняя Wasserstein-дистанция по всем числовым признакам."""
+    """Mean Wasserstein distance across all numerical features."""
     num_cols = real.numerical_features
     distances = [
         wasserstein_distance(
@@ -176,9 +176,9 @@ def wasserstein_mean(synthetic, real):
 
 def nearest_neighbour_distance(synthetic, real, quantile=0.05):
     """
-    Оценка приватности: 5-й перцентиль расстояния от каждой синтетической
-    точки до ближайшей реальной (нормировано на стандартное отклонение).
-    Чем больше значение — тем дальше синтетика от реальных записей.
+    Privacy estimate: 5th percentile of distance from each synthetic
+    point to the nearest real one (normalized by standard deviation).
+    Larger value means synthetic data is farther from real records.
     """
     num_cols = real.numerical_features
     real_arr  = real.data[num_cols].dropna().values
@@ -195,15 +195,15 @@ def nearest_neighbour_distance(synthetic, real, quantile=0.05):
 
 
 benchmark = Benchmark({
-    # Стандартные метрики качества предсказания
+    # Standard prediction quality metrics
     "r2_xgb":        ("r2",        {"model": "xgboost"}),
     "r2_linear":     ("r2",        {"model": "linear"}),
     "rmse_xgb":      ("rmse",      {"model": "xgboost"}),
-    # Статистическое сходство распределений
+    # Statistical distribution similarity
     "js_mean":       ("js_mean",   {}),
     "frob_corr":     ("frob_corr", {}),
     "frob_mi":       ("frob_mi",   {}),
-    # Кастомные метрики
+    # Custom metrics
     "wasserstein":   (wasserstein_mean,          {}),
     "privacy_p05":   (nearest_neighbour_distance, {"quantile": 0.05}),
 })
@@ -218,8 +218,8 @@ print(result.metrics)
 # }
 ```
 
-!!! tip "Kwargs в кастомных метриках"
-    Параметры, заданные в спецификации (`{"quantile": 0.05}`), передаются в функцию как keyword-аргументы. Это позволяет переиспользовать одну функцию с разными настройками:
+!!! tip "Kwargs in custom metrics"
+    Parameters defined in the specification (`{"quantile": 0.05}`) are passed to the function as keyword arguments. This allows reusing one function with different settings:
 
     ```python
     benchmark = Benchmark({

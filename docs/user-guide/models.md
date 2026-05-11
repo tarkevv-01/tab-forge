@@ -1,24 +1,24 @@
-# Модуль Models
+# Models Module
 
-## Зачем это нужно
+## Why You Need This
 
-Шесть поддерживаемых архитектур реализованы в очень разных библиотеках: SDV, Synthcity, PyTorch с кастомными реализациями. Каждая предоставляет свой API. Tab-Forge накрывает всех единым интерфейсом `BaseGenerativeModel` с тремя ключевыми методами: `fit`, `generate`, `structed_generate`.
+The six supported architectures are implemented in very different libraries: SDV, Synthcity, PyTorch with custom implementations. Each provides its own API. Tab-Forge wraps all of them with a unified `BaseGenerativeModel` interface with three key methods: `fit`, `generate`, `structed_generate`.
 
 ---
 
-## Единый интерфейс
+## Unified Interface
 
 ```python
-# Все модели работают одинаково
-model.fit(dataset)                          # обучение
+# All models work the same way
+model.fit(dataset)                          # train
 synth_df  = model.generate(n_samples=500)  # → pd.DataFrame
-synth_ds  = model.structed_generate(500)   # → Dataset (для Benchmark / AutoTuning)
-losses    = model.get_losses()             # история функции потерь
+synth_ds  = model.structed_generate(500)   # → Dataset (for Benchmark / AutoTuning)
+losses    = model.get_losses()             # training loss history
 ```
 
 ---
 
-## Все 6 моделей
+## All 6 Models
 
 ### CTGAN — Conditional Tabular GAN
 
@@ -36,10 +36,10 @@ model.fit(dataset)
 synth = model.structed_generate(1000)
 ```
 
-**Когда использовать:** CTGAN — надёжный универсальный выбор. Реализован через SDV и хорошо работает на смешанных данных (числовые + категориальные). Особенно эффективен когда в данных есть сложные условные распределения по категориальным признакам.
+**When to use:** CTGAN is a reliable general-purpose choice. Implemented via SDV and works well on mixed data (numerical + categorical). Especially effective when data has complex conditional distributions by categorical features.
 
-!!! tip "Оптимальные метрики для CTGAN"
-    По экспериментам CTGAN показал стабильные результаты по **R²** (5 улучшений) и **RMSE** (6 улучшений). Хороший общий выбор для задач регрессии.
+!!! tip "Optimal metrics for CTGAN"
+    Experiments show CTGAN produced stable results for **R²** (5 improvements) and **RMSE** (6 improvements). A good general choice for regression tasks.
 
 ---
 
@@ -53,20 +53,20 @@ model = WGANGPSynthesizer(
     batch_size      = 256,
     generator_lr    = 1e-4,
     discriminator_lr= 1e-4,
-    n_critic        = 5,       # шагов дискриминатора на шаг генератора
-    lambda_gp       = 10,      # коэффициент gradient penalty
+    n_critic        = 5,       # discriminator steps per generator step
+    lambda_gp       = 10,      # gradient penalty coefficient
 )
 model.fit(dataset)
 ```
 
-**Когда использовать:** WGAN-GP теоретически более стабилен в обучении, чем обычный GAN — gradient penalty предотвращает mode collapse. Собственная реализация на PyTorch внутри Tab-Forge.
+**When to use:** WGAN-GP is theoretically more stable in training than standard GAN — gradient penalty prevents mode collapse. Custom PyTorch implementation inside Tab-Forge.
 
-!!! tip "Оптимальные метрики для WGAN-GP"
-    Рекордные результаты по **JS-дивергенции** (12 улучшений из 25!) — это логично, ведь Wasserstein-расстояние напрямую связано с расхождением распределений. Также хорошие результаты по **RMSE** (6 улучшений).
+!!! tip "Optimal metrics for WGAN-GP"
+    Record results for **JS divergence** (12 improvements out of 25!) — this makes sense, as Wasserstein distance is directly related to distribution divergence. Also good results for **RMSE** (6 improvements).
 
 ---
 
-### GAN-MFS — GAN с Meta-Feature Similarity
+### GAN-MFS — GAN with Meta-Feature Similarity
 
 ```python
 from tab_forge.models import GANMFSSynthesizer
@@ -75,21 +75,21 @@ model = GANMFSSynthesizer(
     epochs       = 300,
     batch_size   = 256,
     generator_lr = 1e-4,
-    mfs_lambda   = 0.1,    # вес MFS-регуляризатора в функции потерь
-    subset_mfs   = 10,     # размер подвыборки для MFS
-    sample_frac  = 0.1,    # доля данных для вычисления MFS
+    mfs_lambda   = 0.1,    # MFS regularizer weight in loss function
+    subset_mfs   = 10,     # subsample size for MFS
+    sample_frac  = 0.1,    # fraction of data for MFS computation
 )
 model.fit(dataset)
 ```
 
-**Когда использовать:** GAN-MFS расширяет WGAN-GP дополнительным слагаемым в функции потерь — расстоянием Wasserstein на распределениях мета-фич (статистик данных). Это делает генерируемые данные статистически похожими на реальные.
+**When to use:** GAN-MFS extends WGAN-GP with an additional term in the loss function — Wasserstein distance on meta-feature (data statistics) distributions. This makes generated data statistically similar to real data.
 
-!!! tip "GAN-MFS — выбор номер один для R²"
-    В экспериментах GAN-MFS показал **наилучшие результаты по R²** среди всех моделей (8 улучшений из 25). Если ваша задача — обучить ML-модель на синтетике, начните с GAN-MFS.
+!!! tip "GAN-MFS — the number one choice for R²"
+    In experiments, GAN-MFS showed **the best R² results** among all models (8 improvements out of 25). If your goal is to train an ML model on synthetic data, start with GAN-MFS.
 
 ---
 
-### CTABGAN+ — CTABGAN с вспомогательными головами
+### CTABGAN+ — CTABGAN with Auxiliary Heads
 
 ```python
 from tab_forge.models import CTABGANPlusSynthesizer
@@ -106,13 +106,13 @@ model = CTABGANPlusSynthesizer(
 model.fit(dataset)
 ```
 
-**Когда использовать:** CTABGAN+ добавляет к обычному CTGAN вспомогательные классификационные/регрессионные головы в дискриминаторе. Это принуждает генератор учитывать целевую переменную и сохранять её распределение.
+**When to use:** CTABGAN+ adds auxiliary classification/regression heads in the discriminator to standard CTGAN. This forces the generator to account for the target variable and preserve its distribution.
 
-!!! tip "Оптимальные метрики для CTABGAN+"
-    Показал выдающиеся результаты по **RMSE** (11 улучшений — лучший результат среди всех моделей!). Хороший выбор когда важна точность предсказания.
+!!! tip "Optimal metrics for CTABGAN+"
+    Outstanding results for **RMSE** (11 improvements — the best result among all models!). A great choice when prediction accuracy matters.
 
-!!! note "Тип задачи"
-    CTABGAN+ автоматически определяет тип вспомогательной задачи из `dataset.info.task_type`. Укажите правильный тип задачи при создании `Dataset`.
+!!! note "Task type"
+    CTABGAN+ automatically determines the auxiliary task type from `dataset.info.task_type`. Make sure to specify the correct task type when creating the `Dataset`.
 
 ---
 
@@ -132,14 +132,14 @@ model = TVAESynthesizer(
 model.fit(dataset)
 ```
 
-**Когда использовать:** TVAE — VAE-based архитектура от SDV. В отличие от GAN, VAE обучается стабильнее (нет соревнования генератора и дискриминатора) и хорошо работает на датасетах с пропущенными значениями.
+**When to use:** TVAE is a VAE-based architecture from SDV. Unlike GAN, VAE trains more stably (no generator-discriminator competition) and works well on datasets with missing values.
 
-!!! tip "Когда выбирать TVAE"
-    Если GAN-обучение нестабильно или данных мало — попробуйте TVAE. Модель хорошо справляется с задачами где важна **RMSE** (8 улучшений).
+!!! tip "When to choose TVAE"
+    If GAN training is unstable or data is limited — try TVAE. The model handles tasks where **RMSE** is important well (8 improvements).
 
 ---
 
-### TabDDPM — Диффузионная модель
+### TabDDPM — Diffusion Model
 
 ```python
 from tab_forge.models import DDPMSynthesizer
@@ -155,32 +155,32 @@ model = DDPMSynthesizer(
 model.fit(dataset)
 ```
 
-**Когда использовать:** TabDDPM — современная диффузионная архитектура (Synthcity). Хорошо улавливает сложные многомодальные распределения и нелинейные зависимости. Обычно требует больше времени на обучение.
+**When to use:** TabDDPM is a modern diffusion architecture (Synthcity). It captures complex multimodal distributions and nonlinear dependencies well. Usually requires more training time.
 
-!!! tip "Оптимальные метрики для TabDDPM"
-    Хорошие результаты по **R²** (7 улучшений) и **MI** (6 улучшений). Рекомендуется для датасетов с нелинейными зависимостями.
+!!! tip "Optimal metrics for TabDDPM"
+    Good results for **R²** (7 improvements) and **MI** (6 improvements). Recommended for datasets with nonlinear dependencies.
 
-!!! warning "Время обучения"
-    Диффузионные модели обучаются медленнее GAN. При ограниченных ресурсах уменьшите `num_timesteps` или `epochs`.
-
----
-
-## Сравнение моделей
-
-| Модель | Архитектура | Лучшая метрика | Скорость | Стабильность |
-|--------|------------|----------------|----------|--------------|
-| CTGAN | Conditional GAN (SDV) | R², RMSE | Быстрая | Средняя |
-| WGAN-GP | Wasserstein GAN | JS divergence | Средняя | Высокая |
-| GAN-MFS | WGAN-GP + MFS loss | **R²** ⭐ | Средняя | Высокая |
-| CTABGAN+ | CTGAN + aux heads | **RMSE** ⭐ | Низкая | Низкая |
-| TVAE | Variational AE (SDV) | RMSE | Быстрая | Очень высокая |
-| TabDDPM | Diffusion (Synthcity) | R², MI | Медленная | Высокая |
+!!! warning "Training time"
+    Diffusion models train slower than GAN. With limited resources, reduce `num_timesteps` or `epochs`.
 
 ---
 
-## Гиперпараметры по умолчанию
+## Model Comparison
 
-!!! note "Откуда берутся дефолты?"
-    Дефолтные значения гиперпараметров взяты из оригинальных статей и репозиториев каждой архитектуры. При использовании `AutoTuningStudy` с режимом `"extended"` они служат отправной точкой для поиска.
+| Model | Architecture | Best metric | Speed | Stability |
+|-------|------------|-------------|-------|----------|
+| CTGAN | Conditional GAN (SDV) | R², RMSE | Fast | Medium |
+| WGAN-GP | Wasserstein GAN | JS divergence | Medium | High |
+| GAN-MFS | WGAN-GP + MFS loss | **R²** ⭐ | Medium | High |
+| CTABGAN+ | CTGAN + aux heads | **RMSE** ⭐ | Slow | Low |
+| TVAE | Variational AE (SDV) | RMSE | Fast | Very high |
+| TabDDPM | Diffusion (Synthcity) | R², MI | Slow | High |
 
-Подробные диапазоны всех гиперпараметров для тюнинга описаны в разделе [Tuning](./tuning.md) и в [API Reference](../api/models.md).
+---
+
+## Default Hyperparameters
+
+!!! note "Where do defaults come from?"
+    Default hyperparameter values are taken from the original papers and repositories of each architecture. When using `AutoTuningStudy` with `"extended"` mode, they serve as the starting point for the search.
+
+Detailed hyperparameter ranges for tuning are described in the [Tuning](./tuning.md) section and in the [API Reference](../api/models.md).

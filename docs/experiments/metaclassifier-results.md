@@ -1,148 +1,148 @@
-# Результаты мета-классификатора (LLM Selection)
+# Meta-Classifier Results (LLM Selection)
 
-## Что мы измеряли
+## What We Measured
 
-Ключевой вопрос: **насколько хорошо LLM предсказывает лучшую модель для датасета?**
+The key question: **how well does the LLM predict the best model for a dataset?**
 
-Мы тестировали 4 стратегии формирования промпта:
+We tested 4 prompt construction strategies:
 
-- **Zero-shot + full prompt** — мета-фичи + полные описания моделей, без примеров
-- **Zero-shot + short prompt** — мета-фичи + краткие описания, без примеров
-- **Few-shot + full prompt** — мета-фичи + полные описания + результаты на референсных датасетах
-- **Few-shot + short prompt** — мета-фичи + краткие описания + результаты на референсных датасетах
+- **Zero-shot + full prompt** — meta-features + full model descriptions, no examples
+- **Zero-shot + short prompt** — meta-features + brief descriptions, no examples
+- **Few-shot + full prompt** — meta-features + full descriptions + results on reference datasets
+- **Few-shot + short prompt** — meta-features + brief descriptions + results on reference datasets
 
-И два типа метрик качества предсказания:
+And two types of prediction quality metrics:
 
-- **ρ Spearman** — насколько хорошо LLM упорядочивает модели (корреляция рангов с реальным рейтингом)
-- **top1-acc** — как часто LLM правильно называет **лучшую** модель с первой попытки
+- **ρ Spearman** — how well the LLM orders the models (rank correlation with the real ranking)
+- **top1-acc** — how often the LLM correctly names the **best** model on the first attempt
 
 ---
 
-## Что такое zero-shot и few-shot
+## What is Zero-shot and Few-shot
 
 ### Zero-shot
 
-LLM видит только:
-- Мета-характеристики датасета (размер, признаки, статистики)
-- Описания моделей
-- Целевую метрику
+The LLM sees only:
+- Dataset meta-characteristics (size, features, statistics)
+- Model descriptions
+- Target metric
 
-Модель отвечает на основе общих знаний — **без примеров** того, как модели вели себя на реальных данных.
+The model responds based on general knowledge — **without examples** of how models behaved on real data.
 
 ### Few-shot
 
-В дополнение к zero-shot добавляются **результаты предварительных экспериментов** на 5 референсных датасетах. LLM видит конкретные числа: например, «на датасете abalone при оптимизации по R² модель GAN-MFS показала лучший результат». Это контекстуальный опыт, который помогает LLM лучше рассуждать.
+In addition to the zero-shot content, **results of preliminary experiments** on 5 reference datasets are added. The LLM sees specific numbers: for example, "on the abalone dataset when optimizing by R², the GAN-MFS model showed the best result". This is contextual experience that helps the LLM reason better.
 
-### Full vs Short — набор мета-фич датасета
+### Full vs Short — dataset meta-feature set
 
-Речь идёт о количестве мета-характеристик пользовательского датасета, которые передаются в промпте.
+This refers to the number of meta-characteristics of the user dataset that are passed in the prompt.
 
-- **Full** — полный набор из **43 мета-фич** (все доступные признаки pymfe): статистики распределений, характеристики информационного содержания, размерность и т.д.
-- **Short** — сокращённый набор мета-фич, сформированный по результатам исследования важности признаков (порог > 0.05). Включает ключевые фичи, на которые LLM реально обращает внимание при ранжировании — полный набор при этом не даёт существенного прироста качества.
+- **Full** — the complete set of **43 meta-features** (all available pymfe features): distribution statistics, information content characteristics, dimensionality, etc.
+- **Short** — a reduced set of meta-features formed by feature importance analysis (threshold > 0.05). Includes the key features the LLM actually relies on for ranking — the full set provides no significant quality gain.
 
 ---
 
-## Таблица результатов
+## Results Table
 
-### ρ Spearman (средний по датасетам)
+### ρ Spearman (average across datasets)
 
-*Насколько хорошо LLM упорядочивает модели — от 0 (случайно) до 1 (идеально). Значение 0.5+ считается хорошим.*
+*How well the LLM orders models — from 0 (random) to 1 (perfect). A value of 0.5+ is considered good.*
 
-| Метрика | zero-shot full | zero-shot short | few-shot full | few-shot short |
-|---------|---------------|-----------------|---------------|----------------|
+| Metric | zero-shot full | zero-shot short | few-shot full | few-shot short |
+|--------|---------------|-----------------|---------------|----------------|
 | **R²** | 0.5815 | 0.5040 | **0.7234** | 0.6937 |
 | **LF** | **0.5794** | 0.5406 | 0.4080 | 0.4171 |
 | **JS** | 0.1611 | 0.2846 | 0.3029 | 0.2891 |
 | **MI** | 0.4948 | 0.5085 | **0.7463** | 0.6251 |
 | **RMSE** | 0.2891 | 0.3143 | 0.3280 | 0.2800 |
 
-### top1-acc (средний по датасетам)
+### top1-acc (average across datasets)
 
-*Доля случаев, в которых LLM правильно назвала лучшую модель с первого места. 0.84 = в 84% случаев LLM права.*
+*Fraction of cases in which the LLM correctly named the best model in first place. 0.84 = in 84% of cases the LLM is correct.*
 
-| Метрика | zero-shot full | zero-shot short | few-shot full | few-shot short |
-|---------|---------------|-----------------|---------------|----------------|
+| Metric | zero-shot full | zero-shot short | few-shot full | few-shot short |
+|--------|---------------|-----------------|---------------|----------------|
 | **R²** | 0.48 | 0.36 | 0.60 | 0.60 |
 | **LF** | 0.28 | 0.36 | 0.60 | 0.64 |
 | **JS** | 0.16 | 0.40 | **0.84** | 0.76 |
 | **MI** | 0.44 | 0.44 | **0.84** | 0.76 |
 | **RMSE** | 0.32 | 0.32 | 0.44 | 0.52 |
 
-!!! note "Выделение результатов"
-    В оригинальной презентации зелёные ячейки — высокие значения (хорошо), красные — низкие. В обеих таблицах **few-shot + full prompt** доминирует для большинства метрик.
+!!! note "Result highlighting"
+    In the original presentation, green cells indicate high values (good), red indicate low. In both tables, **few-shot + full prompt** dominates for most metrics.
 
 ---
 
-## Интерпретация результатов
+## Interpretation of Results
 
-### Few-shot значительно лучше zero-shot
+### Few-shot is significantly better than zero-shot
 
-Для большинства метрик переход к few-shot повышает качество предсказания. Самый наглядный пример:
+For most metrics, switching to few-shot improves prediction quality. The most striking example:
 
-- **JS zero-shot full**: top1-acc = **0.16** (LLM практически случайно выбирает)
-- **JS few-shot full**: top1-acc = **0.84** (в 84% случаев LLM правильно называет лучшую модель!)
+- **JS zero-shot full**: top1-acc = **0.16** (LLM is almost choosing randomly)
+- **JS few-shot full**: top1-acc = **0.84** (in 84% of cases the LLM correctly names the best model!)
 
-Разрыв в 5 раз! Это объяснимо: из общих знаний сложно понять какая GAN-архитектура лучше воспроизведёт JS-дивергенцию — но конкретные экспериментальные данные дают LLM нужный контекст.
+A 5x gap! This is explainable: from general knowledge it is hard to understand which GAN architecture will better reproduce JS divergence — but specific experimental data gives the LLM the necessary context.
 
-### Лучшие результаты — для JS и MI
+### Best results — for JS and MI
 
-Few-shot + full prompt для **JS** и **MI** даёт top1-acc = **0.84**. Это значит, что в 84% случаев LLM правильно называет лучшую модель с первой попытки — без единого запуска тюнинга.
+Few-shot + full prompt for **JS** and **MI** gives top1-acc = **0.84**. This means that in 84% of cases the LLM correctly names the best model on the first attempt — without running a single tuning trial.
 
-### R² и LF — уверенное ранжирование
+### R² and LF — confident ranking
 
-Для **R²** ρ Spearman = **0.72** (few-shot full) — LLM не просто угадывает лучшую модель, но и достаточно точно упорядочивает остальные. Это означает: порядок, в котором вы тюните модели по рейтингу LLM, соответствует реальному порядку их качества.
+For **R²** ρ Spearman = **0.72** (few-shot full) — the LLM doesn't just guess the best model, but also orders the rest reasonably well. This means: the order in which you tune models by LLM ranking corresponds to the real order of their quality.
 
-### RMSE — сложная метрика для LLM
+### RMSE — a difficult metric for LLM
 
-Для **RMSE** все стратегии показывают relative скромные результаты (top1-acc 0.32–0.52, ρ 0.28–0.33). Это может объяснятся тем, что RMSE сильно зависит от масштаба данных и специфики целевой переменной — информации, которую сложно выразить через стандартные мета-фичи.
+For **RMSE** all strategies show relatively modest results (top1-acc 0.32–0.52, ρ 0.28–0.33). This may be because RMSE strongly depends on data scale and target variable specifics — information that is hard to express through standard meta-features.
 
 ---
 
-## Что такое ρ Spearman в данном контексте
+## What is ρ Spearman in This Context
 
-**ρ Spearman** — это коэффициент корреляции рангов. В нашем контексте:
+**ρ Spearman** is the rank correlation coefficient. In our context:
 
-1. У нас есть **реальный рейтинг** 6 моделей по метрике X на датасете Y (получен после тюнинга всех моделей)
-2. LLM выдаёт **предсказанный рейтинг**
-3. ρ Spearman измеряет, насколько эти два рейтинга совпадают
+1. We have a **real ranking** of 6 models by metric X on dataset Y (obtained after tuning all models)
+2. The LLM outputs a **predicted ranking**
+3. ρ Spearman measures how closely these two rankings agree
 
 \[
 \rho = 1 - \frac{6 \sum_i d_i^2}{n(n^2 - 1)}
 \]
 
-где \(d_i\) — разность рангов для i-й модели.
+where \(d_i\) is the rank difference for the i-th model.
 
-- **ρ = 1.0** — LLM предсказала порядок идеально
-- **ρ = 0.0** — рейтинг случайный
-- **ρ = -1.0** — LLM поставила всё с ног на голову
+- **ρ = 1.0** — LLM predicted the order perfectly
+- **ρ = 0.0** — ranking is random
+- **ρ = -1.0** — LLM ranked everything in reverse order
 
-Значения 0.7+ (достигнутые для R² и MI в few-shot режиме) — это очень хорошие результаты для задачи мета-обучения.
+Values of 0.7+ (achieved for R² and MI in few-shot mode) are very good results for a meta-learning task.
 
 ---
 
-## Практические выводы
+## Practical Conclusions
 
-### 1. Используйте few-shot режим
+### 1. Use few-shot mode
 
-Всегда используйте `shot_mode="few"` — разница с zero-shot существенная для большинства метрик.
+Always use `shot_mode="few"` — the difference from zero-shot is significant for most metrics.
 
-### 2. Full vs Short набор мета-фич
+### 2. Full vs Short meta-feature set
 
-Несмотря на то что **full** (43 мета-фичи) в среднем немного лучше или равен short, разница несущественна. Используйте `mfe_features="short"` — сокращённый набор покрывает те признаки, на которые LLM реально опирается, и даёт сопоставимое качество при более компактном промпте.
+Despite the fact that **full** (43 meta-features) is on average slightly better or equal to short, the difference is negligible. Use `mfe_features="short"` — the reduced set covers the features the LLM actually relies on, and gives comparable quality with a more compact prompt.
 
-### 3. Если оптимизируете по RMSE — перепроверяйте LLM-рейтинг
+### 3. If optimizing by RMSE — double-check the LLM ranking
 
-LLM менее надёжна при предсказании лучшей модели для RMSE. Рассмотрите тюнинг двух-трёх первых моделей из рейтинга, а не только первой.
+The LLM is less reliable at predicting the best model for RMSE. Consider tuning two or three top models from the ranking, not just the first.
 
-### 4. Рекомендуемая конфигурация
+### 4. Recommended configuration
 
 ```python
 prompt = gen.build_prompt(
     dataset       = dataset,
-    target_metric = "r2_metric",  # или "mi_matrix_metric"
+    target_metric = "r2_metric",  # or "mi_matrix_metric"
     shot_mode     = "few",        # ✓ few-shot
-    mfe_features  = "short",      # ✓ 12 ключевых фич
+    mfe_features  = "short",      # ✓ 12 key features
 )
 result = runner.run(prompt, n_runs=5, temperature=0.7)
-# top1-acc ~0.60–0.84 в зависимости от метрики
+# top1-acc ~0.60–0.84 depending on the metric
 ```

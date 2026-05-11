@@ -1,12 +1,12 @@
-# Модуль Benchmark
+# Benchmark Module
 
-## Зачем это нужно
+## Why You Need This
 
-После генерации синтетических данных нужно ответить на вопрос: насколько они хороши? Tab-Forge предоставляет стандартизированный инструмент для оценки — `Benchmark`. Он принимает синтетику и реальные данные в виде `Dataset`-объектов и возвращает числа по выбранным метрикам.
+After generating synthetic data, you need to answer the question: how good is it? Tab-Forge provides a standardized tool for evaluation — `Benchmark`. It accepts synthetic and real data as `Dataset` objects and returns numbers for selected metrics.
 
 ---
 
-## Базовое использование
+## Basic Usage
 
 ```python
 from tab_forge.benchmark import Benchmark
@@ -23,11 +23,11 @@ print(result)
 
 ---
 
-## Спецификация метрик
+## Metric Specification
 
-Benchmark принимает метрики в двух форматах:
+Benchmark accepts metrics in two formats:
 
-### Список (без имён)
+### List (without names)
 
 ```python
 bench = Benchmark([
@@ -39,9 +39,9 @@ bench = Benchmark([
 ])
 ```
 
-### Словарь (с именами)
+### Dictionary (with names)
 
-Удобно когда нужно запустить одну и ту же метрику с разными параметрами:
+Convenient when you need to run the same metric with different parameters:
 
 ```python
 bench = Benchmark({
@@ -53,58 +53,58 @@ bench = Benchmark({
 
 ---
 
-## Доступные метрики
+## Available Metrics
 
-| Строка | Описание | Параметры |
-|--------|----------|-----------|
-| `"r2"` | Коэффициент детерминации | `model`: `"xgboost"` / `"linearregression"` |
-| `"rmse"` | Среднеквадратичная ошибка | `model`: `"xgboost"` / `"linearregression"` |
-| `"js_mean"` | Среднее Jensen–Shannon по всем признакам | — |
-| `"frob_corr"` | Норма Фробениуса разности корреляционных матриц | — |
-| `"frob_mi"` | Норма Фробениуса разности матриц взаимной информации | — |
+| String | Description | Parameters |
+|--------|-------------|-----------|
+| `"r2"` | Coefficient of determination | `model`: `"xgboost"` / `"linearregression"` |
+| `"rmse"` | Root mean square error | `model`: `"xgboost"` / `"linearregression"` |
+| `"js_mean"` | Mean Jensen–Shannon across all features | — |
+| `"frob_corr"` | Frobenius norm of the difference between correlation matrices | — |
+| `"frob_mi"` | Frobenius norm of the difference between mutual information matrices | — |
 
-!!! note "ML-модели для r2 и rmse"
-    Параметр `model` задаёт, какой ML-алгоритм используется для оценки. Рекомендуется `"xgboost"` — он нелинейный и лучше отражает реальную полезность синтетики.
+!!! note "ML models for r2 and rmse"
+    The `model` parameter specifies which ML algorithm is used for evaluation. `"xgboost"` is recommended — it is nonlinear and better reflects the real utility of synthetic data.
 
 ---
 
 ## BenchmarkResult
 
-`bench.evaluate()` возвращает `BenchmarkResult`:
+`bench.evaluate()` returns a `BenchmarkResult`:
 
 ```python
 result = bench.evaluate(synth, test)
 
-# Получить все метрики
+# Get all metrics
 print(result.metrics)
 # {'r2_xgb': 0.743, 'rmse_xgb': 1.823, 'js_diverg': 0.041}
 
-# Или вызвать repr
+# Or call repr
 print(result)
 # BenchmarkResult(r2_xgb=0.743, rmse_xgb=1.823, js_diverg=0.041)
 ```
 
 ---
 
-## Интерпретация результатов
+## Interpreting Results
 
 ### R²
 
-- `R² > 0.8` — отличная синтетика: ML-модели обучаются на ней почти так же хорошо, как на реальных данных
-- `R² 0.5–0.8` — приемлемо для аугментации
-- `R² < 0.3` — синтетика практически бесполезна для ML
+- `R² > 0.8` — excellent synthetic data: ML models train on it almost as well as on real data
+- `R² 0.5–0.8` — acceptable for augmentation
+- `R² < 0.3` — synthetic data is practically useless for ML
 
 ### RMSE
 
-Зависит от масштаба целевой переменной. Ориентируйтесь на RMSE реальной модели (обученной на реальных данных) как на бенчмарк:
+Depends on the scale of the target variable. Use RMSE of a real model (trained on real data) as a benchmark:
 
 ```python
-# Реальная модель как baseline
+# Real model as baseline
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import numpy as np
 
-# Обучаем на реальных train, оцениваем на реальных test
+# Train on real train, evaluate on real test
 real_model = LinearRegression().fit(train.get_X(), train.get_target())
 baseline_rmse = np.sqrt(mean_squared_error(test.get_target(), real_model.predict(test.get_X())))
 
@@ -114,19 +114,19 @@ print(f"Synth RMSE: {result.metrics['rmse']:.3f}")
 
 ### Jensen–Shannon
 
-- `JS < 0.05` — распределения очень близки
-- `JS 0.05–0.2` — небольшое расхождение, приемлемо
-- `JS > 0.3` — значительное расхождение маргинальных распределений
+- `JS < 0.05` — distributions are very close
+- `JS 0.05–0.2` — small divergence, acceptable
+- `JS > 0.3` — significant divergence of marginal distributions
 
-### Frobenius Correlation и MI
+### Frobenius Correlation and MI
 
-Абсолютные значения зависят от размерности (количества признаков). Имеет смысл сравнивать разные модели между собой или трекать изменение при тюнинге.
+Absolute values depend on dimensionality (number of features). It makes sense to compare different models against each other or track changes during tuning.
 
 ---
 
-## Использование в AutoTuningStudy
+## Use in AutoTuningStudy
 
-`AutoTuningStudy` по умолчанию создаёт `Benchmark` автоматически из конфига модели. Но вы можете передать свой:
+`AutoTuningStudy` creates `Benchmark` automatically from the model config by default. But you can provide your own:
 
 ```python
 from tab_forge.benchmark import Benchmark
@@ -146,19 +146,19 @@ study = AutoTuningStudy(
 )
 ```
 
-!!! warning "Одна метрика для тюнинга"
-    Для тюнинга нужна **одна** скалярная цель. Если ваш `Benchmark` возвращает несколько метрик, `AutoTuningStudy` усредняет их. Для раздельной оптимизации запустите несколько отдельных study.
+!!! warning "Single metric for tuning"
+    Tuning requires **one** scalar objective. If your `Benchmark` returns multiple metrics, `AutoTuningStudy` averages them. For separate optimization, run multiple individual studies.
 
 ---
 
-## Полный пример оценки
+## Complete Evaluation Example
 
 ```python
 from tab_forge.dataset import Dataset
 from tab_forge.models import CTGANSynthesizer
 from tab_forge.benchmark import Benchmark
 
-# Загрузка данных
+# Load data
 dataset = Dataset(data="abalone.csv", target="Rings", task_type="regression",
                   numerical_features=["Length", "Diameter", "Height",
                                       "Whole weight", "Shucked weight"],
@@ -166,11 +166,11 @@ dataset = Dataset(data="abalone.csv", target="Rings", task_type="regression",
 
 train, test = dataset.train_test_split(test_size=0.2, random_state=42)
 
-# Обучение модели
+# Train the model
 model = CTGANSynthesizer(epochs=300)
 model.fit(train)
 
-# Генерация и оценка
+# Generate and evaluate
 synth = model.structed_generate(n_samples=len(test))
 
 bench = Benchmark({

@@ -1,34 +1,34 @@
-# Результаты экспериментов по тюнингу
+# Tuning Experiment Results
 
-## Цель экспериментов
+## Experiment Objective
 
-Мы хотели ответить на два вопроса:
+We wanted to answer two questions:
 
-1. Если оптимизировать модель по одной метрике — улучшаются ли при этом остальные?
-2. Какая метрика тюнинга даёт наибольший «обобщающий» эффект для каждой модели?
+1. If you optimize a model by one metric — do the others improve as well?
+2. Which tuning metric provides the greatest "generalizing" effect for each model?
 
-Это важно: запускать тюнинг по 5 метрикам одновременно дорого. Если одна метрика «тянет» остальные за собой — достаточно оптимизировать по ней одной.
-
----
-
-## Экспериментальная установка
-
-- **5 датасетов:** abalone, cl-housing, air-quality, wind, gats
-- **6 моделей:** CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM
-- **25 триалов** тюнинга для каждой метрики и каждой модели
-- **k-fold кросс-валидация** в каждом триале
-- После тюнинга — оценка **всех 5 метрик** на отложенной выборке
-
-Число в ячейке таблицы: **сколько раз из 25 триалов** оптимизация по данной метрике улучшала все *остальные* метрики (не ту, по которой оптимизировали).
+This matters: running tuning across 5 metrics simultaneously is expensive. If one metric "pulls" the others along — it is sufficient to optimize by that one alone.
 
 ---
 
-## Таблица результатов
+## Experimental Setup
 
-*Числа — количество триалов (из 25), в которых оптимизация по данной метрике улучшила остальные метрики качества синтетики.*
+- **5 datasets:** abalone, cl-housing, air-quality, wind, gats
+- **6 models:** CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM
+- **25 trials** of tuning for each metric and each model
+- **k-fold cross-validation** in each trial
+- After tuning — evaluation of **all 5 metrics** on the holdout set
 
-| Модель | R² | LF (FrobCorr) | JS | MI (FrobMI) | RMSE |
-|--------|----|---------------|----|-------------|------|
+The number in each table cell: **how many times out of 25 trials** did optimizing by the given metric improve all *other* metrics (not the one being optimized).
+
+---
+
+## Results Table
+
+*Numbers represent how many trials (out of 25) in which optimization by the given metric improved the other synthetic data quality metrics.*
+
+| Model | R² | LF (FrobCorr) | JS | MI (FrobMI) | RMSE |
+|-------|----|---------------|----|-------------|------|
 | **CTGAN** | 5 | 6 | 4 | 4 | 6 |
 | **WGAN-GP** | 4 | 1 | 12 | 2 | 6 |
 | **GAN-MFS** | **8** | 3 | 7 | 3 | 4 |
@@ -36,79 +36,79 @@
 | **TVAE** | 2 | 3 | 7 | 5 | 8 |
 | **TabDDPM** | 7 | 4 | **3** | **6** | 5 |
 
-!!! note "Как читать таблицу"
-    Строка GAN-MFS, столбец R²: значение **8** означает, что в 8 из 25 триалов, когда тюнинг оптимизировал GAN-MFS по метрике R², улучшались и остальные 4 метрики (LF, JS, MI, RMSE). Зелёный цвет в оригинальной презентации обозначал высокие значения (хорошо), красный — низкие.
+!!! note "How to read the table"
+    Row GAN-MFS, column R²: value **8** means that in 8 out of 25 trials, when tuning optimized GAN-MFS by R², all 4 other metrics also improved (LF, JS, MI, RMSE). Green color in the original presentation indicated high values (good), red indicated low.
 
 ---
 
-## Интерпретация по моделям
+## Interpretation by Model
 
 ### CTGAN
 
-Результаты равномерные по всем метрикам (4–6). Нет явного лидера. Если вы используете CTGAN и не знаете, по какой метрике тюнить — выбирайте **LF (FrobCorr)** или **RMSE** — оба дают 6 обобщающих улучшений.
+Results are uniform across all metrics (4–6). No clear leader. If you use CTGAN and do not know which metric to tune by — choose **LF (FrobCorr)** or **RMSE** — both give 6 generalizing improvements.
 
 ### WGAN-GP
 
-Выраженный лидер — **JS-дивергенция** (12 улучшений — максимальный результат во всей таблице!). Это теоретически обоснованно: WGAN-GP минимизирует Wasserstein-расстояние между распределениями, что напрямую связано с JS. Оптимизируя WGAN-GP по JS — вы «играете на сильной стороне» архитектуры.
+Clear leader — **JS divergence** (12 improvements — the maximum result in the entire table!). This is theoretically justified: WGAN-GP minimizes Wasserstein distance between distributions, which is directly related to JS. Optimizing WGAN-GP by JS — you are "playing to the architecture's strength".
 
-!!! tip "Рекомендация для WGAN-GP"
-    Тюньте WGAN-GP по метрике `js_mean`. При этом с высокой вероятностью улучшатся и остальные метрики.
+!!! tip "Recommendation for WGAN-GP"
+    Tune WGAN-GP by the `js_mean` metric. This will very likely also improve the other metrics.
 
 ### GAN-MFS
 
-Явный лидер — **R²** (8 улучшений). GAN-MFS с его мета-фич регуляризатором особенно хорошо сохраняет статистическую структуру данных, что напрямую влияет на ML-полезность синтетики.
+Clear leader — **R²** (8 improvements). GAN-MFS with its meta-feature regularizer particularly well preserves the statistical structure of data, which directly affects the ML utility of synthetic data.
 
-!!! tip "Рекомендация для GAN-MFS"
-    Тюньте GAN-MFS по метрике `r2`. GAN-MFS показал **наилучший общий результат среди всех моделей по R²** — это ваш лучший выбор когда важна ML-полезность синтетики.
+!!! tip "Recommendation for GAN-MFS"
+    Tune GAN-MFS by the `r2` metric. GAN-MFS showed **the best overall R² result among all models** — this is your best choice when ML utility of synthetic data is important.
 
 ### CTABGAN+
 
-Рекордный показатель — **RMSE** (11 улучшений — второй результат после WGAN-GP/JS). CTABGAN+ с вспомогательными регрессионными головами нацелен именно на точность предсказания целевой переменной. Тюнинг по RMSE «попадает в цель».
+Record result — **RMSE** (11 improvements — second result after WGAN-GP/JS). CTABGAN+ with auxiliary regression heads is specifically aimed at target variable prediction accuracy. Tuning by RMSE "hits the target".
 
-!!! tip "Рекомендация для CTABGAN+"
-    Тюньте CTABGAN+ по метрике `rmse`. Вспомогательные регрессионные головы дискриминатора делают эту модель прирождённым оптимизатором RMSE.
+!!! tip "Recommendation for CTABGAN+"
+    Tune CTABGAN+ by the `rmse` metric. The auxiliary regression heads in the discriminator make this model a natural RMSE optimizer.
 
 ### TVAE
 
-Хорошие результаты по **JS** (7) и **RMSE** (8). TVAE — VAE-архитектура, и ELBO-функция потерь неявно минимизирует расхождение распределений.
+Good results for **JS** (7) and **RMSE** (8). TVAE is a VAE architecture, and the ELBO loss function implicitly minimizes distribution divergence.
 
-!!! tip "Рекомендация для TVAE"
-    Тюньте по `rmse` или `js_mean`. Оба дают стабильное обобщающее улучшение.
+!!! tip "Recommendation for TVAE"
+    Tune by `rmse` or `js_mean`. Both provide stable generalizing improvement.
 
 ### TabDDPM
 
-Неплохие результаты по **R²** (7) и **MI** (6), но **JS** — всего 3 (один из худших). Диффузионные модели хорошо моделируют сложные нелинейные зависимости, но маргинальные распределения — не их конёк.
+Good results for **R²** (7) and **MI** (6), but **JS** — only 3 (one of the worst). Diffusion models model complex nonlinear dependencies well, but marginal distributions are not their strong suit.
 
-!!! tip "Рекомендация для TabDDPM"
-    Тюньте по `r2` или `frob_mi` (MI). Не ждите от TabDDPM отличных результатов по JS.
+!!! tip "Recommendation for TabDDPM"
+    Tune by `r2` or `frob_mi` (MI). Do not expect excellent JS results from TabDDPM.
 
 ---
 
-## Общие выводы
+## General Conclusions
 
-### 1. Нет универсальной «лучшей метрики» для всех моделей
+### 1. There is no universal "best metric" for all models
 
-Архитектура определяет, какая метрика оптимально её «раскрывает». Тюнинг по неправильной метрике — неэффективный расход ресурсов.
+The architecture determines which metric optimally "unlocks" it. Tuning by the wrong metric is an inefficient use of resources.
 
-### 2. У каждой модели есть «родная» метрика
+### 2. Each model has its "native" metric
 
-| Модель | Рекомендуемая метрика тюнинга |
-|--------|-------------------------------|
-| CTGAN | LF или RMSE |
+| Model | Recommended tuning metric |
+|-------|--------------------------|
+| CTGAN | LF or RMSE |
 | WGAN-GP | JS ⭐ |
 | GAN-MFS | R² ⭐ |
 | CTABGAN+ | RMSE ⭐ |
-| TVAE | RMSE или JS |
-| TabDDPM | R² или MI |
+| TVAE | RMSE or JS |
+| TabDDPM | R² or MI |
 
-### 3. LF (Frobenius Correlation) — слабый сигнал для тюнинга
+### 3. LF (Frobenius Correlation) — weak signal for tuning
 
-Для большинства моделей оптимизация по LF даёт мало обобщающих улучшений (1–6). Это не значит, что LF не важна — просто она хуже подходит как **цель** оптимизации.
+For most models, optimization by LF provides few generalizing improvements (1–6). This does not mean LF is not important — it just performs poorly as an **optimization objective**.
 
-### 4. Используйте LLM-рейтинг чтобы выбрать модель, а затем тюньте по правильной метрике
+### 4. Use the LLM ranking to select the model, then tune by the right metric
 
-Пример оптимального пайплайна:
+Example of an optimal pipeline:
 
 ```
-LLM рекомендует GAN-MFS → тюним GAN-MFS по r2 → получаем максимальную ML-полезность
+LLM recommends GAN-MFS → tune GAN-MFS by r2 → achieve maximum ML utility
 ```

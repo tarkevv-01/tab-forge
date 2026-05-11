@@ -1,24 +1,24 @@
-# Модуль Dataset
+# Dataset Module
 
-## Зачем это нужно
+## Why You Need This
 
-Разные генеративные модели ожидают данные в разных форматах: одни хотят чистый `pd.DataFrame`, другим нужна информация о типах признаков, третьим — отдельно числовые и категориальные колонки. Каждый раз вручную пробрасывать эту информацию утомительно и чревато ошибками.
+Different generative models expect data in different formats: some want a plain `pd.DataFrame`, others need information about feature types, and others need numerical and categorical columns separately. Manually propagating this information each time is tedious and error-prone.
 
-`Dataset` — это единый контейнер, который хранит данные вместе с метаинформацией: целевую переменную, тип задачи, списки числовых и категориальных признаков. Все модули Tab-Forge работают именно с `Dataset` — это делает пайплайн типобезопасным и предсказуемым.
+`Dataset` is a unified container that stores data together with meta-information: the target variable, task type, and lists of numerical and categorical features. All Tab-Forge modules work with `Dataset` — this makes the pipeline type-safe and predictable.
 
 ---
 
-## Основной класс — `Dataset`
+## The Main Class — `Dataset`
 
-### Создание из CSV
+### Create from CSV
 
 ```python
 from tab_forge.dataset import Dataset
 
 dataset = Dataset(
-    data="abalone.csv",           # путь к CSV или pd.DataFrame
-    target="Rings",               # целевая переменная
-    task_type="regression",       # "regression" или "classification"
+    data="abalone.csv",           # path to CSV or pd.DataFrame
+    target="Rings",               # target variable
+    task_type="regression",       # "regression" or "classification"
     numerical_features=[
         "Length", "Diameter", "Height",
         "Whole weight", "Shucked weight",
@@ -28,7 +28,7 @@ dataset = Dataset(
 )
 ```
 
-### Создание из DataFrame
+### Create from DataFrame
 
 ```python
 import pandas as pd
@@ -39,15 +39,15 @@ dataset = Dataset(
     target="target_col",
     task_type="classification",
     categorical_features=["category_a", "category_b"],
-    # numerical_features можно опустить — остальное будет определено автоматически
+    # numerical_features can be omitted — the rest will be determined automatically
 )
 ```
 
 ---
 
-## DatasetInfo — мета-информация
+## DatasetInfo — Meta-Information
 
-После создания объекта `Dataset` доступен атрибут `info`:
+After creating a `Dataset` object, the `info` attribute is available:
 
 ```python
 print(dataset.info)
@@ -66,21 +66,21 @@ DatasetInfo(
 )
 ```
 
-`DatasetInfo` хранит:
+`DatasetInfo` stores:
 
-| Поле | Смысл |
-|------|-------|
-| `n_samples` | Количество строк |
-| `n_features` | Количество признаков (без целевой) |
-| `n_numerical` | Число числовых признаков |
-| `n_categorical` | Число категориальных признаков |
-| `n_registered` | Признаки, готовые к обработке моделями |
-| `task_type` | `"regression"` или `"classification"` |
-| `target_name` | Имя целевой переменной |
+| Field | Meaning |
+|-------|---------|
+| `n_samples` | Number of rows |
+| `n_features` | Number of features (excluding target) |
+| `n_numerical` | Number of numerical features |
+| `n_categorical` | Number of categorical features |
+| `n_registered` | Features ready for model processing |
+| `task_type` | `"regression"` or `"classification"` |
+| `target_name` | Name of the target variable |
 
 ---
 
-## Разбиение данных
+## Splitting Data
 
 ### train_test_split
 
@@ -89,68 +89,68 @@ train, test = dataset.train_test_split(
     test_size    = 0.2,
     random_state = 42,
     shuffle      = True,
-    stratify     = False,  # True только для classification
+    stratify     = False,  # True only for classification
 )
 
 print(f"Train: {len(train)}, Test: {len(test)}")
 ```
 
-!!! note "Стратификация"
-    Параметр `stratify=True` доступен только для `task_type="classification"` и использует `StratifiedKFold` под капотом.
+!!! note "Stratification"
+    The `stratify=True` parameter is available only for `task_type="classification"` and uses `StratifiedKFold` under the hood.
 
-### split_folds — для кросс-валидации
+### split_folds — for cross-validation
 
 ```python
 from tab_forge.dataset import split_folds
 
 folds = split_folds(dataset, n_splits=5, shuffle=True, random_state=42)
-# folds — список из 5 Dataset-объектов
+# folds — list of 5 Dataset objects
 
 for i, fold in enumerate(folds):
-    print(f"Fold {i}: {len(fold)} строк")
+    print(f"Fold {i}: {len(fold)} rows")
 ```
 
 !!! note ""
-    `split_folds` используется внутри `AutoTuningStudy` автоматически — вам не нужно вызывать его вручную при тюнинге.
+    `split_folds` is used internally by `AutoTuningStudy` automatically — you do not need to call it manually during tuning.
 
 ---
 
-## Объединение датасетов
+## Merging Datasets
 
 ```python
 from tab_forge.dataset import merge_datasets
 
-# Объединение нескольких совместимых датасетов
+# Merge several compatible datasets
 combined = merge_datasets([train, test])
 ```
 
-!!! warning "Совместимость датасетов"
-    `merge_datasets` проверяет, что у всех объектов одинаковые: целевая переменная, тип задачи, набор признаков. При несовпадении выбрасывается исключение.
+!!! warning "Dataset compatibility"
+    `merge_datasets` checks that all objects have the same: target variable, task type, and feature set. An exception is raised on mismatch.
 
 ---
 
-## Получение данных
+## Accessing Data
 
 ```python
-# Получить все данные включая целевую переменную
+# Get all data including the target variable
 df = dataset.get_data()
 
-# Получить только признаки (без target)
+# Get only features (without target)
 X = dataset.get_X()
 
-# Получить только целевую переменную
+# Get only the target variable
 y = dataset.get_target()
 
-# Краткая сводка
+# Brief summary
 summary = dataset.summary()
 # {"shape": (4177, 9), "task_type": "regression", "missing": {...}}
 ```
 
 ---
 
-## Регистрация признаков
+## Registering Features
 
-Иногда датасет содержит дополнительные признаки, которые нужно добавить к уже созданному объекту:
+Sometimes a dataset contains additional features that need to be added to an already created object:
 
 ```python
 dataset.register_features(
@@ -161,29 +161,29 @@ dataset.register_features(
 
 ---
 
-## Типичные паттерны использования
+## Common Usage Patterns
 
-!!! example "Паттерн 1: загрузка + сплит"
+!!! example "Pattern 1: load + split"
 
     ```python
     dataset = Dataset(data="data.csv", target="y", task_type="regression")
     train, test = dataset.train_test_split(test_size=0.2)
     ```
 
-!!! example "Паттерн 2: k-fold для тюнинга"
+!!! example "Pattern 2: k-fold for tuning"
 
     ```python
     from tab_forge.dataset import split_folds, merge_datasets
 
     folds = split_folds(train, n_splits=5)
-    # Для fold 0: валидация на folds[0], обучение на merge(folds[1:])
+    # For fold 0: validate on folds[0], train on merge(folds[1:])
     val_fold = folds[0]
     train_folds = merge_datasets(folds[1:])
     ```
 
-!!! example "Паттерн 3: из синтетики обратно в Dataset"
+!!! example "Pattern 3: from synthetic data back to Dataset"
 
-    Когда модель возвращает `Dataset` через `structed_generate`, его можно сразу передать в `Benchmark`:
+    When a model returns a `Dataset` via `structed_generate`, it can be directly passed to `Benchmark`:
 
     ```python
     synth = model.structed_generate(n_samples=500)

@@ -1,6 +1,6 @@
 # API Reference — Tuning
 
-## Импорт
+## Import
 
 ```python
 from tab_forge.tuning import AutoTuningStudy, TuningStudy
@@ -24,23 +24,23 @@ AutoTuningStudy(
 )
 ```
 
-Полноценный пайплайн байесовской оптимизации гиперпараметров с k-fold кросс-валидацией. Интегрирует `Dataset`, модели, `Benchmark` и Optuna в единый workflow.
+Full Bayesian hyperparameter optimization pipeline with k-fold cross-validation. Integrates `Dataset`, models, `Benchmark`, and Optuna into a unified workflow.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|-------------|----------|
-| `model_class` | класс или `str` | — | Класс синтезатора или строка-имя (`"CTGAN"`, `"GAN-MFS"`, и т.д.) |
-| `get_params` | `Callable(trial) -> dict` | `None` | Функция пространства поиска для режима `"manual"` |
-| `cv` | `int` | `3` | Количество фолдов |
-| `sampler` | Optuna sampler | `TPESampler` | Алгоритм поиска гиперпараметров |
-| `search_space_mode` | `str` | `"manual"` | `"manual"` или `"extended"` |
-| `benchmark` | `Benchmark` | авто | Объект Benchmark для оценки качества |
-| `direction` | `str` | из конфига | `"maximize"` или `"minimize"` |
-| `**study_kwargs` | — | — | Дополнительные аргументы для `optuna.create_study` |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `model_class` | class or `str` | — | Synthesizer class or name string (`"CTGAN"`, `"GAN-MFS"`, etc.) |
+| `get_params` | `Callable(trial) -> dict` | `None` | Search space function for `"manual"` mode |
+| `cv` | `int` | `3` | Number of folds |
+| `sampler` | Optuna sampler | `TPESampler` | Hyperparameter search algorithm |
+| `search_space_mode` | `str` | `"manual"` | `"manual"` or `"extended"` |
+| `benchmark` | `Benchmark` | auto | Benchmark object for quality evaluation |
+| `direction` | `str` | from config | `"maximize"` or `"minimize"` |
+| `**study_kwargs` | — | — | Additional arguments for `optuna.create_study` |
 
-!!! note "Строки-имена моделей"
-    Допустимые строки для `model_class`:
+!!! note "Model name strings"
+    Valid strings for `model_class`:
     `"CTGAN"`, `"WGAN-GP"`, `"GAN-MFS"`, `"CTABGAN+"`, `"TVAE"`, `"DDPM"`
 
 ---
@@ -56,17 +56,17 @@ optimize(
 ) -> optuna.Study
 ```
 
-Запускает байесовскую оптимизацию.
+Launches Bayesian optimization.
 
-**Параметры:**
+**Parameters:**
 
-| Параметр | Описание |
-|----------|----------|
-| `dataset` | Датасет для тюнинга |
-| `n_trials` | Количество триалов Optuna |
-| `verbose` | Включить вывод Optuna |
+| Parameter | Description |
+|-----------|-------------|
+| `dataset` | Dataset for tuning |
+| `n_trials` | Number of Optuna trials |
+| `verbose` | Enable Optuna output |
 
-**Возвращает:** объект `optuna.Study` с полной историей триалов.
+**Returns:** `optuna.Study` object with complete trial history.
 
 !!! example "Extended mode"
 
@@ -108,13 +108,13 @@ optimize(
 
 ---
 
-### Свойства `AutoTuningStudy`
+### `AutoTuningStudy` Properties
 
-| Свойство | Тип | Описание |
-|----------|-----|----------|
-| `best_params` | `dict` | Лучшие найденные гиперпараметры |
-| `best_value` | `float` | Лучшее значение целевой метрики |
-| `best_trial` | `optuna.Trial` | Объект лучшего триала Optuna |
+| Property | Type | Description |
+|----------|------|-------------|
+| `best_params` | `dict` | Best found hyperparameters |
+| `best_value` | `float` | Best value of the target metric |
+| `best_trial` | `optuna.Trial` | Best Optuna trial object |
 
 ---
 
@@ -127,12 +127,12 @@ TuningStudy(
 )
 ```
 
-Тонкая обёртка над `optuna.Study`. Используйте когда нужен полный контроль над objective-функцией.
+Thin wrapper around `optuna.Study`. Use when full control over the objective function is needed.
 
-**Параметры:**
+**Parameters:**
 
-- `direction` — `"maximize"` или `"minimize"`
-- `**study_kwargs` — аргументы для `optuna.create_study` (например, `sampler=TPESampler(seed=42)`)
+- `direction` — `"maximize"` or `"minimize"`
+- `**study_kwargs` — arguments for `optuna.create_study` (e.g., `sampler=TPESampler(seed=42)`)
 
 ---
 
@@ -147,7 +147,7 @@ optimize(
 )
 ```
 
-Запускает оптимизацию с произвольной objective-функцией.
+Runs optimization with an arbitrary objective function.
 
 !!! example ""
 
@@ -158,7 +158,7 @@ optimize(
 
     def objective(trial):
         params = {"epochs": trial.suggest_int("epochs", 100, 500)}
-        # ... обучение и оценка ...
+        # ... training and evaluation ...
         return score
 
     study.optimize(objective, n_trials=20)
@@ -167,28 +167,28 @@ optimize(
 
 ---
 
-### Свойства `TuningStudy`
+### `TuningStudy` Properties
 
-| Свойство | Тип | Описание |
-|----------|-----|----------|
-| `best_params` | `dict` | Лучшие найденные параметры |
-| `best_value` | `float` | Лучшее значение objective |
-| `best_trial` | `optuna.Trial` | Объект лучшего триала |
+| Property | Type | Description |
+|----------|------|-------------|
+| `best_params` | `dict` | Best found parameters |
+| `best_value` | `float` | Best objective value |
+| `best_trial` | `optuna.Trial` | Best trial object |
 
 ---
 
 ## Samplers
 
-Tab-Forge реэкспортирует оптимальные samplers из Optuna:
+Tab-Forge re-exports optimal samplers from Optuna:
 
 ```python
 from tab_forge.tuning import TPESampler, RandomSampler
 ```
 
-| Sampler | Когда использовать |
-|---------|-------------------|
-| `TPESampler` | По умолчанию. Байесовская оптимизация через Tree-structured Parzen Estimator. Эффективен при 20+ триалах. |
-| `RandomSampler` | Случайный поиск. Подходит для небольшого числа триалов или как baseline. |
+| Sampler | When to use |
+|---------|------------|
+| `TPESampler` | Default. Bayesian optimization via Tree-structured Parzen Estimator. Effective with 20+ trials. |
+| `RandomSampler` | Random search. Suitable for a small number of trials or as a baseline. |
 
 ```python
 from tab_forge.tuning import AutoTuningStudy, TPESampler
@@ -196,6 +196,6 @@ from tab_forge.tuning import AutoTuningStudy, TPESampler
 study = AutoTuningStudy(
     model_class = "CTGAN",
     search_space_mode = "extended",
-    sampler = TPESampler(seed=42),  # фиксируем seed для воспроизводимости
+    sampler = TPESampler(seed=42),  # fix seed for reproducibility
 )
 ```

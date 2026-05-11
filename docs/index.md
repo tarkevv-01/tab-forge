@@ -1,38 +1,38 @@
 # Tab-Forge
 
-**Модульная Python-библиотека для автоматизированной настройки генеративных моделей на табличных данных**
+**A modular Python library for automated tuning of generative models on tabular data**
 
 ---
 
-Tab-Forge решает реальную задачу: выбор и настройка генеративной модели для синтеза табличных данных — дело трудоёмкое. Нужно понять, какую из шести совершенно разных архитектур (GAN, VAE, Diffusion) попробовать первой, какие метрики качества важны для вашей задачи, и сколько времени тратить на тюнинг.
+Tab-Forge solves a real problem: selecting and configuring a generative model for tabular data synthesis is a labor-intensive task. You need to figure out which of six completely different architectures (GAN, VAE, Diffusion) to try first, which quality metrics matter for your task, and how much time to spend on tuning.
 
-Tab-Forge автоматизирует весь этот процесс: LLM анализирует мета-характеристики вашего датасета и предсказывает, какие модели стоит попробовать в первую очередь — а дальше Optuna-тюнинг делает остальное.
-
----
-
-## Для кого эта библиотека
-
-- **Data scientists**, которым нужны синтетические данные для аугментации, балансировки классов или тестирования
-- **ML-инженеры**, работающие с приватными или ограниченными датасетами
-- **Исследователи**, изучающие генеративные модели для табличных данных
-- Все, кто устал вручную подбирать гиперпараметры GAN
+Tab-Forge automates this entire process: an LLM analyzes the meta-characteristics of your dataset and predicts which models to try first — then Optuna tuning takes care of the rest.
 
 ---
 
-## Ключевые преимущества
+## Who This Library Is For
 
-| Возможность | Детали |
-|-------------|--------|
-| **6 архитектур из коробки** | CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM — единый интерфейс |
-| **LLM-ассистированный выбор** | PromptGenerator + LLMRunner ранжируют модели по мета-фичам вашего датасета |
-| **Self-consistency** | N независимых запросов к LLM, агрегация через голосование — устойчивый результат |
-| **Байесовский тюнинг** | AutoTuningStudy через Optuna с k-fold CV; поддержка extended и manual режимов |
-| **5 метрик качества** | R², RMSE, Jensen–Shannon, Frobenius Correlation, Frobenius MI |
-| **Модульность** | Каждый компонент можно использовать отдельно |
+- **Data scientists** who need synthetic data for augmentation, class balancing, or testing
+- **ML engineers** working with private or limited datasets
+- **Researchers** studying generative models for tabular data
+- Anyone tired of manually tuning GAN hyperparameters
 
 ---
 
-## Быстрый пример
+## Key Advantages
+
+| Feature | Details |
+|---------|---------|
+| **6 architectures out of the box** | CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, TabDDPM — unified interface |
+| **LLM-assisted selection** | PromptGenerator + LLMRunner rank models by meta-features of your dataset |
+| **Self-consistency** | N independent LLM requests, rank aggregation via voting — robust result |
+| **Bayesian tuning** | AutoTuningStudy via Optuna with k-fold CV; supports extended and manual modes |
+| **5 quality metrics** | R², RMSE, Jensen–Shannon, Frobenius Correlation, Frobenius MI |
+| **Modularity** | Each component can be used independently |
+
+---
+
+## Quick Example
 
 ```python
 from tab_forge.dataset import Dataset
@@ -40,7 +40,7 @@ from tab_forge.prompt_generator import PromptGenerator
 from tab_forge.llm_runner import LLMRunner
 from tab_forge.tuning import AutoTuningStudy
 
-# 1. Загружаем данные
+# 1. Load data
 dataset = Dataset(
     data="abalone.csv",
     target="Rings",
@@ -50,7 +50,7 @@ dataset = Dataset(
     categorical_features=["Sex"],
 )
 
-# 2. LLM выбирает лучшую модель для этого датасета
+# 2. LLM selects the best model for this dataset
 prompt = PromptGenerator().build_prompt(
     dataset=dataset,
     target_metric="r2_metric",
@@ -59,31 +59,31 @@ prompt = PromptGenerator().build_prompt(
 result = LLMRunner(base_url="https://api.openai.com/v1",
                    api_key="sk-...", model="gpt-4o").run(prompt, n_runs=5)
 
-print("Рейтинг:", result.final_ranking)
+print("Ranking:", result.final_ranking)
 # → ['GAN-MFS', 'CTGAN', 'WGAN-GP', 'CTABGAN+', 'TVAE', 'DDPM']
 
-# 3. Тюним лучшую модель
+# 3. Tune the best model
 study = AutoTuningStudy(
-    model_class=result.final_ranking[0],  # строка из рейтинга LLM
+    model_class=result.final_ranking[0],  # string from LLM ranking
     search_space_mode="extended",
     cv=3,
 )
 study.optimize(dataset, n_trials=25)
-print("Лучшие параметры:", study.best_params)
+print("Best parameters:", study.best_params)
 ```
 
 ---
 
-## Архитектура пайплайна
+## Pipeline Architecture
 
 ```
-Ваш датасет
+Your dataset
      │
      ▼
-PromptGenerator  ──── мета-фичи + опыт референсных датасетов
+PromptGenerator  ──── meta-features + experience on reference datasets
      │
      ▼
-LLMRunner  ──── self-consistency (N запросов → усреднение рангов)
+LLMRunner  ──── self-consistency (N requests → rank averaging)
      │
      ▼
 AutoTuningStudy  ──── Optuna + k-fold CV
@@ -95,26 +95,26 @@ AutoTuningStudy  ──── Optuna + k-fold CV
 
 ---
 
-## Разделы документации
+## Documentation Sections
 
 <div class="grid cards" markdown>
 
-- **[Установка](getting-started/installation.md)**
-  Как поставить библиотеку и зависимости
+- **[Installation](getting-started/installation.md)**
+  How to install the library and its dependencies
 
-- **[Быстрый старт](getting-started/quickstart.md)**
-  Полный пайплайн за 5 минут
+- **[Quick Start](getting-started/quickstart.md)**
+  Full pipeline in 5 minutes
 
-- **[Метрики качества](concepts/metrics.md)**
-  Что измеряет каждая метрика и когда её использовать
+- **[Quality Metrics](concepts/metrics.md)**
+  What each metric measures and when to use it
 
-- **[Архитектура](concepts/architecture.md)**
-  Как устроены модули и как они взаимодействуют
+- **[Architecture](concepts/architecture.md)**
+  How modules are organized and how they interact
 
-- **[Руководство пользователя](user-guide/dataset.md)**
-  Подробное описание каждого модуля
+- **[User Guide](user-guide/dataset.md)**
+  Detailed description of each module
 
-- **[Эксперименты](experiments/tuning-results.md)**
-  Результаты исследований и выводы
+- **[Experiments](experiments/tuning-results.md)**
+  Research results and conclusions
 
 </div>

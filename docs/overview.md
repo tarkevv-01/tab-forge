@@ -1,41 +1,41 @@
-# Tab-Forge — Обзор
+# Tab-Forge — Overview
 
-Tab-Forge — модульная библиотека для автоматизированного создания синтетических табличных данных. Её ключевая идея: **перед дорогостоящим перебором** гиперпараметров LLM анализирует мета-характеристики вашего датасета и задачи, предсказывает, какие генеративные модели покажут себя лучше всего, и предлагает приоритетный порядок их тюнинга.
+Tab-Forge is a modular library for automated generation of synthetic tabular data. Its core idea: **before expensive hyperparameter search**, an LLM analyzes the meta-characteristics of your dataset and task, predicts which generative models will perform best, and proposes a prioritized tuning order.
 
 ---
 
-## Структура библиотеки
+## Library Structure
 
 ```
 tab_forge/
-├── dataset/           # Загрузка и управление данными
-├── models/            # Генеративные архитектуры (CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, DDPM)
-├── benchmark/         # Метрики качества синтетических данных
-├── prompt_generator/  # Сборка промта для LLM + мета-фичи датасета
-├── llm_runner/        # Взаимодействие с LLM, self-consistency агрегация
-└── tuning/            # Тюнинг гиперпараметров (Optuna)
+├── dataset/           # Data loading and management
+├── models/            # Generative architectures (CTGAN, WGAN-GP, GAN-MFS, CTABGAN+, TVAE, DDPM)
+├── benchmark/         # Synthetic data quality metrics
+├── prompt_generator/  # LLM prompt assembly + dataset meta-features
+├── llm_runner/        # LLM interaction, self-consistency aggregation
+└── tuning/            # Hyperparameter tuning (Optuna)
 ```
 
 ---
 
-## Пайплайн
+## Pipeline
 
 ```
 ┌──────────────────────────────────────────┐
-│            PromptGenerator               │  ← мета-фичи датасета +
-│                                          │    опыт на референсных датасетах
+│            PromptGenerator               │  ← dataset meta-features +
+│                                          │    experience on reference datasets
 └───────────────────┬──────────────────────┘
-                    │ готовый промт
+                    │ assembled prompt
                     ↓
 ┌──────────────────────────────────────────┐
-│               LLMRunner                  │  ← ранжирование моделей
-│       (self-consistency, N runs)         │    через self-consistency
+│               LLMRunner                  │  ← model ranking
+│       (self-consistency, N runs)         │    via self-consistency
 └───────────────────┬──────────────────────┘
-                    │ приоритетный список моделей
+                    │ prioritized model list
                     ↓
 ┌──────────────────────────────────────────┐
 │           AutoTuningStudy                │  ← k-fold CV + Optuna
-│                                          │    по каждой модели из рейтинга
+│                                          │    for each model in the ranking
 └──────┬───────────────────────┬───────────┘
        │                       │
        ↓                       ↓
@@ -44,109 +44,109 @@ tab_forge/
 └──────────────┘   └──────────┬────────────┘
                                ↓
                   ┌────────────────────────┐
-                  │        Benchmark       │  ← оценка качества синтетики
+                  │        Benchmark       │  ← synthetic data quality evaluation
                   └────────────────────────┘
 ```
 
-Каждый из шагов можно использовать независимо.
+Each step can be used independently.
 
 ---
 
-## Компоненты
+## Components
 
 ### Dataset
 
-Обёртка над `pd.DataFrame` (или путём к CSV). Хранит метаинформацию: целевую переменную, тип задачи (`regression` / `classification`), списки числовых и категориальных признаков.
+A wrapper around `pd.DataFrame` (or a path to a CSV file). Stores meta-information: the target variable, task type (`regression` / `classification`), and lists of numerical and categorical features.
 
-Предоставляет утилиты:
-- `train_test_split()` — разбиение на обучающую/тестовую выборки
-- `split_folds()` — k-fold разбиение (для кросс-валидации в тюнинге)
-- `merge_datasets()` — объединение нескольких `Dataset`-объектов
+Provides utilities:
+- `train_test_split()` — split into train/test sets
+- `split_folds()` — k-fold split (for cross-validation in tuning)
+- `merge_datasets()` — merge multiple `Dataset` objects
 
 ---
 
 ### PromptGenerator
 
-Строит текстовый промт для LLM, включающий:
+Builds a text prompt for the LLM, including:
 
-- **Мета-характеристики датасета** — статистики, вычисляемые автоматически (часть из них — через библиотеку `pymfe`):
+- **Dataset meta-characteristics** — statistics computed automatically (some via the `pymfe` library):
 
-  | Мета-фича | Смысл |
-  |-----------|-------|
-  | `nr_inst` | Количество строк |
-  | `nr_attr` | Количество признаков |
-  | `nr_num` / `nr_cat` | Числовые / категориальные признаки |
-  | `missing_pct` | Доля пропущенных значений, % |
-  | `task_type` | Тип задачи |
-  | `abs_corr_mean` / `abs_corr_max` | Средняя / максимальная абсолютная корреляция |
-  | `skewness_mean` | Средняя асимметрия |
-  | `kurtosis_mean` / `kurtosis_std` | Среднее / СКО эксцесса |
-  | `std_mean` | Среднее стандартное отклонение |
+  | Meta-feature | Meaning |
+  |-------------|---------|
+  | `nr_inst` | Number of rows |
+  | `nr_attr` | Number of features |
+  | `nr_num` / `nr_cat` | Numerical / categorical features |
+  | `missing_pct` | Fraction of missing values, % |
+  | `task_type` | Task type |
+  | `abs_corr_mean` / `abs_corr_max` | Mean / maximum absolute correlation |
+  | `skewness_mean` | Mean skewness |
+  | `kurtosis_mean` / `kurtosis_std` | Mean / std of kurtosis |
+  | `std_mean` | Mean standard deviation |
 
-- **Описания поддерживаемых моделей** и целевой метрики.
-- **(few-shot)** Результаты предварительных экспериментов на 5 референсных датасетах (`abalone`, `cl-housing`, `air`, `wind`, `gats`) — LLM видит, как каждая модель проявила себя на похожих задачах.
+- **Descriptions of supported models** and the target metric.
+- **(few-shot)** Results of preliminary experiments on 5 reference datasets (`abalone`, `cl-housing`, `air`, `wind`, `gats`) — the LLM sees how each model performed on similar tasks.
 
-Параметр `mfe_features`:
-- `"short"` (по умолчанию) — кураторский набор из 12 ключевых мета-фич
-- `"full"` — все признаки из выбранных `mfe_groups`
-- `list[str]` — произвольный пользовательский набор
+`mfe_features` parameter:
+- `"short"` (default) — a curated set of 12 key meta-features
+- `"full"` — all features from the selected `mfe_groups`
+- `list[str]` — an arbitrary user-defined set
 
 ---
 
 ### LLMRunner
 
-Отправляет промт в любой OpenAI-совместимый API (OpenAI, локальный сервер, etc.).
+Sends the prompt to any OpenAI-compatible API (OpenAI, local server, etc.).
 
-**Self-consistency:** запрос повторяется `n_runs` раз независимо; ранги моделей из каждого ответа усредняются. Это снижает влияние случайного выбора LLM и делает итоговый рейтинг устойчивее.
+**Self-consistency:** the request is repeated `n_runs` times independently; model ranks from each response are averaged. This reduces the influence of random LLM behavior and makes the final ranking more stable.
 
-Возвращает объект `RunnerResult` с:
-- `average_ranks` — средний ранг каждой модели (чем меньше, тем лучше)
-- `final_ranking` — список моделей, упорядоченных по среднему рангу
+Returns a `RunnerResult` object with:
+- `average_ranks` — average rank of each model (lower is better)
+- `final_ranking` — list of models ordered by average rank
 
 ---
 
 ### Models
 
-Единый базовый интерфейс `BaseGenerativeModel` с методами `fit` / `generate` / `structed_generate`. Четыре реализации доступны «из коробки»:
+A unified base interface `BaseGenerativeModel` with `fit` / `generate` / `structed_generate` methods. Six implementations are available out of the box:
 
-| Класс | Архитектура |
+| Class | Architecture |
 |-------|-------------|
 | `CTGANSynthesizer` | Conditional Tabular GAN (SDV) |
 | `WGANGPSynthesizer` | Wasserstein GAN + Gradient Penalty |
-| `GANMFSSynthesizer` | WGAN-GP с MFS-регуляризатором в функции потерь |
-| `CTABGANPlusSynthesizer` | CTAB-GAN+ с вспомогательными регрессионными/классификационными головами |
-| `TVAESynthesizer` | Variational Autoencoder с табличной адаптацией ELBO |
-| `DDPMSynthesizer` | Диффузионная модель (Tab-DDPM) |
+| `GANMFSSynthesizer` | WGAN-GP with MFS regularizer in the loss function |
+| `CTABGANPlusSynthesizer` | CTAB-GAN+ with auxiliary regression/classification heads |
+| `TVAESynthesizer` | Variational Autoencoder with tabular ELBO adaptation |
+| `DDPMSynthesizer` | Diffusion model (Tab-DDPM) |
 
-Все шесть моделей участвуют в LLM-ранжировании; тюнинг запускается для моделей в порядке, предложенном LLM.
+All six models participate in LLM ranking; tuning is launched for models in the order proposed by the LLM.
 
 ---
 
 ### Benchmark
 
-Оценивает качество синтетических данных относительно реальных. Принимает спецификацию метрик в виде списка или словаря кортежей.
+Evaluates the quality of synthetic data relative to real data. Accepts a metric specification as a list or dictionary of tuples.
 
-#### Метрики качества
+#### Quality Metrics
 
-| Метрика | Смысл | Направление |
-|---------|-------|-------------|
-| **R²** | Доля дисперсии реальных данных, объяснённая синтетическими (через ML-модель) | выше → лучше |
-| **RMSE** | Среднеквадратичная ошибка предсказания | ниже → лучше |
-| **Jensen–Shannon** | Расхождение маргинальных распределений признаков | ниже → лучше |
-| **Frobenius Correlation** | Норма разности корреляционных матриц | ниже → лучше |
-| **Frobenius MI** | Сохранность нелинейных зависимостей (матрица взаимной информации) | ниже → лучше |
+| Metric | Meaning | Direction |
+|--------|---------|-----------|
+| **R²** | Fraction of real data variance explained by synthetic data (via ML model) | higher → better |
+| **RMSE** | Root mean square prediction error | lower → better |
+| **Jensen–Shannon** | Divergence of marginal feature distributions | lower → better |
+| **Frobenius Correlation** | Norm of the difference between correlation matrices | lower → better |
+| **Frobenius MI** | Preservation of nonlinear dependencies (mutual information matrix) | lower → better |
 
 ---
 
 ### AutoTuningStudy
 
-Выполняет автоматический поиск гиперпараметров через Optuna.
+Performs automated hyperparameter search via Optuna.
 
-**Схема работы:**
-1. Данные делятся на `cv` фолдов.
-2. Для каждого набора гиперпараметров (`trial`): модель обучается на объединении train-фолдов, генерирует синтетику в размере val-фолда, `Benchmark` считает метрику.
-3. Средняя метрика по фолдам — цель оптимизации.
+**Workflow:**
+1. Data is split into `cv` folds.
+2. For each hyperparameter set (`trial`): the model is trained on combined train folds, generates synthetic data the size of the val fold, `Benchmark` computes the metric.
+3. Average metric across folds — optimization objective.
 
-**Режимы пространства поиска:**
-- `"manual"` — только гиперпараметры, заданные пользователем через `get_params(trial)`
-- `"extended"` — пространство поиска расширяется предустановленными для данной архитектуры диапазонами (размеры слоёв, learning rate, epochs, batch size и т.д.)
+**Search space modes:**
+- `"manual"` — only hyperparameters defined by the user via `get_params(trial)`
+- `"extended"` — search space is extended with preset ranges for the given architecture (layer sizes, learning rate, epochs, batch size, etc.)
